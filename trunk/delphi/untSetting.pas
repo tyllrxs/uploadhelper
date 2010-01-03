@@ -98,199 +98,162 @@ begin
 end;
 
 procedure TfrmSetting.FormCreate(Sender: TObject);
-var num,i:integer;
-ss:string;
-begin
-chkMulThread.Checked:=myini.ReadBool('General','MultiThread',true);
-chkMulThreadClick(nil);
-txtMulnum.IntValue:=myini.ReadInteger('General','Threads',3);
-chkRetry.Checked:=myini.ReadBool('General','OnErrRetry',true);
-chkTimeOut.Checked:=myini.ReadBool('General','ConnTimeOut',false);
-chkTimeOutClick(nil);
-txtTimeOut.IntValue:=myini.ReadInteger('General','TimeOut',60);
-chkTaskbar.Checked:=myini.ReadBool('General','taskbar',false);
-chkTaskbarClick(nil);
-chkTrayMsg.Checked:=myini.ReadBool('General','TrayMsg',true);
-chkTrayMsgClick(nil);
-txtInfoTitle.Text:=myini.ReadString('General','InfoTitle','嘿嘿~~');
-txtInfoContent.Text:=myini.ReadString('General','InfoContent','偶已经隐藏在这里了');
-num:=myini.ReadInteger('General','trayicon',1);
-(FindComponent('rb'+inttostr(num)) as TRadioButton).Checked:=true;
-rb0Click((FindComponent('rb'+inttostr(num)) as TRadioButton));
-chkCompress.Checked:=myini.ReadBool('Compress','Compression',true);
-txtCompress.IntValue:=myini.ReadInteger('Compress','min',1024);
-chkCompressClick(nil);
-tbCompress.Position:=myini.ReadInteger('Compress','ratio',60);
-tbCompressChange(nil);
-ss:=myini.ReadString('Search','filetype','jpg|gif|png|bmp|pdf');
-for i:=0 to lstFileType.Items.Count-1 do
-begin
-  if Pos('|'+lstFileType.Items[i]+'|','|'+ss+'|')>0 then
-  begin
-     lstFileType.ItemChecked[i]:=true;
-  end;
-end;
-chkChildDir.Checked:=myini.ReadBool('Search','child_dir',false);
-chkFileSize.Checked:=myini.ReadBool('Search','filesize',true);
-chkFileSizeClick(nil);
-txtMinSize.IntValue:=myini.ReadInteger('Search','minsize',1);
-txtMaxSize.IntValue:=myini.ReadInteger('Search','maxsize',1024);
-txtPicSpace.IntValue:=myini.ReadInteger('Personal','picspace',1);
-for i := 0 to length(BBSHOSTLIST) - 1 do
-  cmbResult.Items.Add(GetBoard(BBSHOSTLIST[i]));
-cmbResult.ItemIndex:=Min(myini.ReadInteger('Personal','urlhost',0),cmbResult.Items.Count-1);
-chkClearOld.Checked:=myini.ReadBool('Personal','ClearOld',false);
-txtHead.Text:=StringReplace(myini.ReadString('Personal','headtext',''),'[\n]',CRLF,[rfReplaceAll]);
-txtRoot.Text:=StringReplace(myini.ReadString('Personal','roottext',''),'[\n]',CRLF,[rfReplaceAll]);
-chkTrimBlank.Checked:=myini.ReadBool('Personal','TrimBlank',true);
-pagecontrol1.ActivePageIndex:=myini.ReadInteger('UserSettings','OptionPage',0);
-end;
-{
-procedure TfrmSetting.SearchSkin;
 var
-  SR: TSearchRec;
-  FileAttr,num: Integer;
-  qPath: string;
+  num,i:integer;
+  ss:string;
 begin
-  lstSkin.Items.Add('(不使用皮肤)');
-  qPath := ExtractFilePath(Paramstr(0))+'skin\';
-  FileAttr := faAnyFile;
-  num:=FindFirst(qPath + '*.skn', FileAttr, SR);
-  while num=0 do
+  chkMulThread.Checked:=myini.ReadBool('General','MultiThread',true);
+  chkMulThreadClick(nil);
+  txtMulnum.IntValue:=myini.ReadInteger('General','Threads',3);
+  chkRetry.Checked:=myini.ReadBool('General','OnErrRetry',true);
+  chkTimeOut.Checked:=myini.ReadBool('General','ConnTimeOut',false);
+  chkTimeOutClick(nil);
+  txtTimeOut.IntValue:=myini.ReadInteger('General','TimeOut',60);
+  chkTaskbar.Checked:=myini.ReadBool('General','taskbar',false);
+  chkTaskbarClick(nil);
+  chkTrayMsg.Checked:=myini.ReadBool('General','TrayMsg',true);
+  chkTrayMsgClick(nil);
+  txtInfoTitle.Text:=myini.ReadString('General','InfoTitle','嘿嘿~~');
+  txtInfoContent.Text:=myini.ReadString('General','InfoContent','偶已经隐藏在这里了');
+  num:=myini.ReadInteger('General','trayicon',1);
+  (FindComponent('rb'+inttostr(num)) as TRadioButton).Checked:=true;
+  rb0Click((FindComponent('rb'+inttostr(num)) as TRadioButton));
+  chkCompress.Checked:=myini.ReadBool('Compress','Compression',true);
+  txtCompress.IntValue:=myini.ReadInteger('Compress','min',1024);
+  chkCompressClick(nil);
+  tbCompress.Position:=myini.ReadInteger('Compress','ratio',60);
+  tbCompressChange(nil);
+  ss:=myini.ReadString('Search','filetype','jpg|gif|png|bmp|pdf');
+  for i:=0 to lstFileType.Items.Count-1 do
   begin
-    lstSkin.Items.Add(StringReplace(SR.Name,'.skn','',[rfReplaceAll, rfIgnoreCase]));
-    num:=FindNext(SR);
+    if Pos('|'+lstFileType.Items[i]+'|','|'+ss+'|')>0 then
+    begin
+       lstFileType.ItemChecked[i]:=true;
+    end;
   end;
-  lstSkin.ItemIndex:=Min(myini.ReadInteger('General','skinfile',1),lstSkin.Count-1);
-  lstSkinClick(nil);
+  chkChildDir.Checked:=myini.ReadBool('Search','child_dir',false);
+  chkFileSize.Checked:=myini.ReadBool('Search','filesize',true);
+  chkFileSizeClick(nil);
+  txtMinSize.IntValue:=myini.ReadInteger('Search','minsize',1);
+  txtMaxSize.IntValue:=myini.ReadInteger('Search','maxsize',1024);
+  txtPicSpace.IntValue:=myini.ReadInteger('Personal','picspace',1);
+  for i := 0 to length(BBSHOSTLIST) - 1 do
+    cmbResult.Items.Add(GetBoard(BBSHOSTLIST[i]));
+  cmbResult.ItemIndex:=Min(myini.ReadInteger('Personal','urlhost',0),cmbResult.Items.Count-1);
+  chkClearOld.Checked:=myini.ReadBool('Personal','ClearOld',false);
+  txtHead.Text:=StringReplace(myini.ReadString('Personal','headtext',''),'[\n]',CRLF,[rfReplaceAll]);
+  txtRoot.Text:=StringReplace(myini.ReadString('Personal','roottext',''),'[\n]',CRLF,[rfReplaceAll]);
+  chkTrimBlank.Checked:=myini.ReadBool('Personal','TrimBlank',true);
+  pagecontrol1.ActivePageIndex:=myini.ReadInteger('UserSettings','OptionPage',0);
 end;
-}
+
 procedure TfrmSetting.btnOKClick(Sender: TObject);
-var i,num:integer;
-ss:string;
+var
+  i,num:integer;
+  ss:string;
 begin
-myini.WriteBool('General','MultiThread',chkMulThread.Checked);
-myini.WriteInteger('General','Threads',txtMulnum.IntValue);
-myini.WriteBool('General','OnErrRetry',chkRetry.Checked);
-myini.WriteBool('General','ConnTimeOut',chkTimeOut.Checked);
-myini.WriteInteger('General','TimeOut',txtTimeOut.IntValue);
-myini.WriteBool('General','taskbar',chkTaskbar.Checked);
-myini.WriteBool('General','TrayMsg',chkTrayMsg.Checked);
-myini.WriteString('General','InfoTitle',txtInfoTitle.Text);
-myini.WriteString('General','InfoContent',txtInfoContent.Text);
-for num:=0 to 2 do
-begin
-  if (FindComponent('rb'+inttostr(num)) as TRadioButton).Checked then
+  myini.WriteBool('General','MultiThread',chkMulThread.Checked);
+  myini.WriteInteger('General','Threads',txtMulnum.IntValue);
+  myini.WriteBool('General','OnErrRetry',chkRetry.Checked);
+  myini.WriteBool('General','ConnTimeOut',chkTimeOut.Checked);
+  myini.WriteInteger('General','TimeOut',txtTimeOut.IntValue);
+  myini.WriteBool('General','taskbar',chkTaskbar.Checked);
+  myini.WriteBool('General','TrayMsg',chkTrayMsg.Checked);
+  myini.WriteString('General','InfoTitle',txtInfoTitle.Text);
+  myini.WriteString('General','InfoContent',txtInfoContent.Text);
+  for num:=0 to 2 do
   begin
-    myini.WriteInteger('General','trayicon',num);
-    break;
+    if (FindComponent('rb'+inttostr(num)) as TRadioButton).Checked then
+    begin
+      myini.WriteInteger('General','trayicon',num);
+      break;
+    end;
   end;
-end;
-myini.WriteBool('Compress','Compression',chkCompress.Checked);
-myini.WriteInteger('Compress','min',txtCompress.IntValue);
-myini.WriteInteger('Compress','ratio',tbCompress.Position);
-ss:='';
-for i:=0 to lstFileType.Items.Count-1 do
-begin
-  if lstFileType.ItemChecked[i] then
+  myini.WriteBool('Compress','Compression',chkCompress.Checked);
+  myini.WriteInteger('Compress','min',txtCompress.IntValue);
+  myini.WriteInteger('Compress','ratio',tbCompress.Position);
+  ss:='';
+  for i:=0 to lstFileType.Items.Count-1 do
   begin
-     ss:=ss+'|'+lstFileType.Items[i];
+    if lstFileType.ItemChecked[i] then
+    begin
+       ss:=ss+'|'+lstFileType.Items[i];
+    end;
   end;
-end;
-Delete(ss,1,1);
-myini.WriteString('Search','filetype',ss);
-myini.WriteBool('Search','child_dir',chkChildDir.Checked);
-myini.WriteBool('Search','filesize',chkFileSize.Checked);
-myini.WriteInteger('Search','minsize',txtMinSize.IntValue);
-myini.WriteInteger('Search','maxsize',txtMaxSize.IntValue);
-myini.WriteInteger('Personal','urlhost',cmbResult.ItemIndex);
-myini.WriteInteger('Personal','picspace',txtPicSpace.IntValue);
-myini.WriteBool('Personal','ClearOld',chkClearOld.Checked);
-myini.WriteString('Personal','headtext',StringReplace(txtHead.Text,CRLF,'[\n]',[rfReplaceAll]));
-myini.WriteString('Personal','roottext',StringReplace(txtRoot.Text,CRLF,'[\n]',[rfReplaceAll]));
-myini.WriteBool('Personal','TrimBlank',chkTrimBlank.Checked);
+  Delete(ss,1,1);
+  myini.WriteString('Search','filetype',ss);
+  myini.WriteBool('Search','child_dir',chkChildDir.Checked);
+  myini.WriteBool('Search','filesize',chkFileSize.Checked);
+  myini.WriteInteger('Search','minsize',txtMinSize.IntValue);
+  myini.WriteInteger('Search','maxsize',txtMaxSize.IntValue);
+  myini.WriteInteger('Personal','urlhost',cmbResult.ItemIndex);
+  myini.WriteInteger('Personal','picspace',txtPicSpace.IntValue);
+  myini.WriteBool('Personal','ClearOld',chkClearOld.Checked);
+  myini.WriteString('Personal','headtext',StringReplace(txtHead.Text,CRLF,'[\n]',[rfReplaceAll]));
+  myini.WriteString('Personal','roottext',StringReplace(txtRoot.Text,CRLF,'[\n]',[rfReplaceAll]));
+  myini.WriteBool('Personal','TrimBlank',chkTrimBlank.Checked);
 end;
 
 procedure TfrmSetting.chkCompressClick(Sender: TObject);
 begin
-txtCompress.Enabled:=chkCompress.Checked;
-grpCompress.Enabled:=chkCompress.Checked;
+  txtCompress.Enabled:=chkCompress.Checked;
+  grpCompress.Enabled:=chkCompress.Checked;
 end;
 
 procedure TfrmSetting.tbCompressChange(Sender: TObject);
 begin
-txtRatio.IntValue:=tbCompress.Position;
+  txtRatio.IntValue:=tbCompress.Position;
 end;
 
 procedure TfrmSetting.txtRatioChange(Sender: TObject);
 begin
-tbCompress.Position:=txtRatio.IntValue;
-end;
-{
-procedure TfrmSetting.lstSkinClick(Sender: TObject);
-begin
-if lstSkin.ItemIndex<0 then
-  exit
-else if lstSkin.ItemIndex=0 then
-  frmMain.SkinData1.Active:=false
-else
-  if not frmMain.SkinData1.Active then
-  begin
-    showmessage('重启本程序后生效');
-    frmMain.SkinData1.Active:=true;
-  end;
-  frmMain.SkinData1.LoadFromFile(ExtractFilePath(Paramstr(0))+'skin\'+lstSkin.Items[lstSkin.ItemIndex]+'.skn');
-end;
-  }
-procedure TfrmSetting.rb0Click(Sender: TObject);
-begin
-if (Sender as TRadioButton).Tag=0 then
-begin
-chkTaskbar.Checked:=true;
-chkTaskbarClick(nil);
-chkTaskbar.Enabled:=false;
-frmMain.trayicon.Enabled:=false;
-end
-else
-begin
-chkTaskbar.Enabled:=true;
-frmMain.trayicon.Enabled:=true;
-end;
-if (Sender as TRadioButton).Tag=1 then
-begin
-frmMain.trayicon.Animate:=false;
-end
-else
-begin
-frmMain.trayicon.Animate:=true;
+  tbCompress.Position:=txtRatio.IntValue;
 end;
 
+procedure TfrmSetting.rb0Click(Sender: TObject);
+begin
+  if (Sender as TRadioButton).Tag=0 then
+  begin
+    chkTaskbar.Checked:=true;
+    chkTaskbarClick(nil);
+    chkTaskbar.Enabled:=false;
+    frmMain.trayicon.Enabled:=false;
+  end
+  else
+  begin
+    chkTaskbar.Enabled:=true;
+    frmMain.trayicon.Enabled:=true;
+  end;
+  if (Sender as TRadioButton).Tag=1 then
+    frmMain.trayicon.Animate:=false
+  else
+    frmMain.trayicon.Animate:=true;
 end;
 
 procedure TfrmSetting.chkFileSizeClick(Sender: TObject);
 begin
-txtMinSize.Enabled:=chkFileSize.Checked;
-txtMaxSize.Enabled:=chkFileSize.Checked;
+  txtMinSize.Enabled:=chkFileSize.Checked;
+  txtMaxSize.Enabled:=chkFileSize.Checked;
 end;
 
 procedure TfrmSetting.chkMulThreadClick(Sender: TObject);
 begin
-   txtMulnum.Enabled:=chkMulThread.Checked;
+  txtMulnum.Enabled:=chkMulThread.Checked;
 end;
 
 procedure TfrmSetting.chkTaskbarClick(Sender: TObject);
 begin
-frmMain.trayicon.HideOnMinimize:=not chkTaskbar.Checked;
+  frmMain.trayicon.HideOnMinimize:=not chkTaskbar.Checked;
 end;
 
 procedure TfrmSetting.chkTimeoutClick(Sender: TObject);
 begin
-txtTimeout.Enabled:=chkTimeout.Checked;
+  txtTimeout.Enabled:=chkTimeout.Checked;
 end;
 
 procedure TfrmSetting.chkTrayMsgClick(Sender: TObject);
 begin
-gpSysTrayInfo.Enabled:=chkTrayMsg.Checked;
+  gpSysTrayInfo.Enabled:=chkTrayMsg.Checked;
 end;
 
 end.

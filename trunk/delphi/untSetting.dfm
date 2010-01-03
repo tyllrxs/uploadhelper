@@ -283,10 +283,6 @@ object frmSetting: TfrmSetting
     object TabSheet7: TTabSheet
       Caption = #25991#20214#22841#25628#32034
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label2: TLabel
         Left = 152
         Top = 48
