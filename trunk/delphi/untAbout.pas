@@ -35,7 +35,7 @@ uses untMain;
 
 procedure TfrmAbout.FormClick(Sender: TObject);
 begin
-  self.Close;
+  Close;
 end;
 
 procedure TfrmAbout.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -46,12 +46,12 @@ end;
 
 procedure TfrmAbout.FormCreate(Sender: TObject);
 begin
-lblAppName.Caption:=application.Title;
-lblAppVersion.Caption:='版本: '+APPVERSION;
-lblAuthor.Caption:='作者: '+APPAUTHOR;
-lblHomepage.Caption:=APPHOMEPAGE;
-lblHomepage.URL:=APPHOMEPAGE;
-self.FormStyle:=frmMain.FormStyle;
+  lblAppName.Caption:=application.Title;
+  lblAppVersion.Caption:='版本: '+APPVERSION;
+  lblAuthor.Caption:='作者: '+APPAUTHOR;
+  lblHomepage.Caption:=APPHOMEPAGE;
+  lblHomepage.URL:=APPHOMEPAGE;
+  FormStyle:=frmMain.FormStyle;
 end;
 
 end.
