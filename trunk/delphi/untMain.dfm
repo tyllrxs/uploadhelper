@@ -467,10 +467,6 @@ object frmMain: TfrmMain
       Caption = #36716#36148#32593#39029
       ImageIndex = 3
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label11: TLabel
         Left = 327
         Top = 229

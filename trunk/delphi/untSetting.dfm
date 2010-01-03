@@ -30,6 +30,10 @@ object frmSetting: TfrmSetting
     object TabSheet5: TTabSheet
       Caption = #24120#35268
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object chkTaskbar: TCheckBox
         Left = 237
         Top = 71
@@ -188,6 +192,10 @@ object frmSetting: TfrmSetting
     object TabSheet2: TTabSheet
       Caption = #22270#29255#21387#32553
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label5: TLabel
         Left = 168
         Top = 10
@@ -275,6 +283,10 @@ object frmSetting: TfrmSetting
     object TabSheet7: TTabSheet
       Caption = #25991#20214#22841#25628#32034
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label2: TLabel
         Left = 152
         Top = 48
@@ -491,7 +503,7 @@ object frmSetting: TfrmSetting
     Left = 8
     Top = 280
     Bitmap = {
-      494C010108000900180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101080009001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

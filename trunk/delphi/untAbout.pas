@@ -1,4 +1,4 @@
-unit untAbout;
+ï»¿unit untAbout;
 
 interface
 
@@ -47,8 +47,8 @@ end;
 procedure TfrmAbout.FormCreate(Sender: TObject);
 begin
 lblAppName.Caption:=application.Title;
-lblAppVersion.Caption:='°æ±¾: '+APPVERSION;
-lblAuthor.Caption:='×÷Õß: '+APPAUTHOR;
+lblAppVersion.Caption:='ç‰ˆæœ¬: '+APPVERSION;
+lblAuthor.Caption:='ä½œè€…: '+APPAUTHOR;
 lblHomepage.Caption:=APPHOMEPAGE;
 lblHomepage.URL:=APPHOMEPAGE;
 self.FormStyle:=frmMain.FormStyle;

@@ -1,4 +1,4 @@
-unit untMain;
+ï»¿unit untMain;
 
 interface
 
@@ -199,8 +199,8 @@ uses untAbout,untFeedback,untLogin,untSetting;
 /////////////////////////////////////////////////////////////
 constructor regThread.Create(myindex:integer);
 begin
-      inherited   Create(false);   //false   ´´½¨ºóÁ¢¼´Ö´ĞĞ
-      FreeOnTerminate:=true;     //true       ×Ô¶¯½áÊøÏß³Ì
+      inherited   Create(false);   //false   åˆ›å»ºåç«‹å³æ‰§è¡Œ
+      FreeOnTerminate:=true;     //true       è‡ªåŠ¨ç»“æŸçº¿ç¨‹
       retried:=false;
       InterlockedIncrement(total);
       if myindex>=nn then
@@ -236,17 +236,17 @@ end;
 procedure regThread.upld;
 begin
   flg:='';
-  msg:='ÉÏ´«ÖĞ...';
+  msg:='ä¸Šä¼ ä¸­...';
   flname:=frmMain.lstUpFile.Items[fid].SubItems[0];
   if not fileexists(flname) then
   begin
-    msg:='ÎÄ¼ş²»´æÔÚ';
+    msg:='æ–‡ä»¶ä¸å­˜åœ¨';
     flg:='fail';
     exit;
   end
   else if not CheckType(flname,'jpg|png|gif|pdf|jpeg') then
   begin
-    msg:='²»Ö§³Ö´ËÎÄ¼şÀàĞÍ';
+    msg:='ä¸æ”¯æŒæ­¤æ–‡ä»¶ç±»å‹';
     flg:='fail';
     exit;
   end
@@ -256,7 +256,7 @@ begin
       flname:=flname+'.jpg'
     else
     begin
-      msg:='BMP¸ñÊ½Î´ÄÜ³É¹¦×ª»»³ÉJPG¸ñÊ½';
+      msg:='BMPæ ¼å¼æœªèƒ½æˆåŠŸè½¬æ¢æˆJPGæ ¼å¼';
       flg:='fail';
       exit;
     end;
@@ -267,7 +267,7 @@ begin
       flname:=flname+'.jpg'
     else
     begin
-      msg:='Í¼Æ¬Î´ÄÜ³É¹¦Ñ¹Ëõ';
+      msg:='å›¾ç‰‡æœªèƒ½æˆåŠŸå‹ç¼©';
       flg:='fail';
       exit;
     end;
@@ -293,7 +293,7 @@ begin
       Content.AddFile('up',flname,'');
       try
         IdHTTPreg.Post(bbshost+BBSPATH+'upload?b='+GetBoard(frmMain.cmbBoard.Items[frmMain.cmbBoard.ItemIndex]),Content,response);
-        if Pos('´íÎó',response.DataString)>0 then
+        if Pos('é”™è¯¯',response.DataString)>0 then
           flg:='fail'
         else
           flg:='OK';
@@ -310,7 +310,7 @@ begin
     on e:exception do
       begin
         flg:='Except';
-        msg:='Ê§°Ü£¬'+e.ClassName+' '+e.Message;
+        msg:='å¤±è´¥ï¼Œ'+e.ClassName+' '+e.Message;
       end;
   end;
 end;
@@ -319,11 +319,11 @@ procedure regThread.upld4;
 begin
   if flg='OK' then
         begin
-          frmMain.lstUpfile.Items[fid].SubItems[2]:='³É¹¦';
+          frmMain.lstUpfile.Items[fid].SubItems[2]:='æˆåŠŸ';
           frmMain.txtContent.Text:=StringReplace(frmMain.txtContent.Text,'[File'+Inttostr(fid+1)+' Uploading...]',GetFileURL(msg),[rfReplaceAll]);
         end
   else if flg='fail' then
-        frmMain.lstUpfile.Items[fid].SubItems[2]:='Ê§°Ü£¬'+trimhtml(msg)
+        frmMain.lstUpfile.Items[fid].SubItems[2]:='å¤±è´¥ï¼Œ'+trimhtml(msg)
   else if flg='Except' then
       begin
         if (not retried) and myini.ReadBool('General','OnErrRetry',true) then
@@ -343,7 +343,7 @@ begin
 
     InterlockedIncrement(over);
     frmMain.pp.Position:=100*over div nn;
-    frmMain.lblProgress.Caption:='Ä¿Ç°½ø¶È: '+Inttostr(over)+' / '+Inttostr(nn);
+    frmMain.lblProgress.Caption:='ç›®å‰è¿›åº¦: '+Inttostr(over)+' / '+Inttostr(nn);
 
     if over = nn then
     begin
@@ -370,7 +370,7 @@ begin
   begin
      lv.Items[i].Caption:=Inttostr(i+1);
   end;
-  lblProgress.Caption:='Ñ¡ÔñÁË '+Inttostr(lv.Items.Count)+' ¸öÎÄ¼ş';
+  lblProgress.Caption:='é€‰æ‹©äº† '+Inttostr(lv.Items.Count)+' ä¸ªæ–‡ä»¶';
   btnUpload.Enabled:=true;
 end;
 
@@ -452,7 +452,7 @@ begin
     myMenuItem:=TMenuItem.Create(nil);
     With myMenuItem do
     begin
-      Caption:='ÒÆ³ıÑ¡ÖĞ';
+      Caption:='ç§»é™¤é€‰ä¸­';
       ImageIndex:=11;
       OnClick:=mnuRemoveClick;
     end;
@@ -469,7 +469,7 @@ begin
   myMenuItem:=TMenuItem.Create(nil);
   With myMenuItem do
   begin
-    Caption:='ÒÆ³ıÖØ¸´µÄ';
+    Caption:='ç§»é™¤é‡å¤çš„';
     OnClick:=mnuRemoveDuplicateClick;
   end;
   myPopMenu.Items.Add(myMenuItem);
@@ -477,7 +477,7 @@ begin
   myMenuItem:=TMenuItem.Create(nil);
   With myMenuItem do
   begin
-    Caption:='ÒÆ³ıÎŞĞ§µÄ';
+    Caption:='ç§»é™¤æ— æ•ˆçš„';
     OnClick:=mnuRemoveInvalidClick;
   end;
   myPopMenu.Items.Add(myMenuItem);
@@ -489,7 +489,7 @@ begin
   myMenuItem:=TMenuItem.Create(nil);
   With myMenuItem do
   begin
-    Caption:='ÒÆ³ıËùÓĞ';
+    Caption:='ç§»é™¤æ‰€æœ‰';
     ImageIndex:=10;
     OnClick:=mnuRemoveAllClick;
   end;
@@ -501,7 +501,7 @@ end;
 {procedure TfrmMain.lngEngClick(Sender: TObject);
 begin
   (Sender as TMenuItem).Checked:=True;
-  //showmessage('ÖØÆô±¾³ÌĞòÉúĞ§');
+  //showmessage('é‡å¯æœ¬ç¨‹åºç”Ÿæ•ˆ');
   myini.WriteString('General','Language',langs.Strings[(Sender as TMenuItem).Tag]);
   langsave(self);
 end;}
@@ -510,7 +510,7 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   //if FormatDateTime('YYYY',DATE)<>'2009' then
   //begin
-  //  ShowMessage('¶Ô²»Æğ£¬±¾²âÊÔ°æÒÑ¾­¹ıÆÚ£¬ÇëÊ¹ÓÃĞÂ°æ±¾');
+  //  ShowMessage('å¯¹ä¸èµ·ï¼Œæœ¬æµ‹è¯•ç‰ˆå·²ç»è¿‡æœŸï¼Œè¯·ä½¿ç”¨æ–°ç‰ˆæœ¬');
   //  ShellExecute(0, 'open', PChar(APPHOMEPAGE), '','', SW_SHOWNORMAL);
   //  Application.Terminate;
   //end;
@@ -524,9 +524,9 @@ begin
   appendmode:=true;
   DragAcceptFiles(lstUpfile.handle,true);
   OLDWndProc:=lstUpfile.WindowProc;
-  //±£´æÔ­À´µÄWindowProc
+  //ä¿å­˜åŸæ¥çš„WindowProc
   lstUpfile.WindowProc:=self.DragFileProc;
-  //ÉèÖÃĞÂµÄWindowProc
+  //è®¾ç½®æ–°çš„WindowProc
   self.Caption:=application.Title+' v'+APPVERSION;
   self.Width:=myini.ReadInteger('UserSettings','MainWinWidth',503);
   self.Height:=myini.ReadInteger('UserSettings','MainWinHeight',489);
@@ -578,10 +578,10 @@ begin
     end;
   except
     diagXPOpen.Options:=[ofAllowMultiSelect];
-    diagXPOpen.Filter:='ËùÓĞÖ§³ÖµÄ¸ñÊ½(*.jpg;*.jpeg;*.png;*.gif;*.pdf)|*.jpg;*.jpeg;*.png;*.gif;*.pdf'
-                        +'|ËùÓĞÍ¼Ïñ¸ñÊ½(*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif'
-                        +'|PDF ÎÄµµ(*.pdf)|*.pdf'
-                        +'|ËùÓĞÎÄ¼ş(*.*)|*.*';
+    diagXPOpen.Filter:='æ‰€æœ‰æ”¯æŒçš„æ ¼å¼(*.jpg;*.jpeg;*.png;*.gif;*.pdf)|*.jpg;*.jpeg;*.png;*.gif;*.pdf'
+                        +'|æ‰€æœ‰å›¾åƒæ ¼å¼(*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif'
+                        +'|PDF æ–‡æ¡£(*.pdf)|*.pdf'
+                        +'|æ‰€æœ‰æ–‡ä»¶(*.*)|*.*';
     if not diagXPopen.Execute then exit;
     if flgUploaded then lstUpfile.Clear;
     flgUploaded:=false;
@@ -649,7 +649,7 @@ begin
     end;
     xml.Active:=false;
   except
-    showmessage('xmlÎÄ¼ş¶ÁÈ¡´íÎó£¬Çëµ½¹Ù·½ÍøÕ¾ÏÂÔØÍêÕû°æ£¬¹Ù·½µØÖ·¼û"°ïÖú"²Ëµ¥~~');
+    showmessage('xmlæ–‡ä»¶è¯»å–é”™è¯¯ï¼Œè¯·åˆ°å®˜æ–¹ç½‘ç«™ä¸‹è½½å®Œæ•´ç‰ˆï¼Œå®˜æ–¹åœ°å€è§"å¸®åŠ©"èœå•~~');
     exit;
   end;
   cmbpstZone.Items:=cmbZone.Items;
@@ -717,17 +717,17 @@ begin
   over:=0;
   if lstUpFile.Items.Count<=0 then
   begin
-    showmessage('»¹Ã»Ñ¡ÔñÒªÉÏ´«µÄÎÄ¼şÄØ');
+    showmessage('è¿˜æ²¡é€‰æ‹©è¦ä¸Šä¼ çš„æ–‡ä»¶å‘¢');
     exit;
   end;
   if cmbBoard.ItemIndex<0 then
   begin
-    showmessage('»¹Ã»Ñ¡ÔñÉÏ´«°æÃæÄØ');
+    showmessage('è¿˜æ²¡é€‰æ‹©ä¸Šä¼ ç‰ˆé¢å‘¢');
     exit;
   end;
   nn:=lstUpFile.Items.Count;
   btnUpload.Enabled:=false;
-  lblProgress.Caption:='ÕıÔÚ¼ì²éÍøÂç...';
+  lblProgress.Caption:='æ­£åœ¨æ£€æŸ¥ç½‘ç»œ...';
   tmp:=myini.ReadString('Personal','signature','Uploaded by UploadHelper v'+APPVERSION+' (by tyllr)');
   if not Perfect_Connect(bbshost+BBSPATH+'preupload?board='+GetBoard(cmbBoard.Items[cmbBoard.ItemIndex])) then
   begin
@@ -753,7 +753,7 @@ begin
     txtContent.Lines.Add(Trim(tsPicList.Strings[tsPicList.Count-1]));
   txtContent.Lines.Add(CRLF+StringReplace(myini.ReadString('Personal','roottext',''),'[\n]',CRLF,[rfReplaceAll]));
 
-  lblProgress.Caption:='¿ªÊ¼ÉÏ´«ÎÄ¼ş...';
+  lblProgress.Caption:='å¼€å§‹ä¸Šä¼ æ–‡ä»¶...';
   flgCompress:=myini.ReadBool('Compress','Compression',true);
   vmin:=myini.ReadInteger('Compress','min',1024);
   rati:=myini.ReadInteger('Compress','ratio',60);
@@ -762,7 +762,7 @@ begin
     threads:=1
   else if threads>10 then
   begin
-    ShowMessage('ÄãÌ«BTÁË,Ò²¸ÃĞªĞªÁË~~');
+    ShowMessage('ä½ å¤ªBTäº†,ä¹Ÿè¯¥æ­‡æ­‡äº†~~');
     Application.Terminate;
     exit;
   end
@@ -814,7 +814,7 @@ begin
     if not diagOpen.Execute then exit;
     mypath:=diagOpen.FileName;
   except
-    diagXPFolder.Title:='ä¯ÀÀÎÄ¼ş¼Ğ';
+    diagXPFolder.Title:='æµè§ˆæ–‡ä»¶å¤¹';
     if not diagXPFolder.Execute then exit;
     mypath:=diagXPFolder.SelectedPathName;
   end;
@@ -855,7 +855,7 @@ end;
 procedure TfrmMain.TrayIconMinimizeApp(Sender: TObject);
 begin
 if myini.ReadBool('General','TrayMsg',true) then
-  trayicon.ShowBalloonHint(myini.ReadString('General','InfoTitle','ºÙºÙ~~'),myini.ReadString('General','InfoContent','Å¼ÒÑ¾­Òş²ØÔÚÕâÀïÁË'));
+  trayicon.ShowBalloonHint(myini.ReadString('General','InfoTitle','å˜¿å˜¿~~'),myini.ReadString('General','InfoContent','å¶å·²ç»éšè—åœ¨è¿™é‡Œäº†'));
 end;
 
 procedure TfrmMain.txtTempDirButtonClick(Sender: TObject);
@@ -866,7 +866,7 @@ try
   if not diagOpen.Execute then exit;
   txtTempDir.Text:=diagOpen.FileName;
 except
-  diagXPFolder.Title:='ä¯ÀÀÎÄ¼ş¼Ğ';
+  diagXPFolder.Title:='æµè§ˆæ–‡ä»¶å¤¹';
   diagXPFolder.SelectedPathName:=txtTempDir.Text;
   if not diagXPFolder.Execute then exit;
   txtTempDir.Text:=diagXPFolder.SelectedPathName;
@@ -877,7 +877,7 @@ procedure TfrmMain.btnZZClick(Sender: TObject);
 var   fn,html:string;
           i,fl,size:integer;  
           data:thandle;
-          p:pointer;             //Êı¾İÖ¸Õë
+          p:pointer;             //æ•°æ®æŒ‡é’ˆ
 begin
 lstUpFile.Clear;
       clipboard.Open;
@@ -885,13 +885,13 @@ lstUpFile.Clear;
           setlength(fn,100);  
           fl:=GetClipboardFormatName(clipboard.Formats[i],@fn[1],200);  
           setlength(fn,fl);  
-          if   pos('HTML',fn)>0   then   begin     //ÊÇHTMLÊı¾İ  
-              Data   :=   GetClipboardData(clipboard.formats[i]);     //µÃµ½Êı¾İÄÚ´æ¾ä±ú  
+          if   pos('HTML',fn)>0   then   begin     //æ˜¯HTMLæ•°æ®  
+              Data   :=   GetClipboardData(clipboard.formats[i]);     //å¾—åˆ°æ•°æ®å†…å­˜å¥æŸ„  
               try  
                   p:=GlobalLock(Data);
-                  size:=globalsize(data);     //µÃµ½Êı¾İ´óĞ¡  
-                  setlength(html,size);         //ÉèÖÃ±£´æÇøÓò  
-                  move(p^,html[1],size);       //¸´ÖÆÊı¾İ  
+                  size:=globalsize(data);     //å¾—åˆ°æ•°æ®å¤§å°  
+                  setlength(html,size);         //è®¾ç½®ä¿å­˜åŒºåŸŸ  
+                  move(p^,html[1],size);       //å¤åˆ¶æ•°æ®  
               finally  
               GlobalUnlock(Data);  
               end;
@@ -923,20 +923,20 @@ begin
 //    if chkSourceURL.Checked then
 //    begin
 //      if opt0.Checked then
-//        ts.Strings[0]:='À´Ô´: '+srcUrl+CRLF+CRLF+ts.Strings[0]
+//        ts.Strings[0]:='æ¥æº: '+srcUrl+CRLF+CRLF+ts.Strings[0]
 //      else
-//        ts.Strings[ts.Count - 1]:=ts.Strings[ts.Count - 1]+CRLF+CRLF+'À´Ô´: '+srcUrl;
+//        ts.Strings[ts.Count - 1]:=ts.Strings[ts.Count - 1]+CRLF+CRLF+'æ¥æº: '+srcUrl;
 //    end;
-//    memo1.Lines.Add('=========½âÎö¿ªÊ¼==========');
+//    memo1.Lines.Add('=========è§£æå¼€å§‹==========');
 //    for i := 0 to ts.Count - 1 do
 //      begin
 //        if i mod 2=0 then
 //           memo1.Lines.Add(ts.Strings[i])
 //        else
-//           memo1.Lines.Add('Í¼Æ¬: '+ts.Strings[i]);
+//           memo1.Lines.Add('å›¾ç‰‡: '+ts.Strings[i]);
 //      end;
-//    memo1.Lines.Add('=========½âÎöÍê±Ï==========');
-//    memo1.Lines.Add('ÕÒµ½'+inttostr(ts.Count div 2)+'ÕÅÍ¼Æ¬');
+//    memo1.Lines.Add('=========è§£æå®Œæ¯•==========');
+//    memo1.Lines.Add('æ‰¾åˆ°'+inttostr(ts.Count div 2)+'å¼ å›¾ç‰‡');
 //    for i := 0 to ts.Count - 1 do
 //      begin
 //        if i mod 2=1 then
@@ -945,7 +945,7 @@ begin
 //              ts.Strings[i]:=GetHost(srcUrl)+ts.Strings[i]
 //            else if Pos('http://',ts.Strings[i])<>1 then
 //              ts.Strings[i]:=GetHostPath(srcUrl)+ts.Strings[i];
-//            memo1.Lines.Add('ÕıÔÚÏÂÔØÍ¼Æ¬( '+Inttostr(i div 2+1)+' / '+inttostr(ts.Count div 2)+' ): '
+//            memo1.Lines.Add('æ­£åœ¨ä¸‹è½½å›¾ç‰‡( '+Inttostr(i div 2+1)+' / '+inttostr(ts.Count div 2)+' ): '
 //            +CRLF+ts.Strings[i]);
 //            ts.Strings[i]:=DownloadFile(ts.Strings[i]);
 //            with lstupfile.Items.Add.SubItems do
@@ -955,7 +955,7 @@ begin
 //                Add('');
 //              end;
 //            if ts.Strings[i]='' then
-//              memo1.Lines.Add('ÏÂÔØ³öÏÖ´íÎó');
+//              memo1.Lines.Add('ä¸‹è½½å‡ºç°é”™è¯¯');
 //            application.ProcessMessages;
 //          end;
 //      end;
@@ -972,12 +972,12 @@ var tgtRequest:TStringList;
 begin
   if (Trim(txtTitle.Text)='') or (Trim(txtContent.Text)='') then
   begin
-    showmessage('±êÌâºÍÄÚÈİ¶¼²»ÄÜÎª¿Õ');
+    showmessage('æ ‡é¢˜å’Œå†…å®¹éƒ½ä¸èƒ½ä¸ºç©º');
     exit;
   end
   else if not btnUpload.Enabled then
   begin
-    if messagebox(self.Handle,PChar('ÎÄ¼ş»¹Ã»ÓĞÉÏ´«Íê±Ï,ÈÔÒª¼ÌĞøÂğ?'),PChar('ÌáÊ¾'),mb_OKCancel+MB_ICONWARNING+MB_DEFBUTTON2)=IDCancel then
+    if messagebox(self.Handle,PChar('æ–‡ä»¶è¿˜æ²¡æœ‰ä¸Šä¼ å®Œæ¯•,ä»è¦ç»§ç»­å—?'),PChar('æç¤º'),mb_OKCancel+MB_ICONWARNING+MB_DEFBUTTON2)=IDCancel then
       exit;
   end;
   appendmode:=false;
@@ -992,7 +992,7 @@ begin
   if Perfect_Connect(bbshost+BBSPATH+'snd?bid='+GetBID(cmbpstBoard.Items[cmbpstBoard.ItemIndex]),tgtRequest) then
   begin
     lstUpFile.Clear;
-    showmessage('·¢±í³É¹¦! ¿ìÈ¥ '+GetBoard(cmbpstBoard.Items[cmbpstBoard.ItemIndex])+' °æ¿´¿´°É:)');
+    showmessage('å‘è¡¨æˆåŠŸ! å¿«å» '+GetBoard(cmbpstBoard.Items[cmbpstBoard.ItemIndex])+' ç‰ˆçœ‹çœ‹å§:)');
   end;
   FreeAndNil(tgtRequest);
   btnPost.Enabled:=true;
@@ -1086,7 +1086,7 @@ resp:=TStringStream.Create('');
 idhttp1.Request.CustomHeaders.Values['Cookie']:=myini.ReadString('Login','cookie','');
 try
   idhttp1.Post(bbshost+BBSPATH+'logout',req,resp);
-  if Pos('´íÎó',resp.DataString)>0 then
+  if Pos('é”™è¯¯',resp.DataString)>0 then
     begin
     showmessage(resp.DataString);
     exit;
@@ -1094,7 +1094,7 @@ try
   else
     begin
     myini.EraseSection('Login');
-    showmessage('×¢Ïú³É¹¦');
+    showmessage('æ³¨é”€æˆåŠŸ');
     frmMain.Caption:=application.Title+' v'+APPVERSION+' - ['+myini.ReadString('Login','id','')+']';
     end;
 except
@@ -1142,11 +1142,11 @@ begin
   if Message.Msg=WM_DropFiles then
   begin
   i:=DragQueryFile(Message.WParam,$FFFFFFFF,nil,0);
-  //È¡µÃÍÏ·ÅÎÄ¼ş×ÜÊı
+  //å–å¾—æ‹–æ”¾æ–‡ä»¶æ€»æ•°
   for i:=0 to i-1 do
   begin
   DragQueryFile(Message.WParam,i,p,255);
-  //È¡µÃÍÏ·ÅÎÄ¼şÃû
+  //å–å¾—æ‹–æ”¾æ–‡ä»¶å
   with lstupfile.Items.Add.SubItems do
     begin
       Add(StrPas(p));
@@ -1156,7 +1156,7 @@ begin
   end;
   ListViewAutoNumber(lstUpfile);
   end
-  else //ÆäËûÏûÏ¢£¬µ÷ÓÃÔ­À´µÄ´¦Àí³ÌĞò
+  else //å…¶ä»–æ¶ˆæ¯ï¼Œè°ƒç”¨åŸæ¥çš„å¤„ç†ç¨‹åº
   OLDWndProc(Message);
 end;
 
@@ -1178,9 +1178,9 @@ tIni:TIniFile;
 ts:TStringList;
 begin
 myTerm:=StringReplace((Sender as TMenuItem).Caption,'&','',[rfReplaceAll]);
-showmessage('ÇëÏÈ¹Ø±Õ'+myTerm+'£¬È»ºóÑ¡Ôñ'+myTerm+'ËùÔÚÄ¿Â¼');
+showmessage('è¯·å…ˆå…³é—­'+myTerm+'ï¼Œç„¶åé€‰æ‹©'+myTerm+'æ‰€åœ¨ç›®å½•');
 try
-diagTerm.Title:='Ñ¡Ôñ'+myTerm+'µÄÎ»ÖÃ';
+diagTerm.Title:='é€‰æ‹©'+myTerm+'çš„ä½ç½®';
 with diagTerm.FileTypes.Items[0] do
   begin
     DisplayName:=myTerm+'.exe';
@@ -1189,7 +1189,7 @@ with diagTerm.FileTypes.Items[0] do
 if not diagTerm.Execute then exit;
 myPath:=ExtractFilePath(diagTerm.FileName);
 except
-diagXPTerm.Title:='Ñ¡Ôñ'+myTerm+'µÄÎ»ÖÃ';
+diagXPTerm.Title:='é€‰æ‹©'+myTerm+'çš„ä½ç½®';
 diagXPTerm.Filter:=myTerm+'.exe|'+myTerm+'.exe';
 if not diagXPTerm.Execute then exit;
 myPath:=ExtractFilePath(diagXPTerm.FileName);
@@ -1212,21 +1212,21 @@ begin
    begin
      if not CopyFile(PChar(myPath+'User\mycmds.txt.example'), PChar(myPath+'User\mycmds.txt'), False) then
      begin
-        showmessage('ÕÒ²»µ½ÎÄ¼ş£º'+myPath+'User\mycmds.txt');
+        showmessage('æ‰¾ä¸åˆ°æ–‡ä»¶ï¼š'+myPath+'User\mycmds.txt');
         exit;
      end;
    end;
    try
      ts.LoadFromFile(myPath+'User\mycmds.txt');
-     ts.Add('99; ; ÉÏ´«ÖúÊÖ; true; py:import os\\nos.startfile(r\"'+StringReplace(application.ExeName,'\','\\',[rfReplaceAll])+'\");');
+     ts.Add('99; ; ä¸Šä¼ åŠ©æ‰‹; true; py:import os\\nos.startfile(r\"'+StringReplace(application.ExeName,'\','\\',[rfReplaceAll])+'\");');
      ts.SaveToFile(myPath+'User\mycmds.txt');
      ts.Free;
    except
-     showmessage('Ğ´ÈëÎÄ¼şÊ§°Ü£º'+myPath+'User\mycmds.txt');
+     showmessage('å†™å…¥æ–‡ä»¶å¤±è´¥ï¼š'+myPath+'User\mycmds.txt');
      exit;
    end;
 end;
-showmessage('³É¹¦¼ÓÈë'+myTerm+'¹¤¾ßÀ¸');
+showmessage('æˆåŠŸåŠ å…¥'+myTerm+'å·¥å…·æ ');
 end;
 
 procedure TfrmMain.mnuNewVersionClick(Sender: TObject);
@@ -1243,14 +1243,14 @@ try
   ts.DelimitedText:=resp;
   if CompareText(Trim(ts.Strings[0]),APPVERSION)>0 then
     begin
-    if messagebox(handle,PChar('·¢ÏÖĞÂ°æ±¾ v'+Trim(ts.Strings[0])+'£¬'+CRLF+'ÊÇ·ñÁ¢¼´Éı¼¶?'),PChar(application.Title),mb_YesNo+mb_IconQuestion)=IDYES then
+    if messagebox(handle,PChar('å‘ç°æ–°ç‰ˆæœ¬ v'+Trim(ts.Strings[0])+'ï¼Œ'+CRLF+'æ˜¯å¦ç«‹å³å‡çº§?'),PChar(application.Title),mb_YesNo+mb_IconQuestion)=IDYES then
       ShellExecute(0, 'open', PChar(APPHOMEPAGE), '','', SW_SHOWNORMAL)
     else
       exit;
     end
   else
     begin
-    showmessage('ÄúÊ¹ÓÃµÄÊÇ×îĞÂ°æ±¾');
+    showmessage('æ‚¨ä½¿ç”¨çš„æ˜¯æœ€æ–°ç‰ˆæœ¬');
     exit;
     end;
 except
