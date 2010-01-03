@@ -85,7 +85,7 @@ object frmMain: TfrmMain
     Top = 22
     Width = 489
     Height = 395
-    ActivePage = tstUpload
+    ActivePage = tstPost
     Images = ImageList2
     TabHeight = 32
     TabOrder = 1
