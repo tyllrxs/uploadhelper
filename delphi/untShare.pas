@@ -25,7 +25,7 @@ uses
   function TextConv(const sstr:string):string;
   function ClearDirectory(const DirName: string; const IncludeSub: Boolean = false; ToRecyle: Boolean = false): Boolean; stdcall;
 const
-  APPVERSION:string='3.6';
+  APPVERSION:string='3.61';
   APPAUTHOR:string='tyllr@日月光华';
   APPHOMEPAGE:string='http://homepage.fudan.edu.cn/~tyllr/uh/';
   BBSPATH:string='bbs/';
