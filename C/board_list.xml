@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BBS>
+	<Zone name="BBS系统"/>
+	<Zone name="复旦大学">
+		<FDU_Development name="旦复旦兮·复旦发展"/>
+		<Undergraduate name="本科生之家"/>
+	</Zone>
+	<Zone name="院系风采">
+		<FDU_C.S.E. name="通信科学与工程系"/>
+		<FDU_E.E. name="电子工程系"/>
+		<FDU_Economics name="经济学院"/>
+		<FDU_F.L. name="外文学院"/>
+		<FDU_Law name="法学院"/>
+		<FDU_Management name="管理学院"/>
+		<FDU_Philosophy name="哲学学院"/>
+		<Mathematics_04 name="04数学·全纯人群，留迹数域"/>
+		<Physics_03 name="03物理·爱你到底"/>
+	</Zone>
+	<Zone name="电脑技术">
+		<Mac name="苹果电脑"/>
+		<MS_Windows name="微软视窗系列"/>
+		<Software name="软件与应用"/>
+		<Unix name="Unix/linux"/>
+		<Virus name="计算机病毒"/>
+	</Zone>
+	<Zone name="休闲娱乐">
+		<Animal name="动物乐园"/>
+		<Auto name="汽车"/>
+		<Beauty name="美容"/>
+		<City_Cafe name="城市咖啡厅"/>
+		<Flower name="花木园艺"/>
+		<Food name="美食"/>
+		<Music_Game name="音乐游戏"/>
+		<PC_Game name="电脑游戏"/>
+		<Photography name="摄影"/>
+		<PIC name="贴图乐园"/>
+		<Sports_Game name="体育游戏"/>
+		<Travel name="旅游"/>
+		<Video_Game name="电子游戏"/>
+	</Zone>
+	<Zone name="文学艺术">
+		<Calligraphy name="书法天地"/>
+		<Campus_Digest name="燕园文荟"/>
+		<Fantasy name="奇幻世界"/>
+		<Fine_Arts name="美术"/>
+	</Zone>
+	<Zone name="体育健身">
+		<Basketball name="篮球"/>
+		<Card name="牌类"/>
+		<Cycling name="自行车"/>
+		<Football_CN name="中国足球"/>
+		<Football_WD name="国际足球"/>
+		<Keepfit name="健美塑身"/>
+		<Outdoors name="户外运动"/>
+		<Running name="跑道人生"/>
+		<Speed name="极速世界"/>
+	</Zone>
+	<Zone name="感性空间">
+		<Employees name="上班一族"/>
+		<Marriage name="围城内外"/>
+		<Single name="网络光协"/>
+	</Zone>
+	<Zone name="新闻信息">
+		<DigitalLife name="数码生活"/>
+		<Magpie_Bridge name="鹊桥"/>
+		<Traffic_Info name="交通信息"/>
+	</Zone>
+	<Zone name="学科学术">
+		<Astronomy name="天文学"/>
+		<Architecture name="建筑与城市规划"/>
+		<Art_Study name="艺术研究与欣赏"/>
+		<EE name="电子工程"/>
+		<Foreign_Language name="外语广场"/>
+		<French name="法语教室"/>
+		<Geography name="地理知识"/>
+		<History name="历史研究"/>
+		<Insurance_Act name="保险与精算"/>
+		<MathTools name="数学软件"/>
+		<ME name="力学与工程科学"/>
+		<Military name="军事天地"/>
+		<Nature name="人与自然/环境保护"/>
+		<Num_Analysis name="数值计算"/>
+		<TeX name="TeX与学术出版"/>
+	</Zone>
+	<Zone name="音乐影视">
+		<Chinese_Music name="民乐"/>
+		<Classic name="古典音乐"/>
+		<NR_Cartoon name="卡通网络资源"/>
+		<NR_Music name="音乐网络资源"/>
+		<OMTV name="欧美电视"/>
+		<TV name="电视"/>
+	</Zone>
+	<Zone name="交易专区">
+		<FM_Beauty_Dress name="美容服饰"/>
+		<FM_Commodity name="家居生活"/>
+		<FM_Ecommodity name="电子商品"/>
+		<FM_PC name="PC机世界"/>
+		<MerchantAgent name="校园代理"/>
+	</Zone>
+</BBS>
