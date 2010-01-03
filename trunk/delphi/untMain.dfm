@@ -93,15 +93,15 @@ object frmMain: TfrmMain
       Caption = #19978#20256#38468#20214
       ImageIndex = 1
       object Label9: TLabel
-        Left = 11
+        Left = 8
         Top = 10
         Width = 60
         Height = 13
         Caption = #19978#20256#21040#29256#38754
       end
       object Label10: TLabel
-        Left = 11
-        Top = 46
+        Left = 8
+        Top = 45
         Width = 168
         Height = 13
         Caption = #35831#36873#25321#35201#19978#20256#30340#25991#20214'('#21487#20197#22810#36873'):'
@@ -114,7 +114,7 @@ object frmMain: TfrmMain
         Caption = '           '
       end
       object cmbZone: TComboBox
-        Left = 81
+        Left = 77
         Top = 7
         Width = 97
         Height = 21
@@ -150,7 +150,7 @@ object frmMain: TfrmMain
         OnClick = chkLockedClick
       end
       object lstUpFile: TRzListView
-        Left = 11
+        Left = 8
         Top = 67
         Width = 462
         Height = 246
@@ -303,21 +303,21 @@ object frmMain: TfrmMain
       Caption = #21457#34920#25991#31456
       object Label3: TLabel
         Left = 8
-        Top = 8
+        Top = 11
         Width = 24
         Height = 13
         Caption = #26631#39064
       end
       object Label4: TLabel
         Left = 328
-        Top = 8
+        Top = 11
         Width = 36
         Height = 13
         Caption = #31614#21517#26723
       end
       object Label5: TLabel
         Left = 8
-        Top = 39
+        Top = 40
         Width = 60
         Height = 13
         Caption = #21457#34920#21040#29256#38754
@@ -441,7 +441,7 @@ object frmMain: TfrmMain
         TabOrder = 3
       end
       object cmbpstZone: TComboBox
-        Left = 74
+        Left = 76
         Top = 37
         Width = 97
         Height = 21
