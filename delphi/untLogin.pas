@@ -1,4 +1,4 @@
-unit untLogin;
+ï»¿unit untLogin;
 
 interface
 
@@ -57,7 +57,7 @@ var
 begin
   if (txtID.Text='') or (txtID.Text=LOGINID) or (txtPwd.Text='') then
   begin
-    showmessage('ÇëÏÈÌîĞ´ÍêÕû');
+    showmessage('è¯·å…ˆå¡«å†™å®Œæ•´');
     exit;
   end;
   btnLogin.Enabled:=false;
@@ -94,13 +94,13 @@ begin
       else
         myini.DeleteKey('Login','pwd');
 
-      showmessage('µÇÂ¼³É¹¦£¬¿ÉÒÔ¿ªÊ¼ÉÏ´«ÎÄ¼şÁË');
+      showmessage('ç™»å½•æˆåŠŸï¼Œå¯ä»¥å¼€å§‹ä¸Šä¼ æ–‡ä»¶äº†');
       frmMain.Caption:=application.Title+' v'+APPVERSION+' - ['+myini.ReadString('Login','id','')+']';
       self.Close;
     end
     else
     begin
-      showmessage(Format('%s%s´íÎó´úÂë£º%d', [ERR_NETWORK, CRLF, IdHTTP1.ResponseCode]));
+      showmessage(Format('%s%sé”™è¯¯ä»£ç ï¼š%d', [ERR_NETWORK, CRLF, IdHTTP1.ResponseCode]));
     end;
   end;
   btnLogin.Enabled:=true;

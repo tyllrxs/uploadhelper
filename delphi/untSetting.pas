@@ -1,4 +1,4 @@
-unit untSetting;
+ï»¿unit untSetting;
 
 interface
 
@@ -112,8 +112,8 @@ chkTaskbar.Checked:=myini.ReadBool('General','taskbar',false);
 chkTaskbarClick(nil);
 chkTrayMsg.Checked:=myini.ReadBool('General','TrayMsg',true);
 chkTrayMsgClick(nil);
-txtInfoTitle.Text:=myini.ReadString('General','InfoTitle','ºÙºÙ~~');
-txtInfoContent.Text:=myini.ReadString('General','InfoContent','Å¼ÒÑ¾­Òş²ØÔÚÕâÀïÁË');
+txtInfoTitle.Text:=myini.ReadString('General','InfoTitle','å˜¿å˜¿~~');
+txtInfoContent.Text:=myini.ReadString('General','InfoContent','å¶å·²ç»éšè—åœ¨è¿™é‡Œäº†');
 num:=myini.ReadInteger('General','trayicon',1);
 (FindComponent('rb'+inttostr(num)) as TRadioButton).Checked:=true;
 rb0Click((FindComponent('rb'+inttostr(num)) as TRadioButton));
@@ -152,7 +152,7 @@ var
   FileAttr,num: Integer;
   qPath: string;
 begin
-  lstSkin.Items.Add('(²»Ê¹ÓÃÆ¤·ô)');
+  lstSkin.Items.Add('(ä¸ä½¿ç”¨çš®è‚¤)');
   qPath := ExtractFilePath(Paramstr(0))+'skin\';
   FileAttr := faAnyFile;
   num:=FindFirst(qPath + '*.skn', FileAttr, SR);
@@ -236,7 +236,7 @@ else if lstSkin.ItemIndex=0 then
 else
   if not frmMain.SkinData1.Active then
   begin
-    showmessage('ÖØÆô±¾³ÌĞòºóÉúĞ§');
+    showmessage('é‡å¯æœ¬ç¨‹åºåç”Ÿæ•ˆ');
     frmMain.SkinData1.Active:=true;
   end;
   frmMain.SkinData1.LoadFromFile(ExtractFilePath(Paramstr(0))+'skin\'+lstSkin.Items[lstSkin.ItemIndex]+'.skn');

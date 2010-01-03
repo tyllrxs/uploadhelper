@@ -1,4 +1,4 @@
-unit untShare;
+ï»¿unit untShare;
 
 interface
 uses
@@ -26,13 +26,13 @@ uses
   function ClearDirectory(const DirName: string; const IncludeSub: Boolean = false; ToRecyle: Boolean = false): Boolean; stdcall;
 const
   APPVERSION:string='3.6';
-  APPAUTHOR:string='tyllr@ÈÕÔÂ¹â»ª';
+  APPAUTHOR:string='tyllr@æ—¥æœˆå…‰å';
   APPHOMEPAGE:string='http://homepage.fudan.edu.cn/~tyllr/uh/';
   BBSPATH:string='bbs/';
-  BBSHOSTLIST:array[0..3] of string=('bbs.fudan.edu.cn (½ÌÓıÍø)','bbs.fudan.sh.cn (¹«ÖÚÍø)','202.120.225.9 (½ÌÓıÍøIP)','61.129.42.9 (¹«ÖÚÍøIP)');
+  BBSHOSTLIST:array[0..3] of string=('bbs.fudan.edu.cn (æ•™è‚²ç½‘)','bbs.fudan.sh.cn (å…¬ä¼—ç½‘)','202.120.225.9 (æ•™è‚²ç½‘IP)','61.129.42.9 (å…¬ä¼—ç½‘IP)');
   CRLF=#13#10;
-  LOGINID:string='<ÇëÊäÈëÄúµÄBBSÕÊºÅ>';
-  ERR_NETWORK:string='ÍøÂçÁ¬½Ó´íÎó';
+  LOGINID:string='<è¯·è¾“å…¥æ‚¨çš„BBSå¸å·>';
+  ERR_NETWORK:string='ç½‘ç»œè¿æ¥é”™è¯¯';
 var
   bbshost: string;
   myini: TIniFile;
@@ -62,7 +62,7 @@ strtmp:=StringReplace(strtmp,'&amp;','&',[rfReplaceAll]);
 Result:=Trim(strtmp);
 end;
 
-//¼ÓÃÜº¯Êı
+//åŠ å¯†å‡½æ•°
 Function EncrypKey (Src:String; Key:String):string;
 var
 KeyLen :Integer;
@@ -93,7 +93,7 @@ end;
 Result:=Dest;
 end;
 
-//½âÃÜº¯Êı
+//è§£å¯†å‡½æ•°
 Function UncrypKey (Src:String; Key:String):string;
 var
 KeyLen :Integer;
@@ -193,12 +193,12 @@ begin
     IDHTTP1.Request.CustomHeaders.Values['Cookie']:=myini.ReadString('Login','cookie','');
     try
       IDHTTP1.Post(surl,ts2,resp);
-      if Pos('´íÎó',resp.DataString)<=0 then
+      if Pos('é”™è¯¯',resp.DataString)<=0 then
       begin
         Result:=true;
         exit;
       end
-      else if (i > 0) or (Pos('µÇÂ¼',resp.DataString) <= 0) then
+      else if (i > 0) or (Pos('ç™»å½•',resp.DataString) <= 0) then
       begin
         showmessage(trimHTML(resp.DataString));
         exit;
@@ -241,7 +241,7 @@ begin
           end;
       end;
     except
-      ShowMessage(Format('%s%s´íÎó´úÂë£º%d', [ERR_NETWORK, CRLF, IDHTTP1.ResponseCode]));
+      ShowMessage(Format('%s%sé”™è¯¯ä»£ç ï¼š%d', [ERR_NETWORK, CRLF, IDHTTP1.ResponseCode]));
       exit;
     end;
   end;
@@ -260,12 +260,12 @@ function bmp2jpg(FromBMP, ToJPG: string):boolean;
 var WicImg:TWICImage;
 begin
   Result := False;
-  WicImg:=TWICImage.Create;¡¡
+  WicImg:=TWICImage.Create;ã€€
   //try
     WicImg.LoadFromFile(FromBMP);
-    WicImg.ImageFormat:=TWICImageFormat.wifJpeg;¡¡
-  ¡¡WicImg.SaveToFile(ToJPG);
-    Result := True;¡¡
+    WicImg.ImageFormat:=TWICImageFormat.wifJpeg;ã€€
+  ã€€WicImg.SaveToFile(ToJPG);
+    Result := True;ã€€
   //finally
     WicImg.Free;
   //end;
@@ -273,25 +273,25 @@ end;
 
 function JPEGCompress(Fromstr, Tostr: string; Quality:Integer):boolean;
 var
-¡¡WicImg: TWICImage;¡¡
-¡¡Factory: IWICImagingFactory;¡¡
-¡¡Scaler: IWICBitmapScaler;¡¡
+ã€€WicImg: TWICImage;ã€€
+ã€€Factory: IWICImagingFactory;ã€€
+ã€€Scaler: IWICBitmapScaler;ã€€
 begin
   Result := False;
-  WicImg := TWICImage.Create;¡¡
+  WicImg := TWICImage.Create;ã€€
   try
-  ¡¡WicImg.LoadFromFile(Fromstr);¡¡¡¡
-  ¡¡Factory := WicImg.ImagingFactory;¡¡
-  ¡¡Factory.CreateBitmapScaler(Scaler);¡¡
-    Scaler.Initialize(WicImg.Handle, WicImg.Width*Quality div 100, WicImg.Height*Quality div 100, WICBitmapInterpolationModeFant);  ¡¡
-  ¡¡WicImg.Handle := IWICBitmap(Scaler);
+  ã€€WicImg.LoadFromFile(Fromstr);ã€€ã€€
+  ã€€Factory := WicImg.ImagingFactory;ã€€
+  ã€€Factory.CreateBitmapScaler(Scaler);ã€€
+    Scaler.Initialize(WicImg.Handle, WicImg.Width*Quality div 100, WicImg.Height*Quality div 100, WICBitmapInterpolationModeFant);  ã€€
+  ã€€WicImg.Handle := IWICBitmap(Scaler);
     WicImg.SaveToFile(Tostr);
-  ¡¡Scaler := nil;¡¡
-  ¡¡Factory := nil;¡¡
+  ã€€Scaler := nil;ã€€
+  ã€€Factory := nil;ã€€
     Result := True;
   finally
-¡¡  WicImg.Free;
-  end;¡¡
+ã€€  WicImg.Free;
+  end;ã€€
 end;
 
 //function URLEncode(const S: ansistring; const InQueryString: Boolean=true): ansistring;
@@ -439,7 +439,7 @@ begin
 //re:=TRegExpr.Create;
 //re.ModifierI:=true;
 //re.Expression:='(http\:\/\/[\x21-\x7f]+\.(jpg|gif|png|bmp))\b';
-//Result:=re.Replace(Result,'<img src="$1" alt="Í¼Æ¬µØÖ·: $1">',true);
+//Result:=re.Replace(Result,'<img src="$1" alt="å›¾ç‰‡åœ°å€: $1">',true);
 //Result:=StringReplace(Result,CRLF,'<br>',[rfReplaceAll]);
 //Result:='<body style="font:9pt Tahoma">'+Result+'</body>';
 ////showmessage(Result);
@@ -482,8 +482,8 @@ begin
   langini:=TIniFile.Create(ExtractFilePath(Paramstr(0))+'language\'+strLang+'.lng');
   case pos(','+strLang+',',','+langs.CommaText+',') div 4 of
     0: application.Title:='UploadHelper';
-    1: application.Title:='ÈÕÔÂ¹â»ªÉÏ´«ÖúÊÖ';
-    2: application.Title:='ÈÕÔÂ¹âÈAÉÏ‚÷ÖúÊÖ';
+    1: application.Title:='æ—¥æœˆå…‰åä¸Šä¼ åŠ©æ‰‹';
+    2: application.Title:='æ—¥æœˆå…‰è¯ä¸Šå‚³åŠ©æ‰‹';
   end;
   myform.Caption:=langini.ReadString(myform.Name,'Caption',myform.Caption);
   prop:=TStringList.Create;
@@ -535,7 +535,7 @@ randomize;
       bmp.Canvas.Font.Size:= 12;
       bmp.Canvas.Font.Style:=[fsBold];
       bmp.Canvas.Font.Name:=frmSetting.font1.Items[frmSetting.font1.Count-1-random(50)];
-      bmp.Canvas.TextOut((bmp.Width  -  bmp.Canvas.Font.Size*18),(bmp.Height - bmp.Canvas.Font.Size*3),'»¶Ó­Ê¹ÓÃ ÈÕÔÂ¹â»ªÉÏ´«ÖúÊÖ');
+      bmp.Canvas.TextOut((bmp.Width  -  bmp.Canvas.Font.Size*18),(bmp.Height - bmp.Canvas.Font.Size*3),'æ¬¢è¿ä½¿ç”¨ æ—¥æœˆå…‰åä¸Šä¼ åŠ©æ‰‹');
       bmp.Canvas.Font.Size:= 12;
       bmp.Canvas.Font.Name:=frmSetting.font2.FontName;
       bmp.Canvas.Font.Style:=[fsBold,fsUnderline];

@@ -1,4 +1,4 @@
-unit untFeedback;
+ï»¿unit untFeedback;
 
 interface
 
@@ -47,7 +47,7 @@ begin
       Values['backup']:='on';
   end;
   if Perfect_Connect(bbshost+BBSPATH+'sndmail',tgtRequest) then
-    showmessage('ÒÑ¾­³É¹¦¼Ä¸ø×÷Õßtyllr£¬¸ĞĞ»ÄúµÄÖ§³Ö');
+    showmessage('å·²ç»æˆåŠŸå¯„ç»™ä½œè€…tyllrï¼Œæ„Ÿè°¢æ‚¨çš„æ”¯æŒ');
   FreeAndNil(tgtRequest);
 end;
 
