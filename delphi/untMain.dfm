@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 150
   BorderIcons = [biSystemMenu, biMinimize, biMaximize, biHelp]
   Caption = 'frmMain'
-  ClientHeight = 441
+  ClientHeight = 437
   ClientWidth = 487
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -85,7 +85,7 @@ object frmMain: TfrmMain
     Top = 22
     Width = 489
     Height = 395
-    ActivePage = tstPost
+    ActivePage = tstUpload
     Images = ImageList2
     TabHeight = 32
     TabOrder = 1
@@ -686,7 +686,7 @@ object frmMain: TfrmMain
   end
   object RzStatusBar1: TRzStatusBar
     Left = 0
-    Top = 422
+    Top = 418
     Width = 487
     Height = 19
     BorderInner = fsNone
@@ -694,7 +694,7 @@ object frmMain: TfrmMain
     BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
     BorderWidth = 0
     TabOrder = 2
-    ExplicitTop = 456
+    ExplicitTop = 422
     object RzStatusPane1: TRzStatusPane
       Left = 0
       Top = 0
@@ -807,7 +807,7 @@ object frmMain: TfrmMain
     Left = 288
     Top = 392
     Bitmap = {
-      494C010116001800700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010116001800740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000EF001002D4022D00E1001E00000000000000000000
@@ -1612,7 +1612,7 @@ object frmMain: TfrmMain
     Left = 320
     Top = 392
     Bitmap = {
-      494C0101040009005C0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900600020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
