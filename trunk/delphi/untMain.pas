@@ -323,7 +323,7 @@ begin
           frmMain.txtContent.Text:=StringReplace(frmMain.txtContent.Text,'[File'+Inttostr(fid+1)+' Uploading...]',GetFileURL(msg),[rfReplaceAll]);
         end
   else if flg='fail' then
-        frmMain.lstUpfile.Items[fid].SubItems[2]:='失败，'+trimhtml(msg)
+        frmMain.lstUpfile.Items[fid].SubItems[2]:='失败，'+trimHTML(msg)
   else if flg='Except' then
       begin
         if (not retried) and myini.ReadBool('General','OnErrRetry',true) then

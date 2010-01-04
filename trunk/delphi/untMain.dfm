@@ -705,6 +705,7 @@ object frmMain: TfrmMain
     end
   end
   object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
     Images = ImageList1
     Left = 384
     Top = 376
@@ -723,7 +724,7 @@ object frmMain: TfrmMain
       object mnuLogout: TMenuItem
         Caption = #27880#38144'(&X)'
         ImageIndex = 4
-        ShortCut = 16499
+        ShortCut = 8307
         OnClick = mnuLogoutClick
       end
     end
@@ -781,7 +782,6 @@ object frmMain: TfrmMain
       object mnuNewVersion: TMenuItem
         Caption = #26816#26597#26032#29256#26412'(&K)'
         ImageIndex = 1
-        ShortCut = 49237
         OnClick = mnuNewVersionClick
       end
       object N3: TMenuItem

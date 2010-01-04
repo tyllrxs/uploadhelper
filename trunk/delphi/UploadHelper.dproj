@@ -54,9 +54,9 @@
 						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
 						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
 						<VersionInfo Name="MajorVer">3</VersionInfo>
-						<VersionInfo Name="MinorVer">4</VersionInfo>
-						<VersionInfo Name="Release">6</VersionInfo>
-						<VersionInfo Name="Build">418</VersionInfo>
+						<VersionInfo Name="MinorVer">6</VersionInfo>
+						<VersionInfo Name="Release">1</VersionInfo>
+						<VersionInfo Name="Build">430</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -68,13 +68,13 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">tyllr@日月光华</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">帮助你上传附件到BBS的好工具</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">3.4.6.418</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">3.6.1.430</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName"/>
 						<VersionInfoKeys Name="LegalCopyright"/>
 						<VersionInfoKeys Name="LegalTrademarks"/>
 						<VersionInfoKeys Name="OriginalFilename"/>
 						<VersionInfoKeys Name="ProductName">日月光华上传助手</VersionInfoKeys>
-						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">3.6</VersionInfoKeys>
 						<VersionInfoKeys Name="Comments">帮助你上传附件到BBS的好工具</VersionInfoKeys>
 					</VersionInfoKeys>
 					<Excluded_Packages>

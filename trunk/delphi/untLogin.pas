@@ -57,7 +57,7 @@ var
 begin
   if (txtID.Text='') or (txtID.Text=LOGINID) or (txtPwd.Text='') then
   begin
-    showmessage('请先填写完整');
+    ShowMessage('请先填写完整');
     exit;
   end;
   btnLogin.Enabled:=false;
@@ -66,7 +66,7 @@ begin
   resp:=TStringStream.Create('');
   try
     IDHTTP1.Post(bbshost+BBSPATH+'login',req,resp);
-    showmessage(trimHTML(resp.DataString));
+    ShowMessage(trimHTML(resp.DataString));
   except
     if IdHTTP1.ResponseCode=302 then
     begin
@@ -94,13 +94,13 @@ begin
       else
         myini.DeleteKey('Login','pwd');
 
-      showmessage('登录成功，可以开始上传文件了');
+      ShowMessage('登录成功，可以开始上传文件了');
       frmMain.Caption:=application.Title+' v'+APPVERSION+' - ['+myini.ReadString('Login','id','')+']';
       self.Close;
     end
     else
     begin
-      showmessage(Format('%s%s错误代码：%d', [ERR_NETWORK, CRLF, IdHTTP1.ResponseCode]));
+      ShowMessage(Format('%s%s错误代码：%d', [ERR_NETWORK, CRLF, IdHTTP1.ResponseCode]));
     end;
   end;
   btnLogin.Enabled:=true;
