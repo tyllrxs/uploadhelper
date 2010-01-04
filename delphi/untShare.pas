@@ -42,25 +42,16 @@ uses untMain, untLogin, untSetting;
 
 function trimHTML(const sstr:string):string;
 var
-  re:TPerlRegEx;
-  strtmp:string;
+  re: TPerlRegEx;
+  strtmp: string;
 begin
   re:=TPerlRegEx.Create(nil);
   re.Subject:=LowerCase(sstr);
-  re.regEx:='<br(\s+\/)?>';
-  re.Replacement:=CRLF;
-  re.ReplaceAll;
-  re.regEx:='<\/?p[^>]*>';
-  re.Replacement:=CRLF;
-  re.ReplaceAll;
   re.regEx:='<[^>]*>';
   re.Replacement:='';
   re.ReplaceAll;
-  strtmp:=StringReplace(re.Subject,'&nbsp;',' ',[rfReplaceAll]);
-  strtmp:=StringReplace(strtmp,'&gt;','>',[rfReplaceAll]);
-  strtmp:=StringReplace(strtmp,'&lt;','<',[rfReplaceAll]);
-  strtmp:=StringReplace(strtmp,'&amp;','&',[rfReplaceAll]);
-  Result:=Trim(strtmp);
+  Result:=re.Subject;
+  FreeAndNil(re);
 end;
 
 //加密函数
@@ -202,7 +193,7 @@ begin
       end
       else if (i > 0) or (Pos('登录',resp.DataString) <= 0) then
       begin
-        showmessage(trimHTML(resp.DataString));
+        ShowMessage(trimHTML(resp.DataString));
         exit;
       end
       else
@@ -221,7 +212,7 @@ begin
           +'&pw='+UncrypKey(myini.ReadString('Login','pwd',''),'thankyou'));
           try
             IDHTTP1.Post(bbshost+BBSPATH+'login',s1,s2);
-            showmessage(trimHTML(s2.DataString));
+            ShowMessage(trimHTML(s2.DataString));
             exit;
           except
             if IdHTTP1.ResponseCode=302 then
@@ -234,7 +225,7 @@ begin
             end
             else
             begin
-              showmessage(ERR_NETWORK);
+              ShowMessage(ERR_NETWORK);
               exit;
             end;
           end;
@@ -446,7 +437,7 @@ begin
 //Result:=re.Replace(Result,'<img src="$1" alt="图片地址: $1">',true);
 //Result:=StringReplace(Result,CRLF,'<br>',[rfReplaceAll]);
 //Result:='<body style="font:9pt Tahoma">'+Result+'</body>';
-////showmessage(Result);
+////ShowMessage(Result);
 end;
 
 function TextConv(const sstr:string):string;
@@ -456,7 +447,7 @@ begin
 //re.ModifierI:=true;
 //re.Expression:='<img[^>]*?src=\"([^\"]+?)\"[^>]*?>';
 //Result:=TrimHTML(re.Replace(sstr,'$1',true));
-////showmessage(sstr);
+////ShowMessage(sstr);
 end;
 
 function ClearDirectory(const DirName: string; const IncludeSub: Boolean = false; ToRecyle: Boolean = false): Boolean; stdcall;
