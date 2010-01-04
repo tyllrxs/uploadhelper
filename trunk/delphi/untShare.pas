@@ -41,146 +41,148 @@ implementation
 uses untMain, untLogin, untSetting;
 
 function trimHTML(const sstr:string):string;
-var re:TPerlRegEx;
-strtmp:string;
+var
+  re:TPerlRegEx;
+  strtmp:string;
 begin
-re:=TPerlRegEx.Create(nil);
-re.Subject:=LowerCase(sstr);
-re.regEx:='<br(\s+\/)?>';
-re.Replacement:=CRLF;
-re.ReplaceAll;
-re.regEx:='<\/?p[^>]*>';
-re.Replacement:=CRLF;
-re.ReplaceAll;
-re.regEx:='<[^>]*>';
-re.Replacement:='';
-re.ReplaceAll;
-strtmp:=StringReplace(re.Subject,'&nbsp;',' ',[rfReplaceAll]);
-strtmp:=StringReplace(strtmp,'&gt;','>',[rfReplaceAll]);
-strtmp:=StringReplace(strtmp,'&lt;','<',[rfReplaceAll]);
-strtmp:=StringReplace(strtmp,'&amp;','&',[rfReplaceAll]);
-Result:=Trim(strtmp);
+  re:=TPerlRegEx.Create(nil);
+  re.Subject:=LowerCase(sstr);
+  re.regEx:='<br(\s+\/)?>';
+  re.Replacement:=CRLF;
+  re.ReplaceAll;
+  re.regEx:='<\/?p[^>]*>';
+  re.Replacement:=CRLF;
+  re.ReplaceAll;
+  re.regEx:='<[^>]*>';
+  re.Replacement:='';
+  re.ReplaceAll;
+  strtmp:=StringReplace(re.Subject,'&nbsp;',' ',[rfReplaceAll]);
+  strtmp:=StringReplace(strtmp,'&gt;','>',[rfReplaceAll]);
+  strtmp:=StringReplace(strtmp,'&lt;','<',[rfReplaceAll]);
+  strtmp:=StringReplace(strtmp,'&amp;','&',[rfReplaceAll]);
+  Result:=Trim(strtmp);
 end;
 
 //加密函数
 Function EncrypKey (Src:String; Key:String):string;
 var
-KeyLen :Integer;
-KeyPos :Integer;
-offset :Integer;
-dest :string;
-SrcPos :Integer;
-SrcAsc :Integer;
-Range :Integer;
-
+  KeyLen :Integer;
+  KeyPos :Integer;
+  offset :Integer;
+  dest :string;
+  SrcPos :Integer;
+  SrcAsc :Integer;
+  Range :Integer;
 begin
-KeyLen:=Length(Key);
-if KeyLen = 0 then key:='Think Space';
-KeyPos:=0;
-Range:=256;
-
-Randomize;
-offset:=Random(Range);
-dest:=format('%1.2x',[offset]);
-for SrcPos := 1 to Length(Src) do
-begin
-SrcAsc:=(Ord(Src[SrcPos]) + offset) MOD 255;
-if KeyPos < KeyLen then KeyPos:= KeyPos + 1 else KeyPos:=1;
-SrcAsc:= SrcAsc xor Ord(Key[KeyPos]);
-dest:=dest + format('%1.2x',[SrcAsc]);
-offset:=SrcAsc;
-end;
-Result:=Dest;
+  KeyLen:=Length(Key);
+  if KeyLen = 0 then key:='Think Space';
+  KeyPos:=0;
+  Range:=256;
+  Randomize;
+  offset:=Random(Range);
+  dest:=format('%1.2x',[offset]);
+  for SrcPos := 1 to Length(Src) do
+  begin
+    SrcAsc:=(Ord(Src[SrcPos]) + offset) MOD 255;
+    if KeyPos < KeyLen then KeyPos:= KeyPos + 1 else KeyPos:=1;
+    SrcAsc:= SrcAsc xor Ord(Key[KeyPos]);
+    dest:=dest + format('%1.2x',[SrcAsc]);
+    offset:=SrcAsc;
+  end;
+  Result:=Dest;
 end;
 
 //解密函数
 Function UncrypKey (Src:String; Key:String):string;
 var
-KeyLen :Integer;
-KeyPos :Integer;
-offset :Integer;
-dest :string;
-SrcPos :Integer;
-SrcAsc :Integer;
-TmpSrcAsc :Integer;
+  KeyLen :Integer;
+  KeyPos :Integer;
+  offset :Integer;
+  dest :string;
+  SrcPos :Integer;
+  SrcAsc :Integer;
+  TmpSrcAsc :Integer;
 begin
-KeyLen:=Length(Key);
-if KeyLen = 0 then key:='Think Space';
-KeyPos:=0;
-offset:=StrToInt('$'+ copy(src,1,2));
-SrcPos:=3;
-repeat
-SrcAsc:=StrToInt('$'+ copy(src,SrcPos,2));
-if KeyPos < KeyLen Then KeyPos := KeyPos + 1 else KeyPos := 1;
-TmpSrcAsc := SrcAsc xor Ord(Key[KeyPos]);
-if TmpSrcAsc <= offset then
-TmpSrcAsc := 255 + TmpSrcAsc - offset
-else
-TmpSrcAsc := TmpSrcAsc - offset;
-dest := dest + chr(TmpSrcAsc);
-offset:=srcAsc;
-SrcPos:=SrcPos + 2;
-until SrcPos >= Length(Src);
-Result:=Dest;
+  KeyLen:=Length(Key);
+  if KeyLen = 0 then key:='Think Space';
+  KeyPos:=0;
+  offset:=StrToInt('$'+ copy(src,1,2));
+  SrcPos:=3;
+  repeat
+    SrcAsc:=StrToInt('$'+ copy(src,SrcPos,2));
+    if KeyPos < KeyLen Then KeyPos := KeyPos + 1 else KeyPos := 1;
+    TmpSrcAsc := SrcAsc xor Ord(Key[KeyPos]);
+    if TmpSrcAsc <= offset then
+      TmpSrcAsc := 255 + TmpSrcAsc - offset
+    else
+      TmpSrcAsc := TmpSrcAsc - offset;
+    dest := dest + chr(TmpSrcAsc);
+    offset:=srcAsc;
+    SrcPos:=SrcPos + 2;
+  until SrcPos >= Length(Src);
+  Result:=Dest;
 end;
 
 function GetBoard(const sstr:string):string;
-var re:TPerlRegEx;
+var
+  re:TPerlRegEx;
 begin
-re:=TPerlRegEx.Create(nil);
-re.Subject:=sstr;
-re.RegEx:='^[^\s]+';
-if re.Match then
-  Result:=re.MatchedExpression
-else
-  Result:='';
+  re:=TPerlRegEx.Create(nil);
+  re.Subject:=sstr;
+  re.RegEx:='^[^\s]+';
+  if re.Match then
+    Result:=re.MatchedExpression
+  else
+    Result:='';
 end;
 
 function GetBID(const sstr:string):string;
-var re:TPerlRegEx;
-var tmp:string;
+var
+  re:TPerlRegEx;
 begin
-re:=TPerlRegEx.Create(nil);
-re.Subject:=sstr;
-re.RegEx:='\[(\d+)\]';
-if re.Match then
-  Result:=re.SubExpressions[1]
-else
-  Result:='';
+  re:=TPerlRegEx.Create(nil);
+  re.Subject:=sstr;
+  re.RegEx:='\[(\d+)\]';
+  if re.Match then
+    Result:=re.SubExpressions[1]
+  else
+    Result:='';
 end;
 
 function GetFileURL(const sstr:string):string;
-var re:TPerlRegEx;
+var
+  re:TPerlRegEx;
 begin
-re:=TPerlRegEx.Create(nil);
-re.Subject:=sstr;
-re.RegEx:='>http\:\/\/bbs\.fudan\.edu\.cn(.*?)<';
-if re.Match then
-  Result:='http://'+GetBoard(BBSHOSTLIST[myini.ReadInteger('Personal','urlhost',0)])+re.SubExpressions[1]
-else
-  Result:='';
+  re:=TPerlRegEx.Create(nil);
+  re.Subject:=sstr;
+  re.RegEx:='>http\:\/\/bbs\.fudan\.edu\.cn(.*?)<';
+  if re.Match then
+    Result:='http://'+GetBoard(BBSHOSTLIST[myini.ReadInteger('Personal','urlhost',0)])+re.SubExpressions[1]
+  else
+    Result:='';
 end;
 
 function myFileSize(const sstr:string):LongInt;
 var
-f: file of Byte;
+  f: file of Byte;
 begin
-try
-  AssignFile(f, sstr);
-  Reset(f);
-  Result:= FileSize(f);
-  CloseFile(f);
-except
-  Result:=-1;
-end;
+  try
+    AssignFile(f, sstr);
+    Reset(f);
+    Result:= FileSize(f);
+    CloseFile(f);
+  except
+    Result:=-1;
+  end;
 end;
 
 function Perfect_Connect(const surl:string;const req:TStringList=nil):boolean;
-var i:integer;
-s1, s3:TStrings;
-resp, s2, s4:TStringStream;
-idhttp1:TIDHTTP;
-ts, ts2:TStringList;
+var
+  i:integer;
+  s1, s3:TStrings;
+  resp, s2, s4:TStringStream;
+  idhttp1:TIDHTTP;
+  ts, ts2:TStringList;
 begin
   Result:=false;
   ts2:=TStringList.Create;
@@ -248,16 +250,18 @@ begin
 end;
 
 function CheckType(const sstr,iregx:string):boolean;
-var re:TPerlRegEx;
+var
+  re:TPerlRegEx;
 begin
-re:=TPerlRegEx.Create(nil);
-re.Subject:=LowerCase(sstr);
-re.RegEx:='\.(' + iregx + ')$';
-Result:=re.Match;
+  re:=TPerlRegEx.Create(nil);
+  re.Subject:=LowerCase(sstr);
+  re.RegEx:='\.(' + iregx + ')$';
+  Result:=re.Match;
 end;
 
 function bmp2jpg(FromBMP, ToJPG: string):boolean;
-var WicImg:TWICImage;
+var
+  WicImg:TWICImage;
 begin
   Result := False;
   WicImg:=TWICImage.Create;　
