@@ -25,7 +25,7 @@ uses
   function TextConv(const sstr:string):string;
   function ClearDirectory(const DirName: string; const IncludeSub: Boolean = false; ToRecyle: Boolean = false): Boolean; stdcall;
 const
-  APPVERSION:string='3.61';
+  APPVERSION:string='3.62';
   APPAUTHOR:string='tyllr@日月光华';
   APPHOMEPAGE:string='http://homepage.fudan.edu.cn/~tyllr/uh/';
   BBSPATH:string='bbs/';
@@ -250,20 +250,44 @@ begin
   Result:=re.Match;
 end;
 
+function ExecAppWait(AppName, Params: string): Boolean;
+var
+  ShellExInfo: TShellExecuteInfo;
+begin
+  FillChar(ShellExInfo, SizeOf(ShellExInfo), 0);
+  with ShellExInfo do begin
+    cbSize := SizeOf(ShellExInfo);
+    fMask := see_Mask_NoCloseProcess;
+    Wnd := Application.Handle;
+    lpFile := PChar(AppName);
+    lpParameters := PChar(Params);
+    nShow := sw_ShowNormal;
+  end;
+  Result := ShellExecuteEx(@ShellExInfo);
+  if Result then
+    while WaitForSingleObject(ShellExInfo.HProcess, 100) = WAIT_TIMEOUT do
+    begin
+      Application.ProcessMessages;
+      if Application.Terminated then Break;
+    end;
+end;
+
+
 function bmp2jpg(FromBMP, ToJPG: string):boolean;
 var
   WicImg:TWICImage;
 begin
   Result := False;
-  WicImg:=TWICImage.Create;　
-  //try
-    WicImg.LoadFromFile(FromBMP);
-    WicImg.ImageFormat:=TWICImageFormat.wifJpeg;　
-  　WicImg.SaveToFile(ToJPG);
-    Result := True;　
-  //finally
-    WicImg.Free;
-  //end;
+//  WicImg:=TWICImage.Create;　
+//  //try
+//    WicImg.LoadFromFile(FromBMP);
+//    WicImg.ImageFormat:=TWICImageFormat.wifJpeg;　
+//  　WicImg.SaveToFile(ToJPG);
+//    Result := True;　
+//  //finally
+//    WicImg.Free;
+//  //end;
+
 end;
 
 function JPEGCompress(Fromstr, Tostr: string; Quality:Integer):boolean;

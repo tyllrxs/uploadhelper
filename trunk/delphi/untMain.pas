@@ -38,7 +38,7 @@ type
     tstUpload: TTabSheet;
     ImageList2: TImageList;
     cmbZone: TComboBox;
-    RzMenuButton1: TRzMenuButton;
+    btnBrowse: TRzMenuButton;
     PopupMenu1: TPopupMenu;
     mnuFileSelect: TMenuItem;
     mnuFolderSelect: TMenuItem;
@@ -539,9 +539,9 @@ begin
   if self.Width<503 then self.Width:=503;
   if self.Height<489 then self.Height:=489;
   PageControl1.Width:=self.ClientWidth;
-  PageControl1.Height:=self.Height-90;
-  lstUpFile.Width:= PageControl1.Width - 27;
-  lstUpFile.Height:= PageControl1.Height - 151;
+  PageControl1.Height:=self.ClientHeight - PageControl1.TabHeight - 5;
+  lstUpFile.Width:= PageControl1.ClientWidth - 27;
+  lstUpFile.Height:= PageControl1.ClientHeight - PageControl1.TabHeight - btnBrowse.Top - btnBrowse.Height - btnUpload.Height - 20;
   lstUpFile.Columns[1].Width:= lstUpFile.Width * 7 div 14;
   lstUpFile.Columns[2].Width:= lstUpFile.Width * 2 div 14;
   lstUpFile.Columns[3].Width:= lstUpFile.Width - lstUpFile.Columns[0].Width
@@ -879,32 +879,14 @@ var   fn,html:string;
           data:thandle;
           p:pointer;             //数据指针
 begin
-lstUpFile.Clear;
-      clipboard.Open;
-      for   i:=0   to   Clipboard.FormatCount-1   do   begin  
-          setlength(fn,100);  
-          fl:=GetClipboardFormatName(clipboard.Formats[i],@fn[1],200);  
-          setlength(fn,fl);  
-          if   pos('HTML',fn)>0   then   begin     //是HTML数据  
-              Data   :=   GetClipboardData(clipboard.formats[i]);     //得到数据内存句柄  
-              try  
-                  p:=GlobalLock(Data);
-                  size:=globalsize(data);     //得到数据大小  
-                  setlength(html,size);         //设置保存区域  
-                  move(p^,html[1],size);       //复制数据  
-              finally  
-              GlobalUnlock(Data);  
-              end;
-              break;
-          end;
-      end;
-      clipboard.close;
-      if html='' then
-        exit
-      else
-        btnZZ.Enabled:=false;
-      html:=Trim(utf8toansi(html));
-      explainHTML(html);
+//  lstUpFile.Clear;
+//  if not (Clipboard.HasFormat(CF_TEXT) or Clipboard.HasFormat(CF_OEMTEXT)) then
+//    exit;
+//  html:=Clipboard..asText;
+//
+//  //html:=Trim(System.UTF8ToWideString(html));
+//  ShowMessage(html);
+//  //explainHTML(html);
 end;
 
 procedure TfrmMain.explainHTML(const sstr:string);
