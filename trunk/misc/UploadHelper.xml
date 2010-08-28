@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This is an RYGH BBS board list file. -->
+<!-- Last update: 2010-08-19 by tyllr -->
 <BBS>
 	<BBS系统>
 		<Advice name="光华建设与发展" bid="275"/>
@@ -9,9 +11,8 @@
 		<BBS_History name="站史馆" bid="42"/>
 		<BBS_RevLog name="BBS源码修改日志" bid="267"/>
 		<BM_Home name="版主之家" bid="1"/>
-		<C_FDpic name="站庆校园摄影大赛" bid="485"/>
-		<C_Voting name="十二周年站庆票选版" bid="484"/>
-		<Celebration name="日月光华十三周年站庆" bid="271"/>
+		<C_Game name="站庆线上游戏" bid="309"/>
+		<Celebration name="日月光华十四周年站庆" bid="271"/>
 		<Complaint name="举报版" bid="306"/>
 		<GoneWithTheWind name="随风飘逝" bid="305"/>
 		<GuangHuaBei name="光华杯" bid="457"/>
@@ -55,7 +56,6 @@
 	</复旦大学>
 	<院系风采>
 		<C.H.T._03 name="03文博历史旅游管理" bid="420"/>
-		<C.H.T._04 name="04文博历史旅游管理" bid="373"/>
 		<Chemistry_01 name="01化学·聆忆而爱" bid="382"/>
 		<Chemistry_02 name="02化学" bid="375"/>
 		<Chemistry_03 name="03化学" bid="410"/>
@@ -65,7 +65,6 @@
 		<CS_Graduate name="计算机研究生" bid="393"/>
 		<E.E._01EE name="01EE·神采奕奕" bid="341"/>
 		<E.E._02EE name="02大电工·我们在一起" bid="400"/>
-		<E.E._04EE name="04EE·E想天开" bid="380"/>
 		<E.E._05EE name="05电子工程" bid="383"/>
 		<Economics_SEG name="经济学院研究生" bid="415"/>
 		<FDU_A.D. name="艺术设计系" bid="358"/>
@@ -98,6 +97,7 @@
 		<FDU_Management name="管理学院" bid="15"/>
 		<FDU_Mathematics name="数学科学学院" bid="35"/>
 		<FDU_Mechanics name="力学与工程科学系" bid="24"/>
+		<FDU_MEng name="工程硕士" bid="372"/>
 		<FDU_Nursing name="护理学院" bid="303"/>
 		<FDU_O.S.E. name="光科学与工程系" bid="167"/>
 		<FDU_Pharmacy name="药学院" bid="250"/>
@@ -114,13 +114,11 @@
 		<Mechanics_03 name="03力学" bid="399"/>
 		<Mechanics_MEG name="力学系研究生" bid="359"/>
 		<O.S.E._04 name="04光科" bid="397"/>
-		<Physics_00 name="00物理·情千谊久" bid="414"/>
 		<Physics_01 name="01物理·相伴永久" bid="408"/>
 		<Physics_02 name="02物理·我爱依旧" bid="386"/>
 		<Physics_03 name="03物理·爱你到底" bid="387"/>
 		<Physics_04 name="04物理·飞翔" bid="406"/>
 		<Physics_05 name="05物理" bid="381"/>
-		<Physics_98 name="98物理·酒吧邀旧" bid="419"/>
 		<S.I.R.P.A._03 name="0317·纵横天下" bid="388"/>
 		<S.I.R.P.A._04 name="0417·习惯有你" bid="389"/>
 		<Software_00 name="00SS·丝丝情缘" bid="394"/>
@@ -142,6 +140,7 @@
 		<Graphics name="图形图像" bid="171"/>
 		<HackerVsSecurity name="黑客与系统安全" bid="64"/>
 		<Hardware name="硬件诊断" bid="54"/>
+		<IT name="IT江湖" bid="414"/>
 		<Java name="Java语言" bid="60"/>
 		<Mac name="苹果电脑" bid="401"/>
 		<MS_Windows name="微软视窗系列" bid="58"/>
@@ -171,6 +170,7 @@
 		<Ghost_Story name="战战兢兢" bid="74"/>
 		<IQ name="智力乐园" bid="235"/>
 		<Joke name="嘻嘻哈哈" bid="67"/>
+		<MyShow name="王道" bid="419"/>
 		<Photography name="摄影" bid="78"/>
 		<PIC name="贴图乐园" bid="11"/>
 		<Riddle name="灯谜" bid="79"/>
@@ -210,13 +210,11 @@
 		<Card name="牌类" bid="99"/>
 		<Chess name="棋道" bid="100"/>
 		<Cycling name="自行车" bid="255"/>
-		<EuroCup name="阿尔卑斯风云" bid="483"/>
 		<Football_CN name="中国足球" bid="101"/>
 		<Football_WD name="国际足球" bid="103"/>
 		<Health name="医药保健" bid="102"/>
 		<JunQi name="四国军棋" bid="260"/>
 		<KeepFit name="健美塑身" bid="104"/>
-		<Olympics name="北京奥运" bid="480"/>
 		<Outdoors name="户外运动" bid="176"/>
 		<Renju name="五子棋" bid="197"/>
 		<Running name="跑道人生" bid="377"/>
@@ -242,6 +240,7 @@
 		<Friend name="朋友啊朋友" bid="113"/>
 		<Girl name="女孩心声" bid="114"/>
 		<ID_Story name="ID的故事" bid="222"/>
+		<Kids name="育儿" bid="368"/>
 		<LifeInNorth name="北漂一族" bid="318"/>
 		<Love name="情爱悠悠" bid="117"/>
 		<Marriage name="围城内外" bid="443"/>
@@ -259,6 +258,7 @@
 		<Exam name="考试与培训信息" bid="166"/>
 		<EXPO_2010 name="2010年上海世博会" bid="493"/>
 		<GoAbroad name="出国专题" bid="124"/>
+		<HomeDeco name="家居装潢" bid="385"/>
 		<House name="房产信息" bid="213"/>
 		<Job_Big4 name="四大" bid="395"/>
 		<Job_Intern name="实习兼职" bid="40"/>
@@ -282,6 +282,8 @@
 		<Traffic_Info name="交通信息" bid="208"/>
 		<Translation name="翻译" bid="52"/>
 		<Visa name="签证信息" bid="295"/>
+		<WanNeng name="万能" bid="428"/>
+		<Weather name="天气与气候" bid="505"/>
 		<Zone8 name="新闻信息区版面建设" bid="249"/>
 	</新闻信息>
 	<学科学术>
@@ -317,6 +319,7 @@
 		<Philosophy name="哲学" bid="146"/>
 		<Physics name="物理" bid="147"/>
 		<Politics name="政治学" bid="268"/>
+		<PopularSci name="科学人" bid="373"/>
 		<Psychology name="心理学" bid="41"/>
 		<Russian name="俄语教室" bid="239"/>
 		<Sociology name="社会学" bid="252"/>
@@ -361,6 +364,8 @@
 		<FM_PC name="PC跳蚤市场" bid="286"/>
 		<FM_Ticket name="票务信息" bid="288"/>
 		<MerchantAgent name="校园代理" bid="287"/>
+		<Tuangou name="团购" bid="402"/>
+		<ZJSecondhand name="张江二手市场" bid="504"/>
 		<ZoneB name="交易专区版面建设" bid="276"/>
 	</交易专区>
 	<五湖四海>
