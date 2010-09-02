@@ -217,6 +217,8 @@ class MyFrame(wx.Frame):
 	dialog.Destroy()
 
     def OnbtnUploadClick(self, evt):
+	self.progress.SetLabel('Progress: %d / %d' % (0, self.list.GetItemCount()))
+	self.progressnum.SetValue(0)
 	if self.list.GetItemCount() <= 0:
 		wx.MessageBox('Select at least one file for uploading.')
 		return
@@ -240,12 +242,14 @@ class MyFrame(wx.Frame):
 	for i in xrange(self.list.GetItemCount()):
 		self.list.SetStringItem(i, 0, str(i+1))
 
-    def OnbtnPostClick(self, evt): 
+    def OnbtnPostClick(self, evt):
+	self.list.DeleteAllItems()
+	self.progress.SetLabel('%d File(s) Selected' % 0)
+	self.progressnum.SetValue(0)
 	if self.posttitle.GetValue().strip() == '' or self.postbody.GetValue().strip() == '':
 		wx.MessageBox('No empty title or content is allowed.')
 		return
 	self.postbutton.Disable()
-	self.list.DeleteAllItems()
 	cfg1 = wx.FileConfig(APPCODENAME)
 	self.host = cfg1.ReadInt('/Login/Host', 0)
 	self.cookie = cfg1.Read('/Login/Cookie', '')
@@ -292,7 +296,7 @@ class MyFrame(wx.Frame):
 	elif k == 3:
 		while self.list.GetSelectedItemCount() > 0:
 			self.list.DeleteItem(self.list.GetNextItem(-1, wx.LIST_NEXT_ALL, wx.LIST_STATE_SELECTED))
-	else:
+	elif k == 7:
 		self.list.DeleteAllItems()
 	self.list_re_number()
 	self.progress.SetLabel('%d File(s) Selected' % self.list.GetItemCount())
