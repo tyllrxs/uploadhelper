@@ -1,0 +1,99 @@
+UploadHelper
+=====================================================================
+
+1) Introduction
+---------------
+This program was created with the intention of uploading files to RYGH BBS,
+that is, the official BBS site of Fudan University in an easy way.
+
+2) Features of wxDownload Fast
+---------------------------------
+* Multiple uploads (with select only once)
+* Multiple formats support (jpg, gif, png, pdf, etc.)
+* Automatically resize large images
+* HTTP Proxy support
+* Simple image filter processing
+
+3) Command line Parameters (not yet implemented...)
+--------------------------
+[FILES],
+FILES to be uploaded are separated by spaces
+Ex: www.foo.com/foo.exe ftp://ftp.foo.com/foo2.exe http://foo.com:8080/foo3.exe
+
+--hide,
+Start with the the main window hidden
+
+--notray,
+Don't show the icon in the system tray
+
+-list TEXTFILE, --list=TEXTFILE,
+Parse a text file with the list of files to download
+
+-destination DIR, --destination=DIR,
+Destination directory
+
+-reference URL, --reference=URL
+Parse a URL that will be set as a reference URL
+
+-comments COMMENTS, --comments=COMMENTS,
+Add comments for the download
+
+4) Installation
+---------------
+
+4.1) Windows 2000 & XP & Vista
+------------------------------
+
+- Compiling source code
+
+To build the program on Windows, MinGW [ www.mingw.org ] are required, 
+which are the GCC compiler for Windows and Unix environments respectively.  
+Other requirements include the library wxWidgets [ www.wxwidgets.org ],
+built with the options: --enable-unicode,
+as well as the library CURL [ curl.haxx.se ].
+Once you have the above requirements you can change to the directory where the source 
+code was unpacked and type:
+# make BUILD=win32
+
+With this, the executable will be generated. After that, you can copy the executable to
+another place and run it from there.
+
+4.2) Linux
+----------
+
+- Compiling source code
+
+GCC and the program make are required to build the program in the Linux.
+Other requirements include the library wxWidgets [ www.wxwidgets.org ], built with
+the options: --enable-unicode,
+as well as the library CURL [ curl.haxx.se ].
+Usually you can type:
+# sudo apt-get install libcurl4-gnutls-dev libwxbase2.8-dev libwxgtk2.8-dev
+to meet the above requirements.
+  
+Once you have the above requirements you can change to
+the directory where the source code was unpacked and type:
+# ./configure
+# make
+
+With this, the executable will be generated. After that, you can copy the executable to
+another place and run it from there. To do this, type:
+# su
+# make install
+
+4.3) Mac OS X
+----------
+
+- Compiling source code
+
+This has not been tested but should work using the same steps as Linux. Please report
+your experiences.
+
+
+
+
+
+
+
+
+

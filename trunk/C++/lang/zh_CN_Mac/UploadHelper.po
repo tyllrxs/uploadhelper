@@ -1,0 +1,467 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: UploadHelper 4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-22 17:43+0800\n"
+"PO-Revision-Date: 2008-06-22 17:45+0800\n"
+"Last-Translator: tyllr <tyllrxs@gmail.com>\n"
+"Language-Team:  <tyllrxs@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/tyllr/program/UploadHelper\n"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:117
+msgid "Destination"
+msgstr "目标版面"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:123
+msgid "Loc&k"
+msgstr "锁定"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:127
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:482
+msgid "Select File(s) to Upload"
+msgstr "选择要上传的文件"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:129
+msgid "&Browse..."
+msgstr "浏览..."
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:132
+msgid "&Remove..."
+msgstr "移除..."
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:139
+msgid "&Upload Now"
+msgstr "开始上传"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:147
+msgid "Title"
+msgstr "标题"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:151
+msgid "Signature"
+msgstr "签名档"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:164
+msgid "Target board (English name)"
+msgstr "目标版面(英文名称)"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:169
+msgid "S&end"
+msgstr "发表"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:174
+msgid "Upload Files"
+msgstr "上传文件"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:175
+msgid "Post Article"
+msgstr "发表文章"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:179
+msgid "S&witch User...\tF12"
+msgstr "更改用户...\tF12"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:183
+msgid "Lo&g Off...\tShift-F12"
+msgstr "注销...\tShift-F12"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:186
+msgid "&Login"
+msgstr "登录"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:188
+msgid "&Preferences...\tF8"
+msgstr "首选项"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:193
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:268
+msgid "Size"
+msgstr "大小"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:195
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:269
+msgid "Modified"
+msgstr "修改日期"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:197
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:270
+msgid "Created"
+msgstr "创建日期"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:199
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:271
+msgid "Accessed"
+msgstr "访问日期"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:201
+msgid "F&ile Attributes"
+msgstr "文件属性"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:210
+msgid "Integrate to &Term"
+msgstr "集成到 &Term"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:214
+msgid "Alwa&ys on Top"
+msgstr "总在最前"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:217
+msgid "&Settings"
+msgstr "设置"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:219
+msgid "&Frequently Asked Questions\tF1"
+msgstr "常见问题\tF1"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:223
+msgid "&Homepage"
+msgstr "主页"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:226
+msgid "&Check for Updates..."
+msgstr "检查更新..."
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:232
+msgid "&About..."
+msgstr "关于..."
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:235
+msgid "&Help"
+msgstr ""
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:267
+msgid "Filename"
+msgstr "文件名"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:272
+msgid "Status"
+msgstr "状态"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:427
+msgid "Logged off successfully."
+msgstr "注销成功。"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:494
+#: /home/tyllr/program/UploadHelper/MyListCtrl.cpp:163
+msgid "Selected\tDel"
+msgstr "选中的\tDel"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:497
+#: /home/tyllr/program/UploadHelper/MyListCtrl.cpp:190
+msgid "All\tShift+Del"
+msgstr "全部\tShift+Del"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:501
+msgid "Duplicates"
+msgstr "重复的"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:504
+msgid "Invalid"
+msgstr "无效的"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:585
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:630
+#, c-format
+msgid "Please make sure %s is not running, continue?"
+msgstr "Please make sure %s is not running, continue?"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:585
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:630
+msgid "Confirm"
+msgstr "确认"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:587
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:632
+#, c-format
+msgid "Select the location of %s"
+msgstr "Select the location of %s"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:588
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:633
+#, c-format
+msgid "%s program"
+msgstr "%s program"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:675
+msgid "is available."
+msgstr "可用。"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:676
+msgid "Would you like to update now?"
+msgstr "想要立即更新吗?"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:676
+msgid "New version found"
+msgstr "发现新版本"
+
+#: /home/tyllr/program/UploadHelper/MainFrame.cpp:680
+msgid "You are using the latest version."
+msgstr "您使用的是最新版本。"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:91
+msgid "Preferences"
+msgstr "偏好设置"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:97
+msgid "Proxy Settings"
+msgstr "代理设置"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:99
+msgid "No Proxy"
+msgstr "不使用代理"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:101
+msgid "Use Proxy"
+msgstr "使用代理"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:105
+msgid "Address"
+msgstr "地址"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:109
+msgid "Port"
+msgstr "端口"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:115
+#: /home/tyllr/program/UploadHelper/LoginDialog.cpp:40
+msgid "Username"
+msgstr "用户名"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:119
+#: /home/tyllr/program/UploadHelper/LoginDialog.cpp:46
+msgid "Password"
+msgstr "密码"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:125
+msgid "Thread Settings"
+msgstr "线程设置"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:127
+msgid "Threads"
+msgstr "线程数"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:139
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:224
+msgid "Image Options"
+msgstr "图片选项"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:141
+msgid "Scale Images with size >"
+msgstr "缩放图象使其尺寸不超过"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:151
+msgid "Reduce quality of images >"
+msgstr "降低图片质量，如果超过"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:159
+msgid "Quality"
+msgstr "质量"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:173
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:225
+msgid "Image Filters"
+msgstr "图象滤镜"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:175
+msgid "Hue"
+msgstr "色调"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:181
+msgid "Blur"
+msgstr "模糊"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:187
+msgid "Rotate"
+msgstr "旋转"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:202
+msgid "Display host address in URL as"
+msgstr "URL中主机地址显示为"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:208
+msgid "Blank Lines between URLs"
+msgstr "URL之间空行数"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:213
+msgid "Warn me when file is too large or not supported"
+msgstr "当文件过大或不被支持时显示警告"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:215
+msgid "Clear previous text before uploading"
+msgstr "上传前清除以前的内容"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:217
+msgid "Show thumbnail in context menu"
+msgstr "在右键菜单中显示缩略图"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:223
+msgid "General"
+msgstr "基本设置"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:226
+msgid "Miscellaneous"
+msgstr "杂项"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:231
+msgid "OK"
+msgstr "OK"
+
+#: /home/tyllr/program/UploadHelper/ConfigDialog.cpp:232
+msgid "Cancel"
+msgstr "取消"
+
+#: /home/tyllr/program/UploadHelper/UtilFunctions.cpp:120
+msgid "Failed to create temporary folder."
+msgstr "创建临时文件夹失败。"
+
+#: /home/tyllr/program/UploadHelper/UtilFunctions.cpp:134
+msgid "Failed to save image file."
+msgstr "无法保存图片文件。"
+
+#: /home/tyllr/program/UploadHelper/MyListCtrl.cpp:281
+msgid "Please wait, sorting..."
+msgstr "正在排序，请稍候..."
+
+#: /home/tyllr/program/UploadHelper/TaskBarIcon.cpp:45
+msgid "Hide the main window"
+msgstr "隐藏主窗口"
+
+#: /home/tyllr/program/UploadHelper/TaskBarIcon.cpp:47
+msgid "Show the main window"
+msgstr "显示主窗口"
+
+#: /home/tyllr/program/UploadHelper/TaskBarIcon.cpp:48
+msgid "E&xit"
+msgstr "退出"
+
+#: /home/tyllr/program/UploadHelper/LoginDialog.cpp:27
+#: /home/tyllr/program/UploadHelper/LoginDialog.cpp:51
+msgid "Login"
+msgstr "登录"
+
+#: /home/tyllr/program/UploadHelper/LoginDialog.cpp:33
+msgid "Domain / IP"
+msgstr "域名 / IP"
+
+#: /home/tyllr/program/UploadHelper/AboutDialog.cpp:28
+msgid "About"
+msgstr "关于"
+
+#: /home/tyllr/program/UploadHelper/AboutDialog.cpp:42
+msgid "Author:"
+msgstr "作者:"
+
+#: /home/tyllr/program/UploadHelper/AboutDialog.cpp:44
+msgid "Homepage:"
+msgstr "主页:"
+
+#: /home/tyllr/program/UploadHelper/AboutDialog.cpp:48
+msgid "Licensed under GPL v2"
+msgstr "基于GPL v2许可协议"
+
+#: /home/tyllr/program/UploadHelper/AboutDialog.cpp:53
+msgid "Thanks to following contributors:"
+msgstr "感谢下列贡献者:"
+
+#: /home/tyllr/program/UploadHelper/AboutDialog.cpp:58
+msgid "I've known"
+msgstr "我知道了"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:118
+msgid "UploadHelper"
+msgstr "日月光华上传助手"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:145
+msgid "Board selected is invalid."
+msgstr "没有正确选择版面。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:146
+msgid "Please fill in the blanks first."
+msgstr "请先填写完整。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:147
+msgid "Failed to connect with server. Please check your network or proxy settings."
+msgstr "连接服务器失败。请检查网络或代理服务器设置。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:148
+msgid "Login failed. Be sure you've typed correctly."
+msgstr "登录失败。确认你的输入无误。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:149
+msgid "Login successfully. Ready for uploading."
+msgstr "登录成功。可以开始上传文件了。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:150
+msgid "OK. Sent to destination successfully."
+msgstr "OK。成功发送到目标版面。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:151
+msgid "Failed to read configuration. Check the configuration file."
+msgstr "读取用户配置文件失败。请检查配置文件。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:152
+msgid "Failed to save configuration."
+msgstr "不能更新用户配置文件。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:153
+msgid "Failed to read BOARD LIST. Make sure that the list file is correctly located."
+msgstr "读取版面列表失败。请确保列表文件的位置正确。"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:154
+msgid "Error creating thread!"
+msgstr "无法创建线程！"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:155
+msgid "Error starting thread!"
+msgstr "线程启动失败！"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:157
+msgid "Preparing..."
+msgstr "准备中"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:158
+msgid "Uploading..."
+msgstr "正在上传"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:159
+msgid "Failed"
+msgstr "失败"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:160
+msgid "Finished"
+msgstr "完成"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:161
+msgid "Skip"
+msgstr "跳过"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:162
+msgid "Successfully added to the toolbar of Term."
+msgstr "Successfully added to the toolbar of Term."
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:186
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:189
+msgid "Supported Files"
+msgstr "所有支持的文件"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:186
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:189
+msgid "Image Files"
+msgstr "图片文件"
+
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:186
+#: /home/tyllr/program/UploadHelper/UploadHelperApp.h:189
+msgid "Portable Document Format"
+msgstr "便携文档格式"
+
+#, fuzzy
+#~ msgid "New item"
+#~ msgstr "新增項目"
+
