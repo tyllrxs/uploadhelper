@@ -10,8 +10,8 @@
             <object class="sizeritem">
 		<flag>wxBOTTOM</flag>
                 <border>5</border>
-                <object class="wxStaticBitmap" name="bitmap_1">
-                    <bitmap>../icon/title.xpm</bitmap>
+                <object class="wxStaticBitmap" name="imgTitle">
+                    <bitmap>../icon/title.png</bitmap>
                 </object>
             </object>
             <object class="sizeritem">
