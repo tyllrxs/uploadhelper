@@ -81,6 +81,7 @@
                     <usenotebooksizer>1</usenotebooksizer>
                     <object class="notebookpage">
                     <label>Upload Files</label>
+                    <bitmap>../icon/32/upload.png</bitmap>
                     <object class="wxPanel" name="notebook_pane1">
                         <style>wxTAB_TRAVERSAL</style>
                         <object class="wxBoxSizer">
@@ -193,6 +194,7 @@
                     </object>
                     <object class="notebookpage">
                     <label>Post Article</label>
+                    <bitmap>../icon/32/post.png</bitmap>
                     <object class="wxPanel" name="notebook_1_pane_2">
                         <style>wxTAB_TRAVERSAL</style>
                         <object class="wxBoxSizer">
