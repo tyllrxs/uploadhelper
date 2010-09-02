@@ -199,9 +199,9 @@ class MyFrame(wx.Frame):
 	self.board.Enabled = not self.lock.IsChecked()
 
     def OnbtnBrowseClick(self, evt):
-	wildcard = 'All Supported Files (*.jpg;*.gif;*.png;*.pdf)|*.[Jj][Pp][Gg];*.gif;*.png;*.pdf|'\
-		'Image Files (*.jpg;*.gif;*.png)|*.jpg;*.gif;*.png|'\
-		'PDF Files (*.pdf)|*.pdf|'\
+	wildcard = 'All Supported Files (*.jpg;*.gif;*.png;*.pdf)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg];*.[Pp][Dd][Ff]|'\
+		'Image Files (*.jpg;*.gif;*.png)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg]|'\
+		'PDF Files (*.pdf)|*.[Pp][Dd][Ff]|'\
 		'All Files (*.*)|*.*'
 	dialog = wx.FileDialog(None, 'Select Files to Upload', '', '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
@@ -210,9 +210,12 @@ class MyFrame(wx.Frame):
 			self.list.SetStringItem(index, 1, f)
 			fz = os.path.getsize(f) / 1024
 			self.list.SetStringItem(index, 2, '%ld' % fz)
-			if fz > 1024:
+			if not supported_file_type(f):
+				self.list.SetStringItem(index, 3, 'Unsupported File Type', 0)
+				self.list.SetItemTextColour(index, wx.RED)
+			elif fz > 1024:
 				self.list.SetStringItem(index, 3, 'Too Large', 0)
-				self.list.SetItemTextColour(index, wx.RED);
+				self.list.SetItemTextColour(index, wx.BLUE)
 		self.progress.SetLabel('%d File(s) Selected' % self.list.GetItemCount())
 	dialog.Destroy()
 
