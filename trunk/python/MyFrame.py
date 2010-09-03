@@ -24,13 +24,17 @@ class MyFileDropTarget(wx.FileDropTarget):
 
     def OnDropFiles(self, x, y, filenames):
 	for f in filenames:
-		index = self.window.InsertStringItem(sys.maxint, '%s' % (self.window.GetItemCount() + 1))
-		self.window.SetStringItem(index, 1, f)
+		index = self.window.list.InsertStringItem(sys.maxint, '%s' % (self.window.list.GetItemCount() + 1))
+		self.window.list.SetStringItem(index, 1, f)
 		fz = os.path.getsize(f) / 1024
-		self.window.SetStringItem(index, 2, '%ld' % fz)
-		if fz > 1024:
-			self.window.SetStringItem(index, 3, 'Too Large', 0)
-			self.window.SetItemTextColour(index, wx.RED);
+		self.window.list.SetStringItem(index, 2, '%ld' % fz)
+		if not supported_file_type(f):
+			self.window.list.SetStringItem(index, 3, 'Unsupported File Type', 0)
+			self.window.list.SetItemTextColour(index, wx.RED)
+		elif fz > 1024:
+			self.window.list.SetStringItem(index, 3, 'Too Large', 0)
+			self.window.list.SetItemTextColour(index, wx.BLUE)
+	self.window.progress.SetLabel('%d File(s) Selected' % self.window.list.GetItemCount())
 
 class MyFrame(wx.Frame):
 
@@ -105,7 +109,7 @@ class MyFrame(wx.Frame):
 	self.frame.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, id=xrc.XRCID('lstUpFile'))
 	self.frame.Bind(wx.EVT_CLOSE, self.OnClose)
 	# make the list control be a drop target
-	dt = MyFileDropTarget(self.list)
+	dt = MyFileDropTarget(self)
 	self.list.SetDropTarget(dt)
 	# receive message from check for updates thread
 	Publisher().subscribe(self.updateDisplay, "update")
@@ -219,7 +223,7 @@ class MyFrame(wx.Frame):
 	wildcard = 'All Supported Files (*.jpg;*.gif;*.png;*.pdf)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg];*.[Pp][Dd][Ff]|'\
 		'Image Files (*.jpg;*.gif;*.png)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg]|'\
 		'PDF Files (*.pdf)|*.[Pp][Dd][Ff]|'\
-		'All Files (*.*)|*.*'
+		'All Files (*)|*'
 	dialog = wx.FileDialog(None, 'Select Files to Upload', '', '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
 		for f in dialog.GetPaths():
