@@ -11,6 +11,7 @@ from wx.lib.pubsub import Publisher
 from consts import *
 from DlgLogin import *
 from DlgAbout import *
+from logoutthread import *
 from checkcookiethread import *
 from uploadthread import *
 from checkupdatethread import *
@@ -38,6 +39,10 @@ class MyFrame(wx.Frame):
 	self.frame = self.res.LoadFrame(None, 'frmMain')
 	# load UI settings from config file
 	cfg1 = wx.FileConfig(APPCODENAME)
+	if self.get_user_id():
+		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.get_user_id()))
+	else:
+		self.frame.SetTitle(APPNAME)
 	self.frame.SetSize(wx.Size(600,600))
 	self.notebook = xrc.XRCCTRL(self.frame, 'notebook')
 	self.notebook.SetSelection(cfg1.ReadInt('/Upload/ActivePage', 0))
@@ -84,6 +89,7 @@ class MyFrame(wx.Frame):
 	# bind events to UI controls
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuSwitchClick, id=xrc.XRCID('mnuSwitch'))
 	self.frame.Bind(wx.EVT_TOOL, self.OnmnuSwitchClick, id=xrc.XRCID('tlbSwitch'))
+	self.frame.Bind(wx.EVT_MENU, self.OnmnuLogoutClick, id=xrc.XRCID('mnuLogout'))
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuAlwaysOnTopClick, id=xrc.XRCID('mnuAlwaysOnTop'))
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuFAQClick, id=xrc.XRCID('mnuFAQ'))
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuHomepageClick, id=xrc.XRCID('mnuHomepage'))
@@ -143,15 +149,26 @@ class MyFrame(wx.Frame):
 
     def get_cookie(self):
 	cfg1 = wx.FileConfig(APPCODENAME)
-	return cfg1.Read('/Login/Cookie', '')
+	return cfg1.Read('/Login/Cookie')
 
     def get_host(self):
 	cfg1 = wx.FileConfig(APPCODENAME)
 	return BBS_HOSTS[cfg1.ReadInt('/Login/Host', 0)]
 
+    def get_user_id(self):
+	cfg1 = wx.FileConfig(APPCODENAME)
+	return cfg1.Read('/Login/UserID')
+
     def OnmnuSwitchClick(self, evt):
 	dialog = DlgLogin()
 	dialog.dialog.ShowModal()
+	if self.get_user_id():
+		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.get_user_id()))
+	else:
+		self.frame.SetTitle(APPNAME)
+	
+    def OnmnuLogoutClick(self, evt):
+	LogoutThread(self.get_host(), self.get_cookie())
 
     def OnmnuAlwaysOnTopClick(self, evt):
 	if evt.GetEventObject().IsChecked(evt.GetId()):
@@ -349,4 +366,14 @@ class MyFrame(wx.Frame):
 					wx.LaunchDefaultBrowser(HOMEPAGE)
 			else:
 				wx.MessageBox('You are using the latest version.', 'Check for Updates')
+	elif t.startswith('Logout|'):
+		if t.split('|')[1] == 'OK':
+			wx.MessageBox('User "%s" has logged out.' % self.get_user_id())
+			cfg1 = wx.FileConfig(APPCODENAME)
+			if cfg1.HasGroup('Login'):
+				cfg1.DeleteGroup('Login')
+			self.frame.SetTitle(APPNAME)
+		else:
+			tips = t.split('|')
+			wx.MessageBox(tips[2], tips[1])
 

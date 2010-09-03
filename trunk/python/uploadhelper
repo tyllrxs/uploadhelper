@@ -13,8 +13,14 @@ class MyApp(wx.App):
 	self.mainframe.frame.Show()
 	self.SetTopWindow(self.mainframe.frame)
 	cfg1 = wx.FileConfig(APPCODENAME)
-	if cfg1.Read('/Login/UserID', '') == '':
+	if cfg1.Read('/Login/UserID') and cfg1.Read('/Login/AutoLogin'):
+		pass
+	else:
 		DlgLogin().dialog.ShowModal()
+		if self.mainframe.get_user_id():
+			self.mainframe.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.mainframe.get_user_id()))
+		else:
+			self.mainframe.frame.SetTitle(APPNAME)
 	return True
 
 
