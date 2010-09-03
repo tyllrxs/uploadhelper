@@ -54,13 +54,9 @@ class DlgLogin(wx.Dialog):
 		else:
 			cookie = ';'.join(resp.headers['set-cookie'].split(','))
 			cfg1 = wx.FileConfig(APPCODENAME)
-			if autologin:
-				cfg1.Write('/Login/UserID', userid)
-				cfg1.Write('/Login/Password', pwd)
-				cfg1.Write('/Login/Cookie', cookie)
-			else:
-				if cfg1.HasGroup('Login'):
-					cfg1.DeleteGroup('Login')
+			cfg1.Write('/Login/UserID', userid)
+			cfg1.Write('/Login/Password', pwd)
+			cfg1.Write('/Login/Cookie', cookie)
 			cfg1.WriteInt('/Login/Host', host)
 			cfg1.WriteInt('/Login/AutoLogin', autologin)
 			wx.MessageBox('Login OK. Prepare to upload files.')
