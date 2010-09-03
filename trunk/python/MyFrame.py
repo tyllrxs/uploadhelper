@@ -106,6 +106,7 @@ class MyFrame(wx.Frame):
 	self.frame.Bind(wx.EVT_BUTTON, self.OnbtnBrowseClick, id=xrc.XRCID('btnBrowse'))
 	self.frame.Bind(wx.EVT_BUTTON, self.OnbtnUploadClick, id=xrc.XRCID('btnUpload'))
 	self.frame.Bind(wx.EVT_BUTTON, self.OnbtnPostClick, id=xrc.XRCID('btnPost'))
+	self.frame.Bind(wx.EVT_BUTTON, self.OnbtnReshipClick, id=xrc.XRCID('btnReship'))
 	self.frame.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, id=xrc.XRCID('lstUpFile'))
 	self.frame.Bind(wx.EVT_CLOSE, self.OnClose)
 	# make the list control be a drop target
