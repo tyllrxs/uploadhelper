@@ -257,7 +257,7 @@ class MyFrame(wx.Frame):
 	if self.hasPosted:
 		self.postbody.SetValue('')
 		self.hasPosted = False
-	CheckCookieThread(self.get_host(), self.get_board_name(), self.get_cookie())
+	CheckCookieThread(self.get_host(), self.get_board_name())
 	
     def start_upload_threads(self):
 	self.upcount = 0
@@ -284,26 +284,18 @@ class MyFrame(wx.Frame):
 	self.postbutton.Disable()
 	cfg1 = wx.FileConfig(APPCODENAME)
 	self.host = cfg1.ReadInt('/Login/Host', 0)
-	self.cookie = cfg1.Read('/Login/Cookie', '')
-	req = urllib2.Request('http://%s/bbs/snd?bid=%s' % (BBS_HOSTS[self.host], self.get_board_id(True)),
+	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (BBS_HOSTS[self.host], self.get_board_id(True)),
 		urllib.urlencode({'title': self.posttitle.GetValue().encode('gb18030'), 
 				'signature': self.signature.GetValue(),
 				'text': self.postbody.GetValue().encode('gb18030')}))
-	req.add_header('Cookie', self.cookie)  
-	try:
-		resp = urllib2.urlopen(req)
-	except urllib2.HTTPError, e:  
-		wx.MessageBox('%s: %d' % ('Error code', e.code), 'Network Error') 
-	except:
-		wx.MessageBox('Network Error')
+	if info == '':
+		wx.MessageBox('Post Successfully to Board "%s".' % self.get_board_name(True))
+		self.hasPosted = True
+	elif info.find('No User') >= 0:
+		self.OnmnuSwitchClick(wx.CommandEvent())
 	else:
-		the_page = resp.read().decode('gb18030').encode('utf8')
-		if the_page.find('发生错误') >= 0:
-			head, body = get_html_info(the_page)
-			wx.MessageBox(body, head)
-		else:
-			wx.MessageBox('Post Successfully to Board "%s".' % self.get_board_name(True))
-			self.hasPosted = True
+		tips = info.split('|')
+		wx.MessageBox(tips[2], tips[1])
 	self.postbutton.Enable()
 
     def OnbtnReshipClick(self, evt):
@@ -378,12 +370,15 @@ class MyFrame(wx.Frame):
         t = msg.data.strip()
 
 	if t.startswith('Cookie|'):
-		if t.split('|')[1] == 'OK':
+		if t.split('|')[1] == '':
 			self.start_upload_threads()
 		else:
-			tips = t.split('|')
-			wx.MessageBox(tips[2], tips[1])
-			self.uploadbutton.Enable()
+			if t.find('No User') >= 0:
+				self.OnmnuSwitchClick(wx.CommandEvent())
+			else:
+				tips = t.split('|')
+				wx.MessageBox(tips[2], tips[1])
+				self.uploadbutton.Enable()
 	elif t.startswith('Upload|'):
 		self.finishcount += 1
 		self.progress.SetLabel('Progress: %d / %d' % (self.finishcount, self.list.GetItemCount()))
