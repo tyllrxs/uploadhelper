@@ -6,7 +6,7 @@ import sys, os, glib
 APPNAME = 'UploadHelper'
 APPCODENAME = 'UploadHelper'
 PACKAGE = 'uploadhelper'
-VERSION = '3.9.0.1'
+VERSION = '3.9.2.1'
 AUTHOR = 'tyllr'
 EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
