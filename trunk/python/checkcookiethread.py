@@ -12,15 +12,14 @@ class CheckCookieThread(Thread):
     """Check if cookie is valid."""
  
     #----------------------------------------------------------------------
-    def __init__(self, host, board):
+    def __init__(self, window):
         Thread.__init__(self)
-	self.host = host
-	self.board = board
+	self.window = window
         self.start()
  
     #----------------------------------------------------------------------
     def run(self):
-	self.info = perfect_connect('http://%s/bbs/preupload?board=%s' % (self.host, self.board))
+	self.info = perfect_connect(self.window, 'http://%s/bbs/preupload?board=%s' % (self.window.get_host(), self.window.get_board_name()))
         wx.CallAfter(self.checkCookie)
  
     #----------------------------------------------------------------------

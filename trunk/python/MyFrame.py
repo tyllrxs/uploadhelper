@@ -257,7 +257,7 @@ class MyFrame(wx.Frame):
 	if self.hasPosted:
 		self.postbody.SetValue('')
 		self.hasPosted = False
-	CheckCookieThread(self.get_host(), self.get_board_name())
+	CheckCookieThread(self)
 	
     def start_upload_threads(self):
 	self.upcount = 0
@@ -284,15 +284,13 @@ class MyFrame(wx.Frame):
 	self.postbutton.Disable()
 	cfg1 = wx.FileConfig(APPCODENAME)
 	self.host = cfg1.ReadInt('/Login/Host', 0)
-	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (BBS_HOSTS[self.host], self.get_board_id(True)),
+	info = perfect_connect(self, 'http://%s/bbs/snd?bid=%s' % (BBS_HOSTS[self.host], self.get_board_id(True)),
 		urllib.urlencode({'title': self.posttitle.GetValue().encode('gb18030'), 
 				'signature': self.signature.GetValue(),
 				'text': self.postbody.GetValue().encode('gb18030')}))
 	if info == '':
 		wx.MessageBox('Post Successfully to Board "%s".' % self.get_board_name(True))
 		self.hasPosted = True
-	elif info.find('No User') >= 0:
-		self.OnmnuSwitchClick(wx.CommandEvent())
 	else:
 		tips = info.split('|')
 		wx.MessageBox(tips[2], tips[1])
@@ -346,6 +344,19 @@ class MyFrame(wx.Frame):
 	elif k == 3:
 		while self.list.GetSelectedItemCount() > 0:
 			self.list.DeleteItem(self.list.GetNextItem(-1, wx.LIST_NEXT_ALL, wx.LIST_STATE_SELECTED))
+	elif k == 4:
+		total = self.list.GetItemCount()
+		for i in xrange(total - 1, 0, -1):
+			for j in xrange(i):
+				if self.list.GetItem(i, 1).GetText() == self.list.GetItem(j, 1).GetText():
+					self.list.DeleteItem(i)
+					break
+	elif k == 5:
+		total = self.list.GetItemCount()
+		for i in xrange(total - 1, -1, -1):
+			fname = self.list.GetItem(i, 1).GetText()
+			if invalid_file_name(fname) or not supported_file_type(fname):
+				self.list.DeleteItem(i)
 	elif k == 7:
 		self.list.DeleteAllItems()
 	self.list_re_number()
@@ -373,12 +384,9 @@ class MyFrame(wx.Frame):
 		if t.split('|')[1] == '':
 			self.start_upload_threads()
 		else:
-			if t.find('No User') >= 0:
-				self.OnmnuSwitchClick(wx.CommandEvent())
-			else:
-				tips = t.split('|')
-				wx.MessageBox(tips[2], tips[1])
-				self.uploadbutton.Enable()
+			tips = t.split('|')
+			wx.MessageBox(tips[2], tips[1])
+			self.uploadbutton.Enable()
 	elif t.startswith('Upload|'):
 		self.finishcount += 1
 		self.progress.SetLabel('Progress: %d / %d' % (self.finishcount, self.list.GetItemCount()))
