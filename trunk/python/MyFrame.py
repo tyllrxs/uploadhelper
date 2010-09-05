@@ -15,6 +15,7 @@ from logoutthread import *
 from checkcookiethread import *
 from uploadthread import *
 from checkupdatethread import *
+from downloadthread import *
 from parsehtml import *
 
 
@@ -320,19 +321,7 @@ class MyFrame(wx.Frame):
     	self.reshipinfo.AppendText(html)
     	self.reshipinfo.AppendText(SEPARATOR)
     	self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % r'[File \1 Uploading...]', html))
-    	filenames = []
-    	for url in urls:
-    		fname = '/tmp/%s' % url.split('/')[-1]
-    		if fname.find('.') < 0:
-    			fname = '%s.jpg' % fname
-    		urllib.urlretrieve(url, fname)
-    		filenames.append(fname)
-    	self.list.DeleteAllItems()
-    	self.append_upload_files(filenames)
-    	self.notebook.SetSelection(0)
-    	self.ReshipMode = True
-    	evt = wx.CommandEvent()
-    	self.OnbtnUploadClick(evt)
+    	DownloadThread(self, urls)
 
     def OnlstUpFileRClick(self, evt):
 	self.popupmenu = wx.Menu()
@@ -398,6 +387,14 @@ class MyFrame(wx.Frame):
 		if self.upcount < self.list.ItemCount:
 			self.upcount += 1
 			UploadThread(self, self.get_host(), self.get_board_name(), self.upcount - 1, self.get_cookie())
+	elif t.startswith('Download|'):
+		filenames=t.split('|')[1:]
+		self.list.DeleteAllItems()
+	    	self.append_upload_files(filenames)
+	    	self.notebook.SetSelection(0)
+	    	self.ReshipMode = True
+	    	evt = wx.CommandEvent()
+	    	self.OnbtnUploadClick(evt)
 	elif t.startswith('Update|'):
 		if t.split('|')[1] == '':
 			wx.MessageBox('Failed to check for updates. Please try again later.', 'Check for Updates')
