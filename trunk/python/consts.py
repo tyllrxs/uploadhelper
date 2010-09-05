@@ -14,6 +14,7 @@ BBS_HOSTS = ('bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.
 LIST_CONTEXT_MENU = ('&Add Files...', 'A&dd Directories...', '', 
 		'&Remove Selected', 'Remove &Copies', 'Remove &Invalid', '', 
 		'Remove A&ll')
+SEPARATOR = '\n--------------------------------------------\n'
 DATA_DIR = '/usr/share/uploadhelper/'
 FILE_BOARDS = 'data/boards.xml' 
 CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), 'uploadhelper')
