@@ -15,6 +15,7 @@ from logoutthread import *
 from checkcookiethread import *
 from uploadthread import *
 from checkupdatethread import *
+from parsehtml import *
 
 class MyFileDropTarget(wx.FileDropTarget):
 
@@ -23,18 +24,7 @@ class MyFileDropTarget(wx.FileDropTarget):
 	self.window = window
 
     def OnDropFiles(self, x, y, filenames):
-	for f in filenames:
-		index = self.window.list.InsertStringItem(sys.maxint, '%s' % (self.window.list.GetItemCount() + 1))
-		self.window.list.SetStringItem(index, 1, f)
-		fz = os.path.getsize(f) / 1024
-		self.window.list.SetStringItem(index, 2, '%ld' % fz)
-		if not supported_file_type(f):
-			self.window.list.SetStringItem(index, 3, 'Unsupported File Type', 0)
-			self.window.list.SetItemTextColour(index, wx.RED)
-		elif fz > 1024:
-			self.window.list.SetStringItem(index, 3, 'Too Large', 0)
-			self.window.list.SetItemTextColour(index, wx.BLUE)
-	self.window.progress.SetLabel('%d File(s) Selected' % self.window.list.GetItemCount())
+	self.window.append_upload_files(filenames)
 
 class MyFrame(wx.Frame):
 
@@ -86,6 +76,7 @@ class MyFrame(wx.Frame):
 	self.signature.SetValue(cfg1.ReadInt('/Upload/PostSignature', 1))
 	self.postbody = xrc.XRCCTRL(self.frame, 'txtBody')
 	self.postbutton = xrc.XRCCTRL(self.frame, 'btnPost')
+	self.reshipinfo = xrc.XRCCTRL(self.frame, 'txtReship')
 	self.statusbar = xrc.XRCCTRL(self.frame, 'stsBar')
 	self.statusbar.SetFields(STATUSBAR_INFO)
 	# set some status variables
@@ -227,19 +218,22 @@ class MyFrame(wx.Frame):
 		'All Files (*)|*'
 	dialog = wx.FileDialog(None, 'Select Files to Upload', '', '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
-		for f in dialog.GetPaths():
-			index = self.list.InsertStringItem(sys.maxint, '%s' % (self.list.GetItemCount() + 1))
-			self.list.SetStringItem(index, 1, f)
-			fz = os.path.getsize(f) / 1024
-			self.list.SetStringItem(index, 2, '%ld' % fz)
-			if not supported_file_type(f):
-				self.list.SetStringItem(index, 3, 'Unsupported File Type', 0)
-				self.list.SetItemTextColour(index, wx.RED)
-			elif fz > 1024:
-				self.list.SetStringItem(index, 3, 'Too Large', 0)
-				self.list.SetItemTextColour(index, wx.BLUE)
-		self.progress.SetLabel('%d File(s) Selected' % self.list.GetItemCount())
+		self.append_upload_files(dialog.GetPaths())
 	dialog.Destroy()
+	
+    def append_upload_files(self, filenames):
+	for f in filenames:
+		index = self.list.InsertStringItem(sys.maxint, '%s' % (self.list.GetItemCount() + 1))
+		self.list.SetStringItem(index, 1, f)
+		fz = os.path.getsize(f) / 1024
+		self.list.SetStringItem(index, 2, '%ld' % fz)
+		if not supported_file_type(f):
+			self.list.SetStringItem(index, 3, 'Unsupported File Type', 0)
+			self.list.SetItemTextColour(index, wx.RED)
+		elif fz > 1024:
+			self.list.SetStringItem(index, 3, 'Too Large', 0)
+			self.list.SetItemTextColour(index, wx.BLUE)
+	self.progress.SetLabel('%d File(s) Selected' % self.list.GetItemCount())
 
     def OnbtnUploadClick(self, evt):
 	self.progress.SetLabel('Progress: %d / %d' % (0, self.list.GetItemCount()))
@@ -298,6 +292,41 @@ class MyFrame(wx.Frame):
 			wx.MessageBox('Post Successfully to Board "%s".' % self.get_board_name(True))
 			self.hasPosted = True
 	self.postbutton.Enable()
+
+    def OnbtnReshipClick(self, evt):
+        if not wx.TheClipboard.IsOpened():
+		wx.TheClipboard.Open()
+	do = wx.CustomDataObject('text/html')
+        success = wx.TheClipboard.GetData(do)
+    	wx.TheClipboard.Close()
+    	try: 
+    		html = do.GetData().decode('utf16') #Firefox
+    	except:
+    		try:
+    			html = do.GetData().decode('utf8') #Chrome
+    		except:
+    			wx.MessageBox('Unknown Format')
+    			return
+    	self.reshipinfo.SetValue(prettify_html(html))
+    	self.reshipinfo.AppendText(SEPARATOR)
+    	urls, html = parse_html_images(html)
+    	html = parse_html_texts(html)
+    	self.reshipinfo.AppendText(html)
+    	self.reshipinfo.AppendText(SEPARATOR)
+    	for i, url in enumerate(urls):
+    		flist = []
+    		fname = '/tmp/tmp%d.jpg' % i
+    		urllib.urlretrieve(url, fname)
+    		flist.append(fname)
+    		self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % r'[File \1 Uploading...]', html))
+#    	imageurls = parse_html_images(html)
+#    	texts = parse_html_texts(html)
+#    	for i in xrange(len(imageurls)):
+#    		self.reshipinfo.AppendText('\n[Text %d: %s]\n' % (i + 1, texts[i]))
+#    		self.reshipinfo.AppendText('\n[Image %d: %s]\n' % (i + 1, imageurls[i]))
+#    	self.reshipinfo.AppendText('\nText: %s\n' % texts[len(imageurls)])
+#    	self.reshipinfo.AppendText(SEPARATOR)
+	
 
     def OnlstUpFileRClick(self, evt):
 	self.popupmenu = wx.Menu()

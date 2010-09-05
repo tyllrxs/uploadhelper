@@ -1,10 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import urllib2, re
-import wx
-
-from consts import *
+import re
 
 
 def get_html_info(html):

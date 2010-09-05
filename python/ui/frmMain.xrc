@@ -299,7 +299,7 @@
                                         <flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
                                         <border>5</border>
                                         <object class="wxStaticText" name="label_5">
-                                            <label>Copy the Webpage Fraction to Clipboard, then Click</label>
+                                            <label>Copy the Webpage Fraction to Clipboard, then Click\n(Currently support Firefox and Chrome)</label>
                                         </object>
                                     </object>
                                     <object class="sizeritem">
