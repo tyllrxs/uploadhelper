@@ -43,7 +43,7 @@ def get_file_type(fname):
 	else:
 		return ext
 
-def perfect_connect(url, post={}):
+def perfect_connect(window, url, post={}):
 	req = urllib2.Request(url, post)
 	cfg1 = wx.FileConfig(APPCODENAME)
 	for i in xrange(2):
@@ -89,6 +89,6 @@ def perfect_connect(url, post={}):
 								cookie = ';'.join(resp2.headers['set-cookie'].split(','))
 								cfg1.Write('/Login/Cookie', cookie)
 					else:
-						return 'No User'
+						window.OnmnuSwitchClick(wx.CommandEvent())
 			else:
 				return ''
