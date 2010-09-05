@@ -17,7 +17,6 @@ from uploadthread import *
 from checkupdatethread import *
 from parsehtml import *
 
-global ReshipMode
 
 class MyFileDropTarget(wx.FileDropTarget):
 
@@ -83,7 +82,7 @@ class MyFrame(wx.Frame):
 	self.statusbar.SetFields(STATUSBAR_INFO)
 	# set some status variables
 	self.hasPosted = False
-	ReshipMode = False
+	self.ReshipMode = False
 	# bind events to UI controls
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuSwitchClick, id=xrc.XRCID('mnuSwitch'))
 	self.frame.Bind(wx.EVT_TOOL, self.OnmnuSwitchClick, id=xrc.XRCID('tlbSwitch'))
@@ -253,7 +252,7 @@ class MyFrame(wx.Frame):
     def start_upload_threads(self):
 	self.upcount = 0
 	self.finishcount = 0
-	if not ReshipMode:
+	if not self.ReshipMode:
 		for i in xrange(self.list.GetItemCount()):
 			self.postbody.SetValue(self.postbody.GetValue() + '\n%s\n' % '[File %d Uploading...]' % (i + 1))
 	for i in range(0, 3):
@@ -331,7 +330,7 @@ class MyFrame(wx.Frame):
     	self.list.DeleteAllItems()
     	self.append_upload_files(filenames)
     	self.notebook.SetSelection(0)
-    	ReshipMode = True
+    	self.ReshipMode = True
     	evt = wx.CommandEvent()
     	self.OnbtnUploadClick(evt)
 #    	imageurls = parse_html_images(html)
@@ -401,6 +400,7 @@ class MyFrame(wx.Frame):
 		self.progressnum.SetValue(self.finishcount * 100 / self.list.GetItemCount())
 		if self.finishcount >= self.list.ItemCount:
 			self.notebook.SetSelection(1)
+			self.ReshipMode = False
 			self.uploadbutton.Enable()
 			return
 		if self.upcount < self.list.ItemCount:
