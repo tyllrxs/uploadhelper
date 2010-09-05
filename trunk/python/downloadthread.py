@@ -7,6 +7,7 @@ from threading import Thread
 from wx.lib.pubsub import Publisher
 
 from consts import *
+from utilfunc import *
 
 class DownloadThread(Thread):
     """Download Thread."""
@@ -20,17 +21,29 @@ class DownloadThread(Thread):
 	self.filenames = []
 	num = 1
     	for url in self.urls:
-    		fname = '/tmp/%s' % urlparse(url).path.replace('/', '_')
-    		if not re.search(r'\.[\d\w]{1,4}$', fname):
-    			fname = '%s.jpg' % fname
-    		urllib.urlretrieve(url, fname)
-    		wx.CallAfter(self.DownloadInfo, url, num)
+    		fname = url
+    		if not supported_file_type(fname):
+    			if supported_file_type(urlparse(fname).path):
+    				fname += get_file_type(urlparse(fname).path)
+    			else:
+    				fname += '.jpg'
+    		fname = '/tmp/%s' % re.sub(r'[^\w\d\.\{\}\[\]\(\)\+\=\-\_\&\%\#\@\~]', '_', fname)
+    		try:
+    			urllib.urlretrieve(url, fname)
+    		except:
+    			fname = ''
+    		wx.CallAfter(self.DownloadInfo, num, url, fname)
     		self.filenames.append(fname)
     		num += 1
         wx.CallAfter(self.PostDownloadInfo)
  
-    def DownloadInfo(self, url, num):
-	self.window.reshipinfo.AppendText('\n%s ( %d / %d ):\n%s\n%s\n' % ('Downloading', num, len(self.urls), url, 'Finished'))
+    def DownloadInfo(self, num, url, filename):
+    	if filename:
+		self.window.reshipinfo.AppendText('\n%s ( %d / %d ):\n%s\n%s: %s\n%s\n' 
+			% ('Downloading', num, len(self.urls), url, 'Saved To', filename, 'Finished'))
+	else:
+		self.window.reshipinfo.AppendText('\n%s ( %d / %d ):\n%s\n%s\n' 
+			% ('Downloading', num, len(self.urls), url, 'Failed'))
  
     def PostDownloadInfo(self):
     	self.window.reshipinfo.AppendText(SEPARATOR)

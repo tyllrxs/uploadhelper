@@ -228,9 +228,15 @@ class MyFrame(wx.Frame):
 	for f in filenames:
 		index = self.list.InsertStringItem(sys.maxint, '%s' % (self.list.GetItemCount() + 1))
 		self.list.SetStringItem(index, 1, f)
-		fz = os.path.getsize(f) / 1024
+		try:
+			fz = os.path.getsize(f) / 1024
+		except:
+			fz = -1
 		self.list.SetStringItem(index, 2, '%ld' % fz)
-		if not supported_file_type(f):
+		if invalid_file_name(f):
+			self.list.SetStringItem(index, 3, 'Invalid File', 0)
+			self.list.SetItemTextColour(index, wx.RED)
+		elif not supported_file_type(f):
 			self.list.SetStringItem(index, 3, 'Unsupported File Type', 0)
 			self.list.SetItemTextColour(index, wx.RED)
 		elif fz > 1024:
