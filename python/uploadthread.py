@@ -19,6 +19,7 @@ class UploadThread(Thread):
 	self.board = board
 	self.upindex = upindex
 	self.cookie = cookie
+	self.fileurl = ''
 	self.start()
  
     def run(self):
@@ -55,9 +56,11 @@ class UploadThread(Thread):
     def PostUploadInfo(self):
 	if self.upOK:
 		self.window.list.SetStringItem(self.upindex, 3, self.info, 2)
-		content = self.window.postbody.GetValue()
-		self.window.postbody.SetValue(content.replace('[File %d Uploading...]' % (self.upindex + 1), self.fileurl))
+		self.window.list.SetItemTextColour(index, wx.BLACK)
 	else:
 		self.window.list.SetStringItem(self.upindex, 3, self.info, 3)
+		self.window.list.SetItemTextColour(index, wx.RED)
+	content = self.window.postbody.GetValue()
+	self.window.postbody.SetValue(content.replace('[File %d Uploading...]' % (self.upindex + 1), self.fileurl))
 	Publisher().sendMessage("update", '%s|' % 'Upload')
 

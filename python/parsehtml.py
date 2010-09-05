@@ -13,9 +13,12 @@ def parse_html_images(html):
 	urls = []
 	num = 1
 	for image in soup.findAll('img'):
-		urls.append(image['src'])
-		image.replaceWith('[[Image %d: %s]]' % (num, image['src']))
-		num += 1
+		try:
+			urls.append(image['src'])
+			image.replaceWith('[[Image %d: %s]]' % (num, image['src']))
+			num += 1
+		except:
+			pass
 	return urls, str(soup)
 
 def parse_html_texts(html):
