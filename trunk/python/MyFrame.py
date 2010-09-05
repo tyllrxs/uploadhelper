@@ -333,14 +333,6 @@ class MyFrame(wx.Frame):
     	self.ReshipMode = True
     	evt = wx.CommandEvent()
     	self.OnbtnUploadClick(evt)
-#    	imageurls = parse_html_images(html)
-#    	texts = parse_html_texts(html)
-#    	for i in xrange(len(imageurls)):
-#    		self.reshipinfo.AppendText('\n[Text %d: %s]\n' % (i + 1, texts[i]))
-#    		self.reshipinfo.AppendText('\n[Image %d: %s]\n' % (i + 1, imageurls[i]))
-#    	self.reshipinfo.AppendText('\nText: %s\n' % texts[len(imageurls)])
-#    	self.reshipinfo.AppendText(SEPARATOR)
-	
 
     def OnlstUpFileRClick(self, evt):
 	self.popupmenu = wx.Menu()
