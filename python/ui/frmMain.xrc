@@ -13,20 +13,20 @@
                 <object class="wxMenuItem" name="mnuSwitch">
                     <label>_Switch User...</label>
                     <accel>F12</accel>
-                    <bitmap>../icon/16/document-new.png</bitmap>		
+                    <bitmap>../icon/16/switch.png</bitmap>		
                 </object>
 		<object class="separator"/>
 		<object class="wxMenuItem" name="mnuLogout">
                     <label>Logo_ut...</label>
                     <accel>Shift-F12</accel>
-                    <bitmap>../icon/16/document-new.png</bitmap>		
+                    <bitmap>../icon/16/logout.png</bitmap>		
                 </object>
             </object>
-            <object class="wxMenu" name="mnuOption">
-                <label>_Option</label>
+            <object class="wxMenu" name="mnuSetting">
+                <label>_Setting</label>
                 <object class="wxMenuItem" name="mnuPreference">
                     <label>_Preferences...</label>
-                    <bitmap>../icon/16/document-new.png</bitmap>		
+                    <bitmap>../icon/16/setting.png</bitmap>		
                 </object>
 		<object class="separator"/>
 		<object class="wxMenuItem" name="mnuAlwaysOnTop">
@@ -39,10 +39,12 @@
 		<object class="wxMenuItem" name="mnuFAQ">
                     <label>_FAQ</label>
                     <accel>F1</accel>
+                    <bitmap>../icon/16/help.png</bitmap>
                 </object>
 		<object class="separator"/>
 		<object class="wxMenuItem" name="mnuHomepage">
-                    <label>_Homepage</label>	
+                    <label>_Homepage</label>
+                    <bitmap>../icon/16/home.png</bitmap>
                 </object>
 		<object class="wxMenuItem" name="mnuCheckUpdate">
                     <label>Check for _Updates...</label>	
@@ -62,14 +64,33 @@
                 <label>Switch user</label>
                 <tooltip>Switch user</tooltip>
                 <longhelp>Switch user</longhelp>
-                <bitmap>../icon/16/document-new.png</bitmap>
+                <bitmap>../icon/16/switch.png</bitmap>
             </object>
-            <object class="separator"/>
-            <object class="tool" name="ID_LOGOUT">
+            <object class="tool" name="tlbLogout">
                 <label>Logout</label>
                 <tooltip>Logout</tooltip>
                 <longhelp>Logout</longhelp>
-                <bitmap>../icon/16/system-log-out.png</bitmap>
+                <bitmap>../icon/16/logout.png</bitmap>
+            </object>
+            <object class="separator"/>
+            <object class="tool" name="tlbPreference">
+                <label>Preferences</label>
+                <tooltip>Preferences</tooltip>
+                <longhelp>Preferences</longhelp>
+                <bitmap>../icon/16/setting.png</bitmap>
+            </object>
+            <object class="separator"/>
+            <object class="tool" name="tlbFAQ">
+                <label>FAQ</label>
+                <tooltip>FAQ</tooltip>
+                <longhelp>FAQ</longhelp>
+                <bitmap>../icon/16/help.png</bitmap>
+            </object>
+            <object class="tool" name="tlbHomepage">
+                <label>Homepage</label>
+                <tooltip>Homepage</tooltip>
+                <longhelp>Visit Homepage of UploadHelper</longhelp>
+                <bitmap>../icon/16/home.png</bitmap>
             </object>
         </object>
         <object class="wxBoxSizer">
