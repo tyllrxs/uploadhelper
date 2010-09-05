@@ -17,6 +17,8 @@ from uploadthread import *
 from checkupdatethread import *
 from parsehtml import *
 
+global ReshipMode
+
 class MyFileDropTarget(wx.FileDropTarget):
 
     def __init__(self, window):
@@ -81,6 +83,7 @@ class MyFrame(wx.Frame):
 	self.statusbar.SetFields(STATUSBAR_INFO)
 	# set some status variables
 	self.hasPosted = False
+	ReshipMode = False
 	# bind events to UI controls
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuSwitchClick, id=xrc.XRCID('mnuSwitch'))
 	self.frame.Bind(wx.EVT_TOOL, self.OnmnuSwitchClick, id=xrc.XRCID('tlbSwitch'))
@@ -250,8 +253,9 @@ class MyFrame(wx.Frame):
     def start_upload_threads(self):
 	self.upcount = 0
 	self.finishcount = 0
-	for i in xrange(self.list.GetItemCount()):
-		self.postbody.SetValue(self.postbody.GetValue() + '\n%s\n' % '[File %d Uploading...]' % (i + 1))
+	if not ReshipMode:
+		for i in xrange(self.list.GetItemCount()):
+			self.postbody.SetValue(self.postbody.GetValue() + '\n%s\n' % '[File %d Uploading...]' % (i + 1))
 	for i in range(0, 3):
 		if i < self.list.GetItemCount():
 			self.upcount += 1
@@ -307,18 +311,29 @@ class MyFrame(wx.Frame):
     		except:
     			wx.MessageBox('Unknown Format')
     			return
+    	if html.strip() == '':
+    		self.reshipinfo.SetValue('( No webpage content is ready to reship, check if it has been copied correctly. )')
+    		return
     	self.reshipinfo.SetValue(prettify_html(html))
     	self.reshipinfo.AppendText(SEPARATOR)
     	urls, html = parse_html_images(html)
     	html = parse_html_texts(html)
     	self.reshipinfo.AppendText(html)
     	self.reshipinfo.AppendText(SEPARATOR)
-    	for i, url in enumerate(urls):
-    		flist = []
-    		fname = '/tmp/tmp%d.jpg' % i
+    	self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % r'[File \1 Uploading...]', html))
+    	filenames = []
+    	for url in urls:
+    		fname = '/tmp/%s' % url.split('/')[-1]
+    		if fname.find('.') < 0:
+    			fname = '%s.jpg' % fname
     		urllib.urlretrieve(url, fname)
-    		flist.append(fname)
-    		self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % r'[File \1 Uploading...]', html))
+    		filenames.append(fname)
+    	self.list.DeleteAllItems()
+    	self.append_upload_files(filenames)
+    	self.notebook.SetSelection(0)
+    	ReshipMode = True
+    	evt = wx.CommandEvent()
+    	self.OnbtnUploadClick(evt)
 #    	imageurls = parse_html_images(html)
 #    	texts = parse_html_texts(html)
 #    	for i in xrange(len(imageurls)):
