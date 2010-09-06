@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import urllib2
 import wx
 from threading import Thread
 from wx.lib.pubsub import Publisher
