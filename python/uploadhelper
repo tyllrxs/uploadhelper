@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import os, sys
-os.chdir(os.path.split(os.path.realpath(sys.argv[0]))[0])
-
 import wx
 from MyFrame import *
 from DlgLogin import *
 from consts import *
+
+os.chdir(PATH)
 
 class MyApp(wx.App):
 

@@ -15,6 +15,7 @@ LIST_CONTEXT_MENU = ('&Add Files...', 'A&dd Directories...', '',
 		'&Remove Selected', 'Remove &Copies', 'Remove &Invalid', '', 
 		'Remove A&ll')
 SEPARATOR = '\n--------------------------------------------\n--------------------------------------------\n'
+PATH = os.path.abspath(os.path.dirname(sys.argv[0]))
 DATA_DIR = '/usr/share/uploadhelper/'
 FILE_BOARDS = 'data/boards.xml' 
 CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), 'uploadhelper')

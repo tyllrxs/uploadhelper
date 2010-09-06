@@ -31,7 +31,7 @@ class MyFileDropTarget(wx.FileDropTarget):
 class MyFrame(wx.Frame):
 
     def __init__(self):
-        self.res = xrc.XmlResource('ui/frmMain.xrc')
+        self.res = xrc.XmlResource(PATH + '/ui/frmMain.xrc')
 	self.frame = self.res.LoadFrame(None, 'frmMain')
 	# load UI settings from config file
 	cfg1 = wx.FileConfig(APPCODENAME)
