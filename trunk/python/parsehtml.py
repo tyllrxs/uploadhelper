@@ -22,4 +22,5 @@ def parse_html_images(html):
 	return urls, str(soup)
 
 def parse_html_texts(html):
-	return re.sub(r'<[^>]*>', '', html)
+	text = re.compile(r'<(script|style).*?</\1>', re.S|re.I).sub('', html)
+	return re.sub(r'<[^>]*>', '', text)
