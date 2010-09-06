@@ -179,7 +179,7 @@ class MyFrame(wx.Frame):
 		self.frame.SetWindowStyleFlag(self.frame.GetWindowStyleFlag() ^ wx.STAY_ON_TOP)
 
     def OnmnuFAQClick(self, evt):
-        wx.LaunchDefaultBrowser('%sfaq.htm' % HOMEPAGE)
+        wx.LaunchDefaultBrowser('%s%s' % (HOMEPAGE, 'faq.htm'))
 
     def OnmnuHomepageClick(self, evt):
         wx.LaunchDefaultBrowser(HOMEPAGE)
@@ -381,7 +381,11 @@ class MyFrame(wx.Frame):
         t = msg.data.strip()
 
 	if t.startswith('Cookie|'):
-		if t.split('|')[1] == '':
+		if t.find('No User') >= 0:
+			evt = wx.CommandEvent()
+			self.OnmnuSwitchClick(evt)
+			self.OnbtnUploadClick(evt)
+		elif t.split('|')[1] == '':
 			self.start_upload_threads()
 		else:
 			tips = t.split('|')
