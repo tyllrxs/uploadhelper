@@ -82,7 +82,8 @@ class MyFrame(wx.Frame):
 	self.statusbar = xrc.XRCCTRL(self.frame, 'stsBar')
 	self.statusbar.SetFields(STATUSBAR_INFO)
 	# set some status variables
-	self.hasPosted = False
+	self.PostedMode = False
+	self.UploadedMode = False
 	self.ReshipMode = False
 	# bind events to UI controls
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuSwitchClick, id=xrc.XRCID('mnuSwitch'))
@@ -222,12 +223,15 @@ class MyFrame(wx.Frame):
 		'Image Files (*.jpg;*.gif;*.png)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg]|'\
 		'PDF Files (*.pdf)|*.[Pp][Dd][Ff]|'\
 		'All Files (*)|*'
-	dialog = wx.FileDialog(None, 'Select Files to Upload', '', '', wildcard, wx.OPEN|wx.MULTIPLE)
+	dialog = wx.FileDialog(None, 'Select Files to Upload', '', '', wildcard, wx.OPEN|wx.MULTIPLE|wx.FD_CHANGE_DIR)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.append_upload_files(dialog.GetPaths())
 	dialog.Destroy()
 	
     def append_upload_files(self, filenames):
+    	if self.UploadedMode:
+    		self.list.DeleteAllItems()
+    		self.UploadedMode = False
 	for f in filenames:
 		index = self.list.InsertStringItem(sys.maxint, '%s' % (self.list.GetItemCount() + 1))
 		self.list.SetStringItem(index, 1, f)
@@ -254,9 +258,9 @@ class MyFrame(wx.Frame):
 		wx.MessageBox('Select at least one file for uploading.')
 		return
 	self.uploadbutton.Disable()
-	if self.hasPosted:
+	if self.PostedMode:
 		self.postbody.SetValue('')
-		self.hasPosted = False
+		self.PostedMode = False
 	CheckCookieThread(self)
 	
     def start_upload_threads(self):
@@ -290,10 +294,14 @@ class MyFrame(wx.Frame):
 				'text': self.postbody.GetValue().encode('gb18030')}))
 	if info == '':
 		wx.MessageBox('Post Successfully to Board "%s".' % self.get_board_name(True))
-		self.hasPosted = True
+		self.PostedMode = True
+	elif info.find('No User') >= 0:
+		evt = wx.CommandEvent()
+		self.OnmnuSwitchClick(evt)
+		self.OnbtnPostClick(evt)
 	else:
 		tips = info.split('|')
-		wx.MessageBox(tips[2], tips[1])
+		wx.MessageBox(tips[1], tips[0])
 	self.postbutton.Enable()
 
     def OnbtnReshipClick(self, evt):
@@ -397,6 +405,7 @@ class MyFrame(wx.Frame):
 		self.progressnum.SetValue(self.finishcount * 100 / self.list.GetItemCount())
 		if self.finishcount >= self.list.ItemCount:
 			self.notebook.SetSelection(1)
+			self.UploadedMode = True
 			self.ReshipMode = False
 			self.uploadbutton.Enable()
 			return
