@@ -32,7 +32,7 @@ class DlgLogin(wx.Dialog):
 	pwd = self.pwd.GetValue().strip()
 	autologin = self.autologin.GetValue()
 	if userid == '' or pwd == '':
-		wx.MessageBox('Fill the blanks first.')
+		wx.MessageBox(MSG_FILL_BLANKS)
 		return
 	opener = urllib2.build_opener(SmartRedirectHandler())  
 	urllib2.install_opener(opener)  
@@ -40,10 +40,10 @@ class DlgLogin(wx.Dialog):
 	try:
 		resp = urllib2.urlopen(req)  
 	except urllib2.HTTPError, e:  
-		wx.MessageBox('%s: %d' % ('Error code', e.code), 'Network Error') 
+		wx.MessageBox('%s: %d' % (MSG_ERROR_CODE, e.code), MSG_NETWORK_ERROR) 
 		return
 	except:
-		wx.MessageBox('Network Error')
+		wx.MessageBox(MSG_NETWORK_ERROR)
 		return
 	else:
 		if resp.code != 302:			

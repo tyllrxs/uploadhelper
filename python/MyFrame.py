@@ -170,7 +170,7 @@ class MyFrame(wx.Frame):
 	dialog = DlgLogin()
 	dialog.dialog.ShowModal()
 	if self.get_user_id():
-		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.get_user_id()))
+		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, _('User'), self.get_user_id()))
 	else:
 		self.frame.SetTitle(APPNAME)
 	
@@ -221,11 +221,12 @@ class MyFrame(wx.Frame):
 	self.board.Enabled = not self.lock.IsChecked()
 
     def OnbtnBrowseClick(self, evt):
-	wildcard = 'All Supported Files (*.jpg;*.gif;*.png;*.pdf)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg];*.[Pp][Dd][Ff]|'\
-		'Image Files (*.jpg;*.gif;*.png)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg]|'\
-		'PDF Files (*.pdf)|*.[Pp][Dd][Ff]|'\
-		'All Files (*)|*'
-	dialog = wx.FileDialog(None, 'Select Files to Upload', self.get_dialog_path(), '', wildcard, wx.OPEN|wx.MULTIPLE)
+	wildcard = '%s (*.jpg;*.gif;*.png;*.pdf)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg];*.[Pp][Dd][Ff]|'\
+		'%s (*.jpg;*.gif;*.png)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg]|'\
+		'%s (*.pdf)|*.[Pp][Dd][Ff]|'\
+		'%s (*)|*' \
+		% (_('All Supported Files'), _('Image Files'), _('PDF Documents'), _('All Files'))
+	dialog = wx.FileDialog(None, _('Select Files to Upload'), self.get_dialog_path(), '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.append_upload_files(dialog.GetPaths())
 		cfg1 = wx.FileConfig(APPCODENAME)
@@ -245,21 +246,21 @@ class MyFrame(wx.Frame):
 			fz = -1
 		self.list.SetStringItem(index, 2, '%ld' % fz)
 		if invalid_file_name(f):
-			self.list.SetStringItem(index, 3, 'Invalid File', 0)
+			self.list.SetStringItem(index, 3, _('Invalid File'), 0)
 			self.list.SetItemTextColour(index, wx.RED)
 		elif not supported_file_type(f):
-			self.list.SetStringItem(index, 3, 'Unsupported File Type', 0)
+			self.list.SetStringItem(index, 3, _('Unsupported File Type'), 0)
 			self.list.SetItemTextColour(index, wx.RED)
 		elif fz > 1024:
-			self.list.SetStringItem(index, 3, 'Too Large', 0)
+			self.list.SetStringItem(index, 3, _('Too Large'), 0)
 			self.list.SetItemTextColour(index, wx.BLUE)
-	self.progress.SetLabel('%d File(s) Selected' % self.list.GetItemCount())
+	self.progress.SetLabel(_('%d File(s) Selected') % self.list.GetItemCount())
 
     def OnbtnUploadClick(self, evt):
 	self.progress.SetLabel('Progress: %d / %d' % (0, self.list.GetItemCount()))
 	self.progressnum.SetValue(0)
 	if self.list.GetItemCount() <= 0:
-		wx.MessageBox('Select at least one file for uploading.')
+		wx.MessageBox(_('Select at least one file for uploading.'))
 		return
 	self.uploadbutton.Disable()
 	if self.PostedMode:
@@ -284,10 +285,10 @@ class MyFrame(wx.Frame):
 
     def OnbtnPostClick(self, evt):
 	self.list.DeleteAllItems()
-	self.progress.SetLabel('%d File(s) Selected' % 0)
+	self.progress.SetLabel(MSG_FILE_SELECTED % 0)
 	self.progressnum.SetValue(0)
 	if self.posttitle.GetValue().strip() == '' or self.postbody.GetValue().strip() == '':
-		wx.MessageBox('No empty title or content is allowed.')
+		wx.MessageBox(MSG_FILL_BLANKS)
 		return
 	self.postbutton.Disable()
 	cfg1 = wx.FileConfig(APPCODENAME)
@@ -297,7 +298,7 @@ class MyFrame(wx.Frame):
 				'signature': self.signature.GetValue(),
 				'text': self.postbody.GetValue().encode('gb18030')}))
 	if info == '':
-		wx.MessageBox('Post Successfully to Board "%s".' % self.get_board_name(True))
+		wx.MessageBox(_('Post Successfully to Board "%s".') % self.get_board_name(True))
 		self.PostedMode = True
 	elif info.find('No User') >= 0:
 		evt = wx.CommandEvent()
