@@ -11,7 +11,7 @@ AUTHOR = 'tyllr'
 EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
 BBS_HOSTS = ('bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.9')
-LIST_CONTEXT_MENU = ('&Add Files...', 'A&dd Folder...', '', 
+LIST_CONTEXT_MENU = ('&Add Files...', 'A&dd Directory...', '', 
 		'&Remove Selected', 'Remove &Copies', 'Remove &Invalid', '', 
 		'Remove A&ll')
 SEPARATOR = '\n--------------------------------------------\n--------------------------------------------\n'
