@@ -193,11 +193,9 @@ class MyFrame(wx.Frame):
         CheckUpdateThread()
 
     def OnmnuAboutClick(self, evt):
-	try:
-		dialog3 = DlgAbout()
-		dialog3.dialog.ShowModal()
-	finally:
-		dialog3.dialog.Destroy()
+	dialog3 = DlgAbout()
+	dialog3.dialog.ShowModal()
+	dialog3.dialog.Destroy()
 
     def OnZoneChange(self, evt):
 	tmp = self.board.GetSelection()        

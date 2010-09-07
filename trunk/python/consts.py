@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import sys, os, glib
-
+import gettext
+gettext.install('messages', 'locale', unicode=True)
+gettext.translation('messages', 'locale').install(True)
 
 APPNAME = 'UploadHelper'
 APPCODENAME = 'UploadHelper'
@@ -17,6 +18,8 @@ LIST_CONTEXT_MENU = ('&Add Files...', 'A&dd Directory...', '',
 SEPARATOR = '\n--------------------------------------------\n--------------------------------------------\n'
 DATA_DIR = '/usr/share/uploadhelper/'
 FILE_BOARDS = 'data/boards.xml' 
+
+import sys, os, glib
 CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), 'uploadhelper')
 
 if not os.path.exists(CONFIG_ROOT):
