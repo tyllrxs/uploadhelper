@@ -31,7 +31,7 @@ class MyFileDropTarget(wx.FileDropTarget):
 class MyFrame(wx.Frame):
 
     def __init__(self):
-        self.res = xrc.XmlResource(PATH + '/ui/frmMain.xrc')
+        self.res = xrc.XmlResource('ui/frmMain.xrc')
 	self.frame = self.res.LoadFrame(None, 'frmMain')
 	# load UI settings from config file
 	cfg1 = wx.FileConfig(APPCODENAME)
@@ -161,6 +161,10 @@ class MyFrame(wx.Frame):
     def get_user_id(self):
 	cfg1 = wx.FileConfig(APPCODENAME)
 	return cfg1.Read('/Login/UserID')
+	
+    def get_dialog_path(self):
+	cfg1 = wx.FileConfig(APPCODENAME)
+	return cfg1.Read('/Upload/DefaultPath')
 
     def OnmnuSwitchClick(self, evt):
 	dialog = DlgLogin()
@@ -223,9 +227,11 @@ class MyFrame(wx.Frame):
 		'Image Files (*.jpg;*.gif;*.png)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg]|'\
 		'PDF Files (*.pdf)|*.[Pp][Dd][Ff]|'\
 		'All Files (*)|*'
-	dialog = wx.FileDialog(None, 'Select Files to Upload', '', '', wildcard, wx.OPEN|wx.MULTIPLE|wx.FD_CHANGE_DIR)
+	dialog = wx.FileDialog(None, 'Select Files to Upload', self.get_dialog_path(), '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.append_upload_files(dialog.GetPaths())
+		cfg1 = wx.FileConfig(APPCODENAME)
+		cfg1.Write('/Upload/DefaultPath', os.path.abspath(os.path.dirname(dialog.GetPaths()[0])))
 	dialog.Destroy()
 	
     def append_upload_files(self, filenames):
@@ -349,6 +355,11 @@ class MyFrame(wx.Frame):
 			break
 	if k == 0:
 		self.OnbtnBrowseClick(wx.CommandEvent())
+	elif k == 1:
+		dialog = wx.DirDialog(None, "Choose a directory:", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
+	    	if dialog.ShowModal() == wx.ID_OK:
+			print dialog.GetPath()
+	    	dialog.Destroy()
 	elif k == 3:
 		while self.list.GetSelectedItemCount() > 0:
 			self.list.DeleteItem(self.list.GetNextItem(-1, wx.LIST_NEXT_ALL, wx.LIST_STATE_SELECTED))

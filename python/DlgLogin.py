@@ -10,7 +10,7 @@ from utilfunc import *
 
 class DlgLogin(wx.Dialog):
     def __init__(self):
-        self.res = xrc.XmlResource(PATH + '/ui/dlgLogin.xrc')
+        self.res = xrc.XmlResource('ui/dlgLogin.xrc')
 	self.dialog = self.res.LoadDialog(None, 'dlgLogin')
 	cfg1 = wx.FileConfig(APPCODENAME)
 	self.host = xrc.XRCCTRL(self.dialog, 'cmbHost')
