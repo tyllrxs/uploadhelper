@@ -4,20 +4,26 @@ import gettext
 gettext.install('messages', 'locale', unicode=True)
 gettext.translation('messages', 'locale').install(True)
 
-APPNAME = 'UploadHelper'
-APPCODENAME = 'UploadHelper'
+APPNAME = _('UploadHelper')
+APPCODENAME = 'uploadhelper'
 PACKAGE = 'uploadhelper'
 VERSION = '3.9.2.1'
 AUTHOR = 'tyllr'
 EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
 BBS_HOSTS = ('bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.9')
-LIST_CONTEXT_MENU = ('&Add Files...', 'A&dd Directory...', '', 
-		'&Remove Selected', 'Remove &Copies', 'Remove &Invalid', '', 
-		'Remove A&ll')
+LIST_CONTEXT_MENU = (_('&Add Files...'), _('A&dd Directory...'), '', 
+		_('&Remove Selected'), _('Remove &Copies'), _('Remove &Invalid'), '', 
+		_('Remove A&ll'))
 SEPARATOR = '\n--------------------------------------------\n--------------------------------------------\n'
 DATA_DIR = '/usr/share/uploadhelper/'
 FILE_BOARDS = 'data/boards.xml' 
+
+# Some common messages
+MSG_ERROR_CODE = _('Error code')
+MSG_NETWORK_ERROR = _('Network Error')
+MSG_FILL_BLANKS = _('Fill the blanks first.')
+MSG_FILE_SELECTED = _('%d File(s) Selected')
 
 import sys, os, glib
 CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), 'uploadhelper')
@@ -30,4 +36,4 @@ try:
 except:
     LANG = 'en-us'
 
-STATUSBAR_INFO = ['Contact tyllr (at) RYGH BBS for help or advice']
+STATUSBAR_INFO = [_('Contact tyllr (at) RYGH BBS for help or advice')]
