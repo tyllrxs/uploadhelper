@@ -298,7 +298,7 @@ class MyFrame(wx.Frame):
 		wx.MessageBox(MSG_FILL_BLANKS)
 		return
 	self.postbutton.Disable()
-	info = perfect_connect(self, 'http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
+	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
 		urllib.urlencode({'title': self.posttitle.GetValue().encode('gb18030'), 
 				'signature': self.signature.GetValue(),
 				'text': self.postbody.GetValue().encode('gb18030')}))
@@ -388,12 +388,12 @@ class MyFrame(wx.Frame):
 
     def OnClose(self, evt):
 	write_config('Upload', {'UpZone': self.zone.GetSelection(), \
-		'UpBoard', self.board.GetSelection(), \
-		'UpBoardLock', self.lock.IsChecked(), \
-		'PostSignature', self.signature.GetValue(), \
-		'PostZone', self.postzone.GetSelection(), \
-		'PostBoard', self.postboard.GetSelection(), \
-		'ActivePage', self.notebook.GetSelection()})
+		'UpBoard': self.board.GetSelection(), \
+		'UpBoardLock': self.lock.IsChecked(), \
+		'PostSignature': self.signature.GetValue(), \
+		'PostZone': self.postzone.GetSelection(), \
+		'PostBoard': self.postboard.GetSelection(), \
+		'ActivePage': self.notebook.GetSelection()})
 	self.frame.Destroy()
 
     #----------------------------------------------------------------------

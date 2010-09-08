@@ -18,7 +18,7 @@ class CheckCookieThread(Thread):
  
     #----------------------------------------------------------------------
     def run(self):
-	self.info = perfect_connect(self.window, 'http://%s/bbs/preupload?board=%s' % (self.window.get_host(), self.window.get_board_name()))
+	self.info = perfect_connect('http://%s/bbs/preupload?board=%s' % (self.window.get_host(), self.window.get_board_name()))
         wx.CallAfter(self.checkCookie)
  
     #----------------------------------------------------------------------

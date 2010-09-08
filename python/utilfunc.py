@@ -92,6 +92,10 @@ def read_config_bool(section, option, default = False):
 
 def write_config(section, dic):
 	cf = ConfigParser.ConfigParser()
+	try:
+		cf.read(CONFIG_FILE)
+	except:
+		pass
 	if not cf.has_section(section):
 		cf.add_section(section)
 	for k, v in dic.items():
