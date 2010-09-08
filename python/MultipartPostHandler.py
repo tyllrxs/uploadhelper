@@ -99,7 +99,7 @@ class MultipartPostHandler(urllib2.BaseHandler):
             filename = fd.name.split('/')[-1]
             contenttype = mimetypes.guess_type(filename)[0] or 'application/octet-stream'
             buf.write('--%s\r\n' % boundary)
-            buf.write('Content-Disposition: form-data; name="%s"; filename="%s"\r\n' % (key, filename))
+            buf.write('Content-Disposition: form-data; name="%s"; filename="%s"\r\n' % (key, filename.encode('gb18030')))
             buf.write('Content-Type: %s\r\n' % contenttype)
             # buffer += 'Content-Length: %s\r\n' % file_size
             fd.seek(0)
