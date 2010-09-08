@@ -29,17 +29,18 @@ MSG_FILE_SELECTED = _('%d File(s) Selected')
 MSG_UNKNOWN_ERROR = _('Unknown Error')
 MSG_INVALID_FILE = _('Invalid File or Not Permitted to Read')
 MSG_CHECK_UPDATE = _('Check for Updates')
-MSG_FILE_UPLOADING = _('[File %d Uploading...]')
+MSG_FILE_UPLOADING = '[File %d Uploading...]'
+MSG_FILE_UPLOADING_2 = r'[File \1 Uploading...]'
 MSG_LOGOUT = _('Logout')
 STATUS_UPLOADING = _('Uploading')
 STATUS_UPLOADED = _('Finished')
 
 import sys, os, glib
-CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), APPCODENAME)
+CONFIG_ROOT = os.path.join(os.getenv('HOME'), '.config/%s' % APPCODENAME)
 
 if not os.path.exists(CONFIG_ROOT):
     os.makedirs(CONFIG_ROOT)
 
 CONFIG_FILE = '%s/user.conf' % CONFIG_ROOT
-
+print CONFIG_FILE
 STATUSBAR_INFO = [_('Contact tyllr (at) RYGH BBS for help or advice')]

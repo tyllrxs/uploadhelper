@@ -84,10 +84,6 @@ msgstr "无效的文件或不允许读取"
 msgid "Check for Updates"
 msgstr "检查更新"
 
-#: consts.py:32
-msgid "[File %d Uploading...]"
-msgstr "[文件 %d 正在上传...]"
-
 #: consts.py:33
 msgid "Logout"
 msgstr "注销"
