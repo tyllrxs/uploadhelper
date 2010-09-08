@@ -105,10 +105,12 @@ def write_config(section, dic):
 def remove_config(section, option = ''):
 	cf = ConfigParser.ConfigParser()
 	try:
+		cf.read(CONFIG_FILE)
 		if option:
 			cf.remove_option(section, option)
 		else:
 			cf.remove_section(section)
+		cf.write(open(CONFIG_FILE, 'w'))
 	except:
 		pass
 
