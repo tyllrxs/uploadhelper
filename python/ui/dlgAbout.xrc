@@ -30,9 +30,9 @@
             </object>
             <object class="sizeritem">
                 <flag>wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>21</border>
+                <border>5</border>
                 <object class="wxStaticText" name="lblDetail">
-                    <label>http://ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\n2nd\n3rd\n4th</label>
+                    <label>\n\n\nHomepage: http://homepage.fudan.edu.cn/~tyllr/uh/</label>
                 </object>
             </object>
             <object class="sizeritem">
@@ -44,7 +44,7 @@
             </object>
             <object class="sizeritem">
                 <flag>wxLEFT|wxRIGHT|wxALIGN_RIGHT</flag>
-                <border>15</border>
+                <border>10</border>
                 <object class="wxButton" name="btnOK">
                     <label>OK</label>
                 </object>

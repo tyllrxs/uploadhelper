@@ -32,26 +32,26 @@ class UploadThread(Thread):
 	try:
 		params = { 'up' : open(filename, 'rb') }
 	except IOError:
-		self.info = '%s: %s' % ('Fail', 'Invalid File or Not Permitted to Read')
+		self.info = '%s: %s' % (MSG_FAIL, MSG_INVALID_FILE)
 	except:
-		self.info = '%s: %s' % ('Fail', 'Unknown Error')
+		self.info = '%s: %s' % (MSG_FAIL, MSG_UNKNOWN_ERROR)
 	else:
 		try:
 			the_page = opener.open(req, params).read().decode('gb18030').encode('utf8')
 		except:
-			self.info = '%s: %s' % ('Fail', 'Network Error')
+			self.info = '%s: %s' % (MSG_FAIL, MSG_NETWORK_ERROR)
 		else:
 			if the_page.find('发生错误') >= 0:
 				head, body = get_html_info(the_page)
 				self.info = '%s: %s' % (head, body)
 			else:
 				self.upOK = True
-				self.info = 'OK'
+				self.info = STATUS_UPLOADED
 				self.fileurl = get_file_url(the_page)
         wx.CallAfter(self.PostUploadInfo)
  
     def PreUploadInfo(self):
-	self.window.list.SetStringItem(self.upindex, 3, 'Uploading', 1)
+	self.window.list.SetStringItem(self.upindex, 3, STATUS_UPLOADING, 1)
  
     def PostUploadInfo(self):
 	if self.upOK:
@@ -61,6 +61,6 @@ class UploadThread(Thread):
 		self.window.list.SetStringItem(self.upindex, 3, self.info, 3)
 		self.window.list.SetItemTextColour(self.upindex, wx.RED)
 	content = self.window.postbody.GetValue()
-	self.window.postbody.SetValue(content.replace('[File %d Uploading...]' % (self.upindex + 1), self.fileurl))
+	self.window.postbody.SetValue(content.replace(MSG_FILE_UPLOADING % (self.upindex + 1), self.fileurl))
 	Publisher().sendMessage("update", '%s|' % 'Upload')
 

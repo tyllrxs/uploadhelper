@@ -25,14 +25,14 @@ class LogoutThread(Thread):
         try:		    
 		resp = urllib2.urlopen(req)
 	except urllib2.HTTPError, e:  
-		self.info = '%s|%s: %d' % ('Network Error', 'Error code', e.code)
+		self.info = '%s|%s. %s: %d' % (MSG_LOGOUT, MSG_NETWORK_ERROR, 'Error code', e.code)
 	except:
-		self.info = 'Error|Network Error.'
+		self.info = '%s|%s' % (MSG_LOGOUT, MSG_NETWORK_ERROR)
 	else:
 		the_page = resp.read().decode('gb18030').encode('utf8')
 		if the_page.find('发生错误') >= 0:
 			k, v = get_html_info(the_page)
-			self.info = '|'.join([k, v])
+			self.info = '%s|%s: %s' % (MSG_LOGOUT, k, v)
 		else:
 			self.info = 'OK'
         wx.CallAfter(self.sendInfo)

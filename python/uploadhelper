@@ -9,21 +9,17 @@ from consts import *
 from MyFrame import *
 from DlgLogin import *
 
+L = wx.Locale()
+
 class MyApp(wx.App):
 
     def OnInit(self):
+    	L.Init(wx.LANGUAGE_DEFAULT)
+        L.AddCatalogLookupPathPrefix(r'locale')
+        L.AddCatalog('messages')
 	self.mainframe = MyFrame()
-	self.mainframe.frame.Show()
 	self.SetTopWindow(self.mainframe.frame)
-	cfg1 = wx.FileConfig(APPCODENAME)
-	if cfg1.Read('/Login/UserID') and cfg1.Read('/Login/AutoLogin'):
-		pass
-	else:
-		DlgLogin().dialog.ShowModal()
-		if self.mainframe.get_user_id():
-			self.mainframe.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.mainframe.get_user_id()))
-		else:
-			self.mainframe.frame.SetTitle(APPNAME)
+	self.mainframe.frame.Show()
 	return True
 
 
