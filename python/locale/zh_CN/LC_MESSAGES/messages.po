@@ -315,3 +315,6 @@ msgstr "开始转贴"
 
 msgid "Progress"
 msgstr "目前进度"
+
+msgid "Login OK. Prepare to upload files."
+msgstr "登录成功，请准备上传文件。"

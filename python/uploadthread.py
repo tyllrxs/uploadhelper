@@ -26,7 +26,7 @@ class UploadThread(Thread):
 	wx.CallAfter(self.PreUploadInfo)
 	filename = self.window.list.GetItem(self.upindex, 1).GetText()
 	req = urllib2.Request('http://%s/bbs/upload?b=%s' % (self.host, self.board))
-	req.add_header('Cookie', self.cookie)
+	req.add_header('Cookie', self.window.get_cookie())
 	opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
 	self.upOK = False
 	try:
