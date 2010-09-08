@@ -8,6 +8,7 @@ import urllib, urllib2
 from consts import *
 from httpredirect import *
 
+cfg1 = wx.FileConfig(APPCODENAME)
 
 def get_html_info(html):
 	head = re.search(r'<title>(.*)</title>', html).group(1)
@@ -63,11 +64,7 @@ def search_files(path, expr = '.*'):
 
 def perfect_connect(window, url, post = {}, retry = False):
 	req = urllib2.Request(url, post)
-	cfg1 = wx.FileConfig(APPCODENAME)
-	if not retry:
-		req.add_header('Cookie', cfg1.Read('/Login/Cookie'))
-	else:
-		req.add_header('Cookie', cookie)
+	req.add_header('Cookie', cfg1.Read('/Login/Cookie'))
 	try:		    
 		resp = urllib2.urlopen(req)
 	except urllib2.HTTPError, e:  
