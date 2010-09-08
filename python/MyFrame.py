@@ -337,7 +337,7 @@ class MyFrame(wx.Frame):
     	html = parse_html_texts(html)
     	self.reshipinfo.AppendText(html)
     	self.reshipinfo.AppendText(SEPARATOR)
-    	self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING % r'\1', html))
+    	self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html))
     	DownloadThread(self, urls)
 
     def OnlstUpFileRClick(self, evt):
