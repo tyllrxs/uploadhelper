@@ -155,12 +155,15 @@ class MyFrame(wx.Frame):
     def get_user_id(self):
 	return cfg1.Read('/Login/UserID')
 	
+    def get_auto_login(self):
+	return cfg1.Read('/Login/AutoLogin')
+	
     def get_dialog_path(self):
 	return cfg1.Read('/Upload/DefaultPath')
 	
     def OnCreate(self, evt):
     	self.frame.Unbind(wx.EVT_WINDOW_CREATE)
-	if not (self.get_user_id() and cfg1.Read('/Login/AutoLogin')):
+	if not (self.get_user_id() and self.get_auto_login()):
 		dialog = DlgLogin()
 		dialog.dialog.ShowModal()
 		dialog.dialog.Destroy()
@@ -169,8 +172,6 @@ class MyFrame(wx.Frame):
 		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.get_user_id()))
 	else:
 		self.frame.SetTitle(APPNAME)
-	evt.Skip()
-	return True
 
     def OnmnuSwitchClick(self, evt):
 	dialog = DlgLogin()
@@ -243,6 +244,9 @@ class MyFrame(wx.Frame):
     		self.list.DeleteAllItems()
     		self.UploadedMode = False
 	for f in filenames:
+		if os.path.isdir(f):
+			self.append_upload_files(search_files(f, r'\.(jpe?g|gif|png|pdf)$'))
+			continue
 		index = self.list.InsertStringItem(sys.maxint, '%s' % (self.list.GetItemCount() + 1))
 		self.list.SetStringItem(index, 1, f)
 		try:
@@ -259,10 +263,10 @@ class MyFrame(wx.Frame):
 		elif fz > 1024:
 			self.list.SetStringItem(index, 3, _('Too Large'), 0)
 			self.list.SetItemTextColour(index, wx.BLUE)
-	self.progress.SetLabel(_('%d File(s) Selected') % self.list.GetItemCount())
+	self.progress.SetLabel(_('%d File(s) Selected') % self.list.GetItemCount())    	
 
     def OnbtnUploadClick(self, evt):
-	self.progress.SetLabel('Progress: %d / %d' % (0, self.list.GetItemCount()))
+	self.progress.SetLabel('%s: %d / %d' % (_('Progress'), 0, self.list.GetItemCount()))
 	self.progressnum.SetValue(0)
 	if self.list.GetItemCount() <= 0:
 		wx.MessageBox(_('Select at least one file for uploading.'))
@@ -358,9 +362,10 @@ class MyFrame(wx.Frame):
 	if k == 0:
 		self.OnbtnBrowseClick(wx.CommandEvent())
 	elif k == 1:
-		dialog = wx.DirDialog(None, _('Choose a directory'), style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
+		dialog = wx.DirDialog(None, _('Choose a directory'), style=wx.DD_DEFAULT_STYLE)
 	    	if dialog.ShowModal() == wx.ID_OK:
-			print dialog.GetPath()
+			files = search_files(dialog.GetPath(), r'\.(jpe?g|gif|png|pdf)$')
+			self.append_upload_files(files)
 	    	dialog.Destroy()
 	elif k == 3:
 		while self.list.GetSelectedItemCount() > 0:
@@ -404,7 +409,6 @@ class MyFrame(wx.Frame):
 		if t.find('No User') >= 0:
 			evt = wx.CommandEvent()
 			self.OnmnuSwitchClick(evt)
-			self.OnbtnUploadClick(evt)
 		elif t.split('|')[1] == '':
 			self.start_upload_threads()
 		else:

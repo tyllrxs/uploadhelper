@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import re
 import wx
 import urllib, urllib2
@@ -44,10 +45,29 @@ def get_file_type(fname):
 	else:
 		return ext
 
+def search_files(path, expr = '.*'):
+	files = os.listdir(path)
+	r = re.compile(expr, re.I)
+	newfiles = []
+	for f in files:
+		fn = os.path.join(path, f)
+		if r.search(fn) and os.path.isfile(fn):
+        		newfiles.append(fn)
+#        for root, dirs, files in os.walk(path):  
+#		for f in files:  
+#			fn = os.path.join(root, f)
+#			if r.search(fn):
+#        			newfiles.append(fn)
+	return newfiles
+
+
 def perfect_connect(window, url, post = {}, retry = False):
 	req = urllib2.Request(url, post)
 	cfg1 = wx.FileConfig(APPCODENAME)
-	req.add_header('Cookie', cfg1.Read('/Login/Cookie'))
+	if not retry:
+		req.add_header('Cookie', cfg1.Read('/Login/Cookie'))
+	else:
+		req.add_header('Cookie', cookie)
 	try:		    
 		resp = urllib2.urlopen(req)
 	except urllib2.HTTPError, e:  

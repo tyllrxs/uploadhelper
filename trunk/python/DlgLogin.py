@@ -8,11 +8,12 @@ from consts import *
 from httpredirect import *
 from utilfunc import *
 
+cfg1 = wx.FileConfig(APPCODENAME)
+
 class DlgLogin(wx.Dialog):
     def __init__(self):
         self.res = xrc.XmlResource('ui/dlgLogin.xrc')
 	self.dialog = self.res.LoadDialog(None, 'dlgLogin')
-	cfg1 = wx.FileConfig(APPCODENAME)
 	self.host = xrc.XRCCTRL(self.dialog, 'cmbHost')
 	for item in BBS_HOSTS:
 		self.host.Append(item)
@@ -53,13 +54,12 @@ class DlgLogin(wx.Dialog):
 			return
 		else:
 			cookie = ';'.join(resp.headers['set-cookie'].split(','))
-			cfg1 = wx.FileConfig(APPCODENAME)
 			cfg1.Write('/Login/UserID', userid)
 			cfg1.Write('/Login/Password', pwd)
 			cfg1.Write('/Login/Cookie', cookie)
 			cfg1.WriteInt('/Login/Host', host)
 			cfg1.WriteInt('/Login/AutoLogin', autologin)
-			wx.MessageBox('Login OK. Prepare to upload files.')
+			wx.MessageBox(_('Login OK. Prepare to upload files.'))
 			self.dialog.Close()
 
     def OnClose(self, evt):
