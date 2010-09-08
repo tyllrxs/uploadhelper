@@ -35,14 +35,11 @@ STATUS_UPLOADING = _('Uploading')
 STATUS_UPLOADED = _('Finished')
 
 import sys, os, glib
-CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), 'uploadhelper')
+CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), APPCODENAME)
 
 if not os.path.exists(CONFIG_ROOT):
     os.makedirs(CONFIG_ROOT)
 
-try:
-    LANG = os.getenv('LANG').split('.')[0].lower().replace('_','-')
-except:
-    LANG = 'en-us'
+CONFIG_FILE = '%s/user.conf' % CONFIG_ROOT
 
 STATUSBAR_INFO = [_('Contact tyllr (at) RYGH BBS for help or advice')]

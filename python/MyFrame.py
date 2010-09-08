@@ -18,8 +18,6 @@ from checkupdatethread import *
 from downloadthread import *
 from parsehtml import *
 
-cfg1 = wx.FileConfig(APPCODENAME)
-
 class MyFileDropTarget(wx.FileDropTarget):
 
     def __init__(self, window):
@@ -36,20 +34,20 @@ class MyFrame(wx.Frame):
 	self.frame = self.res.LoadFrame(None, 'frmMain')
 	# load UI settings from config file
 	self.notebook = xrc.XRCCTRL(self.frame, 'notebook')
-	self.notebook.SetSelection(cfg1.ReadInt('/Upload/ActivePage', 0))
+	self.notebook.SetSelection(read_config_int('Upload', 'ActivePage', 0))
         self.zone = xrc.XRCCTRL(self.frame, 'cmbZone')
 	self.postzone = xrc.XRCCTRL(self.frame, 'cmbPostZone')
         self.board = xrc.XRCCTRL(self.frame, 'cmbBoard')
 	self.postboard = xrc.XRCCTRL(self.frame, 'cmbPostBoard')
 	self.read_zones()
-	self.zone.SetSelection(cfg1.ReadInt('/Upload/UpZone', 4))
-	self.postzone.SetSelection(cfg1.ReadInt('/Upload/PostZone', 4))
+	self.zone.SetSelection(read_config_int('Upload', 'UpZone', 4))
+	self.postzone.SetSelection(read_config_int('Upload', 'PostZone', 4))
 	self.read_boards()
-	self.board.SetSelection(cfg1.ReadInt('/Upload/UpBoard', 16))
+	self.board.SetSelection(read_config_int('Upload', 'UpBoard', 16))
 	self.read_postboards()
-	self.postboard.SetSelection(cfg1.ReadInt('/Upload/PostBoard', 16))
+	self.postboard.SetSelection(read_config_int('Upload', 'PostBoard', 16))
 	self.lock = xrc.XRCCTRL(self.frame, 'chkLock')
-	self.lock.SetValue(cfg1.ReadInt('/Upload/UpBoardLock', 0))
+	self.lock.SetValue(read_config_bool('Upload', 'UpBoardLock'))
 	il = wx.ImageList(16,16, True)
 	for name in glob.glob('icon/indicator/*.png'):
 		bmp = wx.Bitmap(name, wx.BITMAP_TYPE_PNG)
@@ -70,7 +68,7 @@ class MyFrame(wx.Frame):
 	self.uploadbutton = xrc.XRCCTRL(self.frame, 'btnUpload')
 	self.posttitle = xrc.XRCCTRL(self.frame, 'txtTitle')
 	self.signature = xrc.XRCCTRL(self.frame, 'txtSignature')
-	self.signature.SetValue(cfg1.ReadInt('/Upload/PostSignature', 1))
+	self.signature.SetValue(read_config_int('Upload', 'PostSignature', 1))
 	self.postbody = xrc.XRCCTRL(self.frame, 'txtBody')
 	self.postbutton = xrc.XRCCTRL(self.frame, 'btnPost')
 	self.reshipinfo = xrc.XRCCTRL(self.frame, 'txtReship')
@@ -147,19 +145,19 @@ class MyFrame(wx.Frame):
 	return re.compile('\[(\d+)\]').search(board).group(1)
 
     def get_cookie(self):
-	return cfg1.Read('/Login/Cookie')
+	return read_config('Login', 'Cookie')
 
     def get_host(self):
-	return BBS_HOSTS[cfg1.ReadInt('/Login/Host', 0)]
+	return BBS_HOSTS[read_config_int('Login', 'Host', 0)]
 
     def get_user_id(self):
-	return cfg1.Read('/Login/UserID')
+	return read_config('Login', 'UserID')
 	
     def get_auto_login(self):
-	return cfg1.Read('/Login/AutoLogin')
+	return read_config('Login', 'AutoLogin')
 	
     def get_dialog_path(self):
-	return cfg1.Read('/Upload/DefaultPath')
+	return read_config('Upload', 'DefaultPath')
 	
     def OnCreate(self, evt):
     	self.frame.Unbind(wx.EVT_WINDOW_CREATE)
@@ -236,7 +234,7 @@ class MyFrame(wx.Frame):
 	dialog = wx.FileDialog(None, _('Select Files to Upload'), self.get_dialog_path(), '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.append_upload_files(dialog.GetPaths())
-		cfg1.Write('/Upload/DefaultPath', os.path.abspath(os.path.dirname(dialog.GetPaths()[0])))
+		write_config('Upload', {'DefaultPath': os.path.abspath(os.path.dirname(dialog.GetPaths()[0]))})
 	dialog.Destroy()
 	
     def append_upload_files(self, filenames):
@@ -389,13 +387,13 @@ class MyFrame(wx.Frame):
 	self.progress.SetLabel(MSG_FILE_SELECTED % self.list.GetItemCount())
 
     def OnClose(self, evt):
-	cfg1.WriteInt('/Upload/UpZone', self.zone.GetSelection())
-	cfg1.WriteInt('/Upload/UpBoard', self.board.GetSelection())
-	cfg1.WriteInt('/Upload/UpBoardLock', self.lock.IsChecked())
-	cfg1.WriteInt('/Upload/PostSignature', self.signature.GetValue())
-	cfg1.WriteInt('/Upload/PostZone', self.postzone.GetSelection())
-	cfg1.WriteInt('/Upload/PostBoard', self.postboard.GetSelection())
-	cfg1.WriteInt('/Upload/ActivePage', self.notebook.GetSelection())
+	write_config('Upload', {'UpZone': self.zone.GetSelection(), \
+		'UpBoard', self.board.GetSelection(), \
+		'UpBoardLock', self.lock.IsChecked(), \
+		'PostSignature', self.signature.GetValue(), \
+		'PostZone', self.postzone.GetSelection(), \
+		'PostBoard', self.postboard.GetSelection(), \
+		'ActivePage', self.notebook.GetSelection()})
 	self.frame.Destroy()
 
     #----------------------------------------------------------------------
@@ -409,6 +407,7 @@ class MyFrame(wx.Frame):
 		if t.find('No User') >= 0:
 			evt = wx.CommandEvent()
 			self.OnmnuSwitchClick(evt)
+			self.uploadbutton.Enable()
 		elif t.split('|')[1] == '':
 			self.start_upload_threads()
 		else:
@@ -448,8 +447,7 @@ class MyFrame(wx.Frame):
 	elif t.startswith('Logout|'):
 		if t.split('|')[1] == 'OK':
 			wx.MessageBox(_('User "%s" has logged out.') % self.get_user_id())
-			if cfg1.HasGroup('Login'):
-				cfg1.DeleteGroup('Login')
+			remove_config('Login')
 			self.frame.SetTitle(APPNAME)
 		else:
 			tips = t.split('|')

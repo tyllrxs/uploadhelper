@@ -25,7 +25,7 @@ class LogoutThread(Thread):
         try:		    
 		resp = urllib2.urlopen(req)
 	except urllib2.HTTPError, e:  
-		self.info = '%s|%s. %s: %d' % (MSG_LOGOUT, MSG_NETWORK_ERROR, 'Error code', e.code)
+		self.info = '%s|%s. %s: %d' % (MSG_LOGOUT, MSG_NETWORK_ERROR, MSG_ERROR_CODE, e.code)
 	except:
 		self.info = '%s|%s' % (MSG_LOGOUT, MSG_NETWORK_ERROR)
 	else:
