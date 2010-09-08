@@ -4,11 +4,10 @@ import os
 import re
 import wx
 import urllib, urllib2
-
+import ConfigParser
 from consts import *
 from httpredirect import *
 
-cfg1 = wx.FileConfig(APPCODENAME)
 
 def get_html_info(html):
 	head = re.search(r'<title>(.*)</title>', html).group(1)
@@ -61,17 +60,64 @@ def search_files(path, expr = '.*'):
 #        			newfiles.append(fn)
 	return newfiles
 
+def read_config(section, option, default = ''):
+	cf = ConfigParser.ConfigParser()
+	try:
+		cf.read(CONFIG_FILE)
+		value = cf.get(section, option)
+	except:
+		return default
+	else:
+		return value
 
-def perfect_connect(window, url, post = {}, retry = False):
+def read_config_int(section, option, default = 0):
+	cf = ConfigParser.ConfigParser()
+	try:
+		cf.read(CONFIG_FILE)
+		value = cf.getint(section, option)
+	except:
+		return default
+	else:
+		return value
+		
+def read_config_bool(section, option, default = False):
+	cf = ConfigParser.ConfigParser()
+	try:
+		cf.read(CONFIG_FILE)
+		value = cf.getboolean(section, option)
+	except:
+		return default
+	else:
+		return value
+
+def write_config(section, dic):
+	cf = ConfigParser.ConfigParser()
+	if not cf.has_section(section):
+		cf.add_section(section)
+	for k, v in dic.items():
+		cf.set(section, k, v)
+	cf.write(open(CONFIG_FILE, 'w'))
+
+def remove_config(section, option = ''):
+	cf = ConfigParser.ConfigParser()
+	try:
+		if option:
+			cf.remove_option(section, option)
+		else:
+			cf.remove_section(section)
+	except:
+		pass
+
+def perfect_connect(url, post = {}, retry = False):
 	req = urllib2.Request(url, post)
-	req.add_header('Cookie', cfg1.Read('/Login/Cookie'))
+	req.add_header('Cookie', read_config('Login', 'Cookie'))
 	try:		    
 		resp = urllib2.urlopen(req)
 	except urllib2.HTTPError, e:  
-		info = '%s|%s: %d' % ('Network Error', 'Error code', e.code)
+		info = '%s|%s: %d' % (MSG_NETWORK_ERROR, MSG_ERROR_CODE, e.code)
 		return info
 	except:
-		info = 'Error|Network Error.'
+		info = '%s|%s' % (MSG_ERROR, MSG_NETWORK_ERROR)
 		return info
 	else:
 		the_page = resp.read().decode('gb18030').encode('utf8')
@@ -81,9 +127,9 @@ def perfect_connect(window, url, post = {}, retry = False):
 			if retry or the_page.find('登录') < 0:
 				return info
 			else:
-				host = cfg1.ReadInt('/Login/Host', 0)
-				userid = cfg1.Read('/Login/UserID')
-				pwd = cfg1.Read('/Login/Password')
+				host = read_config_int('Login', 'Host', 0)
+				userid = read_config('Login', 'UserID')
+				pwd = read_config('Login', 'Password')
 				if userid and pwd:
 					opener = urllib2.build_opener(SmartRedirectHandler())  
 					urllib2.install_opener(opener)  
@@ -91,10 +137,10 @@ def perfect_connect(window, url, post = {}, retry = False):
 					try:
 						resp2 = urllib2.urlopen(req2)  
 					except urllib2.HTTPError, e:  
-						info = '%s|%s: %d' % ('Network Error', 'Error code', e.code)
+						info = '%s|%s: %d' % (MSG_NETWORK_ERROR, MSG_ERROR_CODE, e.code)
 						return info
 					except:
-						info = 'Error|Network Error.'
+						info = '%s|%s' % (MSG_ERROR, MSG_NETWORK_ERROR)
 						return info
 					else:
 						if resp2.code != 302:			
@@ -104,8 +150,8 @@ def perfect_connect(window, url, post = {}, retry = False):
 							return info
 						else:
 							cookie = ';'.join(resp2.headers['set-cookie'].split(','))
-							cfg1.Write('/Login/Cookie', cookie)
-							return perfect_connect(window, url, post, True)
+							write_config('Login', {'Cookie': cookie})
+							return perfect_connect(url, post, True)
 				else:
 					return 'No User'
 		else:
