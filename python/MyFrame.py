@@ -169,7 +169,7 @@ class MyFrame(wx.Frame):
 		dialog.dialog.Destroy()
 	self.frame.SetSize(wx.Size(600,600))
 	if self.get_user_id():
-		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.get_user_id()))
+		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, _('User'), self.get_user_id()))
 	else:
 		self.frame.SetTitle(APPNAME)
 
