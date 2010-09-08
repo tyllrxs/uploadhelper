@@ -20,10 +20,19 @@ DATA_DIR = '/usr/share/uploadhelper/'
 FILE_BOARDS = 'data/boards.xml' 
 
 # Some common messages
+MSG_ERROR = _('Error')
+MSG_FAIL = _('Fail')
 MSG_ERROR_CODE = _('Error code')
 MSG_NETWORK_ERROR = _('Network Error')
 MSG_FILL_BLANKS = _('Fill the blanks first.')
 MSG_FILE_SELECTED = _('%d File(s) Selected')
+MSG_UNKNOWN_ERROR = _('Unknown Error')
+MSG_INVALID_FILE = _('Invalid File or Not Permitted to Read')
+MSG_CHECK_UPDATE = _('Check for Updates')
+MSG_FILE_UPLOADING = _('[File %d Uploading...]')
+MSG_LOGOUT = _('Logout')
+STATUS_UPLOADING = _('Uploading')
+STATUS_UPLOADED = _('Finished')
 
 import sys, os, glib
 CONFIG_ROOT = os.path.join(glib.get_user_config_dir(), 'uploadhelper')

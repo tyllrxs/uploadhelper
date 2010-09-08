@@ -18,6 +18,7 @@ from checkupdatethread import *
 from downloadthread import *
 from parsehtml import *
 
+cfg1 = wx.FileConfig(APPCODENAME)
 
 class MyFileDropTarget(wx.FileDropTarget):
 
@@ -34,12 +35,6 @@ class MyFrame(wx.Frame):
         self.res = xrc.XmlResource('ui/frmMain.xrc')
 	self.frame = self.res.LoadFrame(None, 'frmMain')
 	# load UI settings from config file
-	cfg1 = wx.FileConfig(APPCODENAME)
-	if self.get_user_id():
-		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.get_user_id()))
-	else:
-		self.frame.SetTitle(APPNAME)
-	self.frame.SetSize(wx.Size(600,600))
 	self.notebook = xrc.XRCCTRL(self.frame, 'notebook')
 	self.notebook.SetSelection(cfg1.ReadInt('/Upload/ActivePage', 0))
         self.zone = xrc.XRCCTRL(self.frame, 'cmbZone')
@@ -61,7 +56,7 @@ class MyFrame(wx.Frame):
 		il_max = il.Add(bmp)
 	self.list = xrc.XRCCTRL(self.frame, 'lstUpFile')
 	self.list.AssignImageList(il, wx.IMAGE_LIST_SMALL)
-	for col, text in enumerate(['No.', 'Filename', 'Size (KB)', 'Status']):
+	for col, text in enumerate(['No.', _('Filename'), '%s (KB)' % _('Size'), _('Status')]):
 		if col == 0 or col == 2:
 			self.list.InsertColumn(col, text, wx.LIST_FORMAT_CENTER)
 		else:
@@ -86,6 +81,7 @@ class MyFrame(wx.Frame):
 	self.UploadedMode = False
 	self.ReshipMode = False
 	# bind events to UI controls
+	self.frame.Bind(wx.EVT_WINDOW_CREATE, self.OnCreate)
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuSwitchClick, id=xrc.XRCID('mnuSwitch'))
 	self.frame.Bind(wx.EVT_TOOL, self.OnmnuSwitchClick, id=xrc.XRCID('tlbSwitch'))
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuLogoutClick, id=xrc.XRCID('mnuLogout'))
@@ -151,20 +147,30 @@ class MyFrame(wx.Frame):
 	return re.compile('\[(\d+)\]').search(board).group(1)
 
     def get_cookie(self):
-	cfg1 = wx.FileConfig(APPCODENAME)
 	return cfg1.Read('/Login/Cookie')
 
     def get_host(self):
-	cfg1 = wx.FileConfig(APPCODENAME)
 	return BBS_HOSTS[cfg1.ReadInt('/Login/Host', 0)]
 
     def get_user_id(self):
-	cfg1 = wx.FileConfig(APPCODENAME)
 	return cfg1.Read('/Login/UserID')
 	
     def get_dialog_path(self):
-	cfg1 = wx.FileConfig(APPCODENAME)
 	return cfg1.Read('/Upload/DefaultPath')
+	
+    def OnCreate(self, evt):
+    	self.frame.Unbind(wx.EVT_WINDOW_CREATE)
+	if not (self.get_user_id() and cfg1.Read('/Login/AutoLogin')):
+		dialog = DlgLogin()
+		dialog.dialog.ShowModal()
+		dialog.dialog.Destroy()
+	self.frame.SetSize(wx.Size(600,600))
+	if self.get_user_id():
+		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, 'User', self.get_user_id()))
+	else:
+		self.frame.SetTitle(APPNAME)
+	evt.Skip()
+	return True
 
     def OnmnuSwitchClick(self, evt):
 	dialog = DlgLogin()
@@ -229,7 +235,6 @@ class MyFrame(wx.Frame):
 	dialog = wx.FileDialog(None, _('Select Files to Upload'), self.get_dialog_path(), '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.append_upload_files(dialog.GetPaths())
-		cfg1 = wx.FileConfig(APPCODENAME)
 		cfg1.Write('/Upload/DefaultPath', os.path.abspath(os.path.dirname(dialog.GetPaths()[0])))
 	dialog.Destroy()
 	
@@ -273,7 +278,7 @@ class MyFrame(wx.Frame):
 	self.finishcount = 0
 	if not self.ReshipMode:
 		for i in xrange(self.list.GetItemCount()):
-			self.postbody.SetValue(self.postbody.GetValue() + '\n%s\n' % '[File %d Uploading...]' % (i + 1))
+			self.postbody.SetValue(self.postbody.GetValue() + '\n%s\n' % MSG_FILE_UPLOADING % (i + 1))
 	for i in range(0, 3):
 		if i < self.list.GetItemCount():
 			self.upcount += 1
@@ -291,9 +296,7 @@ class MyFrame(wx.Frame):
 		wx.MessageBox(MSG_FILL_BLANKS)
 		return
 	self.postbutton.Disable()
-	cfg1 = wx.FileConfig(APPCODENAME)
-	self.host = cfg1.ReadInt('/Login/Host', 0)
-	info = perfect_connect(self, 'http://%s/bbs/snd?bid=%s' % (BBS_HOSTS[self.host], self.get_board_id(True)),
+	info = perfect_connect(self, 'http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
 		urllib.urlencode({'title': self.posttitle.GetValue().encode('gb18030'), 
 				'signature': self.signature.GetValue(),
 				'text': self.postbody.GetValue().encode('gb18030')}))
@@ -324,7 +327,7 @@ class MyFrame(wx.Frame):
     			wx.MessageBox('Unknown Format')
     			return
     	if html.strip() == '':
-    		self.reshipinfo.SetValue('( No webpage content is ready to reship, check if it has been copied correctly. )')
+    		self.reshipinfo.SetValue(_('(No webpage content is ready to reship, check if it has been copied correctly.)'))
     		return
     	self.reshipinfo.SetValue(prettify_html(html))
     	self.reshipinfo.AppendText(SEPARATOR)
@@ -332,7 +335,7 @@ class MyFrame(wx.Frame):
     	html = parse_html_texts(html)
     	self.reshipinfo.AppendText(html)
     	self.reshipinfo.AppendText(SEPARATOR)
-    	self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % r'[File \1 Uploading...]', html))
+    	self.postbody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING % r'\1', html))
     	DownloadThread(self, urls)
 
     def OnlstUpFileRClick(self, evt):
@@ -355,7 +358,7 @@ class MyFrame(wx.Frame):
 	if k == 0:
 		self.OnbtnBrowseClick(wx.CommandEvent())
 	elif k == 1:
-		dialog = wx.DirDialog(None, "Choose a directory:", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
+		dialog = wx.DirDialog(None, _('Choose a directory'), style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
 	    	if dialog.ShowModal() == wx.ID_OK:
 			print dialog.GetPath()
 	    	dialog.Destroy()
@@ -378,10 +381,9 @@ class MyFrame(wx.Frame):
 	elif k == 7:
 		self.list.DeleteAllItems()
 	self.list_re_number()
-	self.progress.SetLabel('%d File(s) Selected' % self.list.GetItemCount())
+	self.progress.SetLabel(MSG_FILE_SELECTED % self.list.GetItemCount())
 
     def OnClose(self, evt):
-	cfg1 = wx.FileConfig(APPCODENAME)
 	cfg1.WriteInt('/Upload/UpZone', self.zone.GetSelection())
 	cfg1.WriteInt('/Upload/UpBoard', self.board.GetSelection())
 	cfg1.WriteInt('/Upload/UpBoardLock', self.lock.IsChecked())
@@ -411,7 +413,7 @@ class MyFrame(wx.Frame):
 			self.uploadbutton.Enable()
 	elif t.startswith('Upload|'):
 		self.finishcount += 1
-		self.progress.SetLabel('Progress: %d / %d' % (self.finishcount, self.list.GetItemCount()))
+		self.progress.SetLabel('%s: %d / %d' % (_('Progress'), self.finishcount, self.list.GetItemCount()))
 		self.progressnum.SetValue(self.finishcount * 100 / self.list.GetItemCount())
 		if self.finishcount >= self.list.ItemCount:
 			self.notebook.SetSelection(1)
@@ -432,17 +434,16 @@ class MyFrame(wx.Frame):
 	    	self.OnbtnUploadClick(evt)
 	elif t.startswith('Update|'):
 		if t.split('|')[1] == '':
-			wx.MessageBox('Failed to check for updates. Please try again later.', 'Check for Updates')
+			wx.MessageBox(_('Failed to check for updates, try again later.'), MSG_CHECK_UPDATE)
 		else:
 			if VERSION < '%s' % t.split('|')[1]:
-				if wx.YES == wx.MessageBox('A new version %s is available!\nWould you like to update now?' % t, 'Check for Updates', wx.YES_NO):
+				if wx.YES == wx.MessageBox(_('A new version %s is available!\nWould you like to update now?') % t, MSG_CHECK_UPDATE, wx.YES_NO):
 					wx.LaunchDefaultBrowser(HOMEPAGE)
 			else:
-				wx.MessageBox('You are using the latest version.', 'Check for Updates')
+				wx.MessageBox(_('You are using the latest version.'), MSG_CHECK_UPDATE)
 	elif t.startswith('Logout|'):
 		if t.split('|')[1] == 'OK':
-			wx.MessageBox('User "%s" has logged out.' % self.get_user_id())
-			cfg1 = wx.FileConfig(APPCODENAME)
+			wx.MessageBox(_('User "%s" has logged out.') % self.get_user_id())
 			if cfg1.HasGroup('Login'):
 				cfg1.DeleteGroup('Login')
 			self.frame.SetTitle(APPNAME)
