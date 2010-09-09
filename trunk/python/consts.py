@@ -42,5 +42,5 @@ if not os.path.exists(CONFIG_ROOT):
     os.makedirs(CONFIG_ROOT)
 
 CONFIG_FILE = '%s/user.conf' % CONFIG_ROOT
-print CONFIG_FILE
+
 STATUSBAR_INFO = [_('Contact tyllr (at) RYGH BBS for help or advice')]
