@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import os
+import os, sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import re
 import wx
 import urllib, urllib2
 import ConfigParser
 from consts import *
 from httpredirect import *
-
 
 def get_html_info(html):
 	head = re.search(r'<title>(.*)</title>', html).group(1)
