@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import gettext
-gettext.install('messages', 'locale', unicode = True)
-gettext.translation('messages', 'locale').install(True)
+try:
+	gettext.install('messages', 'locale', unicode = True)
+	gettext.translation('messages', 'locale').install(True)
+except:
+	pass
 
 APPNAME = _('UploadHelper')
 APPCODENAME = 'uploadhelper'
