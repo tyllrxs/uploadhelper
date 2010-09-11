@@ -3,6 +3,7 @@
   <object class="wxDialog" name="dlgLogin">
     <style>wxDEFAULT_DIALOG_STYLE</style>
     <title>Login</title>
+    <centered>1</centered>
     <object class="wxBoxSizer">
       <orient>wxVERTICAL</orient>
       <object class="sizeritem">
@@ -96,7 +97,7 @@
           <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
             <object class="wxHyperlinkCtrl" name="lnkHelp">
-              <label>How to Use?</label>
+              <label>How to Use</label>
               <url>http://homepage.fudan.edu.cn/~tyllr/uh/faq.htm</url>
             </object>
             <flag>wxALL|wxALIGN_CENTRE_VERTICAL|wxALIGN_CENTRE_HORIZONTAL</flag>

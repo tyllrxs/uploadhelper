@@ -218,7 +218,7 @@ msgstr "BBS 主机"
 msgid "Password"
 msgstr "密码"
 
-msgid "How to Use?"
+msgid "How to Use"
 msgstr "还不会使用?"
 
 msgid "Auto Login"

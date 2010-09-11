@@ -33,6 +33,14 @@ class MyFrame(wx.Frame):
         self.res = xrc.XmlResource('ui/frmMain.xrc')
 	self.frame = self.res.LoadFrame(None, 'frmMain')
 	# load UI settings from config file
+	self.menubar = self.res.LoadMenuBar('menubar1')
+	self.menubar.SetAutoWindowMenu(False)
+	self.menubar.FindItemById(xrc.XRCID('mnuAbout')).SetId(wx.ID_ABOUT)
+	self.frame.SetMenuBar(self.menubar)
+	self.toolbar = self.res.LoadToolBar(self.frame, 'toolbar1')
+	self.frame.SetToolBar(self.toolbar)
+	self.frame.SetSize(wx.Size(600, 600))
+	self.frame.CenterOnScreen()
 	self.notebook = xrc.XRCCTRL(self.frame, 'notebook')
 	self.notebook.SetSelection(read_config_int('Upload', 'ActivePage', 0))
         self.zone = xrc.XRCCTRL(self.frame, 'cmbZone')
@@ -90,7 +98,7 @@ class MyFrame(wx.Frame):
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuHomepageClick, id=xrc.XRCID('mnuHomepage'))
 	self.frame.Bind(wx.EVT_TOOL, self.OnmnuHomepageClick, id=xrc.XRCID('tlbHomepage'))
 	self.frame.Bind(wx.EVT_MENU, self.OnmnuCheckUpdateClick, id=xrc.XRCID('mnuCheckUpdate'))
-	self.frame.Bind(wx.EVT_MENU, self.OnmnuAboutClick, id=xrc.XRCID('mnuAbout'))
+	self.frame.Bind(wx.EVT_MENU, self.OnmnuAboutClick, id=wx.ID_ABOUT)
         self.frame.Bind(wx.EVT_COMBOBOX, self.OnZoneChange, id=xrc.XRCID('cmbZone'))
 	self.frame.Bind(wx.EVT_COMBOBOX, self.OnBoardChange, id=xrc.XRCID('cmbBoard'))
 	self.frame.Bind(wx.EVT_COMBOBOX, self.OnPostZoneChange, id=xrc.XRCID('cmbPostZone'))
@@ -165,7 +173,6 @@ class MyFrame(wx.Frame):
 		dialog = DlgLogin()
 		dialog.dialog.ShowModal()
 		dialog.dialog.Destroy()
-	self.frame.SetSize(wx.Size(600,600))
 	if self.get_user_id():
 		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, _('User'), self.get_user_id()))
 	else:
@@ -226,7 +233,13 @@ class MyFrame(wx.Frame):
 	self.board.Enabled = not self.lock.IsChecked()
 
     def OnbtnBrowseClick(self, evt):
-	wildcard = '%s (*.jpg;*.gif;*.png;*.pdf)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg];*.[Pp][Dd][Ff]|'\
+	wildcard = '%s (*.jpg;*.gif;*.png;*.pdf)|*.jpg;*.gif;*.png;*.pdf|'\
+		'%s (*.jpg;*.gif;*.png)|*.jpg;*.gif;*.png|'\
+		'%s (*.pdf)|*.pdf|'\
+		'%s (*)|*' \
+		% (_('All Supported Files'), _('Image Files'), _('PDF Documents'), _('All Files'))
+	if sys.platform[:5] == 'linux':
+		wildcard = '%s (*.jpg;*.gif;*.png;*.pdf)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg];*.[Pp][Dd][Ff]|'\
 		'%s (*.jpg;*.gif;*.png)|*.[Jj][Pp][Gg];*.[Gg][Ii][Ff];*.[Pp][Nn][Gg]|'\
 		'%s (*.pdf)|*.[Pp][Dd][Ff]|'\
 		'%s (*)|*' \

@@ -18,8 +18,8 @@ class MyApp(wx.App):
         L.AddCatalogLookupPathPrefix(r'locale')
         L.AddCatalog('messages')
 	self.mainframe = MyFrame()
-	self.SetTopWindow(self.mainframe.frame)
 	self.mainframe.frame.Show()
+	self.SetTopWindow(self.mainframe.frame)
 	return True
 
 
