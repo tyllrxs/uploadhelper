@@ -38,7 +38,7 @@ MSG_LOGOUT = _('Logout')
 STATUS_UPLOADING = _('Uploading')
 STATUS_UPLOADED = _('Finished')
 
-import sys, os, glib
+import sys, os
 CONFIG_ROOT = os.path.join(os.getenv('HOME'), '.config/%s' % APPCODENAME)
 
 if not os.path.exists(CONFIG_ROOT):
