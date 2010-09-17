@@ -57,8 +57,8 @@ class MyFrame(wx.Frame):
 	self.lock = xrc.XRCCTRL(self.frame, 'chkLock')
 	self.lock.SetValue(read_config_bool('Upload', 'UpBoardLock'))
 	il = wx.ImageList(16,16, True)
-	for name in glob.glob('icon/indicator/*.png'):
-		bmp = wx.Bitmap(name, wx.BITMAP_TYPE_PNG)
+	for name in ['alarm', 'process', 'ok', 'error']:
+		bmp = wx.Bitmap('icon/indicator/%s.png' % name, wx.BITMAP_TYPE_PNG)
 		il_max = il.Add(bmp)
 	self.list = xrc.XRCCTRL(self.frame, 'lstUpFile')
 	self.list.AssignImageList(il, wx.IMAGE_LIST_SMALL)
