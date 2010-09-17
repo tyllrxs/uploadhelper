@@ -43,6 +43,9 @@ class MyFrame(wx.Frame):
 	self.frame.CenterOnScreen()
 	self.notebook = xrc.XRCCTRL(self.frame, 'notebook')
 	self.notebook.SetSelection(read_config_int('Upload', 'ActivePage', 0))
+	if sys.platform == 'darwin':
+		for page in xrange(self.notebook.GetPageCount()):
+			self.notebook.SetPageImage(page, -1)
         self.zone = xrc.XRCCTRL(self.frame, 'cmbZone')
 	self.postzone = xrc.XRCCTRL(self.frame, 'cmbPostZone')
         self.board = xrc.XRCCTRL(self.frame, 'cmbBoard')
