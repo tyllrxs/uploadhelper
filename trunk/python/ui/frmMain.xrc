@@ -84,8 +84,8 @@
   </object>
   <object class="wxFrame" name="frmMain">
     <object class="wxStatusBar" name="stsBar">
-      <fields>1</fields>
-      <widths>-1</widths>
+      <fields>2</fields>
+      <widths>-1, -2</widths>
     </object>
     <object class="wxBoxSizer">
       <orient>wxVERTICAL</orient>
@@ -114,8 +114,7 @@
                       <object class="wxComboBox" name="cmbZone">
                         <style>wxCB_READONLY</style>
                         <selection>-1</selection>
-                        <content>
-                                            </content>
+                        <content></content>
                       </object>
                     </object>
                     <object class="sizeritem">
@@ -125,8 +124,7 @@
                       <object class="wxComboBox" name="cmbBoard">
                         <style>wxCB_READONLY</style>
                         <selection>-1</selection>
-                        <content>
-                                            </content>
+                        <content></content>
                       </object>
                     </object>
                     <object class="sizeritem">

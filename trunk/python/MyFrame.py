@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, sys, glob
+import os, sys
 import re
 from xml.dom import minidom
 import wx
@@ -73,7 +73,9 @@ class MyFrame(wx.Frame):
 	self.list.SetColumnWidth(0, 40)
 	self.list.SetColumnWidth(1, 320)
 	self.list.SetColumnWidth(2, 80)
-	self.list.SetColumnWidth(3, 100)
+	self.list.SetColumnWidth(3, 130)
+	if sys.platform.startswith('win32'):
+		self.list.SetColumnWidth(3, 100)
 	self.progress = xrc.XRCCTRL(self.frame, 'lblProgress')
 	self.progressnum = xrc.XRCCTRL(self.frame, 'gagProgress')
 	self.uploadbutton = xrc.XRCCTRL(self.frame, 'btnUpload')
@@ -376,10 +378,10 @@ class MyFrame(wx.Frame):
 	if k == 0:
 		self.OnbtnBrowseClick(wx.CommandEvent())
 	elif k == 1:
-		dialog = wx.DirDialog(None, _('Choose a directory'), style=wx.DD_DEFAULT_STYLE)
+		dialog = wx.DirDialog(None, _('Choose a directory'), self.get_dialog_path(), style=wx.DD_DEFAULT_STYLE)
 	    	if dialog.ShowModal() == wx.ID_OK:
-			files = search_files(dialog.GetPath(), r'\.(jpe?g|gif|png|pdf)$')
-			self.append_upload_files(files)
+			self.append_upload_files([dialog.GetPath()])
+			write_config('Upload', {'DefaultPath': dialog.GetPath()})
 	    	dialog.Destroy()
 	elif k == 3:
 		while self.list.GetSelectedItemCount() > 0:

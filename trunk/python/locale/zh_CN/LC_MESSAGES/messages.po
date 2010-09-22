@@ -77,8 +77,8 @@ msgid "Unknown Error"
 msgstr "未知错误"
 
 #: consts.py:30
-msgid "Invalid File or Not Permitted to Read"
-msgstr "无效的文件或不允许读取"
+msgid "Invalid File"
+msgstr "无效的文件"
 
 #: consts.py:31
 msgid "Check for Updates"
