@@ -10,13 +10,14 @@ from wx.lib.pubsub import Publisher
 from consts import *
 from utilfunc import *
 from dialogs import *
-from filedrop import *
+from dnd import *
 from logoutthread import *
 from checkcookiethread import *
 from uploadthread import *
 from checkupdatethread import *
 from downloadthread import *
 from parsehtml import *
+
 
 class MyFrame(wx.Frame):
     def __init__(self, *args, **kwds):
@@ -37,7 +38,7 @@ class MyFrame(wx.Frame):
         self.chkLock = wx.CheckBox(self.notebook_pane1, -1, _("Locked"))
         self.label_1 = wx.StaticText(self.notebook_pane1, -1, _("Select File(s) to Upload"))
         self.btnBrowse = wx.Button(self.notebook_pane1, -1, _("Browse..."))
-        self.lstUpFile = wx.ListCtrl(self.notebook_pane1, -1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+        self.lstUpFile = DragList(self.notebook_pane1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
         self.lblProgress = wx.StaticText(self.notebook_pane1, -1, "")
         self.btnUpload = wx.Button(self.notebook_pane1, -1, _("Upload"))
         self.gagProgress = wx.Gauge(self.notebook_pane1, -1, 100)
@@ -146,7 +147,7 @@ class MyFrame(wx.Frame):
 	self.cmbPostBoard.SetSelection(read_config_int('Upload', 'PostBoard', 16))
 	self.chkLock.SetValue(read_config_bool('Upload', 'UpBoardLock'))
 	il = wx.ImageList(16,16, True)
-	for name in [wx.ART_WARNING, wx.ART_GO_UP, wx.ART_TICK_MARK, wx.ART_CROSS_MARK]:
+	for name in [wx.ART_WARNING, wx.ART_GO_UP, wx.ART_TICK_MARK, wx.ART_CROSS_MARK, wx.ART_GO_DOWN]:
 		il.Add(wx.ArtProvider.GetBitmap(name, wx.ART_OTHER))
 	self.lstUpFile.AssignImageList(il, wx.IMAGE_LIST_SMALL)
 	for col, text in enumerate(['No.', _('Filename'), '%s (KB)' % _('Size'), _('Status')]):
@@ -163,8 +164,8 @@ class MyFrame(wx.Frame):
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
 	
 	# make the list control be a drop target
-	dt = MyFileDropTarget(self)
-	self.lstUpFile.SetDropTarget(dt)
+	dt = ListDrop(self.lstUpFile)
+        self.lstUpFile.SetDropTarget(dt)
 	
 	# set some status variables
 	self.PostedMode = False
