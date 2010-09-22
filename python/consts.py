@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import gettext
+import locale, gettext
 try:
 	gettext.install('messages', 'locale', unicode = True)
-	gettext.translation('messages', 'locale').install(True)
+	gettext.translation('messages', 'locale', locale.getdefaultlocale()[1]).install(True)
 except:
 	pass
 
@@ -30,7 +30,7 @@ MSG_NETWORK_ERROR = _('Network Error')
 MSG_FILL_BLANKS = _('Fill the blanks first.')
 MSG_FILE_SELECTED = _('%d File(s) Selected')
 MSG_UNKNOWN_ERROR = _('Unknown Error')
-MSG_INVALID_FILE = _('Invalid File or Not Permitted to Read')
+MSG_INVALID_FILE = _('Invalid File')
 MSG_UNSUPPORTED_FORMAT = _('Unsupported File Format')
 MSG_ENTITY_TOO_LARGE = _('Too Large File')
 MSG_CHECK_UPDATE = _('Check for Updates')
@@ -40,7 +40,10 @@ MSG_LOGOUT = _('Logout')
 STATUS_UPLOADING = _('Uploading')
 STATUS_UPLOADED = _('Finished')
 
+# Set directories to save data
+
 import sys, os
+
 if sys.platform.startswith('win32'):
 	CONFIG_ROOT = os.path.join(os.environ['APPDATA'], APPCODENAME)
 	TEMP_DIR = os.path.join(os.environ['TEMP'], APPCODENAME)
@@ -55,5 +58,6 @@ if not os.path.exists(TEMP_DIR):
     os.makedirs(TEMP_DIR)
 
 CONFIG_FILE = os.path.join(CONFIG_ROOT, 'user.conf')
+
 
 STATUSBAR_INFO = ['', _('Contact tyllr (at) RYGH BBS for help or advice')]
