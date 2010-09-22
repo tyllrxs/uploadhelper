@@ -1,0 +1,264 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-08 05:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: all.py:1
+
+msgid "About"
+msgstr "关于"
+
+#: all.py:2 all.py:12
+msgid "UploadHelper"
+msgstr "日月光华上传助手"
+
+#: all.py:4
+msgid "OK"
+msgstr "确定"
+
+#: all.py:5 all.py:11
+msgid "Login"
+msgstr "登录"
+
+#: all.py:6
+msgid "BBS host"
+msgstr "BBS 主机"
+
+#: all.py:7
+
+msgid "User ID"
+msgstr "用户 ID"
+
+#: all.py:8
+msgid "Password"
+msgstr "密码"
+
+#: all.py:9
+msgid "How to Use?"
+msgstr "还不会使用?"
+
+#: all.py:10
+
+msgid "Auto Login"
+msgstr "自动登录"
+
+#: all.py:13
+msgid "&Login"
+msgstr "登录(&L)"
+
+#: all.py:14
+msgid "&Switch User..."
+msgstr "更改用户(&S)"
+
+#: all.py:15
+
+msgid "Logo&ut..."
+msgstr "注销(&U)"
+
+#: all.py:16
+msgid "&Setting"
+msgstr "设置(&S)"
+
+#: all.py:17
+msgid "&Preferences..."
+msgstr "首选项(&P)"
+
+#: all.py:18
+msgid "Always on &Top"
+msgstr "总在最前(&T)"
+
+#: all.py:19
+msgid "&Help"
+msgstr "帮助(&H)"
+
+#: all.py:20
+msgid "&FAQ"
+msgstr "常见问题(&F)"
+
+#: all.py:21
+msgid "&Homepage"
+msgstr "主页(&H)"
+
+#: all.py:22
+msgid "Check for &Updates..."
+msgstr "检查更新(&U)"
+
+#: all.py:23
+msgid "&About..."
+msgstr "关于(&A)"
+
+#: all.py:24 all.py:25 all.py:26
+msgid "Switch user"
+msgstr "更改用户"
+
+#: all.py:27 all.py:28 all.py:29
+msgid "Logout"
+msgstr "注销"
+
+#: all.py:30 all.py:31 all.py:32
+msgid "Preferences"
+msgstr "首选项"
+
+#: all.py:33 all.py:34 all.py:35
+
+msgid "FAQ"
+msgstr "常见问题"
+
+#: all.py:36 all.py:37
+msgid "Homepage"
+msgstr "主页"
+
+#: all.py:38
+msgid "Visit Homepage of UploadHelper"
+msgstr "访问日月光华上传助手主页"
+
+#: all.py:39
+
+msgid "Upload Files"
+msgstr "上传文件"
+
+#: all.py:40 all.py:48
+msgid "Destination"
+msgstr "目标版面"
+
+#: all.py:41
+msgid "Locked"
+msgstr "锁定"
+
+#: all.py:42
+
+msgid "Select File(s) to Upload"
+msgstr "选择要上传的文件"
+
+#: all.py:43
+msgid "Browse..."
+msgstr "浏览..."
+
+#: all.py:44
+
+msgid "Upload"
+msgstr "上传"
+
+#: all.py:45
+msgid "Post Article"
+msgstr "发表文章"
+
+#: all.py:46
+msgid "Title"
+msgstr "标题"
+
+#: all.py:47
+msgid "Signature"
+msgstr "签名档"
+
+#: all.py:49
+msgid "Post"
+msgstr "发表"
+
+#: all.py:50
+msgid "Reship Webpage"
+msgstr "转贴网页"
+
+#: all.py:51
+msgid ""
+"Copy the Webpage Fraction to Clipboard, then Click\n"
+"(Currently support Firefox and Chrome)"
+msgstr ""
+"将网页片段复制到剪贴板，然后点击\n"
+"(目前仅支持 Firefox 和 Chrome)"
+
+#: all.py:52
+msgid "Start Reshipping"
+msgstr "开始转贴"
+
+msgid "Filename"
+msgstr "文件名"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "&Add Files..."
+msgstr "添加文件(&A)..."
+
+msgid "A&dd Directory..."
+msgstr "添加目录(&D)"
+
+msgid "&Remove Selected"
+msgstr "移除所选(&R)"
+
+msgid "Remove &Copies"
+msgstr "移除重复的(&C)"
+
+msgid "Remove &Invalid"
+msgstr "移除无效的(&I)"
+
+msgid "Remove A&ll"
+msgstr "移除所有(&L)"
+
+msgid "Error code"
+msgstr "错误代码"
+
+msgid "Network Error"
+msgstr "网络连接错误"
+
+msgid "Fill the blanks first."
+msgstr "请先填写完整"
+
+msgid "%d File(s) Selected"
+msgstr "选择了 %d 个文件"
+
+msgid "Contact tyllr (at) RYGH BBS for help or advice"
+msgstr "如有意见、建议，请与日月光华tyllr联系"
+
+msgid "Version"
+msgstr "版本"
+
+msgid "Author"
+msgstr "作者"
+
+msgid "All Supported Files"
+msgstr "所有支持的文件"
+
+msgid "Image Files"
+msgstr "图片文件"
+
+msgid "PDF Documents"
+msgstr "PDF 文档"
+
+msgid "All Files"
+msgstr "所有文件"
+
+msgid "Invalid File"
+msgstr "无效文件"
+
+msgid "Unsupported File Type"
+msgstr "不支持的文件类型"
+
+msgid "Too Large"
+msgstr "文件太大"
+
+msgid "Select at least one file for uploading."
+msgstr "请至少选择一个文件上传。"
+
+msgid "Post Successfully to Board \"%s\"."
+msgstr "成功发表到 %s 版。"
+
+msgid "License"
+msgstr "授权协议"
