@@ -14,6 +14,7 @@ class DlgAbout(wx.Dialog):
 		% (_('Version'), VERSION, _('Author'), AUTHOR, EMAIL, _('Homepage'), HOMEPAGE, _('License')))
 	xrc.XRCCTRL(self.dialog, 'btnOK').SetId(wx.ID_OK)
 	self.dialog.Fit()
+	self.dialog.Center()
 	self.dialog.Bind(wx.EVT_CLOSE, self.OnClose)
 	
     def OnClose(self, evt):

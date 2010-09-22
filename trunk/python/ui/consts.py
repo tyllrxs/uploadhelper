@@ -14,7 +14,7 @@ VERSION = '3.9.2.1'
 AUTHOR = 'tyllr'
 EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
-BBS_HOSTS = ['bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.9']
+BBS_HOSTS = ('bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.9')
 LIST_CONTEXT_MENU = (_('&Add Files...'), _('A&dd Directory...'), '', 
 		_('&Remove Selected'), _('Remove &Copies'), _('Remove &Invalid'), '', 
 		_('Remove A&ll'))

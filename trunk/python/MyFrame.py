@@ -17,6 +17,7 @@ from uploadthread import *
 from checkupdatethread import *
 from downloadthread import *
 from parsehtml import *
+from ui.dialogs import *
 
 class MyFileDropTarget(wx.FileDropTarget):
 
@@ -184,8 +185,8 @@ class MyFrame(wx.Frame):
 		self.frame.SetTitle(APPNAME)
 
     def OnmnuSwitchClick(self, evt):
-	dialog = DlgLogin()
-	dialog.dialog.ShowModal()
+	dialog = MyLoginDialog(self.frame)
+	dialog.ShowModal()
 	if self.get_user_id():
 		self.frame.SetTitle('%s [%s: %s]' % (APPNAME, _('User'), self.get_user_id()))
 	else:
@@ -210,9 +211,9 @@ class MyFrame(wx.Frame):
         CheckUpdateThread()
 
     def OnmnuAboutClick(self, evt):
-	dialog3 = DlgAbout()
-	dialog3.dialog.ShowModal()
-	dialog3.dialog.Destroy()
+	dialog3 = MyAboutDialog(self.frame)
+	dialog3.ShowModal()
+	dialog3.Destroy()
 
     def OnZoneChange(self, evt):
 	tmp = self.board.GetSelection()        
