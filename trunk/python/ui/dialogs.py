@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os, sys
+import urllib, urllib2, cookielib
 import wx
 from consts import *
 from utilfunc import *
+from httpredirect import *
+
 
 class MyLoginDialog(wx.Dialog):
     def __init__(self, *args, **kwds):
@@ -18,13 +21,20 @@ class MyLoginDialog(wx.Dialog):
         self.lnkHelp = wx.HyperlinkCtrl(self, -1, _("How to Use"), '%s%s' % (HOMEPAGE, 'faq.htm'))
         self.chkAutoLogin = wx.CheckBox(self, -1, _("Auto Login"))
         self.btnLogin = wx.Button(self, -1, _("Login"))
-
+        
         self.__set_properties()
         self.__do_layout()
-
+        
+	self.Bind(wx.EVT_BUTTON, self.OnbtnLoginClick, self.btnLogin)
+	self.Bind(wx.EVT_CLOSE, self.OnClose)
+	
     def __set_properties(self):
         self.SetTitle(_("Login"))
-        
+        self.cmbHost.SetSelection(read_config_int('Login', 'Host', 0))
+        self.txtUser.SetValue(read_config('Login', 'UserID'))
+	self.txtPwd.SetValue(read_config('Login', 'Password'))
+	self.chkAutoLogin.SetValue(read_config_bool('Login', 'AutoLogin', True))
+	self.btnLogin.SetDefault()
 
     def __do_layout(self):
         object_1 = wx.BoxSizer(wx.VERTICAL)
@@ -51,10 +61,42 @@ class MyLoginDialog(wx.Dialog):
         object_1.Fit(self)
         self.Layout()
         self.Centre()
-	self.Bind(wx.EVT_CLOSE, self.OnClose)
+
+    def OnbtnLoginClick(self, evt):
+	host = self.cmbHost.GetSelection()
+	userid = self.txtUser.GetValue().strip()
+	pwd = self.txtPwd.GetValue().strip()
+	autologin = self.chkAutoLogin.IsChecked()
+	if userid == '' or pwd == '':
+		wx.MessageBox(MSG_FILL_BLANKS)
+		return
+	opener = urllib2.build_opener(SmartRedirectHandler())  
+	urllib2.install_opener(opener)  
+	req = urllib2.Request('http://%s/bbs/login' % BBS_HOSTS[host], urllib.urlencode({'id': userid, 'pw': pwd}))  
+	try:
+		resp = urllib2.urlopen(req)  
+	except urllib2.HTTPError, e:  
+		wx.MessageBox('%s: %d' % (MSG_ERROR_CODE, e.code), MSG_NETWORK_ERROR) 
+		return
+	except:
+		wx.MessageBox(MSG_NETWORK_ERROR)
+		return
+	else:
+		if resp.code != 302:			
+			the_page = resp.read().decode('gb18030').encode('utf8')
+			head, body = get_html_info(the_page)
+			wx.MessageBox(body, head)
+			return
+		else:
+			cookie = ';'.join(resp.headers['set-cookie'].split(','))
+			write_config('Login', {'UserID': userid, 'Password': pwd, 'Cookie': cookie, 'Host': host, 'AutoLogin': autologin})
+			wx.MessageBox(_('Login OK. Prepare to upload files.'))
+			self.Close()
 	
     def OnClose(self, evt):
 	self.Destroy()
+
+# end of class MyLoginDialog
 
 
 class MyAboutDialog(wx.Dialog):
@@ -73,6 +115,8 @@ class MyAboutDialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
 
+	self.Bind(wx.EVT_CLOSE, self.OnClose)
+	
     def __set_properties(self):
         self.SetTitle(_("About"))
 
@@ -90,7 +134,8 @@ class MyAboutDialog(wx.Dialog):
         sizer.Fit(self)
         self.Layout()
         self.Centre()
-	self.Bind(wx.EVT_CLOSE, self.OnClose)
 		
     def OnClose(self, evt):
 	self.Destroy()
+	
+# end of class MyAboutDialog
