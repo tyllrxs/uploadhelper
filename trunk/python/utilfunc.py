@@ -62,6 +62,13 @@ def search_files(path, expr = '.*'):
 #        			newfiles.append(fn)
 	return newfiles
 
+def update_title():
+	mainwin = wx.GetApp().GetTopWindow()
+	if mainwin.get_user_id():
+		mainwin.SetTitle('%s v%s [%s: %s]' % (APPNAME, VERSION, _('User'), mainwin.get_user_id()))
+	else:
+		mainwin.SetTitle('%s v%s' % (APPNAME, VERSION))
+
 def read_config(section, option, default = ''):
 	cf = ConfigParser.ConfigParser()
 	try:
