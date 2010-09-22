@@ -10,7 +10,7 @@ except:
 APPNAME = _('UploadHelper')
 APPCODENAME = 'uploadhelper'
 PACKAGE = 'uploadhelper'
-VERSION = '3.9.2.1'
+VERSION = '3.93'
 AUTHOR = 'tyllr'
 EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'

@@ -91,6 +91,7 @@ class MyLoginDialog(wx.Dialog):
 			cookie = ';'.join(resp.headers['set-cookie'].split(','))
 			write_config('Login', {'UserID': userid, 'Password': pwd, 'Cookie': cookie, 'Host': host, 'AutoLogin': autologin})
 			wx.MessageBox(_('Login OK. Prepare to upload files.'))
+			update_title()
 			self.Close()
 	
     def OnClose(self, evt):

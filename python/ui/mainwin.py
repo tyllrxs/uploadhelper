@@ -136,7 +136,7 @@ class MyFrame(wx.Frame):
     
     def __set_properties(self):
     	self.SetSize(wx.Size(600, 600))
-        self.SetTitle(_("UploadHelper"))
+	update_title()
 	self.read_zones()
 	self.cmbZone.SetSelection(read_config_int('Upload', 'UpZone', 4))
 	self.cmbPostZone.SetSelection(read_config_int('Upload', 'PostZone', 4))
@@ -286,21 +286,14 @@ class MyFrame(wx.Frame):
     def OnCreate(self, evt):
     	self.Unbind(wx.EVT_WINDOW_CREATE)
 	if not (self.get_user_id() and self.get_auto_login()):
-		dialog = DlgLogin()
-		dialog.dialog.ShowModal()
-		dialog.dialog.Destroy()
-	if self.get_user_id():
-		self.SetTitle('%s [%s: %s]' % (APPNAME, _('User'), self.get_user_id()))
-	else:
-		self.SetTitle(APPNAME)
+		dialog = MyLoginDialog(self)
+		dialog.ShowModal()
+		dialog.Close()
 
     def OnmnuSwitchClick(self, evt):
 	dialog = MyLoginDialog(self)
 	dialog.ShowModal()
-	if self.get_user_id():
-		self.SetTitle('%s [%s: %s]' % (APPNAME, _('User'), self.get_user_id()))
-	else:
-		self.SetTitle(APPNAME)
+	dialog.Close()
 	
     def OnmnuLogoutClick(self, evt):
 	LogoutThread(self.get_host(), self.get_cookie())
@@ -577,7 +570,7 @@ class MyFrame(wx.Frame):
 		if t.split('|')[1] == 'OK':
 			wx.MessageBox(_('User "%s" has logged out.') % self.get_user_id())
 			remove_config('Login')
-			self.SetTitle(APPNAME)
+			update_title()
 		else:
 			tips = t.split('|')
 			wx.MessageBox(tips[2], tips[1])
