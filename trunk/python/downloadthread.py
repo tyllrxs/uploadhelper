@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import urllib, re
 from urlparse import urlparse
 import wx
@@ -27,7 +28,8 @@ class DownloadThread(Thread):
     				fname += get_file_type(urlparse(fname).path)
     			else:
     				fname += '.jpg'
-    		fname = '/tmp/%s' % re.sub(r'[^\w\d\.\{\}\[\]\(\)\+\=\-\_\&\%\#\@\~]', '_', fname)
+    		fname = re.sub(r'[^\w\d\.\{\}\[\]\(\)\+\=\-\_\&\%\#\@\~]', '_', fname)
+    		fname = os.path.join(TEMP_DIR, fname)
     		try:
     			urllib.urlretrieve(url, fname)
     		except:

@@ -152,16 +152,12 @@ msgstr "所有文件"
 msgid "Select Files to Upload"
 msgstr "选择要上传的文件"
 
-#: MyFrame.py:254
-msgid "Invalid File"
-msgstr "无效文件"
-
 #: MyFrame.py:257
-msgid "Unsupported File Type"
-msgstr "不支持的文件类型"
+msgid "Unsupported File Format"
+msgstr "不支持的文件格式"
 
 #: MyFrame.py:260
-msgid "Too Large"
+msgid "Too Large File"
 msgstr "文件太大"
 
 #: MyFrame.py:268
