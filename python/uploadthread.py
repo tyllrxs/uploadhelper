@@ -29,7 +29,7 @@ class UploadThread(Thread):
  
     def run(self):
 	wx.CallAfter(self.PreUploadInfo)
-	filename = self.window.list.GetItem(self.upindex, 1).GetText()
+	filename = self.window.lstUpFile.GetItem(self.upindex, 1).GetText()
 	req = urllib2.Request('http://%s/bbs/upload?b=%s' % (self.host, self.board))
 	req.add_header('Cookie', self.cookie)
 	opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
@@ -64,16 +64,16 @@ class UploadThread(Thread):
         wx.CallAfter(self.PostUploadInfo)
  
     def PreUploadInfo(self):
-	self.window.list.SetStringItem(self.upindex, 3, STATUS_UPLOADING, 1)
+	self.window.lstUpFile.SetStringItem(self.upindex, 3, STATUS_UPLOADING, 1)
  
     def PostUploadInfo(self):
 	if self.upOK:
-		self.window.list.SetStringItem(self.upindex, 3, self.info, 2)
-		self.window.list.SetItemTextColour(self.upindex, wx.BLACK)
+		self.window.lstUpFile.SetStringItem(self.upindex, 3, self.info, 2)
+		self.window.lstUpFile.SetItemTextColour(self.upindex, wx.BLACK)
 	else:
-		self.window.list.SetStringItem(self.upindex, 3, self.info, 3)
-		self.window.list.SetItemTextColour(self.upindex, wx.RED)
-	content = self.window.postbody.GetValue()
-	self.window.postbody.SetValue(content.replace(MSG_FILE_UPLOADING % (self.upindex + 1), self.fileurl))
+		self.window.lstUpFile.SetStringItem(self.upindex, 3, self.info, 3)
+		self.window.lstUpFile.SetItemTextColour(self.upindex, wx.RED)
+	content = self.window.txtBody.GetValue()
+	self.window.txtBody.SetValue(content.replace(MSG_FILE_UPLOADING % (self.upindex + 1), self.fileurl))
 	Publisher().sendMessage("update", '%s|' % 'Upload')
 
