@@ -41,14 +41,14 @@ class DownloadThread(Thread):
  
     def DownloadInfo(self, num, url, filename):
     	if filename:
-		self.window.reshipinfo.AppendText('\n%s ( %d / %d ):\n%s\n%s: %s\n%s\n' 
+		self.window.txtReship.AppendText('\n%s ( %d / %d ):\n%s\n%s: %s\n%s\n' 
 			% ('Downloading', num, len(self.urls), url, 'Saved To', filename, 'Finished'))
 	else:
-		self.window.reshipinfo.AppendText('\n%s ( %d / %d ):\n%s\n%s\n' 
+		self.window.txtReship.AppendText('\n%s ( %d / %d ):\n%s\n%s\n' 
 			% ('Downloading', num, len(self.urls), url, 'Failed'))
  
     def PostDownloadInfo(self):
-    	self.window.reshipinfo.AppendText(SEPARATOR)
+    	self.window.txtReship.AppendText(SEPARATOR)
 	Publisher().sendMessage("update", '%s|%s' % ('Download', '|'.join(self.filenames)))
 	
 	
