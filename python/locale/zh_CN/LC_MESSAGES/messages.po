@@ -232,8 +232,8 @@ msgstr "注销(&U)"
 msgid "&Setting"
 msgstr "设置(&S)"
 
-msgid "&Preferences..."
-msgstr "首选项(&P)"
+msgid "&Preferences"
+msgstr "偏好设置(&P)"
 
 msgid "Always on &Top"
 msgstr "总在最前(&T)"
@@ -250,14 +250,14 @@ msgstr "主页(&H)"
 msgid "Check for &Updates..."
 msgstr "检查更新(&U)..."
 
-msgid "&About..."
+msgid "&About"
 msgstr "关于(&A)"
 
 msgid "Switch user"
 msgstr "更改用户"
 
 msgid "Preferences"
-msgstr "首选项"
+msgstr "偏好设置"
 
 msgid "FAQ"
 msgstr "常见问题"
@@ -295,12 +295,8 @@ msgstr "发表"
 msgid "Reship Webpage"
 msgstr "转贴网页"
 
-msgid ""
-"Copy the Webpage Fraction to Clipboard, then Click\n"
-"(Currently support Firefox and Chrome)"
-msgstr ""
-"将网页片段复制到剪贴板，然后点击\n"
-"(目前仅支持 Firefox 和 Chrome)"
+msgid "Copy the Webpage Fraction to Clipboard, then Click"
+msgstr "将网页片段复制到剪贴板，然后点击"
 
 msgid "Start Reshipping"
 msgstr "开始转贴"
@@ -313,3 +309,6 @@ msgstr "登录成功，请准备上传文件。"
 
 msgid "Visit Homepage"
 msgstr "访问主页"
+
+msgid "Show about dialog"
+msgstr "显示关于对话框"
