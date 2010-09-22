@@ -310,3 +310,6 @@ msgstr "目前进度"
 
 msgid "Login OK. Prepare to upload files."
 msgstr "登录成功，请准备上传文件。"
+
+msgid "Visit Homepage"
+msgstr "访问主页"
