@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import sys
+if sys.platform.startswith('win32'):
+	reload(sys)
+	sys.setdefaultencoding('latin1')
+
 import urllib2
 import wx
 from threading import Thread
@@ -38,10 +43,18 @@ class UploadThread(Thread):
 	else:
 		try:
 			the_page = opener.open(req, params).read().decode('gb18030').encode('utf8')
-		except:
+		except urllib2.HTTPError, e:
+			if e.code == 413:
+                        	self.info = '%s: %s' % (MSG_FAIL, MSG_ENTITY_TOO_LARGE)
+                        elif e.code == 400:
+                        	self.info = '%s: %s' % (MSG_FAIL, MSG_UNSUPPORTED_FORMAT)
+                        else:
+                        	self.info = '%s: %s %d' % (MSG_FAIL, MSG_ERROR_CODE, e.code)
+                except Exception, e:
 			self.info = '%s: %s' % (MSG_FAIL, MSG_NETWORK_ERROR)
+			print e
 		else:
-			if the_page.find('发生错误') >= 0:
+			if the_page.find(u'发生错误') >= 0:
 				head, body = get_html_info(the_page)
 				self.info = '%s: %s' % (head, body)
 			else:

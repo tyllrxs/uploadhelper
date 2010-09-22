@@ -116,7 +116,7 @@ def remove_config(section, option = ''):
 	except:
 		pass
 
-def perfect_connect(url, post = {}, retry = False):
+def perfect_connect(url, post = '', retry = False):
 	req = urllib2.Request(url, post)
 	req.add_header('Cookie', read_config('Login', 'Cookie'))
 	try:		    
@@ -124,15 +124,19 @@ def perfect_connect(url, post = {}, retry = False):
 	except urllib2.HTTPError, e:  
 		info = '%s|%s: %d' % (MSG_NETWORK_ERROR, MSG_ERROR_CODE, e.code)
 		return info
-	except:
+	except urllib2.URLError, e:
+                info = '%s|%s: %s' % (MSG_NETWORK_ERROR, MSG_ERROR_CODE, e.reason)
+		return info
+	except Exception, e:
 		info = '%s|%s' % (MSG_ERROR, MSG_NETWORK_ERROR)
+		print e
 		return info
 	else:
 		the_page = resp.read().decode('gb18030').encode('utf8')
-		if the_page.find('发生错误') >= 0:
+		if the_page.find(u'发生错误') >= 0:
 			k, v = get_html_info(the_page)
 			info = '|'.join([k, v])
-			if retry or the_page.find('登录') < 0:
+			if retry or the_page.find(u'登录') < 0:
 				return info
 			else:
 				host = read_config_int('Login', 'Host', 0)

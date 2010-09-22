@@ -73,7 +73,7 @@ class MyFrame(wx.Frame):
 	self.list.SetColumnWidth(0, 40)
 	self.list.SetColumnWidth(1, 320)
 	self.list.SetColumnWidth(2, 80)
-	self.list.SetColumnWidth(3, 130)
+	self.list.SetColumnWidth(3, 100)
 	self.progress = xrc.XRCCTRL(self.frame, 'lblProgress')
 	self.progressnum = xrc.XRCCTRL(self.frame, 'gagProgress')
 	self.uploadbutton = xrc.XRCCTRL(self.frame, 'btnUpload')
@@ -269,13 +269,13 @@ class MyFrame(wx.Frame):
 			fz = -1
 		self.list.SetStringItem(index, 2, '%ld' % fz)
 		if invalid_file_name(f):
-			self.list.SetStringItem(index, 3, _('Invalid File'), 0)
+			self.list.SetStringItem(index, 3, MSG_INVALID_FILE, 0)
 			self.list.SetItemTextColour(index, wx.RED)
 		elif not supported_file_type(f):
-			self.list.SetStringItem(index, 3, _('Unsupported File Type'), 0)
+			self.list.SetStringItem(index, 3, MSG_UNSUPPORTED_FORMAT, 0)
 			self.list.SetItemTextColour(index, wx.RED)
 		elif fz > 1024:
-			self.list.SetStringItem(index, 3, _('Too Large'), 0)
+			self.list.SetStringItem(index, 3, MSG_ENTITY_TOO_LARGE, 0)
 			self.list.SetItemTextColour(index, wx.BLUE)
 	self.progress.SetLabel(_('%d File(s) Selected') % self.list.GetItemCount())    	
 
