@@ -330,3 +330,36 @@ msgstr "不支持 Python 3，请到这里下载2.X版本"
 
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython 版本太低，请到这里下载新版本"
+
+msgid "&Language"
+msgstr "语言(&L)"
+
+msgid "de"
+msgstr "德语"
+
+msgid "en"
+msgstr "英语"
+
+msgid "es"
+msgstr "西班牙语"
+
+msgid "fr"
+msgstr "法语"
+
+msgid "ru"
+msgstr "俄语"
+
+msgid "pt"
+msgstr "葡萄牙语"
+
+msgid "ja_JP"
+msgstr "日语"
+
+msgid "ko_KR"
+msgstr "朝鲜语"
+
+msgid "zh_CN"
+msgstr "简体中文"
+
+msgid "zh_TW"
+msgstr "繁体中文"
