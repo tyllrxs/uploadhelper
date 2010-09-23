@@ -20,32 +20,32 @@ msgstr ""
 msgid "UploadHelper"
 msgstr "UploadHelper"
 
-msgid "Select File(s) to Upload"
-msgstr "Selecione Arquivo (s) para carregar"
+msgid "Select Files to Upload"
+msgstr "Selecionar arquivos para upload"
 
 #: consts.py:15
-msgid "&Add Files..."
-msgstr "& Add Files ..."
+msgid "&Add Files"
+msgstr "Add Files"
 
 #: consts.py:15
-msgid "A&dd Directory..."
-msgstr "A & dd Directory ..."
+msgid "A&dd Directory"
+msgstr "Add Directory"
 
 #: consts.py:16
 msgid "&Remove Selected"
-msgstr "& Remover Selecionados"
+msgstr "Remover Selecionados"
 
 #: consts.py:16
 msgid "Remove &Copies"
-msgstr "Retire e Cópias"
+msgstr "Remova as cópias"
 
 #: consts.py:16
 msgid "Remove &Invalid"
-msgstr "Retire e inválido"
+msgstr "Remover inválido"
 
 #: consts.py:17
 msgid "Remove A&ll"
-msgstr "Remover A & ll"
+msgstr "Remover tudo"
 
 #: consts.py:23
 msgid "Error"
@@ -67,10 +67,9 @@ msgstr "Erro de rede"
 msgid "Fill the blanks first."
 msgstr "Preencha os espaços em branco em primeiro lugar."
 
-#: consts.py:28 MyFrame.py:262
-#, python-format
-msgid "%d File(s) Selected"
-msgstr "Arquivo% d (s) selecionados"
+#: consts.py:28
+msgid "%d Files Selected"
+msgstr "% D arquivos selecionados"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -148,10 +147,6 @@ msgstr "Documentos em PDF"
 msgid "All Files"
 msgstr "Todos os Arquivos"
 
-#: MyFrame.py:235
-msgid "Select Files to Upload"
-msgstr "Selecionar arquivos para upload"
-
 #: MyFrame.py:257
 msgid "Unsupported File Format"
 msgstr "Formato de arquivo não suportado"
@@ -165,12 +160,12 @@ msgid "Select at least one file for uploading."
 msgstr "Selecione pelo menos um arquivo para upload."
 
 #: MyFrame.py:304
-msgid "Post Successfully to Board \"%s\"."
-msgstr "Post com sucesso para o Conselho \"%s\"."
+msgid "Post Successfully to Board"
+msgstr "Post com sucesso para o Conselho"
 
 #: MyFrame.py:330
-msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "(Nenhum conteúdo de páginas web está pronta para reenviar, verifique se ele foi copiado corretamente.)"
+msgid "No webpage content is ready to reship, check if it has been copied correctly."
+msgstr "Nenhum conteúdo de páginas web está pronta para reenviar, verifique se ele foi copiado corretamente."
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -189,8 +184,8 @@ msgid "You are using the latest version."
 msgstr "Você está usando a versão mais recente."
 
 #: MyFrame.py:446
-msgid "User \"%s\" has logged out."
-msgstr "O usuário \"%s\" foi desconectado."
+msgid "has logged out."
+msgstr "foi desconectado."
 
 msgid "About"
 msgstr "Sobre"
@@ -214,19 +209,19 @@ msgid "Auto Login"
 msgstr "Auto Login"
 
 msgid "&Login"
-msgstr "Login &"
+msgstr "Login"
 
-msgid "&Switch User..."
-msgstr "& Switch User ..."
+msgid "&Switch User"
+msgstr "Mudar de utilizador"
 
-msgid "Logo&ut..."
-msgstr "Logo & ut ..."
+msgid "Logo&ut"
+msgstr "Logout"
 
 msgid "&Setting"
-msgstr "& Ambiente"
+msgstr "Ambiente"
 
 msgid "&Preferences"
-msgstr "& Preferências"
+msgstr "Preferências"
 
 msgid "Preferences"
 msgstr "Preferências"
@@ -234,29 +229,35 @@ msgstr "Preferências"
 msgid "Preferences..."
 msgstr "Preferências ..."
 
-msgid "Preference..."
-msgstr "Preferência ..."
+msgid "Preference"
+msgstr "Preferência"
+
+msgid "&Language"
+msgstr "Idioma"
+
+msgid "Select interface language"
+msgstr "Selecione o idioma da interface"
 
 msgid "Always on &Top"
-msgstr "Always on Top &"
+msgstr "Sempre em cima"
 
 msgid "&Help"
-msgstr "& Ajuda"
+msgstr "Ajuda"
 
 msgid "Help"
 msgstr "Ajuda"
 
 msgid "&FAQ"
-msgstr "Perguntas e"
+msgstr "FAQ"
 
 msgid "&Homepage"
-msgstr "Homepage &"
+msgstr "Homepage"
 
-msgid "Check for &Updates..."
-msgstr "Atualização Automática ..."
+msgid "Check for &Updates"
+msgstr "Check for Updates"
 
 msgid "&About"
-msgstr "& About"
+msgstr "Sobre"
 
 msgid "Switch user"
 msgstr "Mudar usuário"
@@ -276,8 +277,8 @@ msgstr "Destino"
 msgid "Locked"
 msgstr "Bloqueado"
 
-msgid "Browse..."
-msgstr "Navegar ..."
+msgid "Browse"
+msgstr "Procurar"
 
 msgid "Upload"
 msgstr "Upload"
@@ -323,3 +324,6 @@ msgstr "Python 3 não é suportado. Obtenha uma versão 2.X na"
 
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython é muito antiga. Obter uma versão mais recente na"
+
+msgid "Language has changed. Restart to take effects."
+msgstr "Linguagem mudou. Reinicie a ter efeitos."

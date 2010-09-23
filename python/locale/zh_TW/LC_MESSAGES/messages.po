@@ -20,16 +20,16 @@ msgstr ""
 msgid "UploadHelper"
 msgstr "日月光華上傳助手"
 
-msgid "Select File(s) to Upload"
+msgid "Select Files to Upload"
 msgstr "選擇要上傳的檔案"
 
 #: consts.py:15
-msgid "&Add Files..."
-msgstr "添加檔案..."
+msgid "&Add Files"
+msgstr "添加檔案"
 
 #: consts.py:15
-msgid "A&dd Directory..."
-msgstr "添加目錄..."
+msgid "A&dd Directory"
+msgstr "添加目錄"
 
 #: consts.py:16
 msgid "&Remove Selected"
@@ -61,15 +61,14 @@ msgstr "錯誤代碼"
 
 #: consts.py:26
 msgid "Network Error"
-msgstr "網絡連接錯誤"
+msgstr "網路連接錯誤"
 
 #: consts.py:27
 msgid "Fill the blanks first."
 msgstr "請先填寫完整"
 
-#: consts.py:28 MyFrame.py:262
-#, python-format
-msgid "%d File(s) Selected"
+#: consts.py:28
+msgid "%d Files Selected"
 msgstr "選擇了 %d 個檔案"
 
 #: consts.py:29
@@ -98,7 +97,7 @@ msgstr "完成"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "如有意見、建議，請與日月光華tyllr聯繫"
+msgstr "如有意見、建議，請與日月光華tyllr聯絡"
 
 #: DlgAbout.py:14
 msgid "Version"
@@ -130,7 +129,7 @@ msgstr "狀態"
 
 #: MyFrame.py:179
 msgid "User"
-msgstr "用戶"
+msgstr "使用者"
 
 #: MyFrame.py:234
 msgid "All Supported Files"
@@ -148,10 +147,6 @@ msgstr "PDF 文檔"
 msgid "All Files"
 msgstr "所有檔案"
 
-#: MyFrame.py:235
-msgid "Select Files to Upload"
-msgstr "選擇要上傳的檔案"
-
 #: MyFrame.py:257
 msgid "Unsupported File Format"
 msgstr "不支持的檔案格式"
@@ -165,12 +160,12 @@ msgid "Select at least one file for uploading."
 msgstr "請至少選擇一個檔案上傳。"
 
 #: MyFrame.py:304
-msgid "Post Successfully to Board \"%s\"."
-msgstr "成功發表到 %s 版。"
+msgid "Post Successfully to Board"
+msgstr "成功發表到版面"
 
 #: MyFrame.py:330
-msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "(沒有找到要轉貼的網頁內容，請檢查是否已經復制好。)"
+msgid "No webpage content is ready to reship, check if it has been copied correctly."
+msgstr "沒有找到要轉貼的網頁內容，請檢查是否已經復制好。"
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -182,15 +177,15 @@ msgstr "檢查更新失敗，請稍後重試。"
 
 #: MyFrame.py:440
 msgid "A new version %s is available! Would you like to update now?"
-msgstr "發現新版本 %s！要立即更新嗎？"
+msgstr "發現新版本 %s ! 是否立即更新？"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
 msgstr "你正在使用最新版本。"
 
 #: MyFrame.py:446
-msgid "User \"%s\" has logged out."
-msgstr "用戶 \"%s\" 已註銷。"
+msgid "has logged out."
+msgstr "已註銷。"
 
 msgid "About"
 msgstr "關於"
@@ -199,7 +194,7 @@ msgid "OK"
 msgstr "確定"
 
 msgid "Login"
-msgstr "登錄"
+msgstr "登入"
 
 msgid "BBS host"
 msgstr "BBS 主機"
@@ -211,15 +206,15 @@ msgid "How to Use"
 msgstr "還不會使用?"
 
 msgid "Auto Login"
-msgstr "自動登錄"
+msgstr "自動登入"
 
 msgid "&Login"
-msgstr "登錄"
+msgstr "登入"
 
-msgid "&Switch User..."
-msgstr "更改用戶"
+msgid "&Switch User"
+msgstr "更改使用者"
 
-msgid "Logo&ut..."
+msgid "Logo&ut"
 msgstr "註銷"
 
 msgid "&Setting"
@@ -232,10 +227,16 @@ msgid "Preferences"
 msgstr "首選項"
 
 msgid "Preferences..."
+msgstr "偏好設置..."
+
+msgid "Preference"
 msgstr "偏好設置"
 
-msgid "Preference..."
-msgstr "偏好設置"
+msgid "&Language"
+msgstr "語言"
+
+msgid "Select interface language"
+msgstr "選擇界面語言"
 
 msgid "Always on &Top"
 msgstr "總在最前"
@@ -252,14 +253,14 @@ msgstr "常見問題"
 msgid "&Homepage"
 msgstr "主頁"
 
-msgid "Check for &Updates..."
-msgstr "檢查更新..."
+msgid "Check for &Updates"
+msgstr "檢查更新"
 
 msgid "&About"
 msgstr "關於"
 
 msgid "Switch user"
-msgstr "更改用戶"
+msgstr "更改使用者"
 
 msgid "FAQ"
 msgstr "常見問題"
@@ -276,8 +277,8 @@ msgstr "目標版面"
 msgid "Locked"
 msgstr "鎖定"
 
-msgid "Browse..."
-msgstr "瀏覽..."
+msgid "Browse"
+msgstr "瀏覽"
 
 msgid "Upload"
 msgstr "上傳"
@@ -307,7 +308,7 @@ msgid "Progress"
 msgstr "目前進度"
 
 msgid "Login OK. Prepare to upload files."
-msgstr "登錄成功，請準備上傳檔案。"
+msgstr "登入成功，請準備上傳檔案。"
 
 msgid "Visit Homepage"
 msgstr "訪問主頁"
@@ -324,5 +325,5 @@ msgstr "不支持 Python 3，請到這裡下載2.X版本"
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython 版本太低，請到這裡下載新版本"
 
-msgid "&Language"
-msgstr "語言"
+msgid "Language has changed. Restart to take effects."
+msgstr "語言已經更改。重啟本程序生效。"

@@ -36,8 +36,8 @@ class MyFrame(wx.Frame):
         self.cmbZone = wx.ComboBox(self.notebook_pane1, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
         self.cmbBoard = wx.ComboBox(self.notebook_pane1, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
         self.chkLock = wx.CheckBox(self.notebook_pane1, -1, _("Locked"))
-        self.label_1 = wx.StaticText(self.notebook_pane1, -1, _("Select File(s) to Upload"))
-        self.btnBrowse = wx.Button(self.notebook_pane1, -1, _("Browse..."))
+        self.label_1 = wx.StaticText(self.notebook_pane1, -1, _("Select Files to Upload"))
+        self.btnBrowse = wx.Button(self.notebook_pane1, -1, '%s...' % _("Browse"))
         self.lstUpFile = DragList(self.notebook_pane1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
         self.lblProgress = wx.StaticText(self.notebook_pane1, -1, "")
         self.btnUpload = wx.Button(self.notebook_pane1, -1, _("Upload"))
@@ -73,22 +73,27 @@ class MyFrame(wx.Frame):
     def __set_menubar(self):
         menuBar = wx.MenuBar()
         mnuLogin = wx.Menu()
-        mnuSwitch = wx.MenuItem(mnuLogin, wx.NewId(), _("&Switch User..."), "", wx.ITEM_NORMAL)
+        mnuSwitch = wx.MenuItem(mnuLogin, wx.NewId(), '%s...' % _("&Switch User"), "", wx.ITEM_NORMAL)
         mnuSwitch.SetBitmap(wx.Bitmap('icon/16/switch.png'))
         mnuLogin.AppendItem(mnuSwitch)
         mnuLogin.AppendSeparator()
-        mnuLogout = wx.MenuItem(mnuLogin, wx.NewId(), _("Logo&ut..."), "", wx.ITEM_NORMAL)
+        mnuLogout = wx.MenuItem(mnuLogin, wx.NewId(), '%s...' % _("Logo&ut"), "", wx.ITEM_NORMAL)
         mnuLogout.SetBitmap(wx.Bitmap('icon/16/logout.png'))
         mnuLogin.AppendItem(mnuLogout)
         menuBar.Append(mnuLogin, _("&Login"))
         mnuSetting = wx.Menu()
-        mnuPreference = wx.MenuItem(mnuSetting, wx.ID_PREFERENCES)
+        mnuPreference = wx.MenuItem(mnuSetting, wx.ID_PREFERENCES, '%s...' % _("&Preferences"))
         mnuSetting.AppendItem(mnuPreference)
         mnuSetting.AppendSeparator()
         mnuLang = wx.Menu()
-        for lang in APPLANGUAGES:
-        	mnuLang.AppendItem(wx.MenuItem(mnuLang, wx.NewId(), _(lang), "", wx.ITEM_RADIO))
-        mnuSetting.AppendMenu(-1, _("&Language"), mnuLang)
+        target_lang = read_config('General', 'language', 'en') 
+        for cod, lng in APPLANGUAGES:
+        	mnulng = wx.MenuItem(mnuLang, wx.NewId(), lng, cod, wx.ITEM_RADIO)
+        	mnuLang.AppendItem(mnulng)
+        	if cod == target_lang:
+        		mnulng.Check(True)
+        	self.Bind(wx.EVT_MENU, self.OnmnuLangClick, mnulng)
+        mnuSetting.AppendMenu(-1, _("&Language"), mnuLang, _("Select interface language"))
         mnuSetting.AppendSeparator()
         mnuAlwaysOnTop = wx.MenuItem(mnuSetting, wx.NewId(), _("Always on &Top"), "", wx.ITEM_CHECK)
         mnuSetting.AppendItem(mnuAlwaysOnTop)
@@ -100,10 +105,10 @@ class MyFrame(wx.Frame):
         mnuHomepage = wx.MenuItem(mnuHelp, wx.NewId(), _("&Homepage"), _("Visit Homepage"), wx.ITEM_NORMAL)
         mnuHomepage.SetBitmap(wx.Bitmap('icon/16/home.png'))
         mnuHelp.AppendItem(mnuHomepage)
-        mnuCheckUpdate = wx.MenuItem(mnuHelp, wx.NewId(), _("Check for &Updates..."), "", wx.ITEM_NORMAL)
+        mnuCheckUpdate = wx.MenuItem(mnuHelp, wx.NewId(), '%s...' % _("Check for &Updates"), "", wx.ITEM_NORMAL)
         mnuHelp.AppendItem(mnuCheckUpdate)
         mnuHelp.AppendSeparator()
-        mnuAbout = wx.MenuItem(mnuHelp, wx.ID_ABOUT)
+        mnuAbout = wx.MenuItem(mnuHelp, wx.ID_ABOUT, '%s...' % _("&About"), _("Show about dialog"))
         mnuHelp.AppendItem(mnuAbout)
         menuBar.Append(mnuHelp, _("&Help"))
         # Mac issues
@@ -405,7 +410,7 @@ class MyFrame(wx.Frame):
 		elif fz > 1024:
 			self.lstUpFile.SetStringItem(index, 3, MSG_ENTITY_TOO_LARGE, 0)
 			self.lstUpFile.SetItemTextColour(index, wx.BLUE)
-	self.lblProgress.SetLabel(_('%d File(s) Selected') % self.lstUpFile.GetItemCount())    	
+	self.lblProgress.SetLabel(_('%d Files Selected') % self.lstUpFile.GetItemCount())    	
 
     def OnbtnUploadClick(self, evt):
     	self.to_upload = False
@@ -450,7 +455,7 @@ class MyFrame(wx.Frame):
 				'text': self.txtBody.GetValue().encode('gb18030')}))
 	self.btnPost.Enable()
 	if info == '':
-		wx.MessageBox(_('Post Successfully to Board "%s".') % self.get_board_name(True))
+		wx.MessageBox('%s %s.' % (_('Post Successfully to Board'), self.get_board_name(True)))
 		self.PostedMode = True
 	elif info.find('No User') >= 0:
 		self.to_post = True
@@ -480,7 +485,7 @@ class MyFrame(wx.Frame):
     		except:
     			html = do.GetData()
     	if html.strip() == '':
-    		self.txtReship.SetValue(_('(No webpage content is ready to reship, check if it has been copied correctly.)'))
+    		self.txtReship.SetValue(_('No webpage content is ready to reship, check if it has been copied correctly.'))
     		return
     	self.txtReship.SetValue(html) # decode to display correctly in Windows
     	self.txtReship.AppendText(SEPARATOR)
@@ -536,6 +541,12 @@ class MyFrame(wx.Frame):
 		self.lstUpFile.DeleteAllItems()
 	self.list_re_number()
 	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())
+	
+    def OnmnuLangClick(self, evt):
+	lng = self.GetMenuBar().FindItemById(evt.GetId()).GetHelp()
+	lng = lng.replace('__', '_')
+	write_config('General', {'language': lng})
+	wx.MessageBox(_('Language has changed. Restart to take effects.'))
 
     def OnClose(self, evt):
 	write_config('Upload', {'UpZone': self.cmbZone.GetSelection(), \
@@ -590,13 +601,13 @@ class MyFrame(wx.Frame):
 			wx.MessageBox(_('Failed to check for updates, try again later.'), MSG_CHECK_UPDATE)
 		else:
 			if VERSION < '%s' % t.split('|')[1]:
-				if wx.YES == wx.MessageBox(_('A new version %s is available!\nWould you like to update now?') % t, MSG_CHECK_UPDATE, wx.YES_NO):
+				if wx.YES == wx.MessageBox(_('A new version %s is available! Would you like to update now?') % t, MSG_CHECK_UPDATE, wx.YES_NO):
 					wx.LaunchDefaultBrowser(HOMEPAGE)
 			else:
 				wx.MessageBox(_('You are using the latest version.'), MSG_CHECK_UPDATE)
 	elif t.startswith('Logout|'):
 		if t.split('|')[1] == 'OK':
-			wx.MessageBox(_('User "%s" has logged out.') % self.get_user_id())
+			wx.MessageBox('%s %s' % (self.get_user_id(), _('has logged out.')))
 			remove_config('Login')
 			update_title()
 		else:
