@@ -3,7 +3,7 @@
 import locale, gettext
 try:
 	gettext.install('messages', 'locale', unicode = True)
-	gettext.translation('messages', 'locale', locale.getdefaultlocale()[1]).install(True)
+	gettext.translation('messages', 'locale', locale.getdefaultlocale()[0]).install(True)
 except:
 	pass
 

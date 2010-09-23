@@ -139,7 +139,7 @@ def perfect_connect(url, post = '', retry = False):
 		print e
 		return info
 	else:
-		the_page = resp.read().decode('gb18030').encode('utf8')
+		the_page = resp.read().decode('gb18030')
 		if the_page.find(u'发生错误') >= 0:
 			k, v = get_html_info(the_page)
 			info = '|'.join([k, v])
@@ -163,7 +163,7 @@ def perfect_connect(url, post = '', retry = False):
 						return info
 					else:
 						if resp2.code != 302:			
-							the_page = resp2.read().decode('gb18030').encode('utf8')
+							the_page = resp2.read().decode('gb18030')
 							k, v = get_html_info(the_page)
 							info = '|'.join([k, v])
 							return info

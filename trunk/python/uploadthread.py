@@ -42,7 +42,7 @@ class UploadThread(Thread):
 		self.info = '%s: %s' % (MSG_FAIL, MSG_UNKNOWN_ERROR)
 	else:
 		try:
-			the_page = opener.open(req, params).read().decode('gb18030').encode('utf8')
+			the_page = opener.open(req, params).read().decode('gb18030')
 		except urllib2.HTTPError, e:
 			if e.code == 413:
                         	self.info = '%s: %s' % (MSG_FAIL, MSG_ENTITY_TOO_LARGE)

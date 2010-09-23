@@ -83,7 +83,7 @@ class MyLoginDialog(wx.Dialog):
 		return
 	else:
 		if resp.code != 302:			
-			the_page = resp.read().decode('gb18030').encode('utf8')
+			the_page = resp.read().decode('gb18030')
 			head, body = get_html_info(the_page)
 			wx.MessageBox(body, head)
 			return
@@ -92,6 +92,9 @@ class MyLoginDialog(wx.Dialog):
 			write_config('Login', {'UserID': userid, 'Password': pwd, 'Cookie': cookie, 'Host': host, 'AutoLogin': autologin})
 			wx.MessageBox(_('Login OK. Prepare to upload files.'))
 			update_title()
+			if self.Parent.to_upload:
+				evt = wx.CommandEvent()
+				self.Parent.OnbtnUploadClick(evt)
 			self.Close()
 	
     def OnClose(self, evt):
@@ -110,7 +113,7 @@ class MyAboutDialog(wx.Dialog):
         self.txtInfo = wx.StaticText(self)
         self.txtInfo.SetLabel('%s: %s\n%s: %s (%s)\n%s: %s\n%s: GPL v2' 
 		% (_('Version'), VERSION, _('Author'), AUTHOR, EMAIL, _('Homepage'), HOMEPAGE, _('License')))
-        self.txtLink = wx.HyperlinkCtrl(self, -1, _('Visit Homepage'), HOMEPAGE, style = wx.HL_ALIGN_LEFT)
+        self.txtLink = wx.HyperlinkCtrl(self, -1, _('Visit Homepage'), HOMEPAGE)
         self.btnOK = wx.Button(self, wx.ID_OK)
 
         self.__set_properties()
@@ -128,7 +131,8 @@ class MyAboutDialog(wx.Dialog):
         sizer.Add(self.txtInfo, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 10)
         sizer.Add(wx.StaticLine(self), 0, wx.LEFT|wx.RIGHT|wx.EXPAND, 10)
         subsizer = wx.BoxSizer(wx.HORIZONTAL)
-        subsizer.Add(self.txtLink, 1, wx.ALIGN_CENTRE_VERTICAL)
+        subsizer.Add(self.txtLink, 0, wx.ALIGN_CENTRE_VERTICAL)
+        subsizer.Add((20, 20), 1, wx.ALIGN_CENTRE_VERTICAL)
         subsizer.Add(self.btnOK, 0, wx.ALIGN_CENTRE_VERTICAL)
         sizer.Add(subsizer, 0, wx.ALL|wx.EXPAND, 10)
         self.SetSizer(sizer)
