@@ -136,7 +136,6 @@ class MyFrame(wx.Frame):
 	self.SetStatusBar(statusBar)
     
     def __set_properties(self):
-    	self.SetSize(wx.Size(600, 600))
 	update_title()
 	self.read_zones()
 	self.cmbZone.SetSelection(read_config_int('Upload', 'UpZone', 4))
@@ -171,6 +170,7 @@ class MyFrame(wx.Frame):
 	self.PostedMode = False
 	self.UploadedMode = False
 	self.ReshipMode = False
+	self.to_upload = False
 	
 	# receive message from check for updates thread
 	Publisher().subscribe(self.updateDisplay, "update")
@@ -230,6 +230,8 @@ class MyFrame(wx.Frame):
 	self.notebook.SetSelection(read_config_int('Upload', 'ActivePage', 0))
         object_1.Add(self.notebook, 1, wx.EXPAND, 0)
         self.SetSizer(object_1)
+        self.Fit()
+        self.SetSize(wx.Size(600, 600))
         self.Layout()
         self.CentreOnScreen()
 
@@ -387,6 +389,7 @@ class MyFrame(wx.Frame):
 	self.lblProgress.SetLabel(_('%d File(s) Selected') % self.lstUpFile.GetItemCount())    	
 
     def OnbtnUploadClick(self, evt):
+    	self.to_upload = False
 	self.lblProgress.SetLabel('%s: %d / %d' % (_('Progress'), 0, self.lstUpFile.GetItemCount()))
 	self.gagProgress.SetValue(0)
 	if self.lstUpFile.GetItemCount() <= 0:
@@ -440,28 +443,32 @@ class MyFrame(wx.Frame):
     def OnbtnReshipClick(self, evt):
         if not wx.TheClipboard.IsOpened():
 		wx.TheClipboard.Open()
-	do = wx.CustomDataObject('text/html')
+	do = wx.CustomDataObject('HTML Format')
         if not wx.TheClipboard.GetData(do):
-        	do = wx.CustomDataObject('HTML Format')
+        	do = wx.CustomDataObject('text/html')
+		wx.TheClipboard.GetData(do)
     	wx.TheClipboard.Close()
-    	try: 
-    		html = do.GetData().decode('utf16') #Firefox
+    	try:
+    		# Windows clipboard formats are all utf8 , independent on browsers
+    		if sys.platform.startswith('win32'):
+    			raise_error = 1 / 0
+    		html = do.GetData().decode('utf16') # non-win Firefox
     	except:
     		try:
-    			html = do.GetData().decode('utf8') #Chrome
+    			html = do.GetData().decode('utf8') # IE, Chrome, win Firefox
     		except:
     			wx.MessageBox('Unknown Format')
     			return
     	if html.strip() == '':
     		self.txtReship.SetValue(_('(No webpage content is ready to reship, check if it has been copied correctly.)'))
     		return
-    	self.txtReship.SetValue(prettify_html(html))
+    	self.txtReship.SetValue(prettify_html(html).decode('utf8')) # decode to display correctly in Windows
     	self.txtReship.AppendText(SEPARATOR)
     	urls, html = parse_html_images(html)
     	html = parse_html_texts(html)
-    	self.txtReship.AppendText(html)
+    	self.txtReship.AppendText(html.decode('utf8'))
     	self.txtReship.AppendText(SEPARATOR)
-    	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html))
+    	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html.decode('utf8')))
     	DownloadThread(self, urls)
 
     def OnlstUpFileRClick(self, evt):
@@ -528,9 +535,10 @@ class MyFrame(wx.Frame):
 
 	if t.startswith('Cookie|'):
 		if t.find('No User') >= 0:
+			self.btnUpload.Enable()
+			self.to_upload = True
 			evt = wx.CommandEvent()
 			self.OnmnuSwitchClick(evt)
-			self.btnUpload.Enable()
 		elif t.split('|')[1] == '':
 			self.start_upload_threads()
 		else:
