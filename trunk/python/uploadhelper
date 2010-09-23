@@ -8,14 +8,9 @@ import wx
 from consts import *
 from ui.mainwin import *
 
-L = wx.Locale()
-
 class MyApp(wx.App):
 
     def OnInit(self):
-    	L.Init(wx.LANGUAGE_DEFAULT)
-        L.AddCatalogLookupPathPrefix(r'locale')
-        L.AddCatalog('messages')
 	self.mainframe = MyFrame(None)
 	self.mainframe.Show()
 	self.SetTopWindow(self.mainframe)

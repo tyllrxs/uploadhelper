@@ -18,34 +18,34 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "UploadHelper"
+msgstr "ASE 어시스턴트 중국 올리기"
 
 msgid "Select File(s) to Upload"
-msgstr "선택 파일 (들) 업로드"
+msgstr "업로드할 파일 선택"
 
 #: consts.py:15
 msgid "&Add Files..."
-msgstr "& 파일 추가 ..."
+msgstr "파일 추가 ..."
 
 #: consts.py:15
 msgid "A&dd Directory..."
-msgstr "& DD 형식 디렉토리 ..."
+msgstr "디렉토리를 추가 ..."
 
 #: consts.py:16
 msgid "&Remove Selected"
-msgstr "& 선택한 삭제"
+msgstr "선택 삭제"
 
 #: consts.py:16
 msgid "Remove &Copies"
-msgstr "제거 및 사본"
+msgstr "중복 제거"
 
 #: consts.py:16
 msgid "Remove &Invalid"
-msgstr "제거 및 잘못된"
+msgstr "잘못된 제거"
 
 #: consts.py:17
 msgid "Remove A&ll"
-msgstr "& 줄게 제거"
+msgstr "모두 삭제"
 
 #: consts.py:23
 msgid "Error"
@@ -61,16 +61,16 @@ msgstr "오류 코드"
 
 #: consts.py:26
 msgid "Network Error"
-msgstr "네트워크 오류"
+msgstr "네트워크 연결 오류"
 
 #: consts.py:27
 msgid "Fill the blanks first."
-msgstr "빈 곳을 채우 첫째."
+msgstr "전체 내용을 기입하세요"
 
 #: consts.py:28 MyFrame.py:262
 #, python-format
 msgid "%d File(s) Selected"
-msgstr "% d 개의 파일 (들)을 선택"
+msgstr "% d 개의 선택한 파일"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -94,11 +94,11 @@ msgstr "업로드"
 
 #: consts.py:35
 msgid "Finished"
-msgstr "완료"
+msgstr "완전한"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "도움이나 조언을 문의 tyllr (에서) RYGH 게시판"
+msgstr "의견, 제안, 태양와 접촉, 그리고 달 tyllr하시기 바랍니다"
 
 #: DlgAbout.py:14
 msgid "Version"
@@ -106,19 +106,19 @@ msgstr "버전"
 
 #: DlgAbout.py:14
 msgid "Author"
-msgstr "저자"
+msgstr "의"
 
 #: DlgAbout.py:14
 msgid "Homepage"
-msgstr "홈페이지"
+msgstr "홈"
 
 #: DlgAbout.py:14
 msgid "License"
-msgstr "라이센스"
+msgstr "라이센스 계약"
 
 #: MyFrame.py:59
 msgid "Filename"
-msgstr "파일명"
+msgstr "파일 이름"
 
 #: MyFrame.py:59
 msgid "Size"
@@ -134,7 +134,7 @@ msgstr "사용자"
 
 #: MyFrame.py:234
 msgid "All Supported Files"
-msgstr "지원되는 모든 파일"
+msgstr "모든 증빙 서류"
 
 #: MyFrame.py:234
 msgid "Image Files"
@@ -150,11 +150,11 @@ msgstr "모든 파일"
 
 #: MyFrame.py:235
 msgid "Select Files to Upload"
-msgstr "선택 업로드 파일"
+msgstr "업로드할 파일 선택"
 
 #: MyFrame.py:257
 msgid "Unsupported File Format"
-msgstr "지원되지 않는 파일 형식"
+msgstr "파일 형식은 지원되지 않습니다"
 
 #: MyFrame.py:260
 msgid "Too Large File"
@@ -162,15 +162,15 @@ msgstr "파일이 너무 큽니다"
 
 #: MyFrame.py:268
 msgid "Select at least one file for uploading."
-msgstr "업로드를위한 적어도 하나의 파일을 선택합니다."
+msgstr "적어도 하나의 파일 업로드를 선택하세요."
 
 #: MyFrame.py:304
 msgid "Post Successfully to Board \"%s\"."
-msgstr "게시물이 성공적으로위원회에 \"%s\"을."
+msgstr "성공적으로 % s의 버전에 전달."
 
 #: MyFrame.py:330
 msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "(그것이 제대로 복사되었는지 아니 웹페이지 콘텐츠 reship, 검사 준비가되어 있습니다.)"
+msgstr "(당신은 좋은 사본을 가지고 있는지 확인하십시오 찾을 수있는 웹 페이지에 게시됩니다.)"
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -178,11 +178,11 @@ msgstr "디렉토리를 선택하십시오"
 
 #: MyFrame.py:437
 msgid "Failed to check for updates, try again later."
-msgstr "나중에 다시 시도, 업데이 트를 확인하지 못했습니다."
+msgstr "나중에 다시 시도해주십시오 실패한 업데이 트를 확인합니다."
 
 #: MyFrame.py:440
 msgid "A new version %s is available! Would you like to update now?"
-msgstr "새 버전 % s의 사용할 수 있습니다! 지금 업데이 트 하시겠습니까?"
+msgstr "%의 새 버전을 찾기 바디 즉시 업데이 트합니까?"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
@@ -190,7 +190,7 @@ msgstr "당신은 최신 버전을 사용하고 있습니다."
 
 #: MyFrame.py:446
 msgid "User \"%s\" has logged out."
-msgstr "사용자가 \"%s\"을 로그아웃했다."
+msgstr "사용자가 \"%s\"을 취소되었습니다."
 
 msgid "About"
 msgstr "소개"
@@ -208,73 +208,73 @@ msgid "Password"
 msgstr "비밀 번호"
 
 msgid "How to Use"
-msgstr "사용 방법"
+msgstr "사용하지 않습니다?"
 
 msgid "Auto Login"
 msgstr "자동 로그인"
 
 msgid "&Login"
-msgstr "& 로그인"
+msgstr "로그인"
 
 msgid "&Switch User..."
-msgstr "& 사용자 전환을 ..."
+msgstr "사용자 변경"
 
 msgid "Logo&ut..."
-msgstr "로고 & 유타 ..."
+msgstr "로그아웃"
 
 msgid "&Setting"
-msgstr "& 설정"
+msgstr "세트"
 
 msgid "&Preferences"
-msgstr "및 환경 설정"
+msgstr "환경 설정"
 
 msgid "Preferences"
 msgstr "환경 설정"
 
 msgid "Preferences..."
-msgstr "환경 설정 ..."
+msgstr "환경 설정"
 
 msgid "Preference..."
-msgstr "환경 설정 ..."
+msgstr "환경 설정"
 
 msgid "Always on &Top"
-msgstr "항상 켜져 & 탑"
+msgstr "항상 맨 위"
 
 msgid "&Help"
-msgstr "& 도움말"
+msgstr "도움말"
 
 msgid "Help"
 msgstr "도움말"
 
 msgid "&FAQ"
-msgstr "및 FAQ"
+msgstr "자주 묻는 질문"
 
 msgid "&Homepage"
-msgstr "& 홈페이지"
+msgstr "홈"
 
 msgid "Check for &Updates..."
-msgstr "용 및 업데이트 확인 ..."
+msgstr "업데이트 확인 ..."
 
 msgid "&About"
-msgstr "& 소개"
+msgstr "소개"
 
 msgid "Switch user"
-msgstr "스위치 사용자"
+msgstr "사용자 변경"
 
 msgid "FAQ"
 msgstr "자주 묻는 질문"
 
 msgid "Visit Homepage of UploadHelper"
-msgstr "UploadHelper의 홈페이지를 방문하여"
+msgstr "홈 보좌관은 태양, 그리고 달의 업로드 방문"
 
 msgid "Upload Files"
-msgstr "파일 업로드"
+msgstr "파일 올리기"
 
 msgid "Destination"
-msgstr "목적지"
+msgstr "대상 레이아웃"
 
 msgid "Locked"
-msgstr "옥내"
+msgstr "자물쇠"
 
 msgid "Browse..."
 msgstr "찾아보기 ..."
@@ -283,7 +283,7 @@ msgid "Upload"
 msgstr "업로드"
 
 msgid "Post Article"
-msgstr "게시물 기사"
+msgstr "출판 관련 기사"
 
 msgid "Title"
 msgstr "제목"
@@ -292,34 +292,37 @@ msgid "Signature"
 msgstr "서명"
 
 msgid "Post"
-msgstr "우편"
+msgstr "출판"
 
 msgid "Reship Webpage"
-msgstr "Reship 웹페이지"
+msgstr "링크 페이지"
 
 msgid "Copy the Webpage Fraction to Clipboard, then Click"
-msgstr "다음 클립 보드로 복사 웹페이지 분율,를 클릭하세요"
+msgstr "다음 클립 보드에 파편 페이지를 클릭하십시오"
 
 msgid "Start Reshipping"
-msgstr "시작 Reshipping"
+msgstr "시작 링크"
 
 msgid "Progress"
-msgstr "진행"
+msgstr "현재 진행"
 
 msgid "Login OK. Prepare to upload files."
-msgstr "로그인이 좋아요. 준비 파일을 업로드할 수 있습니다."
+msgstr "로그인, 파일을 업로드할 준비가 성공하지 못했습니다."
 
 msgid "Visit Homepage"
-msgstr "홈페이지 방문"
+msgstr "액세스 홈"
 
 msgid "Show about dialog"
-msgstr "보기에 대한 대화"
+msgstr "디스플레이 정보 대화 상자"
 
 msgid "Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at"
-msgstr "파이썬이 너무 오래되었습니다. 새 2.x에서을 (아무 3.0 이상) 버전에서 가져오기"
+msgstr "파이썬 버전이 너무 낮습니다, (3.0을 지원하지 않는 이상) 새 2.x에서 버전을 다운로드하려면 여기를 방문하시기 바랍니다"
 
 msgid "Python 3 is not supported. Get a 2.X version at"
-msgstr "파이썬 3는 지원되지 않습니다. 2.x에서 버전에서 가져오기"
+msgstr "2.x에서 버전을 다운로드하려면 여기를 방문하시기 바랍니다, 파이썬 3을 지원하지 않습니다"
 
 msgid "wxPython is too old. Get a newer version at"
-msgstr "wxPython가 너무 오래된 버전입니다. 최신 버전에서 가져오기"
+msgstr "wxPython 버전이 너무 낮습니다, 여기에 새 버전을 다운로드하십시오"
+
+msgid "&Language"
+msgstr "언어"

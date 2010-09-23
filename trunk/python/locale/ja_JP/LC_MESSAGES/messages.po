@@ -18,34 +18,34 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "UploadHelper"
+msgstr "ASEのアシスタント中国アップロード"
 
 msgid "Select File(s) to Upload"
-msgstr "[ファイル]（s）がアップロードする"
+msgstr "アップロードするファイルを選択してください"
 
 #: consts.py:15
 msgid "&Add Files..."
-msgstr "とファイルを追加..."
+msgstr "ファイルの追加..."
 
 #: consts.py:15
 msgid "A&dd Directory..."
-msgstr "＆ddのディレクトリ..."
+msgstr "ディレクトリを追加..."
 
 #: consts.py:16
 msgid "&Remove Selected"
-msgstr "＆選択項目の削除"
+msgstr "選択削除"
 
 #: consts.py:16
 msgid "Remove &Copies"
-msgstr "削除＆コピー"
+msgstr "重複削除"
 
 #: consts.py:16
 msgid "Remove &Invalid"
-msgstr "削除＆無効"
+msgstr "無効な削除"
 
 #: consts.py:17
 msgid "Remove A&ll"
-msgstr "＆LLを削除"
+msgstr "すべて削除"
 
 #: consts.py:23
 msgid "Error"
@@ -53,7 +53,7 @@ msgstr "エラー"
 
 #: consts.py:24
 msgid "Fail"
-msgstr "失敗"
+msgstr "障害"
 
 #: consts.py:25
 msgid "Error code"
@@ -61,24 +61,24 @@ msgstr "エラーコード"
 
 #: consts.py:26
 msgid "Network Error"
-msgstr "ネットワークエラー"
+msgstr "ネットワーク接続エラー"
 
 #: consts.py:27
 msgid "Fill the blanks first."
-msgstr "記入ブランク最初の。"
+msgstr "完全に記入してください"
 
 #: consts.py:28 MyFrame.py:262
 #, python-format
 msgid "%d File(s) Selected"
-msgstr "％d個のファイル（の）選択"
+msgstr "％d個の選択したファイル"
 
 #: consts.py:29
 msgid "Unknown Error"
-msgstr "不明なエラー"
+msgstr "不明なエラーが発生しました"
 
 #: consts.py:30
 msgid "Invalid File"
-msgstr "無効なファイル"
+msgstr "不正なファイル"
 
 #: consts.py:31
 msgid "Check for Updates"
@@ -94,11 +94,11 @@ msgstr "アップロード"
 
 #: consts.py:35
 msgid "Finished"
-msgstr "仕上がり"
+msgstr "完全な"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "ヘルプやアドバイスについてはお問い合わせtyllr（で）Ryghさん掲示板"
+msgstr "コメントは、提案は、太陽と接触して、月のtyllrしてください"
 
 #: DlgAbout.py:14
 msgid "Version"
@@ -106,15 +106,15 @@ msgstr "バージョン"
 
 #: DlgAbout.py:14
 msgid "Author"
-msgstr "著者"
+msgstr "の"
 
 #: DlgAbout.py:14
 msgid "Homepage"
-msgstr "ホームページ"
+msgstr "ホーム"
 
 #: DlgAbout.py:14
 msgid "License"
-msgstr "ライセンス"
+msgstr "使用許諾契約書"
 
 #: MyFrame.py:59
 msgid "Filename"
@@ -134,7 +134,7 @@ msgstr "ユーザー"
 
 #: MyFrame.py:234
 msgid "All Supported Files"
-msgstr "サポートされているすべてのファイル"
+msgstr "サポートするすべての文書"
 
 #: MyFrame.py:234
 msgid "Image Files"
@@ -150,27 +150,27 @@ msgstr "すべてのファイル"
 
 #: MyFrame.py:235
 msgid "Select Files to Upload"
-msgstr "を選択してアップロードするファイル"
+msgstr "アップロードするファイルを選択してください"
 
 #: MyFrame.py:257
 msgid "Unsupported File Format"
-msgstr "サポートされていないファイル形式"
+msgstr "ファイル形式はサポートされていません。"
 
 #: MyFrame.py:260
 msgid "Too Large File"
-msgstr "大きすぎるファイル"
+msgstr "ファイルが大きすぎる"
 
 #: MyFrame.py:268
 msgid "Select at least one file for uploading."
-msgstr "アップロードするための少なくとも1つのファイルを選択してください。"
+msgstr "少なくとも1つのファイルがアップロードを選択してください。"
 
 #: MyFrame.py:304
 msgid "Post Successfully to Board \"%s\"."
-msgstr "POSTが正常に理事会に\"％s \"は。"
+msgstr "正常に％sのバージョンに配信されます。"
 
 #: MyFrame.py:330
 msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "（それが正しくコピーされている場合もWebページのコンテンツは他の船に移す、チェックできるようになります。）"
+msgstr "（あなたは良いコピーを持っているかどうかを確認してください見つからない場合Webページに掲示される。）"
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -178,11 +178,11 @@ msgstr "ディレクトリを選択してください"
 
 #: MyFrame.py:437
 msgid "Failed to check for updates, try again later."
-msgstr "後でもう一度試して、更新プログラムの確認に失敗しました。"
+msgstr "後でもう一度試してみてください、失敗した更新を確認してください。"
 
 #: MyFrame.py:440
 msgid "A new version %s is available! Would you like to update now?"
-msgstr "新しいバージョンの％sが利用可能です！あなたは今すぐアップデートをご希望ですか？"
+msgstr "新しいバージョンの％を表示して下さい！代わりにすぐ更新しますか？"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
@@ -190,7 +190,7 @@ msgstr "あなたは、最新のバージョンを使用している。"
 
 #: MyFrame.py:446
 msgid "User \"%s\" has logged out."
-msgstr "ユーザは\"％s \"はログアウトしています。"
+msgstr "ユーザは\"％s \"は取り消されました。"
 
 msgid "About"
 msgstr "について"
@@ -208,70 +208,70 @@ msgid "Password"
 msgstr "パスワード"
 
 msgid "How to Use"
-msgstr "どのように使用して"
+msgstr "使用しないでしょうか？"
 
 msgid "Auto Login"
 msgstr "自動ログイン"
 
 msgid "&Login"
-msgstr "ログイン＆"
+msgstr "ログイン"
 
 msgid "&Switch User..."
-msgstr "＆ユーザーの切り替え..."
+msgstr "ユーザーを変更"
 
 msgid "Logo&ut..."
-msgstr "ロゴは、＆utの..."
+msgstr "ログアウト"
 
 msgid "&Setting"
-msgstr "＆設定"
+msgstr "設定"
 
 msgid "&Preferences"
-msgstr "＆設定"
+msgstr "設定"
 
 msgid "Preferences"
 msgstr "設定"
 
 msgid "Preferences..."
-msgstr "設定..."
+msgstr "設定"
 
 msgid "Preference..."
-msgstr "優先順位..."
+msgstr "設定"
 
 msgid "Always on &Top"
-msgstr "常に＆トップ"
+msgstr "常に手前に表示する"
 
 msgid "&Help"
-msgstr "ヘルプ＆"
+msgstr "ヘルプ"
 
 msgid "Help"
 msgstr "ヘルプ"
 
 msgid "&FAQ"
-msgstr "＆よくあるご質問"
+msgstr "よくある質問"
 
 msgid "&Homepage"
-msgstr "＆ホームページ"
+msgstr "ホーム"
 
 msgid "Check for &Updates..."
-msgstr "用＆アップデート確認..."
+msgstr "更新プログラムの確認..."
 
 msgid "&About"
-msgstr "＆について"
+msgstr "について"
 
 msgid "Switch user"
-msgstr "スイッチユーザー"
+msgstr "ユーザーを変更"
 
 msgid "FAQ"
-msgstr "よくあるご質問"
+msgstr "よくある質問"
 
 msgid "Visit Homepage of UploadHelper"
-msgstr "UploadHelperのホームページを参照してください"
+msgstr "ホーム側近は太陽、月をアップロード参照してください。"
 
 msgid "Upload Files"
-msgstr "ファイルのアップロード"
+msgstr "ファイルをアップロード"
 
 msgid "Destination"
-msgstr "宛先"
+msgstr "ターゲットのレイアウト"
 
 msgid "Locked"
 msgstr "ロック"
@@ -283,7 +283,7 @@ msgid "Upload"
 msgstr "アップロード"
 
 msgid "Post Article"
-msgstr "投稿記事"
+msgstr "公開された記事"
 
 msgid "Title"
 msgstr "タイトル"
@@ -292,34 +292,37 @@ msgid "Signature"
 msgstr "署名"
 
 msgid "Post"
-msgstr "投稿"
+msgstr "公開"
 
 msgid "Reship Webpage"
-msgstr "再び乗船するウェブページ"
+msgstr "リンクページ"
 
 msgid "Copy the Webpage Fraction to Clipboard, then Click"
-msgstr "してクリップボードにコピーしてウェブページの分数[OK]をクリック"
+msgstr "クリップボードへのフラグメントのページ]をクリックします"
 
 msgid "Start Reshipping"
-msgstr "[スタート] Reshipping"
+msgstr "[スタート]リンク"
 
 msgid "Progress"
-msgstr "進行状況"
+msgstr "現在の進行"
 
 msgid "Login OK. Prepare to upload files."
-msgstr "ログインOK]をクリックします。準備は、ファイルをアップロードします。"
+msgstr "ログインには、ファイルをアップロードする準備ができて成功していた。"
 
 msgid "Visit Homepage"
-msgstr "訪問ホームページ"
+msgstr "アクセスホーム"
 
 msgid "Show about dialog"
-msgstr "表示は約ダイアログ"
+msgstr "表示[バージョン情報]ダイアログボックス"
 
 msgid "Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at"
-msgstr "Pythonは古すぎます。新しい2.Xを（なし3.0以上）のバージョンで取得"
+msgstr "Pythonのバージョンが低すぎると、（3.0をサポートしていない以上）新しい2.xバージョンをダウンロードするにはここをご覧ください"
 
 msgid "Python 3 is not supported. Get a 2.X version at"
-msgstr "Pythonの3はサポートされていません。バージョン2.xをで取得"
+msgstr "2.Xのバージョンをダウンロードするにはここを参照してください、Pythonの3をサポートしません。"
 
 msgid "wxPython is too old. Get a newer version at"
-msgstr "wxPythonは古すぎます。新しいバージョンをで取得"
+msgstr "wxPythonのバージョンが低すぎると、ここに新しいバージョンをダウンロードしてください"
+
+msgid "&Language"
+msgstr "言語"

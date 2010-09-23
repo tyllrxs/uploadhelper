@@ -85,6 +85,11 @@ class MyFrame(wx.Frame):
         mnuPreference = wx.MenuItem(mnuSetting, wx.ID_PREFERENCES)
         mnuSetting.AppendItem(mnuPreference)
         mnuSetting.AppendSeparator()
+        mnuLang = wx.Menu()
+        for lang in APPLANGUAGES:
+        	mnuLang.AppendItem(wx.MenuItem(mnuLang, wx.NewId(), _(lang), "", wx.ITEM_RADIO))
+        mnuSetting.AppendMenu(-1, _("&Language"), mnuLang)
+        mnuSetting.AppendSeparator()
         mnuAlwaysOnTop = wx.MenuItem(mnuSetting, wx.NewId(), _("Always on &Top"), "", wx.ITEM_CHECK)
         mnuSetting.AppendItem(mnuAlwaysOnTop)
         menuBar.Append(mnuSetting, _("&Setting"))
