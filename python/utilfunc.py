@@ -4,12 +4,16 @@ import os, sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-import re
+import re, commands
 import wx
 import urllib, urllib2
 import ConfigParser
 from consts import *
 from httpredirect import *
+
+def get_python_version():
+	(status, pyver) = commands.getstatusoutput('python -V')
+	return re.search(r'ython\s+([\d\.]+)', pyver).group(1)
 
 def get_html_info(html):
 	head = re.search(r'<title>(.*)</title>', html).group(1)

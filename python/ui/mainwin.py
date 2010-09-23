@@ -162,6 +162,18 @@ class MyFrame(wx.Frame):
 		self.lstUpFile.SetColumnWidth(3, 100)
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
 	
+	# On Mac OS X, check the versions of python and wxpython
+	if sys.platform == 'darwin':
+		pyver = get_python_version()
+		if pyver < '2.5':
+			self.txtReship.AppendText('\n%s:\n%s\n' % (_('Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at'), HOME_PYTHON))
+		elif pyver >= '3':
+			self.txtReship.AppendText('\n%s:\n%s\n' % (_('Python 3 is not supported. Get a 2.X version at'), HOME_PYTHON))
+		
+	    	wxver = wx.VERSION
+	    	if '.'.join([str(i) for i in wxver[:3]]) < '2.8.10':
+	    		self.txtReship.AppendText('\n%s:\n%s\n' % (_('wxPython is too old. Get a newer version at'), HOME_WXPYTHON))
+	
 	# make the list control be a drop target
 	dt = ListDrop(self.lstUpFile)
         self.lstUpFile.SetDropTarget(dt)
@@ -171,6 +183,7 @@ class MyFrame(wx.Frame):
 	self.UploadedMode = False
 	self.ReshipMode = False
 	self.to_upload = False
+	self.to_post = False
 	
 	# receive message from check for updates thread
 	Publisher().subscribe(self.updateDisplay, "update")
@@ -231,7 +244,6 @@ class MyFrame(wx.Frame):
         object_1.Add(self.notebook, 1, wx.EXPAND, 0)
         self.SetSizer(object_1)
         self.Fit()
-        self.SetSize(wx.Size(600, 600))
         self.Layout()
         self.CentreOnScreen()
 
@@ -285,18 +297,21 @@ class MyFrame(wx.Frame):
 	
     def get_dialog_path(self):
 	return read_config('Upload', 'DefaultPath')
+
+    def show_login(self):
+	dialog = MyLoginDialog(self)
+	dialog.ShowModal()
 	
     def OnCreate(self, evt):
     	self.Unbind(wx.EVT_WINDOW_CREATE)
 	if not (self.get_user_id() and self.get_auto_login()):
-		dialog = MyLoginDialog(self)
-		dialog.ShowModal()
-		dialog.Close()
+		self.show_login()
+	self.SetSize(wx.Size(600, 600))
+        self.Layout()
+        self.CentreOnScreen()
 
     def OnmnuSwitchClick(self, evt):
-	dialog = MyLoginDialog(self)
-	dialog.ShowModal()
-	dialog.Close()
+	self.show_login()
 	
     def OnmnuLogoutClick(self, evt):
 	LogoutThread(self.get_host(), self.get_cookie())
@@ -319,7 +334,6 @@ class MyFrame(wx.Frame):
     def OnmnuAboutClick(self, evt):
 	dialog3 = MyAboutDialog(self)
 	dialog3.ShowModal()
-	dialog3.Destroy()
 
     def OnZoneChange(self, evt):
 	tmp = self.cmbBoard.GetSelection()        
@@ -417,6 +431,7 @@ class MyFrame(wx.Frame):
 		self.lstUpFile.SetStringItem(i, 0, str(i+1))
 
     def OnbtnPostClick(self, evt):
+    	self.to_post = False
 	self.lstUpFile.DeleteAllItems()
 	self.lblProgress.SetLabel(MSG_FILE_SELECTED % 0)
 	self.gagProgress.SetValue(0)
@@ -428,47 +443,47 @@ class MyFrame(wx.Frame):
 		urllib.urlencode({'title': self.txtTitle.GetValue().encode('gb18030'), 
 				'signature': self.txtSignature.GetValue(),
 				'text': self.txtBody.GetValue().encode('gb18030')}))
+	self.btnPost.Enable()
 	if info == '':
 		wx.MessageBox(_('Post Successfully to Board "%s".') % self.get_board_name(True))
 		self.PostedMode = True
 	elif info.find('No User') >= 0:
-		evt = wx.CommandEvent()
-		self.OnmnuSwitchClick(evt)
-		self.OnbtnPostClick(evt)
+		self.to_post = True
+		self.show_login()
 	else:
 		tips = info.split('|')
 		wx.MessageBox(tips[1], tips[0])
-	self.btnPost.Enable()
 
     def OnbtnReshipClick(self, evt):
         if not wx.TheClipboard.IsOpened():
 		wx.TheClipboard.Open()
-	do = wx.CustomDataObject('HTML Format')
-        if not wx.TheClipboard.GetData(do):
-        	do = wx.CustomDataObject('text/html')
-		wx.TheClipboard.GetData(do)
+	# List all possible clipboard formats for HTML on Windows, Linux and Mac
+	formats = ['HTML Format', 'text/html', 'public.html', 'com.apple.webarchive']
+	for fm in formats:
+		do = wx.CustomDataObject(fm)
+        	if wx.TheClipboard.GetData(do):
+			break
     	wx.TheClipboard.Close()
     	try:
-    		# Windows clipboard formats are all utf8 , independent on browsers
-    		if sys.platform.startswith('win32'):
+    		# non-linux clipboard formats are all utf8
+    		if sys.platform.find('linux') < 0:
     			raise_error = 1 / 0
-    		html = do.GetData().decode('utf16') # non-win Firefox
+    		html = do.GetData().decode('utf16') # linux Firefox, maybe safari on mac (to do...)
     	except:
     		try:
-    			html = do.GetData().decode('utf8') # IE, Chrome, win Firefox
+    			html = do.GetData().decode('utf8') # IE, Chrome, non-linux Firefox
     		except:
-    			wx.MessageBox('Unknown Format')
-    			return
+    			html = do.GetData()
     	if html.strip() == '':
     		self.txtReship.SetValue(_('(No webpage content is ready to reship, check if it has been copied correctly.)'))
     		return
-    	self.txtReship.SetValue(prettify_html(html).decode('utf8')) # decode to display correctly in Windows
+    	self.txtReship.SetValue(html) # decode to display correctly in Windows
     	self.txtReship.AppendText(SEPARATOR)
     	urls, html = parse_html_images(html)
     	html = parse_html_texts(html)
-    	self.txtReship.AppendText(html.decode('utf8'))
+    	self.txtReship.AppendText(html)
     	self.txtReship.AppendText(SEPARATOR)
-    	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html.decode('utf8')))
+    	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html))
     	DownloadThread(self, urls)
 
     def OnlstUpFileRClick(self, evt):
@@ -537,8 +552,7 @@ class MyFrame(wx.Frame):
 		if t.find('No User') >= 0:
 			self.btnUpload.Enable()
 			self.to_upload = True
-			evt = wx.CommandEvent()
-			self.OnmnuSwitchClick(evt)
+			self.show_login()
 		elif t.split('|')[1] == '':
 			self.start_upload_threads()
 		else:
