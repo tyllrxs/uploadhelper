@@ -95,6 +95,9 @@ class MyLoginDialog(wx.Dialog):
 			if self.Parent.to_upload:
 				evt = wx.CommandEvent()
 				self.Parent.OnbtnUploadClick(evt)
+			if self.Parent.to_post:
+				evt = wx.CommandEvent()
+				self.Parent.OnbtnPostClick(evt)
 			self.Close()
 	
     def OnClose(self, evt):
