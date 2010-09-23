@@ -74,11 +74,11 @@ class MyFrame(wx.Frame):
         menuBar = wx.MenuBar()
         mnuLogin = wx.Menu()
         mnuSwitch = wx.MenuItem(mnuLogin, wx.NewId(), _("&Switch User..."), "", wx.ITEM_NORMAL)
-        mnuSwitch.SetBitmap(wx.ArtProvider.GetBitmap(wx.ART_ADD_BOOKMARK, wx.ART_MENU))
+        mnuSwitch.SetBitmap(wx.Bitmap('icon/16/switch.png'))
         mnuLogin.AppendItem(mnuSwitch)
         mnuLogin.AppendSeparator()
         mnuLogout = wx.MenuItem(mnuLogin, wx.NewId(), _("Logo&ut..."), "", wx.ITEM_NORMAL)
-        mnuLogout.SetBitmap(wx.ArtProvider.GetBitmap(wx.ART_DEL_BOOKMARK, wx.ART_MENU))
+        mnuLogout.SetBitmap(wx.Bitmap('icon/16/logout.png'))
         mnuLogin.AppendItem(mnuLogout)
         menuBar.Append(mnuLogin, _("&Login"))
         mnuSetting = wx.Menu()
@@ -93,7 +93,7 @@ class MyFrame(wx.Frame):
         mnuHelp.AppendItem(mnuFAQ)
         mnuHelp.AppendSeparator()
         mnuHomepage = wx.MenuItem(mnuHelp, wx.NewId(), _("&Homepage"), _("Visit Homepage"), wx.ITEM_NORMAL)
-        mnuHomepage.SetBitmap(wx.ArtProvider.GetBitmap(wx.ART_GO_HOME, wx.ART_MENU))
+        mnuHomepage.SetBitmap(wx.Bitmap('icon/16/home.png'))
         mnuHelp.AppendItem(mnuHomepage)
         mnuCheckUpdate = wx.MenuItem(mnuHelp, wx.NewId(), _("Check for &Updates..."), "", wx.ITEM_NORMAL)
         mnuHelp.AppendItem(mnuCheckUpdate)
@@ -115,13 +115,13 @@ class MyFrame(wx.Frame):
 	self.SetMenuBar(menuBar)
 
     def __set_toolbar(self):
-    	toolBar = wx.ToolBar(self)
-	tlbSwitch = toolBar.AddLabelTool(-1, _("Switch user"), wx.ArtProvider.GetBitmap(wx.ART_ADD_BOOKMARK, wx.ART_TOOLBAR), wx.NullBitmap, wx.ITEM_NORMAL, _("Switch user"), _("Switch user"))
-        tlbLogout = toolBar.AddLabelTool(-1, _("Logout"), wx.ArtProvider.GetBitmap(wx.ART_DEL_BOOKMARK, wx.ART_TOOLBAR), wx.NullBitmap, wx.ITEM_NORMAL, _("Logout"), _("Logout"))
+    	toolBar = wx.ToolBar(self, style = wx.TB_TEXT)
+	tlbSwitch = toolBar.AddLabelTool(-1, _("Switch user"), wx.Bitmap('icon/24/switch.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Switch user"), _("Switch user"))
+        tlbLogout = toolBar.AddLabelTool(-1, _("Logout"), wx.Bitmap('icon/24/logout.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Logout"), _("Logout"))
         toolBar.AddSeparator()
-        toolBar.AddLabelTool(-1, _("Preferences"), wx.ArtProvider.GetBitmap(wx.ART_EXECUTABLE_FILE, wx.ART_TOOLBAR), wx.NullBitmap, wx.ITEM_NORMAL, _("Preferences"), _("Preferences"))
+        toolBar.AddLabelTool(-1, _("Preferences"), wx.Bitmap('icon/24/setting.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Preferences"), _("Preferences"))
         toolBar.AddSeparator()
-        tlbFAQ = toolBar.AddLabelTool(wx.ID_HELP, _("FAQ"), wx.ArtProvider.GetBitmap(wx.ART_HELP, wx.ART_TOOLBAR), wx.NullBitmap, wx.ITEM_NORMAL, _("FAQ"), _("FAQ"))
+        tlbFAQ = toolBar.AddLabelTool(wx.ID_HELP, _("FAQ"), wx.Bitmap('icon/24/help.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("FAQ"), _("FAQ"))
         # Bind events
         self.Bind(wx.EVT_TOOL, self.OnmnuSwitchClick, tlbSwitch)
 	self.Bind(wx.EVT_TOOL, self.OnmnuLogoutClick, tlbLogout)
@@ -146,8 +146,8 @@ class MyFrame(wx.Frame):
 	self.cmbPostBoard.SetSelection(read_config_int('Upload', 'PostBoard', 16))
 	self.chkLock.SetValue(read_config_bool('Upload', 'UpBoardLock'))
 	il = wx.ImageList(16,16, True)
-	for name in [wx.ART_WARNING, wx.ART_GO_UP, wx.ART_TICK_MARK, wx.ART_CROSS_MARK, wx.ART_GO_DOWN]:
-		il.Add(wx.ArtProvider.GetBitmap(name, wx.ART_OTHER))
+	for name in ['alarm', 'process', 'ok', 'error']:
+		il.Add(wx.Bitmap('icon/indicator/%s.png' % name))
 	self.lstUpFile.AssignImageList(il, wx.IMAGE_LIST_SMALL)
 	for col, text in enumerate(['No.', _('Filename'), '%s (KB)' % _('Size'), _('Status')]):
 		if col == 0 or col == 2:
@@ -162,8 +162,8 @@ class MyFrame(wx.Frame):
 		self.lstUpFile.SetColumnWidth(3, 100)
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
 	
-	# On Mac OS X, check the versions of python and wxpython
-	if sys.platform == 'darwin':
+	# check the versions of python and wxpython
+	if not sys.platform.startswith('win32'):
 		pyver = get_python_version()
 		if pyver < '2.5':
 			self.txtReship.AppendText('\n%s:\n%s\n' % (_('Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at'), HOME_PYTHON))
