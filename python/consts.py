@@ -60,6 +60,6 @@ if not os.path.exists(TEMP_DIR):
     os.makedirs(TEMP_DIR)
 
 CONFIG_FILE = os.path.join(CONFIG_ROOT, 'user.conf')
-
+LOG_FILE = os.path.join(CONFIG_ROOT, 'log.txt')
 
 STATUSBAR_INFO = ['', _('Contact tyllr (at) RYGH BBS for help or advice')]

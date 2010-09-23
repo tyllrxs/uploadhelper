@@ -18,315 +18,308 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "日月光华上传助手"
+msgstr "UploadHelper"
 
 msgid "Select File(s) to Upload"
-msgstr "选择要上传的文件"
+msgstr "Selecione Arquivo (s) para carregar"
 
 #: consts.py:15
 msgid "&Add Files..."
-msgstr "添加文件(&A)..."
+msgstr "& Add Files ..."
 
 #: consts.py:15
 msgid "A&dd Directory..."
-msgstr "添加目录(&D)..."
+msgstr "A & dd Directory ..."
 
 #: consts.py:16
 msgid "&Remove Selected"
-msgstr "移除所选(&R)"
+msgstr "& Remover Selecionados"
 
 #: consts.py:16
 msgid "Remove &Copies"
-msgstr "移除重复的(&C)"
+msgstr "Retire e Cópias"
 
 #: consts.py:16
 msgid "Remove &Invalid"
-msgstr "移除无效的(&I)"
+msgstr "Retire e inválido"
 
 #: consts.py:17
 msgid "Remove A&ll"
-msgstr "移除所有(&L)"
+msgstr "Remover A & ll"
 
 #: consts.py:23
 msgid "Error"
-msgstr "错误"
+msgstr "Erro"
 
 #: consts.py:24
 msgid "Fail"
-msgstr "失败"
+msgstr "Não"
 
 #: consts.py:25
 msgid "Error code"
-msgstr "错误代码"
+msgstr "Código de erro"
 
 #: consts.py:26
 msgid "Network Error"
-msgstr "网络连接错误"
+msgstr "Erro de rede"
 
 #: consts.py:27
 msgid "Fill the blanks first."
-msgstr "请先填写完整"
+msgstr "Preencha os espaços em branco em primeiro lugar."
 
 #: consts.py:28 MyFrame.py:262
 #, python-format
 msgid "%d File(s) Selected"
-msgstr "选择了 %d 个文件"
+msgstr "Arquivo% d (s) selecionados"
 
 #: consts.py:29
 msgid "Unknown Error"
-msgstr "未知错误"
+msgstr "Erro Desconhecido"
 
 #: consts.py:30
 msgid "Invalid File"
-msgstr "无效的文件"
+msgstr "Arquivo inválido"
 
 #: consts.py:31
 msgid "Check for Updates"
-msgstr "检查更新"
+msgstr "Check for Updates"
 
 #: consts.py:33
 msgid "Logout"
-msgstr "注销"
+msgstr "Logout"
 
 #: consts.py:34
 msgid "Uploading"
-msgstr "正在上传"
+msgstr "Uploading"
 
 #: consts.py:35
 msgid "Finished"
-msgstr "完成"
+msgstr "Terminou"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "如有意见、建议，请与日月光华tyllr联系"
+msgstr "tyllr contato (at) BBS RYGH ajuda ou conselhos"
 
 #: DlgAbout.py:14
 msgid "Version"
-msgstr "版本"
+msgstr "Versão"
 
 #: DlgAbout.py:14
 msgid "Author"
-msgstr "作者"
+msgstr "Autor"
 
 #: DlgAbout.py:14
 msgid "Homepage"
-msgstr "主页"
+msgstr "Homepage"
 
 #: DlgAbout.py:14
 msgid "License"
-msgstr "授权协议"
+msgstr "Licença"
 
 #: MyFrame.py:59
 msgid "Filename"
-msgstr "文件名"
+msgstr "Nome do arquivo"
 
 #: MyFrame.py:59
 msgid "Size"
-msgstr "大小"
+msgstr "Tamanho"
 
 #: MyFrame.py:59
 msgid "Status"
-msgstr "状态"
+msgstr "Status"
 
 #: MyFrame.py:179
 msgid "User"
-msgstr "用户"
+msgstr "Usuário"
 
 #: MyFrame.py:234
 msgid "All Supported Files"
-msgstr "所有支持的文件"
+msgstr "Todos os arquivos suportados"
 
 #: MyFrame.py:234
 msgid "Image Files"
-msgstr "图片文件"
+msgstr "Arquivos de Imagem"
 
 #: MyFrame.py:234
 msgid "PDF Documents"
-msgstr "PDF 文档"
+msgstr "Documentos em PDF"
 
 #: MyFrame.py:234
 msgid "All Files"
-msgstr "所有文件"
+msgstr "Todos os Arquivos"
 
 #: MyFrame.py:235
 msgid "Select Files to Upload"
-msgstr "选择要上传的文件"
+msgstr "Selecionar arquivos para upload"
 
 #: MyFrame.py:257
 msgid "Unsupported File Format"
-msgstr "不支持的文件格式"
+msgstr "Formato de arquivo não suportado"
 
 #: MyFrame.py:260
 msgid "Too Large File"
-msgstr "文件太大"
+msgstr "Arquivo muito grande"
 
 #: MyFrame.py:268
 msgid "Select at least one file for uploading."
-msgstr "请至少选择一个文件上传。"
+msgstr "Selecione pelo menos um arquivo para upload."
 
 #: MyFrame.py:304
 msgid "Post Successfully to Board \"%s\"."
-msgstr "成功发表到 %s 版。"
+msgstr "Post com sucesso para o Conselho \"%s\"."
 
 #: MyFrame.py:330
-msgid ""
-"(No webpage content is ready to reship, check if it has been copied "
-"correctly.)"
-msgstr ""
-"(没有找到要转贴的网页内容，请检查是否已经复制好。)"
+msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
+msgstr "(Nenhum conteúdo de páginas web está pronta para reenviar, verifique se ele foi copiado corretamente.)"
 
 #: MyFrame.py:361
 msgid "Choose a directory"
-msgstr "选择一个目录"
+msgstr "Escolha um diretório"
 
 #: MyFrame.py:437
 msgid "Failed to check for updates, try again later."
-msgstr "检查更新失败，请稍后重试。"
+msgstr "Falha ao verificar atualizações, tente novamente mais tarde."
 
 #: MyFrame.py:440
-msgid ""
-"A new version %s is available!\n"
-"Would you like to update now?"
-msgstr ""
-"发现新版本 %s !\n"
-"是否立即更新？"
+msgid "A new version %s is available! Would you like to update now?"
+msgstr "A nova versão% s está disponível! Deseja atualizar agora?"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
-msgstr "你正在使用最新版本。"
+msgstr "Você está usando a versão mais recente."
 
 #: MyFrame.py:446
 msgid "User \"%s\" has logged out."
-msgstr "用户 \"%s\" 已注销。"
+msgstr "O usuário \"%s\" foi desconectado."
 
 msgid "About"
-msgstr "关于"
+msgstr "Sobre"
 
 msgid "OK"
-msgstr "确定"
+msgstr "OK"
 
 msgid "Login"
-msgstr "登录"
+msgstr "Login"
 
 msgid "BBS host"
-msgstr "BBS 主机"
+msgstr "host BBS"
 
 msgid "Password"
-msgstr "密码"
+msgstr "Senha"
 
 msgid "How to Use"
-msgstr "还不会使用?"
+msgstr "Como usar"
 
 msgid "Auto Login"
-msgstr "自动登录"
+msgstr "Auto Login"
 
 msgid "&Login"
-msgstr "登录(&L)"
+msgstr "Login &"
 
 msgid "&Switch User..."
-msgstr "更改用户(&S)"
+msgstr "& Switch User ..."
 
 msgid "Logo&ut..."
-msgstr "注销(&U)"
+msgstr "Logo & ut ..."
 
 msgid "&Setting"
-msgstr "设置(&S)"
+msgstr "& Ambiente"
 
 msgid "&Preferences"
-msgstr "首选项(&P)"
+msgstr "& Preferências"
 
 msgid "Preferences"
-msgstr "首选项"
+msgstr "Preferências"
 
 msgid "Preferences..."
-msgstr "偏好设置"
+msgstr "Preferências ..."
 
 msgid "Preference..."
-msgstr "偏好设置"
+msgstr "Preferência ..."
 
 msgid "Always on &Top"
-msgstr "总在最前(&T)"
+msgstr "Always on Top &"
 
 msgid "&Help"
-msgstr "帮助(&H)"
+msgstr "& Ajuda"
 
 msgid "Help"
-msgstr "帮助"
+msgstr "Ajuda"
 
 msgid "&FAQ"
-msgstr "常见问题(&F)"
+msgstr "Perguntas e"
 
 msgid "&Homepage"
-msgstr "主页(&H)"
+msgstr "Homepage &"
 
 msgid "Check for &Updates..."
-msgstr "检查更新(&U)..."
+msgstr "Atualização Automática ..."
 
 msgid "&About"
-msgstr "关于(&A)"
+msgstr "& About"
 
 msgid "Switch user"
-msgstr "更改用户"
+msgstr "Mudar usuário"
 
 msgid "FAQ"
-msgstr "常见问题"
+msgstr "FAQ"
 
 msgid "Visit Homepage of UploadHelper"
-msgstr "访问日月光华上传助手主页"
+msgstr "Visite a página da UploadHelper"
 
 msgid "Upload Files"
-msgstr "上传文件"
+msgstr "Upload de Arquivos"
 
 msgid "Destination"
-msgstr "目标版面"
+msgstr "Destino"
 
 msgid "Locked"
-msgstr "锁定"
+msgstr "Bloqueado"
 
 msgid "Browse..."
-msgstr "浏览..."
+msgstr "Navegar ..."
 
 msgid "Upload"
-msgstr "上传"
+msgstr "Upload"
 
 msgid "Post Article"
-msgstr "发表文章"
+msgstr "Post artigo"
 
 msgid "Title"
-msgstr "标题"
+msgstr "Título"
 
 msgid "Signature"
-msgstr "签名档"
+msgstr "Assinatura"
 
 msgid "Post"
-msgstr "发表"
+msgstr "Post"
 
 msgid "Reship Webpage"
-msgstr "转贴网页"
+msgstr "Reenvio Webpage"
 
 msgid "Copy the Webpage Fraction to Clipboard, then Click"
-msgstr "将网页片段复制到剪贴板，然后点击"
+msgstr "Copie o Fração Webpage para área de transferência, clique"
 
 msgid "Start Reshipping"
-msgstr "开始转贴"
+msgstr "Iniciar Reexpedição"
 
 msgid "Progress"
-msgstr "目前进度"
+msgstr "Progresso"
 
 msgid "Login OK. Prepare to upload files."
-msgstr "登录成功，请准备上传文件。"
+msgstr "Entrar em OK. Prepare-se para carregar arquivos."
 
 msgid "Visit Homepage"
-msgstr "访问主页"
+msgstr "Visitar a Homepage"
 
 msgid "Show about dialog"
-msgstr "显示关于对话框"
+msgstr "Show de diálogo sobre"
 
 msgid "Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at"
-msgstr "Python 版本太低，请到这里下载新的2.X版本（不支持3.0及以上）"
+msgstr "Python é muito antiga. Faça uma 2.X mais recente (NO 3,0 ou acima) em versão"
 
 msgid "Python 3 is not supported. Get a 2.X version at"
-msgstr "不支持 Python 3，请到这里下载2.X版本"
+msgstr "Python 3 não é suportado. Obtenha uma versão 2.X na"
 
 msgid "wxPython is too old. Get a newer version at"
-msgstr "wxPython 版本太低，请到这里下载新版本"
+msgstr "wxPython é muito antiga. Obter uma versão mais recente na"

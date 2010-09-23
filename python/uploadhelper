@@ -23,5 +23,5 @@ class MyApp(wx.App):
 
 
 if __name__ == '__main__':
-    app = MyApp(False)
+    app = MyApp(True, LOG_FILE)
     app.MainLoop()

@@ -1,0 +1,325 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-08 11:51+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: consts.py:7
+msgid "UploadHelper"
+msgstr "UploadHelper"
+
+msgid "Select File(s) to Upload"
+msgstr "[ファイル]（s）がアップロードする"
+
+#: consts.py:15
+msgid "&Add Files..."
+msgstr "とファイルを追加..."
+
+#: consts.py:15
+msgid "A&dd Directory..."
+msgstr "＆ddのディレクトリ..."
+
+#: consts.py:16
+msgid "&Remove Selected"
+msgstr "＆選択項目の削除"
+
+#: consts.py:16
+msgid "Remove &Copies"
+msgstr "削除＆コピー"
+
+#: consts.py:16
+msgid "Remove &Invalid"
+msgstr "削除＆無効"
+
+#: consts.py:17
+msgid "Remove A&ll"
+msgstr "＆LLを削除"
+
+#: consts.py:23
+msgid "Error"
+msgstr "エラー"
+
+#: consts.py:24
+msgid "Fail"
+msgstr "失敗"
+
+#: consts.py:25
+msgid "Error code"
+msgstr "エラーコード"
+
+#: consts.py:26
+msgid "Network Error"
+msgstr "ネットワークエラー"
+
+#: consts.py:27
+msgid "Fill the blanks first."
+msgstr "記入ブランク最初の。"
+
+#: consts.py:28 MyFrame.py:262
+#, python-format
+msgid "%d File(s) Selected"
+msgstr "％d個のファイル（の）選択"
+
+#: consts.py:29
+msgid "Unknown Error"
+msgstr "不明なエラー"
+
+#: consts.py:30
+msgid "Invalid File"
+msgstr "無効なファイル"
+
+#: consts.py:31
+msgid "Check for Updates"
+msgstr "更新プログラムの確認"
+
+#: consts.py:33
+msgid "Logout"
+msgstr "ログアウト"
+
+#: consts.py:34
+msgid "Uploading"
+msgstr "アップロード"
+
+#: consts.py:35
+msgid "Finished"
+msgstr "仕上がり"
+
+#: consts.py:48
+msgid "Contact tyllr (at) RYGH BBS for help or advice"
+msgstr "ヘルプやアドバイスについてはお問い合わせtyllr（で）Ryghさん掲示板"
+
+#: DlgAbout.py:14
+msgid "Version"
+msgstr "バージョン"
+
+#: DlgAbout.py:14
+msgid "Author"
+msgstr "著者"
+
+#: DlgAbout.py:14
+msgid "Homepage"
+msgstr "ホームページ"
+
+#: DlgAbout.py:14
+msgid "License"
+msgstr "ライセンス"
+
+#: MyFrame.py:59
+msgid "Filename"
+msgstr "ファイル名"
+
+#: MyFrame.py:59
+msgid "Size"
+msgstr "サイズ"
+
+#: MyFrame.py:59
+msgid "Status"
+msgstr "ステータス"
+
+#: MyFrame.py:179
+msgid "User"
+msgstr "ユーザー"
+
+#: MyFrame.py:234
+msgid "All Supported Files"
+msgstr "サポートされているすべてのファイル"
+
+#: MyFrame.py:234
+msgid "Image Files"
+msgstr "イメージファイル"
+
+#: MyFrame.py:234
+msgid "PDF Documents"
+msgstr "PDF文書"
+
+#: MyFrame.py:234
+msgid "All Files"
+msgstr "すべてのファイル"
+
+#: MyFrame.py:235
+msgid "Select Files to Upload"
+msgstr "を選択してアップロードするファイル"
+
+#: MyFrame.py:257
+msgid "Unsupported File Format"
+msgstr "サポートされていないファイル形式"
+
+#: MyFrame.py:260
+msgid "Too Large File"
+msgstr "大きすぎるファイル"
+
+#: MyFrame.py:268
+msgid "Select at least one file for uploading."
+msgstr "アップロードするための少なくとも1つのファイルを選択してください。"
+
+#: MyFrame.py:304
+msgid "Post Successfully to Board \"%s\"."
+msgstr "POSTが正常に理事会に\"％s \"は。"
+
+#: MyFrame.py:330
+msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
+msgstr "（それが正しくコピーされている場合もWebページのコンテンツは他の船に移す、チェックできるようになります。）"
+
+#: MyFrame.py:361
+msgid "Choose a directory"
+msgstr "ディレクトリを選択してください"
+
+#: MyFrame.py:437
+msgid "Failed to check for updates, try again later."
+msgstr "後でもう一度試して、更新プログラムの確認に失敗しました。"
+
+#: MyFrame.py:440
+msgid "A new version %s is available! Would you like to update now?"
+msgstr "新しいバージョンの％sが利用可能です！あなたは今すぐアップデートをご希望ですか？"
+
+#: MyFrame.py:443
+msgid "You are using the latest version."
+msgstr "あなたは、最新のバージョンを使用している。"
+
+#: MyFrame.py:446
+msgid "User \"%s\" has logged out."
+msgstr "ユーザは\"％s \"はログアウトしています。"
+
+msgid "About"
+msgstr "について"
+
+msgid "OK"
+msgstr "[OK]を"
+
+msgid "Login"
+msgstr "ログイン"
+
+msgid "BBS host"
+msgstr "BBSのホスト"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "How to Use"
+msgstr "どのように使用して"
+
+msgid "Auto Login"
+msgstr "自動ログイン"
+
+msgid "&Login"
+msgstr "ログイン＆"
+
+msgid "&Switch User..."
+msgstr "＆ユーザーの切り替え..."
+
+msgid "Logo&ut..."
+msgstr "ロゴは、＆utの..."
+
+msgid "&Setting"
+msgstr "＆設定"
+
+msgid "&Preferences"
+msgstr "＆設定"
+
+msgid "Preferences"
+msgstr "設定"
+
+msgid "Preferences..."
+msgstr "設定..."
+
+msgid "Preference..."
+msgstr "優先順位..."
+
+msgid "Always on &Top"
+msgstr "常に＆トップ"
+
+msgid "&Help"
+msgstr "ヘルプ＆"
+
+msgid "Help"
+msgstr "ヘルプ"
+
+msgid "&FAQ"
+msgstr "＆よくあるご質問"
+
+msgid "&Homepage"
+msgstr "＆ホームページ"
+
+msgid "Check for &Updates..."
+msgstr "用＆アップデート確認..."
+
+msgid "&About"
+msgstr "＆について"
+
+msgid "Switch user"
+msgstr "スイッチユーザー"
+
+msgid "FAQ"
+msgstr "よくあるご質問"
+
+msgid "Visit Homepage of UploadHelper"
+msgstr "UploadHelperのホームページを参照してください"
+
+msgid "Upload Files"
+msgstr "ファイルのアップロード"
+
+msgid "Destination"
+msgstr "宛先"
+
+msgid "Locked"
+msgstr "ロック"
+
+msgid "Browse..."
+msgstr "参照..."
+
+msgid "Upload"
+msgstr "アップロード"
+
+msgid "Post Article"
+msgstr "投稿記事"
+
+msgid "Title"
+msgstr "タイトル"
+
+msgid "Signature"
+msgstr "署名"
+
+msgid "Post"
+msgstr "投稿"
+
+msgid "Reship Webpage"
+msgstr "再び乗船するウェブページ"
+
+msgid "Copy the Webpage Fraction to Clipboard, then Click"
+msgstr "してクリップボードにコピーしてウェブページの分数[OK]をクリック"
+
+msgid "Start Reshipping"
+msgstr "[スタート] Reshipping"
+
+msgid "Progress"
+msgstr "進行状況"
+
+msgid "Login OK. Prepare to upload files."
+msgstr "ログインOK]をクリックします。準備は、ファイルをアップロードします。"
+
+msgid "Visit Homepage"
+msgstr "訪問ホームページ"
+
+msgid "Show about dialog"
+msgstr "表示は約ダイアログ"
+
+msgid "Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at"
+msgstr "Pythonは古すぎます。新しい2.Xを（なし3.0以上）のバージョンで取得"
+
+msgid "Python 3 is not supported. Get a 2.X version at"
+msgstr "Pythonの3はサポートされていません。バージョン2.xをで取得"
+
+msgid "wxPython is too old. Get a newer version at"
+msgstr "wxPythonは古すぎます。新しいバージョンをで取得"
