@@ -12,7 +12,9 @@ EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
 HOME_PYTHON = 'http://www.python.org/'
 HOME_WXPYTHON = 'http://www.wxpython.org/'
-APPLANGUAGES = ['de', 'en', 'es', 'fr', 'ja_JP', 'ko_KR', 'pt', 'ru', 'zh_CN', 'zh_TW']
+APPLANGUAGES = [('de','Deutsch'), ('en','English'), ('es','Español'), ('fr','Française'), 
+		('ja_JP','日本語'), ('ko_KR','한국어'), ('pt','Português'), ('ru','Россию'), 
+		('zh_CN','简体中文'), ('zh_TW','繁體中文')]
 BBS_HOSTS = ['bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.9']
 SEPARATOR = '\n--------------------------------------------\n--------------------------------------------\n'
 DATA_DIR = '/usr/share/uploadhelper/'
@@ -46,7 +48,11 @@ try:
 	lang = cf.get('General', 'language', lang)
 	gettext.translation('messages', 'locale', languages = [lang]).install(True)
 except:
-	pass
+	if not cf.has_section('General'):
+		cf.add_section('General')
+	cf.set('General', 'language', lang)
+finally:
+	cf.write(open(CONFIG_FILE, 'w'))
 
 # Some common messages
 
@@ -68,6 +74,6 @@ MSG_LOGOUT = _('Logout')
 STATUS_UPLOADING = _('Uploading')
 STATUS_UPLOADED = _('Finished')
 STATUSBAR_INFO = ['', _('Contact tyllr (at) RYGH BBS for help or advice')]
-LIST_CONTEXT_MENU = (_('&Add Files...'), _('A&dd Directory...'), '', 
+LIST_CONTEXT_MENU = ('%s...' % _('&Add Files'), '%s...' % _('A&dd Directory'), '', 
 		_('&Remove Selected'), _('Remove &Copies'), _('Remove &Invalid'), '', 
 		_('Remove A&ll'))

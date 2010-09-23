@@ -20,16 +20,16 @@ msgstr ""
 msgid "UploadHelper"
 msgstr "ASEのアシスタント中国アップロード"
 
-msgid "Select File(s) to Upload"
+msgid "Select Files to Upload"
 msgstr "アップロードするファイルを選択してください"
 
 #: consts.py:15
-msgid "&Add Files..."
-msgstr "ファイルの追加..."
+msgid "&Add Files"
+msgstr "ファイルの追加"
 
 #: consts.py:15
-msgid "A&dd Directory..."
-msgstr "ディレクトリを追加..."
+msgid "A&dd Directory"
+msgstr "ディレクトリを追加"
 
 #: consts.py:16
 msgid "&Remove Selected"
@@ -67,9 +67,8 @@ msgstr "ネットワーク接続エラー"
 msgid "Fill the blanks first."
 msgstr "完全に記入してください"
 
-#: consts.py:28 MyFrame.py:262
-#, python-format
-msgid "%d File(s) Selected"
+#: consts.py:28
+msgid "%d Files Selected"
 msgstr "％d個の選択したファイル"
 
 #: consts.py:29
@@ -148,10 +147,6 @@ msgstr "PDF文書"
 msgid "All Files"
 msgstr "すべてのファイル"
 
-#: MyFrame.py:235
-msgid "Select Files to Upload"
-msgstr "アップロードするファイルを選択してください"
-
 #: MyFrame.py:257
 msgid "Unsupported File Format"
 msgstr "ファイル形式はサポートされていません。"
@@ -165,12 +160,12 @@ msgid "Select at least one file for uploading."
 msgstr "少なくとも1つのファイルがアップロードを選択してください。"
 
 #: MyFrame.py:304
-msgid "Post Successfully to Board \"%s\"."
-msgstr "正常に％sのバージョンに配信されます。"
+msgid "Post Successfully to Board"
+msgstr "正常にフォーラムに配信"
 
 #: MyFrame.py:330
-msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "（あなたは良いコピーを持っているかどうかを確認してください見つからない場合Webページに掲示される。）"
+msgid "No webpage content is ready to reship, check if it has been copied correctly."
+msgstr "あなたは良いコピーを持っているかどうかを確認してください、Webページに掲載されて発見した。"
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -182,15 +177,15 @@ msgstr "後でもう一度試してみてください、失敗した更新を確
 
 #: MyFrame.py:440
 msgid "A new version %s is available! Would you like to update now?"
-msgstr "新しいバージョンの％を表示して下さい！代わりにすぐ更新しますか？"
+msgstr "新しいバージョンの％を表示して下さい！代わりにすぐに更新ですか？"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
 msgstr "あなたは、最新のバージョンを使用している。"
 
 #: MyFrame.py:446
-msgid "User \"%s\" has logged out."
-msgstr "ユーザは\"％s \"は取り消されました。"
+msgid "has logged out."
+msgstr "キャンセルされました。"
 
 msgid "About"
 msgstr "について"
@@ -216,10 +211,10 @@ msgstr "自動ログイン"
 msgid "&Login"
 msgstr "ログイン"
 
-msgid "&Switch User..."
+msgid "&Switch User"
 msgstr "ユーザーを変更"
 
-msgid "Logo&ut..."
+msgid "Logo&ut"
 msgstr "ログアウト"
 
 msgid "&Setting"
@@ -232,10 +227,16 @@ msgid "Preferences"
 msgstr "設定"
 
 msgid "Preferences..."
+msgstr "設定..."
+
+msgid "Preference"
 msgstr "設定"
 
-msgid "Preference..."
-msgstr "設定"
+msgid "&Language"
+msgstr "言語"
+
+msgid "Select interface language"
+msgstr "選択してインターフェイス言語"
 
 msgid "Always on &Top"
 msgstr "常に手前に表示する"
@@ -252,8 +253,8 @@ msgstr "よくある質問"
 msgid "&Homepage"
 msgstr "ホーム"
 
-msgid "Check for &Updates..."
-msgstr "更新プログラムの確認..."
+msgid "Check for &Updates"
+msgstr "更新プログラムの確認"
 
 msgid "&About"
 msgstr "について"
@@ -276,8 +277,8 @@ msgstr "ターゲットのレイアウト"
 msgid "Locked"
 msgstr "ロック"
 
-msgid "Browse..."
-msgstr "参照..."
+msgid "Browse"
+msgstr "ブラウズ"
 
 msgid "Upload"
 msgstr "アップロード"
@@ -324,5 +325,5 @@ msgstr "2.Xのバージョンをダウンロードするにはここを参照し
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPythonのバージョンが低すぎると、ここに新しいバージョンをダウンロードしてください"
 
-msgid "&Language"
-msgstr "言語"
+msgid "Language has changed. Restart to take effects."
+msgstr "言語が変更されています。有効にプログラムを再起動します。"

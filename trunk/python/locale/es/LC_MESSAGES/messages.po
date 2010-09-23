@@ -20,32 +20,32 @@ msgstr ""
 msgid "UploadHelper"
 msgstr "UploadHelper"
 
-msgid "Select File(s) to Upload"
-msgstr "Seleccione Archivo (s) para subir"
+msgid "Select Files to Upload"
+msgstr "Seleccione los archivos para subir"
 
 #: consts.py:15
-msgid "&Add Files..."
-msgstr "Agregar archivos y ..."
+msgid "&Add Files"
+msgstr "Agregar archivos"
 
 #: consts.py:15
-msgid "A&dd Directory..."
-msgstr "A & dd Directorio de ..."
+msgid "A&dd Directory"
+msgstr "Agregar directorio"
 
 #: consts.py:16
 msgid "&Remove Selected"
-msgstr "Y Eliminar Seleccionados"
+msgstr "Eliminar Seleccionados"
 
 #: consts.py:16
 msgid "Remove &Copies"
-msgstr "Retire y copias"
+msgstr "Eliminar copias"
 
 #: consts.py:16
 msgid "Remove &Invalid"
-msgstr "Retire y no válido"
+msgstr "Retire válido"
 
 #: consts.py:17
 msgid "Remove A&ll"
-msgstr "Quite A & ll"
+msgstr "Quitar todo"
 
 #: consts.py:23
 msgid "Error"
@@ -67,10 +67,9 @@ msgstr "Error de red"
 msgid "Fill the blanks first."
 msgstr "Llene los espacios en blanco en primer lugar."
 
-#: consts.py:28 MyFrame.py:262
-#, python-format
-msgid "%d File(s) Selected"
-msgstr "% D archivo (s) seleccionados"
+#: consts.py:28
+msgid "%d Files Selected"
+msgstr "% D archivos seleccionados"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -148,10 +147,6 @@ msgstr "Documentos PDF"
 msgid "All Files"
 msgstr "Todos los archivos"
 
-#: MyFrame.py:235
-msgid "Select Files to Upload"
-msgstr "Seleccione los archivos para subir"
-
 #: MyFrame.py:257
 msgid "Unsupported File Format"
 msgstr "Formato de archivo no compatible"
@@ -165,12 +160,12 @@ msgid "Select at least one file for uploading."
 msgstr "Seleccione al menos un archivo para subir."
 
 #: MyFrame.py:304
-msgid "Post Successfully to Board \"%s\"."
-msgstr "Mensaje con éxito a la Junta \"%s\"."
+msgid "Post Successfully to Board"
+msgstr "Mensaje con éxito a la Junta"
 
 #: MyFrame.py:330
-msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "(No hay contenido de página web está listo para volver a enviar, comprobar si se ha copiado correctamente.)"
+msgid "No webpage content is ready to reship, check if it has been copied correctly."
+msgstr "No hay contenido de página web está listo para volver a enviar, comprobar si se ha copiado correctamente."
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -189,8 +184,8 @@ msgid "You are using the latest version."
 msgstr "Está utilizando la versión más reciente."
 
 #: MyFrame.py:446
-msgid "User \"%s\" has logged out."
-msgstr "Usuario \"%s\" ha cerrado la sesión."
+msgid "has logged out."
+msgstr "ha cerrado la sesión."
 
 msgid "About"
 msgstr "Acerca de"
@@ -214,19 +209,19 @@ msgid "Auto Login"
 msgstr "Auto-Login"
 
 msgid "&Login"
-msgstr "Y sesión"
+msgstr "Iniciar sesión"
 
-msgid "&Switch User..."
-msgstr "Y Cambiar de usuario ..."
+msgid "&Switch User"
+msgstr "Cambiar de usuario"
 
-msgid "Logo&ut..."
-msgstr "Logo y ut ..."
+msgid "Logo&ut"
+msgstr "Desconectarse"
 
 msgid "&Setting"
-msgstr "Y Marco"
+msgstr "Marco"
 
 msgid "&Preferences"
-msgstr "Y preferencias"
+msgstr "Preferencias"
 
 msgid "Preferences"
 msgstr "Preferencias"
@@ -234,29 +229,35 @@ msgstr "Preferencias"
 msgid "Preferences..."
 msgstr "Preferencias ..."
 
-msgid "Preference..."
-msgstr "Preferencia ..."
+msgid "Preference"
+msgstr "Preferencia"
+
+msgid "&Language"
+msgstr "Idioma"
+
+msgid "Select interface language"
+msgstr "Seleccione el idioma de la interfaz"
 
 msgid "Always on &Top"
-msgstr "Siempre y en mejores"
+msgstr "Siempre en primer plano"
 
 msgid "&Help"
-msgstr "Y Ayuda"
+msgstr "Ayuda"
 
 msgid "Help"
 msgstr "Ayuda"
 
 msgid "&FAQ"
-msgstr "Y preguntas frecuentes"
+msgstr "Preguntas más frecuentes"
 
 msgid "&Homepage"
-msgstr "Y Página de inicio"
+msgstr "Página de inicio"
 
-msgid "Check for &Updates..."
-msgstr "Buscar actualizaciones ..."
+msgid "Check for &Updates"
+msgstr "Buscar actualizaciones"
 
 msgid "&About"
-msgstr "& Acerca de"
+msgstr "Acerca de"
 
 msgid "Switch user"
 msgstr "Cambio de usuario"
@@ -276,8 +277,8 @@ msgstr "Destino"
 msgid "Locked"
 msgstr "Bloqueado"
 
-msgid "Browse..."
-msgstr "Examinar ..."
+msgid "Browse"
+msgstr "Examinar"
 
 msgid "Upload"
 msgstr "Subir"
@@ -323,3 +324,6 @@ msgstr "Python 3 no es compatible. Obtener una versión 2.X en"
 
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython es demasiado viejo. Obtener una versión más reciente en"
+
+msgid "Language has changed. Restart to take effects."
+msgstr "El lenguaje ha cambiado. Reiniciar para tener efectos."

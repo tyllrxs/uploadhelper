@@ -20,32 +20,32 @@ msgstr ""
 msgid "UploadHelper"
 msgstr "UploadHelper"
 
-msgid "Select File(s) to Upload"
-msgstr "Выберите файл (ы) для закачки"
+msgid "Select Files to Upload"
+msgstr "Выберите файлы для загрузки"
 
 #: consts.py:15
-msgid "&Add Files..."
-msgstr "& Добавить файлы ..."
+msgid "&Add Files"
+msgstr "Добавить файлы"
 
 #: consts.py:15
-msgid "A&dd Directory..."
-msgstr "& DD Directory ..."
+msgid "A&dd Directory"
+msgstr "Добавить Directory"
 
 #: consts.py:16
 msgid "&Remove Selected"
-msgstr "& Удалить выбранное"
+msgstr "Удалить выбранное"
 
 #: consts.py:16
 msgid "Remove &Copies"
-msgstr "Удалить & Копии"
+msgstr "Удалить Копии"
 
 #: consts.py:16
 msgid "Remove &Invalid"
-msgstr "Удалить & Неверный"
+msgstr "Удалять неверные"
 
 #: consts.py:17
 msgid "Remove A&ll"
-msgstr "Удалить & LL"
+msgstr "Удалить все"
 
 #: consts.py:23
 msgid "Error"
@@ -67,10 +67,9 @@ msgstr "Ошибка сети"
 msgid "Fill the blanks first."
 msgstr "Заполнить пробелы в первую очередь."
 
-#: consts.py:28 MyFrame.py:262
-#, python-format
-msgid "%d File(s) Selected"
-msgstr "% D файл (ы) Избранные"
+#: consts.py:28
+msgid "%d Files Selected"
+msgstr "% D выбранных файлов"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -148,10 +147,6 @@ msgstr "Документы PDF"
 msgid "All Files"
 msgstr "Все файлы"
 
-#: MyFrame.py:235
-msgid "Select Files to Upload"
-msgstr "Выберите файлы для загрузки"
-
 #: MyFrame.py:257
 msgid "Unsupported File Format"
 msgstr "Формат файла не поддерживается"
@@ -165,12 +160,12 @@ msgid "Select at least one file for uploading."
 msgstr "Выберите хотя бы один файл для загрузки."
 
 #: MyFrame.py:304
-msgid "Post Successfully to Board \"%s\"."
-msgstr "Сообщение успешно совета \"%s\"."
+msgid "Post Successfully to Board"
+msgstr "Сообщение успешно совета"
 
 #: MyFrame.py:330
-msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "(Нет содержание веб-страницы готова переадресовку, проверить, если он был скопирован правильно.)"
+msgid "No webpage content is ready to reship, check if it has been copied correctly."
+msgstr "Нет содержание веб-страницы готова переадресовку, проверить, если он был скопирован правильно."
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -189,8 +184,8 @@ msgid "You are using the latest version."
 msgstr "Вы используете последнюю версию."
 
 #: MyFrame.py:446
-msgid "User \"%s\" has logged out."
-msgstr "Пользователь \"%s\" имеет вышел из системы."
+msgid "has logged out."
+msgstr "имеет вышел из системы."
 
 msgid "About"
 msgstr "О"
@@ -214,19 +209,19 @@ msgid "Auto Login"
 msgstr "Авто Логин"
 
 msgid "&Login"
-msgstr "& Войти"
+msgstr "Войти"
 
-msgid "&Switch User..."
-msgstr "И Смена пользователя ..."
+msgid "&Switch User"
+msgstr "Смена пользователя"
 
-msgid "Logo&ut..."
-msgstr "Логотип и ут ..."
+msgid "Logo&ut"
+msgstr "Выйти"
 
 msgid "&Setting"
-msgstr "& Настройка"
+msgstr "Настройка"
 
 msgid "&Preferences"
-msgstr "& Настройки"
+msgstr "Настройки"
 
 msgid "Preferences"
 msgstr "Настройки"
@@ -234,29 +229,35 @@ msgstr "Настройки"
 msgid "Preferences..."
 msgstr "Настройки ..."
 
-msgid "Preference..."
-msgstr "Предпочтение ..."
+msgid "Preference"
+msgstr "Предпочтение"
+
+msgid "&Language"
+msgstr "Язык"
+
+msgid "Select interface language"
+msgstr "Выберите язык интерфейса"
 
 msgid "Always on &Top"
-msgstr "Всегда и Top"
+msgstr "Всегда поверх других окон"
 
 msgid "&Help"
-msgstr "& Справка"
+msgstr "Справка"
 
 msgid "Help"
 msgstr "Справка"
 
 msgid "&FAQ"
-msgstr "& FAQ"
+msgstr "Вопросы и ответы"
 
 msgid "&Homepage"
-msgstr "И домашняя страница"
+msgstr "Главная"
 
-msgid "Check for &Updates..."
-msgstr "Проверка и обновление ..."
+msgid "Check for &Updates"
+msgstr "Проверить наличие обновлений"
 
 msgid "&About"
-msgstr "& О"
+msgstr "О"
 
 msgid "Switch user"
 msgstr "Сменить пользователя"
@@ -276,8 +277,8 @@ msgstr "Направление"
 msgid "Locked"
 msgstr "Заблокированный"
 
-msgid "Browse..."
-msgstr "Обзор ..."
+msgid "Browse"
+msgstr "Обзор"
 
 msgid "Upload"
 msgstr "Загрузить"
@@ -323,3 +324,6 @@ msgstr "Python 3 не поддерживается. Получить верси�
 
 msgid "wxPython is too old. Get a newer version at"
 msgstr "WxPython слишком стар. Получить новую версию на"
+
+msgid "Language has changed. Restart to take effects."
+msgstr "Язык был изменен. Перезагрузка, чтобы принять последствия."

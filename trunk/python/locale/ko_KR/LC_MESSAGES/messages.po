@@ -20,16 +20,16 @@ msgstr ""
 msgid "UploadHelper"
 msgstr "ASE 어시스턴트 중국 올리기"
 
-msgid "Select File(s) to Upload"
+msgid "Select Files to Upload"
 msgstr "업로드할 파일 선택"
 
 #: consts.py:15
-msgid "&Add Files..."
-msgstr "파일 추가 ..."
+msgid "&Add Files"
+msgstr "파일 추가"
 
 #: consts.py:15
-msgid "A&dd Directory..."
-msgstr "디렉토리를 추가 ..."
+msgid "A&dd Directory"
+msgstr "추가 디렉토리"
 
 #: consts.py:16
 msgid "&Remove Selected"
@@ -67,9 +67,8 @@ msgstr "네트워크 연결 오류"
 msgid "Fill the blanks first."
 msgstr "전체 내용을 기입하세요"
 
-#: consts.py:28 MyFrame.py:262
-#, python-format
-msgid "%d File(s) Selected"
+#: consts.py:28
+msgid "%d Files Selected"
 msgstr "% d 개의 선택한 파일"
 
 #: consts.py:29
@@ -148,10 +147,6 @@ msgstr "PDF 문서"
 msgid "All Files"
 msgstr "모든 파일"
 
-#: MyFrame.py:235
-msgid "Select Files to Upload"
-msgstr "업로드할 파일 선택"
-
 #: MyFrame.py:257
 msgid "Unsupported File Format"
 msgstr "파일 형식은 지원되지 않습니다"
@@ -165,12 +160,12 @@ msgid "Select at least one file for uploading."
 msgstr "적어도 하나의 파일 업로드를 선택하세요."
 
 #: MyFrame.py:304
-msgid "Post Successfully to Board \"%s\"."
-msgstr "성공적으로 % s의 버전에 전달."
+msgid "Post Successfully to Board"
+msgstr "성공적으로 포럼에 전달"
 
 #: MyFrame.py:330
-msgid "(No webpage content is ready to reship, check if it has been copied correctly.)"
-msgstr "(당신은 좋은 사본을 가지고 있는지 확인하십시오 찾을 수있는 웹 페이지에 게시됩니다.)"
+msgid "No webpage content is ready to reship, check if it has been copied correctly."
+msgstr "아니 당신은 좋은 사본을 가지고 있는지 확인하십시오 웹 페이지에 게시됩니다 없습니다."
 
 #: MyFrame.py:361
 msgid "Choose a directory"
@@ -182,15 +177,15 @@ msgstr "나중에 다시 시도해주십시오 실패한 업데이 트를 확인
 
 #: MyFrame.py:440
 msgid "A new version %s is available! Would you like to update now?"
-msgstr "%의 새 버전을 찾기 바디 즉시 업데이 트합니까?"
+msgstr "%의 새 버전을 찾으 바디 즉시 업데이 트됩니까?"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
 msgstr "당신은 최신 버전을 사용하고 있습니다."
 
 #: MyFrame.py:446
-msgid "User \"%s\" has logged out."
-msgstr "사용자가 \"%s\"을 취소되었습니다."
+msgid "has logged out."
+msgstr "취소되었습니다."
 
 msgid "About"
 msgstr "소개"
@@ -216,10 +211,10 @@ msgstr "자동 로그인"
 msgid "&Login"
 msgstr "로그인"
 
-msgid "&Switch User..."
+msgid "&Switch User"
 msgstr "사용자 변경"
 
-msgid "Logo&ut..."
+msgid "Logo&ut"
 msgstr "로그아웃"
 
 msgid "&Setting"
@@ -232,10 +227,16 @@ msgid "Preferences"
 msgstr "환경 설정"
 
 msgid "Preferences..."
+msgstr "환경 설정 ..."
+
+msgid "Preference"
 msgstr "환경 설정"
 
-msgid "Preference..."
-msgstr "환경 설정"
+msgid "&Language"
+msgstr "언어"
+
+msgid "Select interface language"
+msgstr "선택 인터페이스 언어"
 
 msgid "Always on &Top"
 msgstr "항상 맨 위"
@@ -252,8 +253,8 @@ msgstr "자주 묻는 질문"
 msgid "&Homepage"
 msgstr "홈"
 
-msgid "Check for &Updates..."
-msgstr "업데이트 확인 ..."
+msgid "Check for &Updates"
+msgstr "업데이트 확인"
 
 msgid "&About"
 msgstr "소개"
@@ -276,8 +277,8 @@ msgstr "대상 레이아웃"
 msgid "Locked"
 msgstr "자물쇠"
 
-msgid "Browse..."
-msgstr "찾아보기 ..."
+msgid "Browse"
+msgstr "브라 우즈"
 
 msgid "Upload"
 msgstr "업로드"
@@ -324,5 +325,5 @@ msgstr "2.x에서 버전을 다운로드하려면 여기를 방문하시기 바�
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython 버전이 너무 낮습니다, 여기에 새 버전을 다운로드하십시오"
 
-msgid "&Language"
-msgstr "언어"
+msgid "Language has changed. Restart to take effects."
+msgstr "언어 변경되었습니다. 효과로 프로그램을 다시 시작합니다."
