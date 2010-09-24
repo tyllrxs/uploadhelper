@@ -167,12 +167,9 @@ class MyFrame(wx.Frame):
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_CENTER)
 		else:
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_LEFT)
-	self.lstUpFile.SetColumnWidth(0, 40)
-	self.lstUpFile.SetColumnWidth(1, 320)
-	self.lstUpFile.SetColumnWidth(2, 80)
-	self.lstUpFile.SetColumnWidth(3, 120)
-	if sys.platform.startswith('win32'):
-		self.lstUpFile.SetColumnWidth(3, 100)
+	col_widths = read_config('Upload', 'ColumnWidths', '40,320,80,120').split(',')
+	for col in xrange(self.lstUpFile.GetColumnCount()):
+		self.lstUpFile.SetColumnWidth(col, int(col_widths[col]))
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
 	
 	# check the versions of python and wxpython
@@ -322,9 +319,13 @@ class MyFrame(wx.Frame):
     	self.Unbind(wx.EVT_WINDOW_CREATE)
 	if not (self.get_user_id() and self.get_auto_login()):
 		self.show_login()
-	self.SetSize(wx.Size(600, 600))
+	w = read_config_int('General', 'WinWidth', 600)
+	h = read_config_int('General', 'WinHeight', 600)
+	self.SetSize(wx.Size(w, h))
         self.Layout()
         self.CentreOnScreen()
+        if read_config_bool('General', 'WinMaximized', False):
+        	self.Maximize()
 
     def OnmnuSwitchClick(self, evt):
 	self.show_login()
@@ -471,6 +472,7 @@ class MyFrame(wx.Frame):
 		wx.MessageBox(tips[1], tips[0])
 
     def OnbtnReshipClick(self, evt):
+    	html = ''
         if not wx.TheClipboard.IsOpened():
 		wx.TheClipboard.Open()
 	# List all possible clipboard formats for HTML on Windows, Linux and Mac
@@ -489,19 +491,20 @@ class MyFrame(wx.Frame):
     		html.decode('utf8') 
     	except:
     		try:
-    			html.decode('utf16')
+    			html = html.decode('utf16').encode('utf8')
     		except:
     			pass
-    	if html.strip() == '':
+    			
+	if html.strip() == '':
     		self.txtReship.SetValue(_('No webpage content is ready to reship, check if it has been copied correctly.'))
     		return
-    	self.txtReship.SetValue(html) # decode to display correctly in Windows
-    	self.txtReship.AppendText(SEPARATOR)
-    	urls, html = parse_html_images(html)
-    	html = parse_html_texts(html)
-    	self.txtReship.AppendText(html)
-    	self.txtReship.AppendText(SEPARATOR)
-    	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html))
+
+    	urls, text = parse_html_images(html)
+    	tmptext = parse_html_texts(text)
+    	html += SEPARATOR + tmptext + SEPARATOR
+    	tmptext = re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, tmptext)
+    	self.txtReship.SetValue(html.decode('utf8'))
+	self.txtBody.SetValue(tmptext.decode('utf8'))
     	if urls:
     		DownloadThread(self, urls)
     	else:
@@ -560,13 +563,24 @@ class MyFrame(wx.Frame):
 	wx.MessageBox(_('Language has changed. Restart to take effects.'))
 
     def OnClose(self, evt):
-	write_config('Upload', {'UpZone': self.cmbZone.GetSelection(), \
-		'UpBoard': self.cmbBoard.GetSelection(), \
-		'UpBoardLock': self.chkLock.IsChecked(), \
-		'PostSignature': self.txtSignature.GetValue(), \
-		'PostZone': self.cmbPostZone.GetSelection(), \
-		'PostBoard': self.cmbPostBoard.GetSelection(), \
-		'ActivePage': self.notebook.GetSelection()})
+    	try:
+		write_config('Upload', 
+			{'UpZone': self.cmbZone.GetSelection(), \
+			'UpBoard': self.cmbBoard.GetSelection(), \
+			'UpBoardLock': self.chkLock.IsChecked(), \
+			'PostSignature': self.txtSignature.GetValue(), \
+			'PostZone': self.cmbPostZone.GetSelection(), \
+			'PostBoard': self.cmbPostBoard.GetSelection(), \
+			'ActivePage': self.notebook.GetSelection(), \
+			'ColumnWidths': ','.join([str(self.lstUpFile.GetColumnWidth(col)) for col in xrange(self.lstUpFile.GetColumnCount())]), \
+			})
+		write_config('General', 
+			{'WinWidth': self.GetSize().x, \
+			'WinHeight': self.GetSize().y, \
+			'WinMaximized': self.IsMaximized(), \
+			})
+	except:
+		pass
 	self.Destroy()
 
     def updateDisplay(self, msg):
