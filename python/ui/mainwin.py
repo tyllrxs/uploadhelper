@@ -88,7 +88,7 @@ class MyFrame(wx.Frame):
         mnuLang = wx.Menu()
         target_lang = read_config('General', 'language', 'en') 
         for cod, lng in APPLANGUAGES:
-        	mnulng = wx.MenuItem(mnuLang, wx.NewId(), lng, cod, wx.ITEM_RADIO)
+        	mnulng = wx.MenuItem(mnuLang, wx.NewId(), lng.decode('utf8'), cod, wx.ITEM_RADIO)
         	mnuLang.AppendItem(mnulng)
         	if cod == target_lang:
         		mnulng.Check(True)
@@ -137,6 +137,7 @@ class MyFrame(wx.Frame):
 	self.Bind(wx.EVT_TOOL, self.OnmnuLogoutClick, tlbLogout)
 	self.Bind(wx.EVT_TOOL, self.OnmnuFAQClick, tlbFAQ)
         # Attach
+        toolBar.Realize()
         self.SetToolBar(toolBar) 
     
     def __set_statusbar(self):
@@ -167,7 +168,7 @@ class MyFrame(wx.Frame):
 	self.lstUpFile.SetColumnWidth(0, 40)
 	self.lstUpFile.SetColumnWidth(1, 320)
 	self.lstUpFile.SetColumnWidth(2, 80)
-	self.lstUpFile.SetColumnWidth(3, 130)
+	self.lstUpFile.SetColumnWidth(3, 120)
 	if sys.platform.startswith('win32'):
 		self.lstUpFile.SetColumnWidth(3, 100)
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
@@ -256,6 +257,9 @@ class MyFrame(wx.Frame):
         self.Fit()
         self.Layout()
         self.CentreOnScreen()
+        if sys.platform.startswith('win32'):
+        	evt = wx.CommandEvent()
+        	self.OnCreate(evt)
 
     def read_zones(self):
         xmldoc = minidom.parse(FILE_BOARDS)
@@ -410,7 +414,7 @@ class MyFrame(wx.Frame):
 		elif fz > 1024:
 			self.lstUpFile.SetStringItem(index, 3, MSG_ENTITY_TOO_LARGE, 0)
 			self.lstUpFile.SetItemTextColour(index, wx.BLUE)
-	self.lblProgress.SetLabel(_('%d Files Selected') % self.lstUpFile.GetItemCount())    	
+	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())    	
 
     def OnbtnUploadClick(self, evt):
     	self.to_upload = False
@@ -475,23 +479,23 @@ class MyFrame(wx.Frame):
 			break
     	wx.TheClipboard.Close()
     	try:
-    		# non-linux clipboard formats are all utf8
-    		if sys.platform.find('linux') < 0:
-    			raise_error = 1 / 0
-    		html = do.GetData().decode('utf16') # linux Firefox, maybe safari on mac (to do...)
+    		html = do.GetData().decode('utf8') # linux Firefox, maybe safari on mac (to do...)
+    		print 'utf8'
     	except:
     		try:
-    			html = do.GetData().decode('utf8') # IE, Chrome, non-linux Firefox
+    			html = do.GetData().decode('utf16') # IE, Chrome, non-linux Firefox
+    			print 'utf16'
     		except:
     			html = do.GetData()
     	if html.strip() == '':
     		self.txtReship.SetValue(_('No webpage content is ready to reship, check if it has been copied correctly.'))
     		return
-    	self.txtReship.SetValue(html) # decode to display correctly in Windows
+	print html
+    	self.txtReship.SetValue(html) 
     	self.txtReship.AppendText(SEPARATOR)
     	urls, html = parse_html_images(html)
     	html = parse_html_texts(html)
-    	self.txtReship.AppendText(html)
+    	self.txtReship.AppendText(html) # decode to display correctly in Windows
     	self.txtReship.AppendText(SEPARATOR)
     	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html))
     	DownloadThread(self, urls)
