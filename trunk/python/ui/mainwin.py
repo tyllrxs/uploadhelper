@@ -271,8 +271,13 @@ class MyFrame(wx.Frame):
         object_1.Add(self.notebook, 1, wx.EXPAND, 0)
         self.SetSizer(object_1)
         self.Fit()
+        w = read_config_int('General', 'WinWidth', 600)
+	h = read_config_int('General', 'WinHeight', 600)
+	self.SetSize(wx.Size(w, h))
         self.Layout()
         self.CentreOnScreen()
+        if read_config_bool('General', 'WinMaximized', False):
+        	self.Maximize()
         if sys.platform.startswith('win32'):
         	evt = wx.CommandEvent()
         	self.OnCreate(evt)
@@ -336,13 +341,7 @@ class MyFrame(wx.Frame):
     	self.Unbind(wx.EVT_WINDOW_CREATE)
 	if not (self.get_user_id() and self.get_auto_login()):
 		self.show_login()
-	w = read_config_int('General', 'WinWidth', 600)
-	h = read_config_int('General', 'WinHeight', 600)
-	self.SetSize(wx.Size(w, h))
-        self.Layout()
-        self.CentreOnScreen()
-        if read_config_bool('General', 'WinMaximized', False):
-        	self.Maximize()
+	
 
     def OnmnuSwitchClick(self, evt):
 	self.show_login()
@@ -545,7 +544,7 @@ class MyFrame(wx.Frame):
     	html += SEPARATOR + tmptext + SEPARATOR
     	tmptext = re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, tmptext)
     	self.txtReship.SetValue(html.decode('utf8'))
-	self.txtBody.SetValue(tmptext.decode('utf8'))
+	self.txtBody.SetValue(compress_spaces(tmptext).decode('utf8'))
     	if urls:
     		DownloadThread(self, urls, source_url)
     	else:

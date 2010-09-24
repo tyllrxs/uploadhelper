@@ -27,3 +27,7 @@ def parse_html_texts(html):
 	text = HTMLParser.HTMLParser().unescape(text)
 	return text
 	
+def compress_spaces(html):
+	text = re.compile(r'\n(\s*?\n)+').sub('\n', html)
+	return text
+
