@@ -479,11 +479,11 @@ class MyFrame(wx.Frame):
 			break
     	wx.TheClipboard.Close()
     	try:
-    		html = do.GetData().decode('utf8') # linux Firefox, maybe safari on mac (to do...)
+    		html = do.GetData().decode('utf8') 
     		print 'utf8'
     	except:
     		try:
-    			html = do.GetData().decode('utf16') # IE, Chrome, non-linux Firefox
+    			html = do.GetData().decode('utf16') 
     			print 'utf16'
     		except:
     			html = do.GetData()
@@ -498,7 +498,10 @@ class MyFrame(wx.Frame):
     	self.txtReship.AppendText(html) # decode to display correctly in Windows
     	self.txtReship.AppendText(SEPARATOR)
     	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html))
-    	DownloadThread(self, urls)
+    	if urls:
+    		DownloadThread(self, urls)
+    	else:
+    		self.notebook.SetSelection(1)
 
     def OnlstUpFileRClick(self, evt):
 	self.popupmenu = wx.Menu()
