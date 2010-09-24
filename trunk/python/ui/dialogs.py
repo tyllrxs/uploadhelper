@@ -105,6 +105,96 @@ class MyLoginDialog(wx.Dialog):
 
 # end of class MyLoginDialog
 
+class MySettingDialog(wx.Dialog):
+    def __init__(self, *args, **kwds):
+        wx.Dialog.__init__(self, *args, **kwds)
+        self.notebook_1 = wx.Notebook(self, -1, style=0)
+        self.notebook_1_pane_3 = wx.Panel(self.notebook_1, -1)
+        self.notebook_1_pane_2 = wx.Panel(self.notebook_1, -1)
+        self.sizer_12_staticbox = wx.StaticBox(self.notebook_1_pane_2, -1, _("Search Files"))
+        self.sizer_11_staticbox = wx.StaticBox(self.notebook_1_pane_3, -1, _("Template to Post Article"))
+        self.notebook_1_pane_1 = wx.Panel(self.notebook_1, -1)
+        self.label_1 = wx.StaticText(self.notebook_1_pane_1, -1, _("Threads to Upload"))
+        self.spin_ctrl_1 = wx.SpinCtrl(self.notebook_1_pane_1, -1, "", min=1, max=10)
+        self.checkbox_1 = wx.CheckBox(self.notebook_1_pane_1, -1, _("Minimize to Tray"))
+        self.label_2 = wx.StaticText(self.notebook_1_pane_2, -1, _("Size Range (KB)"))
+        self.spin_ctrl_2 = wx.SpinCtrl(self.notebook_1_pane_2, -1, "", min=0, max=9999)
+        self.label_3 = wx.StaticText(self.notebook_1_pane_2, -1, _("-"))
+        self.spin_ctrl_3 = wx.SpinCtrl(self.notebook_1_pane_2, -1, "", min=0, max=9999)
+        self.checkbox_2 = wx.CheckBox(self.notebook_1_pane_2, -1, _("Search for Subfolders"))
+        self.checkbox_3 = wx.CheckBox(self.notebook_1_pane_2, -1, _("Alarm when file size (KB) is larger than"))
+        self.spin_ctrl_4 = wx.SpinCtrl(self.notebook_1_pane_2, -1, "", min=0, max=9999)
+        self.text_ctrl_2 = wx.TextCtrl(self.notebook_1_pane_3, -1, "")
+        self.label_6 = wx.StaticText(self.notebook_1_pane_3, -1, _("Description"))
+        self.label_4 = wx.StaticText(self.notebook_1_pane_3, -1, _("Post-upload URL"))
+        self.choice_1 = wx.Choice(self.notebook_1_pane_3, -1, choices=[])
+        self.checkbox_4 = wx.CheckBox(self.notebook_1_pane_3, -1, _("Automatic Update"))
+        self.button_1 = wx.Button(self, wx.ID_OK)
+        self.button_2 = wx.Button(self, wx.ID_CANCEL)
+
+        self.__set_properties()
+        self.__do_layout()
+        
+        self.Bind(wx.EVT_CLOSE, self.OnClose)
+
+    def __set_properties(self):
+        self.SetTitle(_("Preferences"))
+
+    def __do_layout(self):
+        sizer_1 = wx.BoxSizer(wx.VERTICAL)
+        sizer_2 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_8 = wx.BoxSizer(wx.VERTICAL)
+        sizer_9 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_11 = wx.StaticBoxSizer(self.sizer_11_staticbox, wx.VERTICAL)
+        sizer_6 = wx.BoxSizer(wx.VERTICAL)
+        sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_12 = wx.StaticBoxSizer(self.sizer_12_staticbox, wx.VERTICAL)
+        sizer_7 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_3 = wx.BoxSizer(wx.VERTICAL)
+        sizer_4 = wx.BoxSizer(wx.VERTICAL)
+        sizer_5 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_5.Add(self.label_1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 3)
+        sizer_5.Add(self.spin_ctrl_1, 0, wx.ALL, 5)
+        sizer_4.Add(sizer_5, 1, wx.EXPAND|wx.ALL, 5)
+        sizer_4.Add(self.checkbox_1, 0, wx.ALL, 5)
+        sizer_3.Add(sizer_4, 0, wx.EXPAND, 0)
+        self.notebook_1_pane_1.SetSizer(sizer_3)
+        sizer_7.Add(self.label_2, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_7.Add(self.spin_ctrl_2, 0, wx.ALL, 5)
+        sizer_7.Add(self.label_3, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_7.Add(self.spin_ctrl_3, 0, wx.ALL, 5)
+        sizer_12.Add(sizer_7, 0, wx.EXPAND, 0)
+        sizer_12.Add(self.checkbox_2, 0, wx.ALL, 5)
+        sizer_6.Add(sizer_12, 0, wx.EXPAND|wx.ALL, 5)
+        sizer_13.Add(self.checkbox_3, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_13.Add(self.spin_ctrl_4, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_6.Add(sizer_13, 0, wx.EXPAND, 0)
+        self.notebook_1_pane_2.SetSizer(sizer_6)
+        sizer_11.Add(self.text_ctrl_2, 0, wx.ALL|wx.EXPAND, 5)
+        sizer_11.Add(self.label_6, 0, wx.ALL, 5)
+        sizer_8.Add(sizer_11, 0, wx.EXPAND|wx.ALL, 5)
+        sizer_9.Add(self.label_4, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 6)
+        sizer_9.Add(self.choice_1, 0, wx.ALL, 5)
+        sizer_8.Add(sizer_9, 0, wx.EXPAND, 0)
+        sizer_8.Add(self.checkbox_4, 0, wx.ALL, 5)
+        self.notebook_1_pane_3.SetSizer(sizer_8)
+        self.notebook_1.AddPage(self.notebook_1_pane_1, _("General"))
+        self.notebook_1.AddPage(self.notebook_1_pane_2, _("File Management"))
+        self.notebook_1.AddPage(self.notebook_1_pane_3, _("Miscellaneous"))
+        sizer_1.Add(self.notebook_1, 1, wx.EXPAND, 0)
+        sizer_2.Add((20, 20), 1, wx.EXPAND, 0)
+        sizer_2.Add(self.button_1, 0, wx.ALL, 5)
+        sizer_2.Add(self.button_2, 0, wx.ALL, 5)
+        sizer_1.Add(sizer_2, 0, wx.EXPAND, 0)
+        self.SetSizer(sizer_1)
+        sizer_1.Fit(self)
+        self.Layout()
+
+    def OnClose(self, evt):
+	self.Destroy()
+	
+# end of class MySettingDialog
+
 
 class MyAboutDialog(wx.Dialog):
     def __init__(self, *args, **kwargs):    

@@ -133,6 +133,7 @@ class MyFrame(wx.Frame):
 	self.Bind(wx.EVT_MENU, self.OnmnuLogoutClick, mnuLogout)
 	self.Bind(wx.EVT_MENU, self.OnmnuTBShowClick, mnuTBShowIcon)
 	self.Bind(wx.EVT_MENU, self.OnmnuTBShowClick, mnuTBShowText)
+	self.Bind(wx.EVT_MENU, self.OnmnuPreferenceClick, mnuPreference)
 	self.Bind(wx.EVT_MENU, self.OnmnuAlwaysOnTopClick, mnuAlwaysOnTop)
 	self.Bind(wx.EVT_MENU, self.OnmnuFAQClick, mnuFAQ)
 	self.Bind(wx.EVT_MENU, self.OnmnuHomepageClick, mnuHomepage)
@@ -146,12 +147,13 @@ class MyFrame(wx.Frame):
 	tlbSwitch = toolBar.AddLabelTool(-1, _("Switch user"), wx.Bitmap('icon/24/switch.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Switch user"), _("Switch user"))
         tlbLogout = toolBar.AddLabelTool(-1, _("Logout"), wx.Bitmap('icon/24/logout.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Logout"), _("Logout"))
         toolBar.AddSeparator()
-        toolBar.AddLabelTool(-1, _("Preferences"), wx.Bitmap('icon/24/setting.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Preferences"), _("Preferences"))
+        tlbPreference = toolBar.AddLabelTool(-1, _("Preferences"), wx.Bitmap('icon/24/setting.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Preferences"), _("Preferences"))
         toolBar.AddSeparator()
         tlbFAQ = toolBar.AddLabelTool(wx.ID_HELP, _("FAQ"), wx.Bitmap('icon/24/help.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("FAQ"), _("FAQ"))
         # Bind events
         self.Bind(wx.EVT_TOOL, self.OnmnuSwitchClick, tlbSwitch)
 	self.Bind(wx.EVT_TOOL, self.OnmnuLogoutClick, tlbLogout)
+	self.Bind(wx.EVT_TOOL, self.OnmnuPreferenceClick, tlbPreference)
 	self.Bind(wx.EVT_TOOL, self.OnmnuFAQClick, tlbFAQ)
         # Attach
         toolBar.Realize()
@@ -348,6 +350,10 @@ class MyFrame(wx.Frame):
 	
     def OnmnuLogoutClick(self, evt):
 	LogoutThread(self.get_host(), self.get_cookie())
+	
+    def OnmnuPreferenceClick(self, evt):
+    	dialog = MySettingDialog(self)
+    	dialog.ShowModal()
 	
     def OnmnuTBShowClick(self, evt):
     	menu = self.GetMenuBar().FindItemById(evt.GetId())
