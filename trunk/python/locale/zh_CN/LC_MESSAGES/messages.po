@@ -327,3 +327,12 @@ msgstr "wxPython 版本太低，请到这里下载新版本"
 
 msgid "Language has changed. Restart to take effects."
 msgstr "语言已经更改。重启本程序生效。"
+
+msgid "T&oolbar"
+msgstr "工具栏(&O)"
+
+msgid "Show &Icons"
+msgstr "显示图标(&I)"
+
+msgid "Show &Texts"
+msgstr "显示文本(&T)"
