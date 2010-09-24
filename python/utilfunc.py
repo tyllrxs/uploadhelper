@@ -11,6 +11,20 @@ import ConfigParser
 from consts import *
 from httpredirect import *
 
+def get_url_host(url):
+	try:
+		host = re.search(r'^https?:\/\/[^\/]+', url).group(0)
+	except:
+		return ''
+	return host
+
+def get_url_path(url):
+	try:
+		path = re.search(r'^(https?:\/\/[^\/]+(/[^\/]*)*)[^\/]*$', url).group(1)
+	except:
+		return ''
+	return path
+
 def get_python_version():
 	(status, pyver) = commands.getstatusoutput('python -V')
 	return re.search(r'ython\s+([\d\.]+)', pyver).group(1)

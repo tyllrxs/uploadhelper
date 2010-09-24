@@ -520,11 +520,11 @@ class MyFrame(wx.Frame):
                         	html = html[begin + 1:]
         		elif fm == 'com.apple.webarchive': # Safari
         			begin = html.find('text/html')
-				end = html.find('/P\x00\x08\x00\r')
+				end = html.rfind('/P')
 				html = html[begin + 13: end]
 				begin = html.rfind('http')
 				source_url = html[begin:]
-				html = html[:begin]
+				html = html[:begin - 9]
 			break
     	wx.TheClipboard.Close()
     	try:
@@ -538,7 +538,8 @@ class MyFrame(wx.Frame):
 	if html.strip() == '':
     		self.txtReship.SetValue(_('No webpage content is ready to reship, check if it has been copied correctly.'))
     		return
-
+	
+	html = prettify_html(html)
     	urls, text = parse_html_images(html)
     	tmptext = source_url.strip() + '\n' + parse_html_texts(text.strip())
     	html += SEPARATOR + tmptext + SEPARATOR
@@ -546,7 +547,7 @@ class MyFrame(wx.Frame):
     	self.txtReship.SetValue(html.decode('utf8'))
 	self.txtBody.SetValue(tmptext.decode('utf8'))
     	if urls:
-    		DownloadThread(self, urls)
+    		DownloadThread(self, urls, source_url)
     	else:
     		self.notebook.SetSelection(1)
 

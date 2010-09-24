@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import re
+import HTMLParser
 from BeautifulSoup import BeautifulSoup
 
+def prettify_html(html):
+        soup = BeautifulSoup(html)
+        return soup.prettify()
 
 def parse_html_images(html):
 	soup = BeautifulSoup(html)
@@ -19,4 +23,7 @@ def parse_html_images(html):
 
 def parse_html_texts(html):
 	text = re.compile(r'<(script|style).*?</\1>', re.S|re.I).sub('', html)
-	return re.sub(r'<[^>]*>', '', text)
+	text = re.sub(r'<[^>]*>', '', text)
+	text = HTMLParser.HTMLParser().unescape(text)
+	return text
+	

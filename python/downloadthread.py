@@ -12,10 +12,13 @@ from utilfunc import *
 
 class DownloadThread(Thread):
     """Download Thread."""
-    def __init__(self, window, urls):
+    def __init__(self, window, urls, source_url = ''):
         Thread.__init__(self)
 	self.window = window
 	self.urls = urls
+	self.source_url = source_url
+	self.host = get_url_host(source_url)
+	self.path = get_url_path(source_url)
 	self.start()
  
     def run(self):
@@ -30,6 +33,11 @@ class DownloadThread(Thread):
     				fname += '.jpg'
     		fname = re.sub(r'[^\w\d\.\{\}\[\]\(\)\+\=\-\_\&\%\#\@\~]', '_', fname)
     		fname = os.path.join(TEMP_DIR, fname)
+    		if self.source_url and not url.startswith('http://'):
+    			if url.startswith('/'):
+    				url = self.host + url
+    			else:
+    				url = self.path + url
     		try:
     			urllib.urlretrieve(url, fname)
     		except:
