@@ -156,6 +156,8 @@ class MyFrame(wx.Frame):
 	self.read_postboards()
 	self.cmbPostBoard.SetSelection(read_config_int('Upload', 'PostBoard', 16))
 	self.chkLock.SetValue(read_config_bool('Upload', 'UpBoardLock'))
+	evt = wx.CommandEvent()
+	self.OnchkLockClick(evt)
 	il = wx.ImageList(16,16, True)
 	for name in ['alarm', 'process', 'ok', 'error']:
 		il.Add(wx.Bitmap('icon/indicator/%s.png' % name))
@@ -476,26 +478,28 @@ class MyFrame(wx.Frame):
 	for fm in formats:
 		do = wx.CustomDataObject(fm)
         	if wx.TheClipboard.GetData(do):
+        		html = do.GetData()
+        		if fm == 'com.apple.webarchive': # Safari
+        			begin = html.find('text/html')
+				end = html.find('/P\x00\x08\x00\r')
+				html = html[begin + 13: end]
 			break
     	wx.TheClipboard.Close()
     	try:
-    		html = do.GetData().decode('utf8') 
-    		print 'utf8'
+    		html.decode('utf8') 
     	except:
     		try:
-    			html = do.GetData().decode('utf16') 
-    			print 'utf16'
+    			html.decode('utf16')
     		except:
-    			html = do.GetData()
+    			pass
     	if html.strip() == '':
     		self.txtReship.SetValue(_('No webpage content is ready to reship, check if it has been copied correctly.'))
     		return
-	print html
-    	self.txtReship.SetValue(html) 
+    	self.txtReship.SetValue(html) # decode to display correctly in Windows
     	self.txtReship.AppendText(SEPARATOR)
     	urls, html = parse_html_images(html)
     	html = parse_html_texts(html)
-    	self.txtReship.AppendText(html) # decode to display correctly in Windows
+    	self.txtReship.AppendText(html)
     	self.txtReship.AppendText(SEPARATOR)
     	self.txtBody.SetValue(re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, html))
     	if urls:
