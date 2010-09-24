@@ -479,6 +479,7 @@ class MyFrame(wx.Frame):
 
     def OnbtnReshipClick(self, evt):
     	html = ''
+    	source_url = ''
         if not wx.TheClipboard.IsOpened():
 		wx.TheClipboard.Open()
 	# List all possible clipboard formats for HTML on Windows, Linux and Mac
@@ -487,10 +488,19 @@ class MyFrame(wx.Frame):
 		do = wx.CustomDataObject(fm)
         	if wx.TheClipboard.GetData(do):
         		html = do.GetData()
-        		if fm == 'com.apple.webarchive': # Safari
+        		if fm == 'HTML Format': # Windows browsers
+                        	begin = html.find('SourceURL')
+                        	html = html[begin + 10:]
+                        	begin = html.find('\n')
+                        	source_url = html[:begin]
+                        	html = html[begin + 1:]
+        		elif fm == 'com.apple.webarchive': # Safari
         			begin = html.find('text/html')
 				end = html.find('/P\x00\x08\x00\r')
 				html = html[begin + 13: end]
+				begin = html.rfind('http')
+				source_url = html[begin:]
+				html = html[:begin]
 			break
     	wx.TheClipboard.Close()
     	try:
@@ -506,7 +516,7 @@ class MyFrame(wx.Frame):
     		return
 
     	urls, text = parse_html_images(html)
-    	tmptext = parse_html_texts(text)
+    	tmptext = source_url.strip() + '\n' + parse_html_texts(text.strip())
     	html += SEPARATOR + tmptext + SEPARATOR
     	tmptext = re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, tmptext)
     	self.txtReship.SetValue(html.decode('utf8'))
