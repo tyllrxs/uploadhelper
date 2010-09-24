@@ -100,6 +100,15 @@ class MyFrame(wx.Frame):
         		mnulng.Check(True)
         	self.Bind(wx.EVT_MENU, self.OnmnuLangClick, mnulng)
         mnuSetting.AppendMenu(-1, _("&Language"), mnuLang, _("Select interface language"))
+        mnuToolbar = wx.Menu()
+        mnuTBShowIcon = wx.MenuItem(mnuToolbar, wx.NewId(), _('Show &Icons'), '1', wx.ITEM_CHECK)
+        mnuToolbar.AppendItem(mnuTBShowIcon)
+        mnuTBShowText = wx.MenuItem(mnuToolbar, wx.NewId(), _('Show &Texts'), '2', wx.ITEM_CHECK)
+        mnuToolbar.AppendItem(mnuTBShowText)
+        tool_style = read_config_int('General', 'ToolbarStyle', 260)
+        mnuTBShowIcon.Check(not (tool_style & wx.TB_NOICONS))
+        mnuTBShowText.Check(tool_style & wx.TB_TEXT)
+        mnuSetting.AppendMenu(-1, _("T&oolbar"), mnuToolbar)
         mnuSetting.AppendSeparator()
         mnuAlwaysOnTop = wx.MenuItem(mnuSetting, wx.NewId(), _("Always on &Top"), "", wx.ITEM_CHECK)
         mnuSetting.AppendItem(mnuAlwaysOnTop)
@@ -122,6 +131,8 @@ class MyFrame(wx.Frame):
 	# Bind events
 	self.Bind(wx.EVT_MENU, self.OnmnuSwitchClick, mnuSwitch)
 	self.Bind(wx.EVT_MENU, self.OnmnuLogoutClick, mnuLogout)
+	self.Bind(wx.EVT_MENU, self.OnmnuTBShowClick, mnuTBShowIcon)
+	self.Bind(wx.EVT_MENU, self.OnmnuTBShowClick, mnuTBShowText)
 	self.Bind(wx.EVT_MENU, self.OnmnuAlwaysOnTopClick, mnuAlwaysOnTop)
 	self.Bind(wx.EVT_MENU, self.OnmnuFAQClick, mnuFAQ)
 	self.Bind(wx.EVT_MENU, self.OnmnuHomepageClick, mnuHomepage)
@@ -131,7 +142,7 @@ class MyFrame(wx.Frame):
 	self.SetMenuBar(menuBar)
 
     def __set_toolbar(self):
-    	toolBar = wx.ToolBar(self, style = wx.TB_TEXT)
+    	toolBar = wx.ToolBar(self, style = read_config_int('General', 'ToolbarStyle', 260))
 	tlbSwitch = toolBar.AddLabelTool(-1, _("Switch user"), wx.Bitmap('icon/24/switch.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Switch user"), _("Switch user"))
         tlbLogout = toolBar.AddLabelTool(-1, _("Logout"), wx.Bitmap('icon/24/logout.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Logout"), _("Logout"))
         toolBar.AddSeparator()
@@ -338,12 +349,25 @@ class MyFrame(wx.Frame):
 	
     def OnmnuLogoutClick(self, evt):
 	LogoutThread(self.get_host(), self.get_cookie())
-
+	
+    def OnmnuTBShowClick(self, evt):
+    	menu = self.GetMenuBar().FindItemById(evt.GetId())
+    	if menu.GetHelp() == '1':
+    		if menu.IsChecked():
+    			self.GetToolBar().SetWindowStyleFlag(self.GetToolBar().GetWindowStyleFlag() & ~wx.TB_NOICONS)
+    		else:
+    			self.GetToolBar().SetWindowStyleFlag(self.GetToolBar().GetWindowStyleFlag() | wx.TB_NOICONS)
+    	elif menu.GetHelp() == '2':
+    		if menu.IsChecked():
+    			self.GetToolBar().SetWindowStyleFlag(self.GetToolBar().GetWindowStyleFlag() | wx.TB_TEXT)
+    		else:
+    			self.GetToolBar().SetWindowStyleFlag(self.GetToolBar().GetWindowStyleFlag() & ~wx.TB_TEXT)
+    
     def OnmnuAlwaysOnTopClick(self, evt):
 	if evt.GetEventObject().IsChecked(evt.GetId()):
         	self.SetWindowStyleFlag(self.GetWindowStyleFlag() | wx.STAY_ON_TOP)
 	else:
-		self.SetWindowStyleFlag(self.GetWindowStyleFlag() ^ wx.STAY_ON_TOP)
+		self.SetWindowStyleFlag(self.GetWindowStyleFlag() & ~wx.STAY_ON_TOP)
 
     def OnmnuFAQClick(self, evt):
         wx.LaunchDefaultBrowser('%s%s' % (HOMEPAGE, 'faq.htm'))
@@ -594,6 +618,7 @@ class MyFrame(wx.Frame):
 			{'WinWidth': self.GetSize().x, \
 			'WinHeight': self.GetSize().y, \
 			'WinMaximized': self.IsMaximized(), \
+			'ToolbarStyle': self.GetToolBar().GetWindowStyleFlag(), \
 			})
 	except:
 		pass

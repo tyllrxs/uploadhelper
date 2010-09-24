@@ -42,7 +42,7 @@ class MyLoginDialog(wx.Dialog):
         object_4 = wx.BoxSizer(wx.HORIZONTAL)
         object_3 = wx.BoxSizer(wx.HORIZONTAL)
         object_2 = wx.BoxSizer(wx.HORIZONTAL)
-        object_1.Add(self.imgTitle, 0, wx.BOTTOM, 5)
+        object_1.Add(self.imgTitle, 0, wx.BOTTOM|wx.ALIGN_CENTER_HORIZONTAL, 5)
         object_2.Add(self.label_1, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         object_2.Add(self.cmbHost, 3, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         object_1.Add(object_2, 1, wx.LEFT|wx.RIGHT|wx.EXPAND|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 10)
