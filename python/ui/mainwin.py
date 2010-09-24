@@ -22,6 +22,12 @@ from parsehtml import *
 class MyFrame(wx.Frame):
     def __init__(self, *args, **kwds):
         wx.Frame.__init__(self, *args, **kwds)
+        icon = wx.EmptyIcon()
+        if sys.platform.startswith('win32'):
+		icon.CopyFromBitmap(wx.Bitmap('icon/logo32.ico'))
+	else:
+		icon.CopyFromBitmap(wx.Bitmap('icon/logo32.png'))
+	self.SetIcon(icon)
         
         self.__set_menubar()
         self.__set_toolbar()
