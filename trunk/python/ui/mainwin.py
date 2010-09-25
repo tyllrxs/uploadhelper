@@ -66,7 +66,6 @@ class MyFrame(wx.Frame):
         self.__do_layout()
         
         # bind events to UI controls
-	self.Bind(wx.EVT_WINDOW_CREATE, self.OnCreate)
         self.Bind(wx.EVT_COMBOBOX, self.OnZoneChange, self.cmbZone)
 	self.Bind(wx.EVT_COMBOBOX, self.OnBoardChange, self.cmbBoard)
 	self.Bind(wx.EVT_COMBOBOX, self.OnPostZoneChange, self.cmbPostZone)
@@ -278,9 +277,10 @@ class MyFrame(wx.Frame):
         self.SetSizer(object_1)
         self.Fit()
         self.set_window_size()
-        if sys.platform.startswith('win32'):
-        	evt = wx.CommandEvent()
-        	self.OnCreate(evt)
+        if not (self.get_user_id() and self.get_auto_login()):
+		self.show_login()
+	if read_config_bool('General', 'AutoUpdate', True):
+		CheckUpdateThread(False)
 
     def set_window_size(self):
 	w = read_config_int('General', 'WinWidth', 600)
@@ -348,14 +348,6 @@ class MyFrame(wx.Frame):
     def show_login(self):
 	dialog = MyLoginDialog(self)
 	dialog.ShowModal()
-	
-    def OnCreate(self, evt):
-    	self.Unbind(wx.EVT_WINDOW_CREATE)
-	if not (self.get_user_id() and self.get_auto_login()):
-		self.show_login()
-	self.set_window_size()
-	if read_config_bool('General', 'AutoUpdate', True):
-		CheckUpdateThread(False)
 
     def OnmnuSwitchClick(self, evt):
 	self.show_login()
