@@ -193,6 +193,9 @@ msgstr "关于"
 msgid "OK"
 msgstr "确定"
 
+msgid "Cancel"
+msgstr "取消"
+
 msgid "Login"
 msgstr "登录"
 
@@ -225,6 +228,9 @@ msgstr "首选项(&P)"
 
 msgid "Preferences"
 msgstr "首选项"
+
+msgid "Preference..."
+msgstr "偏好设置..."
 
 msgid "Preferences..."
 msgstr "偏好设置..."
@@ -336,3 +342,48 @@ msgstr "显示图标(&I)"
 
 msgid "Show &Texts"
 msgstr "显示文本(&T)"
+
+msgid "General"
+msgstr "基本设置"
+
+msgid "File Management"
+msgstr "文件管理"
+
+msgid "Miscellaneous"
+msgstr "其它设置"
+
+msgid "Search Files"
+msgstr "搜索文件"
+
+msgid "Template to Post Article"
+msgstr "发文模板"
+
+msgid "Threads to Upload"
+msgstr "上传线程数"
+
+msgid "Minimize to Tray"
+msgstr "最小化到系统栏"
+
+msgid "Range of Size"
+msgstr "文件大小范围"
+
+msgid "Search for Subfolders"
+msgstr "搜索子文件夹"
+
+msgid "Highlight when file size is larger than"
+msgstr "当文件大小超过该值时高亮显示"
+
+msgid "Notes"
+msgstr "说明"
+
+msgid "Content of article"
+msgstr "文章正文"
+
+msgid "New line"
+msgstr "换行"
+
+msgid "Post-upload URL"
+msgstr "上传后 URL 显示"
+
+msgid "Automatic Update"
+msgstr "自动更新"
