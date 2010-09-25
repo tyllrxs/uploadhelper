@@ -78,6 +78,7 @@ class MyFrame(wx.Frame):
 	self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, self.lstUpFile)
 	self.Bind(wx.EVT_CLOSE, self.OnClose)
 	self.Bind(wx.EVT_ICONIZE, self.on_iconify)
+	
         
     def __set_menubar(self):
         menuBar = wx.MenuBar()
@@ -331,7 +332,10 @@ class MyFrame(wx.Frame):
 
     def get_host(self):
 	return BBS_HOSTS[read_config_int('Login', 'Host', 0)]
-
+	
+    def get_new_host(self):
+	return read_config_int('General', 'FileURL', 0)
+	
     def get_user_id(self):
 	return read_config('Login', 'UserID')
 	
@@ -350,6 +354,8 @@ class MyFrame(wx.Frame):
 	if not (self.get_user_id() and self.get_auto_login()):
 		self.show_login()
 	self.set_window_size()
+	if read_config_bool('General', 'AutoUpdate', True):
+		CheckUpdateThread(False)
 
     def OnmnuSwitchClick(self, evt):
 	self.show_login()
@@ -440,6 +446,8 @@ class MyFrame(wx.Frame):
     	if self.UploadedMode:
     		self.lstUpFile.DeleteAllItems()
     		self.UploadedMode = False
+    	highlight = read_config_bool('General', 'Highlight', True)
+    	file_no_larger = read_config_int('General', 'FileNoLarger', 1024)
 	for f in filenames:
 		if os.path.isdir(f):
 			self.append_files(search_files(f, r'\.(jpe?g|gif|png|pdf)$'))
@@ -457,9 +465,10 @@ class MyFrame(wx.Frame):
 		elif not supported_file_type(f):
 			self.lstUpFile.SetStringItem(index, 3, MSG_UNSUPPORTED_FORMAT, 0)
 			self.lstUpFile.SetItemTextColour(index, wx.RED)
-		elif fz > 1024:
-			self.lstUpFile.SetStringItem(index, 3, MSG_ENTITY_TOO_LARGE, 0)
-			self.lstUpFile.SetItemTextColour(index, wx.BLUE)
+		elif fz > file_no_larger:
+			if highlight:
+				self.lstUpFile.SetStringItem(index, 3, MSG_ENTITY_TOO_LARGE, 0)
+				self.lstUpFile.SetItemTextColour(index, wx.BLUE)
 	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())    	
 
     def OnbtnUploadClick(self, evt):
@@ -485,7 +494,7 @@ class MyFrame(wx.Frame):
 	for i in range(0, threads):
 		if i < self.lstUpFile.GetItemCount():
 			self.upcount += 1
-			UploadThread(self, self.get_host(), self.get_board_name(), i, self.get_cookie())
+			UploadThread(self, self.get_host(), self.get_board_name(), i, self.get_cookie(), self.get_new_host())
 
     def list_re_number(self):
 	for i in xrange(self.lstUpFile.GetItemCount()):
@@ -500,10 +509,16 @@ class MyFrame(wx.Frame):
 		wx.MessageBox(MSG_FILL_BLANKS)
 		return
 	self.btnPost.Disable()
+	post_content = self.txtBody.GetValue()
+	template = read_config('General', 'Template', '')
+	if template.find('$BODY') >= 0:
+		template = template.replace('\\n', '\n')
+		template = template.replace('$BODY', post_content)
+		post_content = template
 	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
 		urllib.urlencode({'title': self.txtTitle.GetValue().encode('gb18030'), 
 				'signature': self.txtSignature.GetValue(),
-				'text': self.txtBody.GetValue().encode('gb18030')}))
+				'text': post_content.encode('gb18030')}))
 	self.btnPost.Enable()
 	if info == '':
 		wx.MessageBox('%s %s.' % (_('Post Successfully to Board'), self.get_board_name(True)), _('Post Article'), wx.ICON_INFORMATION)
@@ -676,7 +691,7 @@ class MyFrame(wx.Frame):
 			return
 		if self.upcount < self.lstUpFile.ItemCount:
 			self.upcount += 1
-			UploadThread(self, self.get_host(), self.get_board_name(), self.upcount - 1, self.get_cookie())
+			UploadThread(self, self.get_host(), self.get_board_name(), self.upcount - 1, self.get_cookie(), self.get_new_host())
 	elif t.startswith('Download|'):
 		filenames=t.split('|')[1:]
 		self.lstUpFile.DeleteAllItems()
@@ -693,7 +708,8 @@ class MyFrame(wx.Frame):
 				if wx.YES == wx.MessageBox(_('A new version %s is available! Would you like to update now?') % t, MSG_CHECK_UPDATE, wx.YES_NO|wx.ICON_QUESTION):
 					wx.LaunchDefaultBrowser(HOMEPAGE)
 			else:
-				wx.MessageBox(_('You are using the latest version.'), MSG_CHECK_UPDATE, wx.ICON_INFORMATION)
+				if t.split('|')[2] == '':
+					wx.MessageBox(_('You are using the latest version.'), MSG_CHECK_UPDATE, wx.ICON_INFORMATION)
 	elif t.startswith('Logout|'):
 		if t.split('|')[1] == 'OK':
 			wx.MessageBox('%s %s' % (self.get_user_id(), _('has logged out.')), _('Logout'), wx.ICON_INFORMATION)

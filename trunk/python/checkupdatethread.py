@@ -12,8 +12,9 @@ class CheckUpdateThread(Thread):
     """Check for Updates Thread."""
  
     #----------------------------------------------------------------------
-    def __init__(self):
+    def __init__(self, notify = True):
         Thread.__init__(self)
+        self.notify = notify
         self.start()
  
     #----------------------------------------------------------------------
@@ -30,5 +31,8 @@ class CheckUpdateThread(Thread):
  
     #----------------------------------------------------------------------
     def checkNewRelease(self):
-	Publisher().sendMessage("update", 'Update|%s' % self.info)
+    	if self.notify:
+		Publisher().sendMessage("update", 'Update|%s|' % self.info)
+	else:
+		Publisher().sendMessage("update", 'Update|%s|Quiet' % self.info)
 

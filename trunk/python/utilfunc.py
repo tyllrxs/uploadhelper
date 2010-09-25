@@ -35,8 +35,9 @@ def get_html_info(html):
 	body = re.sub(r'<[^>]*>', '', body)
 	return head, body
 
-def get_file_url(html):
+def get_file_url(html, index = 0):
 	url = re.search(r'<url>(.*)</url>', html).group(1)
+	url = url.replace('bbs.fudan.edu.cn', BBS_HOSTS[index])
 	return url
 
 def get_update_info(html, key):
@@ -66,18 +67,26 @@ def get_file_type(fname):
 		return ext
 
 def search_files(path, expr = '.*'):
+	min_size = read_config_int('General', 'MinFileSize', 0)
+	max_size = read_config_int('General', 'MaxFileSize', 1024)
 	files = os.listdir(path)
 	r = re.compile(expr, re.I)
 	newfiles = []
-	for f in files:
-		fn = os.path.join(path, f)
-		if r.search(fn) and os.path.isfile(fn):
-        		newfiles.append(fn)
-#        for root, dirs, files in os.walk(path):  
-#		for f in files:  
-#			fn = os.path.join(root, f)
-#			if r.search(fn):
-#        			newfiles.append(fn)
+        if read_config_bool('General', 'SubFolder', False):
+		for root, dirs, files in os.walk(path):  
+			for f in files:  
+				fn = os.path.join(root, f)
+				if r.search(fn):
+					sz = os.path.getsize(fn)
+					if sz >= min_size and sz <= max_size:
+						newfiles.append(fn)
+	else:
+		for f in files:
+			fn = os.path.join(path, f)
+			if r.search(fn) and os.path.isfile(fn):
+				sz = os.path.getsize(fn)
+				if sz >= min_size and sz <= max_size:
+					newfiles.append(fn)
 	return newfiles
 
 def update_title():
