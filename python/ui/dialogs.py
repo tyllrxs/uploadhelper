@@ -13,7 +13,7 @@ class MyLoginDialog(wx.Dialog):
         wx.Dialog.__init__(self, *args, **kwds)
         self.imgTitle = wx.StaticBitmap(self, -1, wx.Bitmap("icon/title.png"))
         self.label_1 = wx.StaticText(self, -1, _("BBS host"), style=wx.ALIGN_CENTRE)
-        self.cmbHost = wx.Choice(self, -1, choices=BBS_HOSTS)
+        self.cmbHost = wx.Choice(self, -1, choices = BBS_HOSTS)
         self.label_2 = wx.StaticText(self, -1, _("User"), style=wx.ALIGN_CENTRE)
         self.txtUser = wx.TextCtrl(self, -1, "")
         self.label_3 = wx.StaticText(self, -1, _("Password"), style=wx.ALIGN_CENTRE)
@@ -68,7 +68,7 @@ class MyLoginDialog(wx.Dialog):
 	pwd = self.txtPwd.GetValue().strip()
 	autologin = self.chkAutoLogin.IsChecked()
 	if userid == '' or pwd == '':
-		wx.MessageBox(MSG_FILL_BLANKS)
+		wx.MessageBox(MSG_FILL_BLANKS, _('Login'), wx.ICON_EXCLAMATION)
 		return
 	opener = urllib2.build_opener(SmartRedirectHandler())  
 	urllib2.install_opener(opener)  
@@ -76,21 +76,21 @@ class MyLoginDialog(wx.Dialog):
 	try:
 		resp = urllib2.urlopen(req)  
 	except urllib2.HTTPError, e:  
-		wx.MessageBox('%s: %d' % (MSG_ERROR_CODE, e.code), MSG_NETWORK_ERROR) 
+		wx.MessageBox('%s: %d' % (MSG_ERROR_CODE, e.code), MSG_NETWORK_ERROR, wx.ICON_ERROR) 
 		return
 	except:
-		wx.MessageBox(MSG_NETWORK_ERROR)
+		wx.MessageBox(MSG_NETWORK_ERROR, MSG_ERROR, wx.ICON_ERROR)
 		return
 	else:
 		if resp.code != 302:			
 			the_page = resp.read().decode('gb18030')
 			head, body = get_html_info(the_page)
-			wx.MessageBox(body, head)
+			wx.MessageBox(body, head, wx.ICON_EXCLAMATION)
 			return
 		else:
 			cookie = ';'.join(resp.headers['set-cookie'].split(','))
 			write_config('Login', {'UserID': userid, 'Password': pwd, 'Cookie': cookie, 'Host': host, 'AutoLogin': autologin})
-			wx.MessageBox(_('Login OK. Prepare to upload files.'))
+			wx.MessageBox(_('Login OK. Prepare to upload files.'), _('Login'), wx.ICON_INFORMATION)
 			update_title()
 			if self.Parent.to_upload:
 				evt = wx.CommandEvent()
@@ -130,7 +130,7 @@ class MySettingDialog(wx.Dialog):
         self.txtTemplate = wx.TextCtrl(self.notebook_pane3, -1, "")
         self.lblNote = wx.StaticText(self.notebook_pane3, -1, '%s:\n$BODY (%s); \\n (%s)' % (_("Notes"), _('Content of article'), _('New line')))
         self.label_4 = wx.StaticText(self.notebook_pane3, -1, _("Post-upload URL"))
-        self.cmbFileURL = wx.Choice(self.notebook_pane3, -1, choices=[])
+        self.cmbFileURL = wx.Choice(self.notebook_pane3, -1, choices = BBS_HOSTS)
         self.chkAutoUpdate = wx.CheckBox(self.notebook_pane3, -1, _("Automatic Update"))
         
         self.btnOK = wx.Button(self, wx.ID_OK, _("OK"))
@@ -139,10 +139,13 @@ class MySettingDialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
         
+        self.Bind(wx.EVT_BUTTON, self.OnbtnOKClick, self.btnOK)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
     def __set_properties(self):
         self.SetTitle(_("Preferences"))
+        self.txtThreads.SetValue(read_config_int('General', 'Threads', 3))
+        self.chkTray.SetValue(read_config_bool('General', 'MinimizeToTray', False))
 
     def __do_layout(self):
         sizer_1 = wx.BoxSizer(wx.VERTICAL)
@@ -193,7 +196,17 @@ class MySettingDialog(wx.Dialog):
         self.SetSizer(sizer_1)
         sizer_1.Fit(self)
         self.Layout()
-
+        
+    def OnbtnOKClick(self, evt):
+	try:
+    		write_config('General', 
+    			{'Threads': self.txtThreads.GetValue(), \
+    			'MinimizeToTray': self.chkTray.IsChecked(), \
+    			})
+    	except:
+    		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
+    	self.Close()
+    		
     def OnClose(self, evt):
 	self.Destroy()
 	

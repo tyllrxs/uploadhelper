@@ -63,6 +63,9 @@ msgstr "错误代码"
 msgid "Network Error"
 msgstr "网络连接错误"
 
+msgid "Error occurred when saving settings"
+msgstr "保存设置时发生错误"
+
 #: consts.py:27
 msgid "Fill the blanks first."
 msgstr "请先填写完整"
@@ -387,3 +390,9 @@ msgstr "上传后 URL 显示"
 
 msgid "Automatic Update"
 msgstr "自动更新"
+
+msgid "Confirm"
+msgstr "确认"
+
+msgid "Are you sure to logout?"
+msgstr "你真的要注销吗？"
