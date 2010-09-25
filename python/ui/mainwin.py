@@ -22,14 +22,13 @@ from taskbaricon import *
 class MyFrame(wx.Frame):
     def __init__(self, *args, **kwds):
         wx.Frame.__init__(self, *args, **kwds)
-        icon = wx.EmptyIcon()
+
         if sys.platform.startswith('win32'):
-		icon.CopyFromBitmap(wx.Bitmap('icon/logo32.ico'))
+		self.SetIcon(wx.Icon('icon/logo32.ico', wx.BITMAP_TYPE_ICO))
 		self.trayicon = ddTaskBarIcon(wx.Icon('icon/logo16.ico', wx.BITMAP_TYPE_ICO), APPNAME, self)
-	else:
-		icon.CopyFromBitmap(wx.Bitmap('icon/logo32.png'))
+	elif sys.platform.find('linux') >= 0:
+		self.SetIcon(wx.Icon('icon/logo32.png', wx.BITMAP_TYPE_PNG))
 		self.trayicon = ddTaskBarIcon(wx.Icon('icon/logo16.png', wx.BITMAP_TYPE_PNG), APPNAME, self)
-	self.SetIcon(icon)
         
         self.__set_menubar()
         self.__set_toolbar()
@@ -548,11 +547,8 @@ class MyFrame(wx.Frame):
                         	html = html[begin + 1:]
         		elif fm == 'com.apple.webarchive': # Safari
         			begin = html.find('text/html')
-				end = html.rfind('/P')
+				end = html.rfind('U')
 				html = html[begin + 13: end]
-				begin = html.rfind('http')
-				source_url = html[begin:]
-				html = html[:begin - 9]
 			break
     	wx.TheClipboard.Close()
     	try:
