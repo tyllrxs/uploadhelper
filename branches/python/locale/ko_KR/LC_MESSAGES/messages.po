@@ -1,0 +1,329 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-08 11:51+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: consts.py:7
+msgid "UploadHelper"
+msgstr "ASE 어시스턴트 중국 올리기"
+
+msgid "Select Files to Upload"
+msgstr "업로드할 파일 선택"
+
+#: consts.py:15
+msgid "&Add Files"
+msgstr "파일 추가"
+
+#: consts.py:15
+msgid "A&dd Directory"
+msgstr "추가 디렉토리"
+
+#: consts.py:16
+msgid "&Remove Selected"
+msgstr "선택 삭제"
+
+#: consts.py:16
+msgid "Remove &Copies"
+msgstr "중복 제거"
+
+#: consts.py:16
+msgid "Remove &Invalid"
+msgstr "잘못된 제거"
+
+#: consts.py:17
+msgid "Remove A&ll"
+msgstr "모두 삭제"
+
+#: consts.py:23
+msgid "Error"
+msgstr "오류"
+
+#: consts.py:24
+msgid "Fail"
+msgstr "실패"
+
+#: consts.py:25
+msgid "Error code"
+msgstr "오류 코드"
+
+#: consts.py:26
+msgid "Network Error"
+msgstr "네트워크 연결 오류"
+
+#: consts.py:27
+msgid "Fill the blanks first."
+msgstr "전체 내용을 기입하세요"
+
+#: consts.py:28
+msgid "%d Files Selected"
+msgstr "% d 개의 선택한 파일"
+
+#: consts.py:29
+msgid "Unknown Error"
+msgstr "알 수없는 오류"
+
+#: consts.py:30
+msgid "Invalid File"
+msgstr "잘못된 파일"
+
+#: consts.py:31
+msgid "Check for Updates"
+msgstr "업데이트 확인"
+
+#: consts.py:33
+msgid "Logout"
+msgstr "로그아웃"
+
+#: consts.py:34
+msgid "Uploading"
+msgstr "업로드"
+
+#: consts.py:35
+msgid "Finished"
+msgstr "완전한"
+
+#: consts.py:48
+msgid "Contact tyllr (at) RYGH BBS for help or advice"
+msgstr "의견, 제안, 태양와 접촉, 그리고 달 tyllr하시기 바랍니다"
+
+#: DlgAbout.py:14
+msgid "Version"
+msgstr "버전"
+
+#: DlgAbout.py:14
+msgid "Author"
+msgstr "의"
+
+#: DlgAbout.py:14
+msgid "Homepage"
+msgstr "홈"
+
+#: DlgAbout.py:14
+msgid "License"
+msgstr "라이센스 계약"
+
+#: MyFrame.py:59
+msgid "Filename"
+msgstr "파일 이름"
+
+#: MyFrame.py:59
+msgid "Size"
+msgstr "크기"
+
+#: MyFrame.py:59
+msgid "Status"
+msgstr "지위"
+
+#: MyFrame.py:179
+msgid "User"
+msgstr "사용자"
+
+#: MyFrame.py:234
+msgid "All Supported Files"
+msgstr "모든 증빙 서류"
+
+#: MyFrame.py:234
+msgid "Image Files"
+msgstr "이미지 파일"
+
+#: MyFrame.py:234
+msgid "PDF Documents"
+msgstr "PDF 문서"
+
+#: MyFrame.py:234
+msgid "All Files"
+msgstr "모든 파일"
+
+#: MyFrame.py:257
+msgid "Unsupported File Format"
+msgstr "파일 형식은 지원되지 않습니다"
+
+#: MyFrame.py:260
+msgid "Too Large File"
+msgstr "파일이 너무 큽니다"
+
+#: MyFrame.py:268
+msgid "Select at least one file for uploading."
+msgstr "적어도 하나의 파일 업로드를 선택하세요."
+
+#: MyFrame.py:304
+msgid "Post Successfully to Board"
+msgstr "성공적으로 포럼에 전달"
+
+#: MyFrame.py:330
+msgid "No webpage content is ready to reship, check if it has been copied correctly."
+msgstr "아니 당신은 좋은 사본을 가지고 있는지 확인하십시오 웹 페이지에 게시됩니다 없습니다."
+
+#: MyFrame.py:361
+msgid "Choose a directory"
+msgstr "디렉토리를 선택하십시오"
+
+#: MyFrame.py:437
+msgid "Failed to check for updates, try again later."
+msgstr "나중에 다시 시도해주십시오 실패한 업데이 트를 확인합니다."
+
+#: MyFrame.py:440
+msgid "A new version %s is available! Would you like to update now?"
+msgstr "%의 새 버전을 찾으 바디 즉시 업데이 트됩니까?"
+
+#: MyFrame.py:443
+msgid "You are using the latest version."
+msgstr "당신은 최신 버전을 사용하고 있습니다."
+
+#: MyFrame.py:446
+msgid "has logged out."
+msgstr "취소되었습니다."
+
+msgid "About"
+msgstr "소개"
+
+msgid "OK"
+msgstr "확인"
+
+msgid "Login"
+msgstr "로그인"
+
+msgid "BBS host"
+msgstr "게시판 호스트"
+
+msgid "Password"
+msgstr "비밀 번호"
+
+msgid "How to Use"
+msgstr "사용하지 않습니다?"
+
+msgid "Auto Login"
+msgstr "자동 로그인"
+
+msgid "&Login"
+msgstr "로그인"
+
+msgid "&Switch User"
+msgstr "사용자 변경"
+
+msgid "Logo&ut"
+msgstr "로그아웃"
+
+msgid "&Setting"
+msgstr "세트"
+
+msgid "&Preferences"
+msgstr "환경 설정"
+
+msgid "Preferences"
+msgstr "환경 설정"
+
+msgid "Preferences..."
+msgstr "환경 설정 ..."
+
+msgid "Preference"
+msgstr "환경 설정"
+
+msgid "&Language"
+msgstr "언어"
+
+msgid "Select interface language"
+msgstr "선택 인터페이스 언어"
+
+msgid "Always on &Top"
+msgstr "항상 맨 위"
+
+msgid "&Help"
+msgstr "도움말"
+
+msgid "Help"
+msgstr "도움말"
+
+msgid "&FAQ"
+msgstr "자주 묻는 질문"
+
+msgid "&Homepage"
+msgstr "홈"
+
+msgid "Check for &Updates"
+msgstr "업데이트 확인"
+
+msgid "&About"
+msgstr "소개"
+
+msgid "Switch user"
+msgstr "사용자 변경"
+
+msgid "FAQ"
+msgstr "자주 묻는 질문"
+
+msgid "Visit Homepage of UploadHelper"
+msgstr "홈 보좌관은 태양, 그리고 달의 업로드 방문"
+
+msgid "Upload Files"
+msgstr "파일 올리기"
+
+msgid "Destination"
+msgstr "대상 레이아웃"
+
+msgid "Locked"
+msgstr "자물쇠"
+
+msgid "Browse"
+msgstr "브라 우즈"
+
+msgid "Upload"
+msgstr "업로드"
+
+msgid "Post Article"
+msgstr "출판 관련 기사"
+
+msgid "Title"
+msgstr "제목"
+
+msgid "Signature"
+msgstr "서명"
+
+msgid "Post"
+msgstr "출판"
+
+msgid "Reship Webpage"
+msgstr "링크 페이지"
+
+msgid "Copy the Webpage Fraction to Clipboard, then Click"
+msgstr "다음 클립 보드에 파편 페이지를 클릭하십시오"
+
+msgid "Start Reshipping"
+msgstr "시작 링크"
+
+msgid "Progress"
+msgstr "현재 진행"
+
+msgid "Login OK. Prepare to upload files."
+msgstr "로그인, 파일을 업로드할 준비가 성공하지 못했습니다."
+
+msgid "Visit Homepage"
+msgstr "액세스 홈"
+
+msgid "Show about dialog"
+msgstr "디스플레이 정보 대화 상자"
+
+msgid "Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at"
+msgstr "파이썬 버전이 너무 낮습니다, (3.0을 지원하지 않는 이상) 새 2.x에서 버전을 다운로드하려면 여기를 방문하시기 바랍니다"
+
+msgid "Python 3 is not supported. Get a 2.X version at"
+msgstr "2.x에서 버전을 다운로드하려면 여기를 방문하시기 바랍니다, 파이썬 3을 지원하지 않습니다"
+
+msgid "wxPython is too old. Get a newer version at"
+msgstr "wxPython 버전이 너무 낮습니다, 여기에 새 버전을 다운로드하십시오"
+
+msgid "Language has changed. Restart to take effects."
+msgstr "언어 변경되었습니다. 효과로 프로그램을 다시 시작합니다."

@@ -1,0 +1,1 @@
+﻿本程序采用Delphi 2010开发，使用的第三方控件包括Raize Components 5.2, TPerlRegEx等。
