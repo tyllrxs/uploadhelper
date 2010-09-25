@@ -44,6 +44,13 @@ def get_update_info(html, key):
 	val = re.search(r'%s=([^\r\n]*)' % key, html).group(1).strip()
 	return val
 
+def apply_template(text):
+	substs = [('\\n', '\n')]
+	txt = text
+	for s, r in substs:
+		txt = txt.replace(s, r)
+	return txt
+
 def invalid_file_name(fname):
 	try:
 		open(fname, 'r')

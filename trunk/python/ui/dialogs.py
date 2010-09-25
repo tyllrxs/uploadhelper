@@ -127,9 +127,12 @@ class MySettingDialog(wx.Dialog):
         
         self.notebook_pane3 = wx.Panel(self.notebook, -1)
         self.staticbox2 = wx.StaticBox(self.notebook_pane3, -1, _("Template to Post Article"))
+        self.label_4 = wx.StaticText(self.notebook_pane3, -1, _("Title"))
+        self.txtTitleTemplate = wx.TextCtrl(self.notebook_pane3, -1, "")
+        self.label_5 = wx.StaticText(self.notebook_pane3, -1, _("Content"))
         self.txtTemplate = wx.TextCtrl(self.notebook_pane3, -1, "")
-        self.lblNote = wx.StaticText(self.notebook_pane3, -1, '%s:\n$BODY (%s); \\n (%s)' % (_("Notes"), _('Content of article'), _('New line')))
-        self.label_4 = wx.StaticText(self.notebook_pane3, -1, _("Post-upload URL"))
+        self.lblNote = wx.StaticText(self.notebook_pane3, -1, '%s:\n$TITLE (%s); $BODY (%s); \\n (%s)' % (_("Notes"), _('Title'), _('Content of article'), _('New line')))
+        self.label_6 = wx.StaticText(self.notebook_pane3, -1, _("Post-upload URL"))
         self.cmbFileURL = wx.Choice(self.notebook_pane3, -1, choices = BBS_HOSTS)
         self.chkAutoUpdate = wx.CheckBox(self.notebook_pane3, -1, _("Automatic Update"))
         
@@ -154,6 +157,7 @@ class MySettingDialog(wx.Dialog):
     	self.txtFileNoLarger.SetValue(read_config_int('General', 'FileNoLarger', 1024))
     	evt = wx.CommandEvent()
     	self.OnchkHighlightClick(evt)
+    	self.txtTitleTemplate.SetValue(read_config('General', 'TitleTemplate', ''))
     	self.txtTemplate.SetValue(read_config('General', 'Template', ''))
     	self.cmbFileURL.SetSelection(read_config_int('General', 'FileURL', 0))
     	self.chkAutoUpdate.SetValue(read_config_bool('General', 'AutoUpdate', True))
@@ -188,10 +192,17 @@ class MySettingDialog(wx.Dialog):
         sizer_13.Add(self.txtFileNoLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_6.Add(sizer_13, 0, wx.EXPAND, 0)
         self.notebook_pane2.SetSizer(sizer_6)
-        sizer_11.Add(self.txtTemplate, 0, wx.ALL|wx.EXPAND, 5)
+        mysizer = wx.BoxSizer(wx.HORIZONTAL)
+        mysizer.Add(self.label_4, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        mysizer.Add(self.txtTitleTemplate, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5)
+        sizer_11.Add(mysizer, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 0)
+        mysizer2 = wx.BoxSizer(wx.HORIZONTAL)
+        mysizer2.Add(self.label_5, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        mysizer2.Add(self.txtTemplate, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5)
+        sizer_11.Add(mysizer2, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 0)
         sizer_11.Add(self.lblNote, 0, wx.ALL, 5)
         sizer_8.Add(sizer_11, 0, wx.EXPAND|wx.ALL, 5)
-        sizer_9.Add(self.label_4, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 6)
+        sizer_9.Add(self.label_6, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 6)
         sizer_9.Add(self.cmbFileURL, 0, wx.ALL, 5)
         sizer_8.Add(sizer_9, 0, wx.EXPAND, 0)
         sizer_8.Add(self.chkAutoUpdate, 0, wx.ALL, 5)
@@ -225,6 +236,7 @@ class MySettingDialog(wx.Dialog):
     			'SubFolder': self.chkSubFolder.IsChecked(), \
     			'Highlight': self.chkHighlight.IsChecked(), \
     			'FileNoLarger': self.txtFileNoLarger.GetValue(), \
+    			'TitleTemplate': self.txtTitleTemplate.GetValue(), \
     			'Template': self.txtTemplate.GetValue(), \
     			'FileURL': self.cmbFileURL.GetSelection(), \
     			'AutoUpdate': self.chkAutoUpdate.IsChecked(), \
