@@ -77,16 +77,22 @@ def search_files(path, expr = '.*'):
 			for f in files:  
 				fn = os.path.join(root, f)
 				if r.search(fn):
-					sz = os.path.getsize(fn)
-					if sz >= 1024 * min_size and sz <= 1024 * max_size:
-						newfiles.append(fn)
+					try:
+						sz = os.path.getsize(fn)
+						if sz >= 1024 * min_size and sz <= 1024 * max_size:
+							newfiles.append(fn)
+					except:
+						pass
 	else:
 		for f in files:
 			fn = os.path.join(path, f)
 			if r.search(fn) and os.path.isfile(fn):
-				sz = os.path.getsize(fn)
-				if sz >= 1024 * min_size and sz <= 1024 * max_size:
-					newfiles.append(fn)
+				try:
+					sz = os.path.getsize(fn)
+					if sz >= 1024 * min_size and sz <= 1024 * max_size:
+						newfiles.append(fn)
+				except:
+					pass
 	return newfiles
 
 def update_title():
