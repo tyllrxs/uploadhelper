@@ -78,14 +78,14 @@ def search_files(path, expr = '.*'):
 				fn = os.path.join(root, f)
 				if r.search(fn):
 					sz = os.path.getsize(fn)
-					if sz >= min_size and sz <= max_size:
+					if sz >= 1024 * min_size and sz <= 1024 * max_size:
 						newfiles.append(fn)
 	else:
 		for f in files:
 			fn = os.path.join(path, f)
 			if r.search(fn) and os.path.isfile(fn):
 				sz = os.path.getsize(fn)
-				if sz >= min_size and sz <= max_size:
+				if sz >= 1024 * min_size and sz <= 1024 * max_size:
 					newfiles.append(fn)
 	return newfiles
 
