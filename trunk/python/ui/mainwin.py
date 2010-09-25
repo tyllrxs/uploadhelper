@@ -352,6 +352,8 @@ class MyFrame(wx.Frame):
 	self.show_login()
 	
     def OnmnuLogoutClick(self, evt):
+    	if wx.NO == wx.MessageBox(_('Are you sure to logout?'), _('Confirm'), wx.YES_NO|wx.NO_DEFAULT|wx.ICON_EXCLAMATION):
+    		return
 	LogoutThread(self.get_host(), self.get_cookie())
 	
     def OnmnuPreferenceClick(self, evt):
@@ -462,7 +464,7 @@ class MyFrame(wx.Frame):
 	self.lblProgress.SetLabel('%s: %d / %d' % (_('Progress'), 0, self.lstUpFile.GetItemCount()))
 	self.gagProgress.SetValue(0)
 	if self.lstUpFile.GetItemCount() <= 0:
-		wx.MessageBox(_('Select at least one file for uploading.'))
+		wx.MessageBox(_('Select at least one file for uploading.'), _('Upload'), wx.ICON_EXCLAMATION)
 		return
 	self.btnUpload.Disable()
 	if self.PostedMode:
@@ -476,7 +478,8 @@ class MyFrame(wx.Frame):
 	if not self.ReshipMode:
 		for i in xrange(self.lstUpFile.GetItemCount()):
 			self.txtBody.SetValue(self.txtBody.GetValue() + '\n%s\n' % MSG_FILE_UPLOADING % (i + 1))
-	for i in range(0, 3):
+	threads = read_config_int('General', 'Threads', 3)
+	for i in range(0, threads):
 		if i < self.lstUpFile.GetItemCount():
 			self.upcount += 1
 			UploadThread(self, self.get_host(), self.get_board_name(), i, self.get_cookie())
@@ -500,7 +503,7 @@ class MyFrame(wx.Frame):
 				'text': self.txtBody.GetValue().encode('gb18030')}))
 	self.btnPost.Enable()
 	if info == '':
-		wx.MessageBox('%s %s.' % (_('Post Successfully to Board'), self.get_board_name(True)))
+		wx.MessageBox('%s %s.' % (_('Post Successfully to Board'), self.get_board_name(True)), _('Post Article'), wx.ICON_INFORMATION)
 		self.PostedMode = True
 	elif info.find('No User') >= 0:
 		self.to_post = True
@@ -630,7 +633,7 @@ class MyFrame(wx.Frame):
 			'ToolbarStyle': self.GetToolBar().GetWindowStyleFlag(), \
 			})
 	except:
-		pass
+		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
 	self.Destroy()
 
     def updateDisplay(self, msg):
@@ -673,16 +676,16 @@ class MyFrame(wx.Frame):
 	    	self.OnbtnUploadClick(evt)
 	elif t.startswith('Update|'):
 		if t.split('|')[1] == '':
-			wx.MessageBox(_('Failed to check for updates, try again later.'), MSG_CHECK_UPDATE)
+			wx.MessageBox(_('Failed to check for updates, try again later.'), MSG_CHECK_UPDATE, wx.ICON_ERROR)
 		else:
 			if VERSION < '%s' % t.split('|')[1]:
-				if wx.YES == wx.MessageBox(_('A new version %s is available! Would you like to update now?') % t, MSG_CHECK_UPDATE, wx.YES_NO):
+				if wx.YES == wx.MessageBox(_('A new version %s is available! Would you like to update now?') % t, MSG_CHECK_UPDATE, wx.YES_NO|wx.ICON_QUESTION):
 					wx.LaunchDefaultBrowser(HOMEPAGE)
 			else:
-				wx.MessageBox(_('You are using the latest version.'), MSG_CHECK_UPDATE)
+				wx.MessageBox(_('You are using the latest version.'), MSG_CHECK_UPDATE, wx.ICON_INFORMATION)
 	elif t.startswith('Logout|'):
 		if t.split('|')[1] == 'OK':
-			wx.MessageBox('%s %s' % (self.get_user_id(), _('has logged out.')))
+			wx.MessageBox('%s %s' % (self.get_user_id(), _('has logged out.')), _('Logout'), wx.ICON_INFORMATION)
 			remove_config('Login')
 			update_title()
 		else:
