@@ -30,7 +30,6 @@ class MyFrame(wx.Frame):
 		icon.CopyFromBitmap(wx.Bitmap('icon/logo32.png'))
 		self.trayicon = ddTaskBarIcon(wx.Icon('icon/logo16.png', wx.BITMAP_TYPE_PNG), APPNAME, self)
 	self.SetIcon(icon)
-
         
         self.__set_menubar()
         self.__set_toolbar()
@@ -619,7 +618,8 @@ class MyFrame(wx.Frame):
 	wx.MessageBox(_('Language has changed. Restart to take effects.'))
 	
     def on_iconify(self, evt):
-        self.Hide()
+        if read_config_bool('General', 'MinimizeToTray', False):
+        	self.Hide()
 
     def OnClose(self, evt):
     	try:
