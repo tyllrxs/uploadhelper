@@ -207,6 +207,7 @@ class MySettingDialog(wx.Dialog):
         self.SetSizer(sizer_1)
         sizer_1.Fit(self)
         self.Layout()
+        self.Centre()
         
     def OnchkHighlightClick(self, evt):
     	if self.chkHighlight.IsChecked():

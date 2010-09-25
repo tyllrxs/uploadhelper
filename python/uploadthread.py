@@ -17,13 +17,14 @@ import MultipartPostHandler
 class UploadThread(Thread):
     """Upload Thread."""
  
-    def __init__(self, window, host, board, upindex, cookie):
+    def __init__(self, window, host, board, upindex, cookie, newhost = 0):
         Thread.__init__(self)
 	self.window = window
 	self.host = host
 	self.board = board
 	self.upindex = upindex
 	self.cookie = cookie
+	self.newhost = newhost
 	self.fileurl = ''
 	self.start()
  
@@ -60,7 +61,7 @@ class UploadThread(Thread):
 			else:
 				self.upOK = True
 				self.info = STATUS_UPLOADED
-				self.fileurl = get_file_url(the_page)
+				self.fileurl = get_file_url(the_page, self.newhost)
         wx.CallAfter(self.PostUploadInfo)
  
     def PreUploadInfo(self):
