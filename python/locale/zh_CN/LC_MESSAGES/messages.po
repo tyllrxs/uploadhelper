@@ -396,3 +396,9 @@ msgstr "确认"
 
 msgid "Are you sure to logout?"
 msgstr "你真的要注销吗？"
+
+msgid "Restore Window"
+msgstr "还原窗口"
+
+msgid "Exit"
+msgstr "退出"

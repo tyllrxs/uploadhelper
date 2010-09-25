@@ -17,7 +17,7 @@ from uploadthread import *
 from checkupdatethread import *
 from downloadthread import *
 from parsehtml import *
-
+from taskbaricon import *
 
 class MyFrame(wx.Frame):
     def __init__(self, *args, **kwds):
@@ -25,9 +25,12 @@ class MyFrame(wx.Frame):
         icon = wx.EmptyIcon()
         if sys.platform.startswith('win32'):
 		icon.CopyFromBitmap(wx.Bitmap('icon/logo32.ico'))
+		self.trayicon = ddTaskBarIcon(wx.Icon('icon/logo16.ico', wx.BITMAP_TYPE_ICO), APPNAME, self)
 	else:
 		icon.CopyFromBitmap(wx.Bitmap('icon/logo32.png'))
+		self.trayicon = ddTaskBarIcon(wx.Icon('icon/logo16.png', wx.BITMAP_TYPE_PNG), APPNAME, self)
 	self.SetIcon(icon)
+
         
         self.__set_menubar()
         self.__set_toolbar()
@@ -75,6 +78,7 @@ class MyFrame(wx.Frame):
 	self.Bind(wx.EVT_BUTTON, self.OnbtnReshipClick, self.btnReship)
 	self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, self.lstUpFile)
 	self.Bind(wx.EVT_CLOSE, self.OnClose)
+	self.Bind(wx.EVT_ICONIZE, self.on_iconify)
         
     def __set_menubar(self):
         menuBar = wx.MenuBar()
@@ -613,6 +617,9 @@ class MyFrame(wx.Frame):
 	lng = lng.replace('__', '_')
 	write_config('General', {'language': lng})
 	wx.MessageBox(_('Language has changed. Restart to take effects.'))
+	
+    def on_iconify(self, evt):
+        self.Hide()
 
     def OnClose(self, evt):
     	try:
@@ -634,6 +641,10 @@ class MyFrame(wx.Frame):
 			})
 	except:
 		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
+	try:
+		self.trayicon.Destroy()
+	except:
+		pass
 	self.Destroy()
 
     def updateDisplay(self, msg):
