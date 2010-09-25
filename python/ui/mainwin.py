@@ -273,17 +273,20 @@ class MyFrame(wx.Frame):
         object_1.Add(self.notebook, 1, wx.EXPAND, 0)
         self.SetSizer(object_1)
         self.Fit()
-        w = read_config_int('General', 'WinWidth', 600)
+        self.set_window_size()
+        if sys.platform.startswith('win32'):
+        	evt = wx.CommandEvent()
+        	self.OnCreate(evt)
+
+    def set_window_size(self):
+	w = read_config_int('General', 'WinWidth', 600)
 	h = read_config_int('General', 'WinHeight', 600)
 	self.SetSize(wx.Size(w, h))
         self.Layout()
         self.CentreOnScreen()
         if read_config_bool('General', 'WinMaximized', False):
         	self.Maximize()
-        if sys.platform.startswith('win32'):
-        	evt = wx.CommandEvent()
-        	self.OnCreate(evt)
-
+        
     def read_zones(self):
         xmldoc = minidom.parse(FILE_BOARDS)
 	num = 0
@@ -343,7 +346,7 @@ class MyFrame(wx.Frame):
     	self.Unbind(wx.EVT_WINDOW_CREATE)
 	if not (self.get_user_id() and self.get_auto_login()):
 		self.show_login()
-	
+	self.set_window_size()
 
     def OnmnuSwitchClick(self, evt):
 	self.show_login()
@@ -369,7 +372,7 @@ class MyFrame(wx.Frame):
     			self.GetToolBar().SetWindowStyleFlag(self.GetToolBar().GetWindowStyleFlag() & ~wx.TB_TEXT)
     
     def OnmnuAlwaysOnTopClick(self, evt):
-	if evt.GetEventObject().IsChecked(evt.GetId()):
+	if self.GetMenuBar().FindItemById(evt.GetId()).IsChecked():
         	self.SetWindowStyleFlag(self.GetWindowStyleFlag() | wx.STAY_ON_TOP)
 	else:
 		self.SetWindowStyleFlag(self.GetWindowStyleFlag() & ~wx.STAY_ON_TOP)
