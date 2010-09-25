@@ -139,6 +139,7 @@ class MySettingDialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
         
+        self.Bind(wx.EVT_CHECKBOX, self.OnchkHighlightClick, self.chkHighlight)
         self.Bind(wx.EVT_BUTTON, self.OnbtnOKClick, self.btnOK)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
@@ -146,7 +147,17 @@ class MySettingDialog(wx.Dialog):
         self.SetTitle(_("Preferences"))
         self.txtThreads.SetValue(read_config_int('General', 'Threads', 3))
         self.chkTray.SetValue(read_config_bool('General', 'MinimizeToTray', False))
-
+    	self.txtMinFileSize.SetValue(read_config_int('General', 'MinFileSize', 0))
+    	self.txtMaxFileSize.SetValue(read_config_int('General', 'MaxFileSize', 1024))
+    	self.chkSubFolder.SetValue(read_config_bool('General', 'SubFolder', False))
+    	self.chkHighlight.SetValue(read_config_bool('General', 'Highlight', True))
+    	self.txtFileNoLarger.SetValue(read_config_int('General', 'FileNoLarger', 1024))
+    	evt = wx.CommandEvent()
+    	self.OnchkHighlightClick(evt)
+    	self.txtTemplate.SetValue(read_config('General', 'Template', ''))
+    	self.cmbFileURL.SetSelection(read_config_int('General', 'FileURL', 0))
+    	self.chkAutoUpdate.SetValue(read_config_bool('General', 'AutoUpdate', True))
+    			
     def __do_layout(self):
         sizer_1 = wx.BoxSizer(wx.VERTICAL)
         sizer_2 = wx.BoxSizer(wx.HORIZONTAL)
@@ -197,11 +208,25 @@ class MySettingDialog(wx.Dialog):
         sizer_1.Fit(self)
         self.Layout()
         
+    def OnchkHighlightClick(self, evt):
+    	if self.chkHighlight.IsChecked():
+    		self.txtFileNoLarger.Enable()
+    	else:
+    		self.txtFileNoLarger.Enable(False)
+    
     def OnbtnOKClick(self, evt):
 	try:
     		write_config('General', 
     			{'Threads': self.txtThreads.GetValue(), \
     			'MinimizeToTray': self.chkTray.IsChecked(), \
+    			'MinFileSize': self.txtMinFileSize.GetValue(), \
+    			'MaxFileSize': self.txtMaxFileSize.GetValue(), \
+    			'SubFolder': self.chkSubFolder.IsChecked(), \
+    			'Highlight': self.chkHighlight.IsChecked(), \
+    			'FileNoLarger': self.txtFileNoLarger.GetValue(), \
+    			'Template': self.txtTemplate.GetValue(), \
+    			'FileURL': self.cmbFileURL.GetSelection(), \
+    			'AutoUpdate': self.chkAutoUpdate.IsChecked(), \
     			})
     	except:
     		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
