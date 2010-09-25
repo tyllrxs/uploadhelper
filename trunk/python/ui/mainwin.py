@@ -579,7 +579,7 @@ class MyFrame(wx.Frame):
     	urls, text = parse_html_images(html)
     	tmptext = source_url.strip() + '\n' + parse_html_texts(text.strip())
     	html += SEPARATOR + tmptext + SEPARATOR
-    	tmptext = re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n%s\n' % MSG_FILE_UPLOADING_2, tmptext)
+    	tmptext = re.sub(r'\[\[Image (\d+)[^\]]*\]\]', '\n\n%s\n\n' % MSG_FILE_UPLOADING_2, tmptext)
     	self.txtReship.SetValue(html.decode('utf8'))
 	self.txtBody.SetValue(compress_spaces(tmptext).decode('utf8'))
     	if urls:

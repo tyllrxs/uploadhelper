@@ -238,6 +238,9 @@ msgstr "偏好设置..."
 msgid "Preferences..."
 msgstr "偏好设置..."
 
+msgid "&Preferences..."
+msgstr "偏好设置(&P)..."
+
 msgid "Preference"
 msgstr "偏好设置"
 
