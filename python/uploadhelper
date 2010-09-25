@@ -15,7 +15,10 @@ class MyApp(wx.App):
 	self.mainframe.Show()
 	self.SetTopWindow(self.mainframe)
 	return True
-
+	
+    def MacReopenApp(self):
+        """Called when the doc icon is clicked, and ???"""
+        self.GetTopWindow().Raise()
 
 if __name__ == '__main__':
     app = MyApp(False)
