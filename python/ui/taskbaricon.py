@@ -24,7 +24,7 @@ class ddTaskBarIcon(wx.TaskBarIcon):
     # override
     def CreatePopupMenu(self):
         menu = wx.Menu()
-	menu.Append(self.ID_Restore, _('Restore Window'))
+	menu.Append(self.ID_Restore, _('Restore/hide Window'))
 	menu.AppendSeparator()
 	menu.Append(wx.ID_EXIT, _('Exit'))
 	return menu
