@@ -509,14 +509,21 @@ class MyFrame(wx.Frame):
 		wx.MessageBox(MSG_FILL_BLANKS)
 		return
 	self.btnPost.Disable()
+	post_title = self.txtTitle.GetValue()
 	post_content = self.txtBody.GetValue()
+	title_template = read_config('General', 'TitleTemplate', '')
+	if title_template.strip():
+		title_template = apply_template(title_template)
+		title_template = title_template.replace('$TITLE', post_title)
+		post_title = title_template
 	template = read_config('General', 'Template', '')
-	if template.find('$BODY') >= 0:
-		template = template.replace('\\n', '\n')
+	if template.strip():
+		template = apply_template(template)
 		template = template.replace('$BODY', post_content)
+		template = template.replace('$TITLE', post_title)
 		post_content = template
 	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
-		urllib.urlencode({'title': self.txtTitle.GetValue().encode('gb18030'), 
+		urllib.urlencode({'title': post_title.encode('gb18030'), 
 				'signature': self.txtSignature.GetValue(),
 				'text': post_content.encode('gb18030')}))
 	self.btnPost.Enable()

@@ -380,7 +380,7 @@ msgid "Notes"
 msgstr "说明"
 
 msgid "Content of article"
-msgstr "文章正文"
+msgstr "正文内容"
 
 msgid "New line"
 msgstr "换行"
@@ -402,3 +402,6 @@ msgstr "还原/隐藏窗口"
 
 msgid "Exit"
 msgstr "退出"
+
+msgid "Content"
+msgstr "正文"
