@@ -14,7 +14,7 @@ class ddTaskBarIcon(wx.TaskBarIcon):
 	self.Bind(wx.EVT_MENU, self.OnRestore, id = self.ID_Restore)
 	self.Bind(wx.EVT_MENU, self.OnExit, id = wx.ID_EXIT)
 
-    def on_left_dclick(self, e):
+    def on_left_dclick(self, evt):
         if self.frame.IsIconized():
         	self.frame.Iconize(False)
         	self.frame.Raise()
@@ -30,7 +30,7 @@ class ddTaskBarIcon(wx.TaskBarIcon):
 	return menu
 
     def OnRestore(self, evt):
-	wx.MessageBox('Hello From TaskBarIcon!', 'Prompt')
+	self.on_left_dclick(evt)
 	
     def OnExit(self, evt):
 	self.frame.Close()
