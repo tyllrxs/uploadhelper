@@ -112,6 +112,13 @@ class MyFrame(wx.Frame):
         mnuTBShowText.Check(tool_style & wx.TB_TEXT)
         mnuSetting.AppendMenu(-1, _("T&oolbar"), mnuToolbar)
         mnuSetting.AppendSeparator()
+        if sys.platform.startswith('win32'):
+        	mnuTerm = wx.Menu()
+        	mnuFterm = wx.MenuItem(mnuTerm, wx.NewId(), 'Fterm', '', wx.ITEM_NORMAL)
+        	mnuTerm.AppendItem(mnuFterm)
+        	mnuCterm = wx.MenuItem(mnuTerm, wx.NewId(), 'Cterm', '', wx.ITEM_NORMAL)
+        	mnuTerm.AppendItem(mnuCterm)
+        	mnuSetting.AppendMenu(-1, '%s *Term' % _("&Integrate to"), mnuTerm)
         mnuAlwaysOnTop = wx.MenuItem(mnuSetting, wx.NewId(), _("Always on &Top"), "", wx.ITEM_CHECK)
         mnuSetting.AppendItem(mnuAlwaysOnTop)
         menuBar.Append(mnuSetting, _("&Setting"))
