@@ -14,7 +14,7 @@ class DragList(wx.ListCtrl):
 	wx.ListCtrl.__init__(self, *arg, **kw)
 	
         self.Bind(wx.EVT_LIST_BEGIN_DRAG, self._startDrag)
-        
+
 
     def getItemInfo(self, idx):
         """Collect all relevant data of a listitem, and put it in a list"""
@@ -89,7 +89,7 @@ class DragList(wx.ListCtrl):
                 except:
                     pass # ignore the extra columns
             index += 1
-
+        
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 # ListDrop

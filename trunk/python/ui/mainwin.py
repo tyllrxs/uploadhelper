@@ -76,7 +76,7 @@ class MyFrame(wx.Frame):
 	self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, self.lstUpFile)
 	self.Bind(wx.EVT_CLOSE, self.OnClose)
 	self.Bind(wx.EVT_ICONIZE, self.on_iconify)
-	
+	self.lstUpFile.Bind(wx.EVT_CONTEXT_MENU, self.OnlstUpFileRClick)
         
     def __set_menubar(self):
         menuBar = wx.MenuBar()
@@ -576,19 +576,19 @@ class MyFrame(wx.Frame):
     		self.notebook.SetSelection(1)
 
     def OnlstUpFileRClick(self, evt):
-	self.popupmenu = wx.Menu()
+	ppmenu = wx.Menu()
 	for text in LIST_CONTEXT_MENU:
 		if len(text) <= 0:
-			self.popupmenu.AppendSeparator()
+			ppmenu.AppendSeparator()
 		else:
-			item = self.popupmenu.Append(-1, text)
+			item = ppmenu.Append(-1, text)
 			self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, item)
-	pos = evt.GetPosition()
-	self.lstUpFile.PopupMenu(self.popupmenu, pos)
-	self.popupmenu.Destroy()
+	self.PopupMenu(ppmenu)
+	ppmenu.Destroy()
 
     def OnPopupItemSelected(self, evt):
-	menutext = self.popupmenu.FindItemById(evt.GetId()).GetText().replace('_', '&')
+    	return
+	menutext = self.ppmenu.FindItemById(evt.GetId()).GetText().replace('_', '&')
 	for k, v in enumerate(LIST_CONTEXT_MENU):
 		if v == menutext:
 			break
