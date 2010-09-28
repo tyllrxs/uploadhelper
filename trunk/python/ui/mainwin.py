@@ -92,6 +92,9 @@ class MyFrame(wx.Frame):
         mnuSetting = wx.Menu()
         mnuPreference = wx.MenuItem(mnuSetting, wx.ID_PREFERENCES, '%s...' % _("&Preferences"))
         mnuSetting.AppendItem(mnuPreference)
+        mnuImageManipulation = wx.MenuItem(mnuSetting, wx.NewId(), '%s...' % _("Image &Manipulation"))
+        mnuImageManipulation.SetBitmap(wx.Bitmap('icon/16/imagemani.png'))
+        mnuSetting.AppendItem(mnuImageManipulation)
         mnuSetting.AppendSeparator()
         mnuLang = wx.Menu()
         target_lang = read_config('General', 'language', 'en') 
@@ -143,6 +146,7 @@ class MyFrame(wx.Frame):
 	self.Bind(wx.EVT_MENU, self.OnmnuTBShowClick, mnuTBShowIcon)
 	self.Bind(wx.EVT_MENU, self.OnmnuTBShowClick, mnuTBShowText)
 	self.Bind(wx.EVT_MENU, self.OnmnuPreferenceClick, mnuPreference)
+	self.Bind(wx.EVT_MENU, self.OnmnuImageManipulationClick, mnuImageManipulation)
 	self.Bind(wx.EVT_MENU, self.OnmnuAlwaysOnTopClick, mnuAlwaysOnTop)
 	self.Bind(wx.EVT_MENU, self.OnmnuFAQClick, mnuFAQ)
 	self.Bind(wx.EVT_MENU, self.OnmnuHomepageClick, mnuHomepage)
@@ -157,6 +161,7 @@ class MyFrame(wx.Frame):
         tlbLogout = toolBar.AddLabelTool(-1, _("Logout"), wx.Bitmap('icon/24/logout.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Logout"), _("Logout"))
         toolBar.AddSeparator()
         tlbPreference = toolBar.AddLabelTool(-1, _("Preferences"), wx.Bitmap('icon/24/setting.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Preferences"), _("Preferences"))
+        tlbImageManipulation = toolBar.AddLabelTool(-1, _("Image Manipulation"), wx.Bitmap('icon/24/imagemani.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("Image Manipulation"), _("Image Manipulation"))
         toolBar.AddSeparator()
         tlbFAQ = toolBar.AddLabelTool(wx.ID_HELP, _("FAQ"), wx.Bitmap('icon/24/help.png'), wx.NullBitmap, wx.ITEM_NORMAL, _("FAQ"), _("FAQ"))
         # Bind events
@@ -365,6 +370,10 @@ class MyFrame(wx.Frame):
 	
     def OnmnuPreferenceClick(self, evt):
     	dialog = MySettingDialog(self)
+    	dialog.ShowModal()
+    	
+    def OnmnuImageManipulationClick(self, evt):
+    	dialog = MyImageDialog(self)
     	dialog.ShowModal()
 	
     def OnmnuTBShowClick(self, evt):
@@ -583,13 +592,23 @@ class MyFrame(wx.Frame):
     		self.notebook.SetSelection(1)
 
     def OnlstUpFileRClick(self, evt):
+	if not hasattr(self, "popupID1"):
+		self.popupID1 = wx.NewId()
+		self.popupID2 = wx.NewId()
+		self.popupID3 = wx.NewId()
+		self.popupID4 = wx.NewId()
+		self.popupID5 = wx.NewId()
+		self.popupID6 = wx.NewId()
+		self.popupID7 = wx.NewId()
+		self.popupID8 = wx.NewId()
+		self.popupID9 = wx.NewId()
 	ppmenu = wx.Menu()
 	for text in LIST_CONTEXT_MENU:
 		if len(text) <= 0:
 			ppmenu.AppendSeparator()
 		else:
 			item = ppmenu.Append(-1, text)
-			self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, item)
+			#self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, id = self.popupID9)
 	self.PopupMenu(ppmenu)
 	ppmenu.Destroy()
 

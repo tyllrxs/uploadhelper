@@ -244,6 +244,12 @@ msgstr "偏好设置(&P)..."
 msgid "Preference"
 msgstr "偏好设置"
 
+msgid "Image &Manipulation"
+msgstr "图片处理(&M)"
+
+msgid "Image Manipulation"
+msgstr "图片处理"
+
 msgid "&Language"
 msgstr "语言(&L)"
 
@@ -408,3 +414,9 @@ msgstr "退出"
 
 msgid "Content"
 msgstr "正文"
+
+msgid "Resize"
+msgstr "缩放"
+
+msgid "Watermark"
+msgstr "水印"
