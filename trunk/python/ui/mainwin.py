@@ -121,7 +121,7 @@ class MyFrame(wx.Frame):
         	mnuTerm.AppendItem(mnuFterm)
         	mnuCterm = wx.MenuItem(mnuTerm, wx.NewId(), 'Cterm', '', wx.ITEM_NORMAL)
         	mnuTerm.AppendItem(mnuCterm)
-        	mnuSetting.AppendMenu(-1, '%s *Term' % _("&Integrate to"), mnuTerm)
+        	mnuSetting.AppendMenu(-1, '%s *T&erm' % _("Integrate to"), mnuTerm)
         mnuAlwaysOnTop = wx.MenuItem(mnuSetting, wx.NewId(), _("Always on &Top"), "", wx.ITEM_CHECK)
         mnuSetting.AppendItem(mnuAlwaysOnTop)
         menuBar.Append(mnuSetting, _("&Setting"))
@@ -168,6 +168,7 @@ class MyFrame(wx.Frame):
         self.Bind(wx.EVT_TOOL, self.OnmnuSwitchClick, tlbSwitch)
 	self.Bind(wx.EVT_TOOL, self.OnmnuLogoutClick, tlbLogout)
 	self.Bind(wx.EVT_TOOL, self.OnmnuPreferenceClick, tlbPreference)
+	self.Bind(wx.EVT_TOOL, self.OnmnuImageManipulationClick, tlbImageManipulation)
 	self.Bind(wx.EVT_TOOL, self.OnmnuFAQClick, tlbFAQ)
         # Attach
         toolBar.Realize()

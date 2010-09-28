@@ -415,8 +415,90 @@ msgstr "退出"
 msgid "Content"
 msgstr "正文"
 
+msgid "Integrate to"
+msgstr "集成到"
+
 msgid "Resize"
 msgstr "缩放"
 
 msgid "Watermark"
 msgstr "水印"
+
+msgid "EXIF Settings"
+msgstr "EXIF 设置"
+
+msgid "Watermark Text"
+msgstr "水印文本"
+
+msgid "Watermark Image"
+msgstr "水印图片"
+
+msgid "Watermark Settings"
+msgstr "水印设置"
+
+msgid "Preview"
+msgstr "预览"
+
+msgid "Resize Settings"
+msgstr "缩放设置"
+
+msgid "Enable Resize for Large Images"
+msgstr "启用大图片缩放"
+
+msgid "Resize To"
+msgstr "缩放到"
+
+msgid "Resize only for Image Size"
+msgstr "仅缩放图片大小"
+
+msgid "Enable EXIF Editing for JPEG"
+msgstr "对 JPEG 启用 EXIF 编辑"
+
+msgid "Import EXIF from Image"
+msgstr "从图片导入 EXIF"
+
+msgid "Enable Watermark"
+msgstr "启用水印"
+
+msgid "Watermark Type"
+msgstr "水印类型"
+
+msgid "Text"
+msgstr "文本"
+
+msgid "Image"
+msgstr "图片"
+
+msgid "Font"
+msgstr "字体"
+
+msgid "Change Font"
+msgstr "更换字体"
+
+msgid "Transparency"
+msgstr "透明度"
+
+msgid "Position"
+msgstr "位置"
+
+msgid "Top Left"
+msgstr "左上角"
+
+msgid "Top Right"
+msgstr "右上角"
+
+msgid "Bottom Left"
+msgstr "左下角"
+
+msgid "Bottom Right"
+msgstr "右下角"
+
+msgid "Padding"
+msgstr "边距"
+
+msgid "Original"
+msgstr "原图"
+
+msgid "Effect"
+msgstr "效果"
+
