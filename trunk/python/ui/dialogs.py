@@ -296,7 +296,9 @@ class MyImageDialog(wx.Dialog):
         self.lblWatermarkTextFont = wx.StaticText(self.notebook_pane_3, -1, '')
         self.btnWatermarkTextFont = wx.Button(self.notebook_pane_3, -1, '%s...' % _("Change Font"))
         self.label_9 = wx.StaticText(self.notebook_pane_3, -1, _("Transparency"))
-        self.sldWatermarkTextTransparency = wx.Slider(self.notebook_pane_3, -1, 0, 0, 100, style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS|wx.SL_LABELS)
+        self.sldWatermarkTextTransparency = wx.Slider(self.notebook_pane_3, -1, 0, 0, 100, size=wx.Size(100, wx.DefaultSize.y), style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS|wx.SL_LABELS)
+        self.label_20 = wx.StaticText(self.notebook_pane_3, -1, _("Color"))
+        self.btnWatermarkTextColor = wx.Button(self.notebook_pane_3, -1, '')
         self.label_6 = wx.StaticText(self.notebook_pane_3, -1, _("Position"))
         self.cmbWatermarkTextPosition = wx.Choice(self.notebook_pane_3, -1, choices=[_("Top Left"), _("Top Right"), _("Bottom Left"), _("Bottom Right")])
         self.label_7 = wx.StaticText(self.notebook_pane_3, -1, _("Padding"))
@@ -319,6 +321,10 @@ class MyImageDialog(wx.Dialog):
 
         self.__set_properties()
         self.__do_layout()
+        
+        self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkTextFontClick, self.btnWatermarkTextFont)
+        self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkTextColorClick, self.btnWatermarkTextColor)
+        self.Bind(wx.EVT_CLOSE, self.OnClose)
 
     def __set_properties(self):
         self.SetTitle(_("Image Manipulation"))
@@ -342,6 +348,7 @@ class MyImageDialog(wx.Dialog):
         sizer_WatermarkText = wx.StaticBoxSizer(self.sizer_WatermarkText_staticbox, wx.VERTICAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_10 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_10_my = wx.BoxSizer(wx.HORIZONTAL)
         sizer_11 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_EXIF = wx.BoxSizer(wx.VERTICAL)
         sizer_16 = wx.StaticBoxSizer(self.sizer_16_staticbox, wx.VERTICAL)
@@ -386,18 +393,21 @@ class MyImageDialog(wx.Dialog):
         sizer_Watermark_Setting.Add(self.rdWatermarkType, 0, wx.EXPAND, 0)
         sizer_11.Add(self.label_3, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_11.Add(self.txtWatermarkText, 1, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 6)
-        sizer_WatermarkText.Add(sizer_11, 1, wx.EXPAND, 0)
+        sizer_WatermarkText.Add(sizer_11, 0, wx.EXPAND, 0)
         sizer_10.Add(self.label_4, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
-        sizer_10.Add(self.lblWatermarkTextFont, 1, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_10.Add(self.lblWatermarkTextFont, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_10.Add(self.btnWatermarkTextFont, 0, wx.ALL, 5)
-        sizer_10.Add(self.label_9, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
-        sizer_10.Add(self.sldWatermarkTextTransparency, 1, wx.EXPAND, 0)
-        sizer_WatermarkText.Add(sizer_10, 1, wx.EXPAND, 0)
+        sizer_WatermarkText.Add(sizer_10, 0, wx.EXPAND, 0)
+        sizer_10_my.Add(self.label_9, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_10_my.Add(self.sldWatermarkTextTransparency, 1, wx.EXPAND, 0)
+        sizer_10_my.Add(self.label_20, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_10_my.Add(self.btnWatermarkTextColor, 1, wx.ALL|wx.EXPAND, 5)
+        sizer_WatermarkText.Add(sizer_10_my, 0, wx.EXPAND, 0)
         sizer_13.Add(self.label_6, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_13.Add(self.cmbWatermarkTextPosition, 0, wx.ALL, 5)
         sizer_13.Add(self.label_7, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_13.Add(self.txtWatermarkTextPadding, 0, wx.ALL, 5)
-        sizer_WatermarkText.Add(sizer_13, 1, wx.EXPAND, 0)
+        sizer_WatermarkText.Add(sizer_13, 0, wx.EXPAND, 0)
         sizer_Watermark_Setting.Add(sizer_WatermarkText, 0, wx.EXPAND, 0)
         sizer_15.Add(self.label_8, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_15.Add(self.txtWatermarkImage, 1, wx.ALL|wx.EXPAND, 5)
@@ -439,6 +449,26 @@ class MyImageDialog(wx.Dialog):
         self.SetSizer(sizer_dialog)
         sizer_dialog.Fit(self)
         self.Layout()
+        self.Centre()
+        
+    def OnbtnWatermarkTextFontClick(self, evt):
+	dialog = wx.FontDialog(self, wx.FontData())
+	if wx.ID_OK == dialog.ShowModal():
+		data = dialog.GetFontData()
+		font = data.GetChosenFont()
+		self.lblWatermarkTextFont.SetLabel('%s' % font.GetNativeFontInfoDesc())
+	dialog.Destroy()
+		
+    def OnbtnWatermarkTextColorClick(self, evt):
+    	dialog = wx.ColourDialog(self)
+    	dialog.GetColourData().SetChooseFull(True)
+	if wx.ID_OK == dialog.ShowModal():
+		data = dialog.GetColourData()
+		self.btnWatermarkTextColor.SetLabel('%s' % str(data.GetColour().GetAsString(wx.C2S_HTML_SYNTAX)))
+	dialog.Destroy()
+    
+    def OnClose(self, evt):
+	self.Destroy()
 
 # end of class MyImageDialog
 
