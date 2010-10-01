@@ -331,10 +331,21 @@ class MyImageDialog(wx.Dialog):
 
     def __set_properties(self):
         self.SetTitle(_("Image Manipulation"))
-        self.chkResize.SetValue(1)
-        self.rdWatermarkType.SetSelection(0)
-        self.cmbWatermarkTextPosition.SetSelection(0)
-        self.cmbWatermarkImagePosition.SetSelection(0)
+        self.chkResize.SetValue(read_config_bool('Resize', 'Resize', True))
+	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
+	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
+	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark'))
+	myfont = wx.Font()
+	myfont.SetNativeFontInfo(read_config('Watermark', 'WatermarkTextFont', ''))
+	self.lblWatermarkTextFont.SetFont(myfont)
+	self.sldWatermarkTextTransparency.SetValue(read_config_int('Watermark', 'WatermarkTextTransparency', 80))
+	self.btnWatermarkTextColor.SetBackgroundColour(wx.Colour().Set(read_config('Watermark', 'WatermarkTextColor', '#000000')))
+	self.cmbWatermarkTextPosition.SetSelection(read_config_int('Watermark', 'WatermarkTextPosition', 0))
+	self.txtWatermarkTextPadding.SetValue(read_config_int('Watermark', 'WatermarkTextPadding', 10))
+	self.txtWatermarkImage.SetValue(read_config('Watermark', 'WatermarkImage', ''))
+	self.sldWatermarkImageTransparency.SetValue(read_config_int('Watermark', 'WatermarkImageTransparency', 80))
+	self.cmbWatermarkImagePosition.SetSelection(read_config_int('Watermark', 'WatermarkImagePosition', 0))
+	self.txtWatermarkImagePadding.SetValue(read_config_int('Watermark', 'WatermarkImagePadding', 10))
 
     def __do_layout(self):
         sizer_dialog = wx.BoxSizer(wx.VERTICAL)
