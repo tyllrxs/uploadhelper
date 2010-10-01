@@ -78,3 +78,4 @@ STATUSBAR_INFO = ['', _('Contact tyllr (at) RYGH BBS for help or advice')]
 LIST_CONTEXT_MENU = ('%s...' % _('&Add Files'), '%s...' % _('A&dd Directory'), '', 
 		_('&Remove Selected'), _('Remove &Copies'), _('Remove &Invalid'), '', 
 		_('Remove A&ll'))
+MARK_POSITIONS = [_("Top Left"), _("Top Right"), _("Center"), _("Bottom Left"), _("Bottom Right")]
