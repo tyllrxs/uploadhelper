@@ -716,7 +716,8 @@ class MyFrame(wx.Frame):
 	    	self.OnbtnUploadClick(evt)
 	elif t.startswith('Update|'):
 		if t.split('|')[1] == '':
-			wx.MessageBox(_('Failed to check for updates, try again later.'), MSG_CHECK_UPDATE, wx.ICON_ERROR)
+			if t.split('|')[2] == '':
+				wx.MessageBox(_('Failed to check for updates, try again later.'), MSG_CHECK_UPDATE, wx.ICON_ERROR)
 		else:
 			if VERSION < '%s' % t.split('|')[1]:
 				if wx.YES == wx.MessageBox(_('A new version %s is available! Would you like to update now?') % t.split('|')[1], MSG_CHECK_UPDATE, wx.YES_NO|wx.ICON_QUESTION):

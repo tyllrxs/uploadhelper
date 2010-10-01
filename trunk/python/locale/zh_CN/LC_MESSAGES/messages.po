@@ -472,9 +472,6 @@ msgstr "图片"
 msgid "Font"
 msgstr "字体"
 
-msgid "Change Font"
-msgstr "更换字体"
-
 msgid "Opacity"
 msgstr "不透明度"
 
@@ -510,3 +507,9 @@ msgstr "效果"
 
 msgid "Select a picture as watermark"
 msgstr "选择一张图片作为水印"
+
+msgid "Select a font for watermark"
+msgstr "选择水印字体"
+
+msgid "Fonts"
+msgstr "字体"
