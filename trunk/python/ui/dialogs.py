@@ -489,6 +489,23 @@ class MyImageDialog(wx.Dialog):
 	dialog.Destroy()
 	
     def OnbtnOKClick(self, evt):
+    	try:
+    		write_config('Watermark', 
+    			{'Watermark': self.chkWatermark.IsChecked(), \
+    			'WatermarkType': self.rdWatermarkType.GetSelection(), \
+    			'WatermarkText': self.txtWatermarkText.GetValue(), \
+    			'WatermarkTextFont': self.lblWatermarkTextFont.GetFont().GetNativeFontInfoDesc(), \
+    			'WatermarkTextTransparency': self.sldWatermarkTextTransparency.GetValue(), \
+    			'WatermarkTextColor': self.btnWatermarkTextColor.GetBackgroundColour().GetAsString(wx.C2S_HTML_SYNTAX), \
+    			'WatermarkTextPosition': self.cmbWatermarkTextPosition.GetSelection(), \
+    			'WatermarkTextPadding': self.txtWatermarkTextPadding.GetValue(), \
+    			'WatermarkImage': self.txtWatermarkImage.GetValue(), \
+    			'WatermarkImageTransparency': self.sldWatermarkImageTransparency.GetValue(), \
+    			'WatermarkImagePosition': self.cmbWatermarkImagePosition.GetSelection(), \
+    			'WatermarkImagePadding': self.txtWatermarkImagePadding.GetValue(), \
+    			})
+    	except:
+    		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
     	self.Close()
    
     def OnClose(self, evt):
