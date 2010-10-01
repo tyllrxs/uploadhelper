@@ -493,6 +493,9 @@ msgstr "右上角"
 msgid "Bottom Left"
 msgstr "左下角"
 
+msgid "Center"
+msgstr "中心"
+
 msgid "Bottom Right"
 msgstr "右下角"
 
@@ -505,3 +508,5 @@ msgstr "原图"
 msgid "Effect"
 msgstr "效果"
 
+msgid "Select a picture as watermark"
+msgstr "选择一张图片作为水印"

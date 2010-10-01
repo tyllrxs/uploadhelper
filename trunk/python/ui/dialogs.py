@@ -335,11 +335,16 @@ class MyImageDialog(wx.Dialog):
 	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
 	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
 	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark'))
-	myfont = wx.Font()
-	myfont.SetNativeFontInfo(read_config('Watermark', 'WatermarkTextFont', ''))
+	myfont = wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL)
+	myfont.SetNativeFontInfoFromString(read_config('Watermark', 'WatermarkTextFont', ''))
 	self.lblWatermarkTextFont.SetFont(myfont)
 	self.sldWatermarkTextTransparency.SetValue(read_config_int('Watermark', 'WatermarkTextTransparency', 80))
-	self.btnWatermarkTextColor.SetBackgroundColour(wx.Colour().Set(read_config('Watermark', 'WatermarkTextColor', '#000000')))
+	try:
+		mycolor = read_config('Watermark', 'WatermarkTextColor', '')
+		r, g, b = [int(item) for item in mycolor[1: -1].split(',')]
+	except:
+		r, g, b = [0, 0, 0]
+	self.btnWatermarkTextColor.SetBackgroundColour(wx.Colour(r, g, b))
 	self.cmbWatermarkTextPosition.SetSelection(read_config_int('Watermark', 'WatermarkTextPosition', 0))
 	self.txtWatermarkTextPadding.SetValue(read_config_int('Watermark', 'WatermarkTextPadding', 10))
 	self.txtWatermarkImage.SetValue(read_config('Watermark', 'WatermarkImage', ''))
@@ -507,7 +512,7 @@ class MyImageDialog(wx.Dialog):
     			'WatermarkText': self.txtWatermarkText.GetValue(), \
     			'WatermarkTextFont': self.lblWatermarkTextFont.GetFont().GetNativeFontInfoDesc(), \
     			'WatermarkTextTransparency': self.sldWatermarkTextTransparency.GetValue(), \
-    			'WatermarkTextColor': self.btnWatermarkTextColor.GetBackgroundColour().GetAsString(wx.C2S_HTML_SYNTAX), \
+    			'WatermarkTextColor': self.btnWatermarkTextColor.GetBackgroundColour().Get(), \
     			'WatermarkTextPosition': self.cmbWatermarkTextPosition.GetSelection(), \
     			'WatermarkTextPadding': self.txtWatermarkTextPadding.GetValue(), \
     			'WatermarkImage': self.txtWatermarkImage.GetValue(), \
