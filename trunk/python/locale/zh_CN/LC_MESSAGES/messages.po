@@ -475,8 +475,8 @@ msgstr "字体"
 msgid "Change Font"
 msgstr "更换字体"
 
-msgid "Transparency"
-msgstr "透明度"
+msgid "Opacity"
+msgstr "不透明度"
 
 msgid "Color"
 msgstr "颜色"

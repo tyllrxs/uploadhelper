@@ -295,8 +295,8 @@ class MyImageDialog(wx.Dialog):
         self.label_4 = wx.StaticText(self.notebook_pane_3, -1, _("Font"))
         self.lblWatermarkTextFont = wx.StaticText(self.notebook_pane_3, -1, 'Sample Text')
         self.btnWatermarkTextFont = wx.Button(self.notebook_pane_3, -1, '%s...' % _("Change Font"))
-        self.label_9 = wx.StaticText(self.notebook_pane_3, -1, _("Transparency"))
-        self.sldWatermarkTextTransparency = wx.Slider(self.notebook_pane_3, -1, 0, 0, 100, size=wx.Size(100, wx.DefaultSize.y), style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS|wx.SL_LABELS)
+        self.label_9 = wx.StaticText(self.notebook_pane_3, -1, _("Opacity"))
+        self.sldWatermarkTextOpacity = wx.Slider(self.notebook_pane_3, -1, 0, 0, 100, size=wx.Size(100, wx.DefaultSize.y), style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS|wx.SL_LABELS)
         self.label_20 = wx.StaticText(self.notebook_pane_3, -1, _("Color"))
         self.btnWatermarkTextColor = wx.Button(self.notebook_pane_3, -1, '')
         self.label_6 = wx.StaticText(self.notebook_pane_3, -1, _("Position"))
@@ -306,16 +306,16 @@ class MyImageDialog(wx.Dialog):
         self.label_8 = wx.StaticText(self.notebook_pane_3, -1, _("Image"))
         self.txtWatermarkImage = wx.TextCtrl(self.notebook_pane_3, -1, "")
         self.btnWatermarkImage = wx.Button(self.notebook_pane_3, -1, '%s...' % _("Browse"))
-        self.label_9_copy = wx.StaticText(self.notebook_pane_3, -1, _("Transparency"))
-        self.sldWatermarkImageTransparency = wx.Slider(self.notebook_pane_3, -1, 0, 0, 100, style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS|wx.SL_LABELS)
+        self.label_9_copy = wx.StaticText(self.notebook_pane_3, -1, _("Opacity"))
+        self.sldWatermarkImageOpacity = wx.Slider(self.notebook_pane_3, -1, 0, 0, 100, style=wx.SL_HORIZONTAL|wx.SL_AUTOTICKS|wx.SL_LABELS)
         self.label_6_copy = wx.StaticText(self.notebook_pane_3, -1, _("Position"))
         self.cmbWatermarkImagePosition = wx.Choice(self.notebook_pane_3, -1, choices=MARK_POSITIONS)
         self.label_7_copy = wx.StaticText(self.notebook_pane_3, -1, _("Padding"))
         self.txtWatermarkImagePadding = wx.SpinCtrl(self.notebook_pane_3, -1, "", min=0, max=100)
         self.lblOriginal = wx.StaticText(self.notebook_pane_3, -1, _("Original"))
-        self.imgOriginal = wx.StaticBitmap(self.notebook_pane_3, -1, wx.Bitmap('pic/sample.jpg'))
+        self.imgOriginal = wx.StaticBitmap(self.notebook_pane_3, -1, wx.Bitmap(SAMPLE_IMAGE))
         self.lblEffect = wx.StaticText(self.notebook_pane_3, -1, _("Effect"))
-        self.imgEffect = wx.StaticBitmap(self.notebook_pane_3, -1, wx.Bitmap('pic/sample.jpg'))
+        self.imgEffect = wx.StaticBitmap(self.notebook_pane_3, -1, wx.Bitmap(SAMPLE_IMAGE))
         self.btnOK = wx.Button(self, wx.ID_OK, _("OK"))
         self.btnCancel = wx.Button(self, wx.ID_CANCEL, _("Cancel"))
 
@@ -338,7 +338,7 @@ class MyImageDialog(wx.Dialog):
 	myfont = wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL)
 	myfont.SetNativeFontInfoFromString(read_config('Watermark', 'WatermarkTextFont', ''))
 	self.lblWatermarkTextFont.SetFont(myfont)
-	self.sldWatermarkTextTransparency.SetValue(read_config_int('Watermark', 'WatermarkTextTransparency', 80))
+	self.sldWatermarkTextOpacity.SetValue(read_config_int('Watermark', 'WatermarkTextOpacity', 60))
 	try:
 		mycolor = read_config('Watermark', 'WatermarkTextColor', '')
 		r, g, b = [int(item) for item in mycolor[1: -1].split(',')]
@@ -348,7 +348,7 @@ class MyImageDialog(wx.Dialog):
 	self.cmbWatermarkTextPosition.SetSelection(read_config_int('Watermark', 'WatermarkTextPosition', 0))
 	self.txtWatermarkTextPadding.SetValue(read_config_int('Watermark', 'WatermarkTextPadding', 10))
 	self.txtWatermarkImage.SetValue(read_config('Watermark', 'WatermarkImage', ''))
-	self.sldWatermarkImageTransparency.SetValue(read_config_int('Watermark', 'WatermarkImageTransparency', 80))
+	self.sldWatermarkImageOpacity.SetValue(read_config_int('Watermark', 'WatermarkImageOpacity', 60))
 	self.cmbWatermarkImagePosition.SetSelection(read_config_int('Watermark', 'WatermarkImagePosition', 0))
 	self.txtWatermarkImagePadding.SetValue(read_config_int('Watermark', 'WatermarkImagePadding', 10))
 
@@ -418,7 +418,7 @@ class MyImageDialog(wx.Dialog):
         sizer_10.Add(self.btnWatermarkTextFont, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_WatermarkText.Add(sizer_10, 0, wx.EXPAND, 0)
         sizer_10_my.Add(self.label_9, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
-        sizer_10_my.Add(self.sldWatermarkTextTransparency, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
+        sizer_10_my.Add(self.sldWatermarkTextOpacity, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
         sizer_10_my.Add(self.label_20, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_10_my.Add(self.btnWatermarkTextColor, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_WatermarkText.Add(sizer_10_my, 0, wx.EXPAND, 0)
@@ -433,7 +433,7 @@ class MyImageDialog(wx.Dialog):
         sizer_15.Add(self.btnWatermarkImage, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_WatermarkImage.Add(sizer_15, 0, wx.EXPAND, 0)
         sizer_10_copy.Add(self.label_9_copy, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
-        sizer_10_copy.Add(self.sldWatermarkImageTransparency, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
+        sizer_10_copy.Add(self.sldWatermarkImageOpacity, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
         sizer_10_copy.Add((20, 20), 1, wx.EXPAND, 0)
         sizer_WatermarkImage.Add(sizer_10_copy, 1, wx.EXPAND, 0)
         sizer_13_copy.Add(self.label_6_copy, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -511,12 +511,12 @@ class MyImageDialog(wx.Dialog):
     			'WatermarkType': self.rdWatermarkType.GetSelection(), \
     			'WatermarkText': self.txtWatermarkText.GetValue(), \
     			'WatermarkTextFont': self.lblWatermarkTextFont.GetFont().GetNativeFontInfoDesc(), \
-    			'WatermarkTextTransparency': self.sldWatermarkTextTransparency.GetValue(), \
+    			'WatermarkTextOpacity': self.sldWatermarkTextOpacity.GetValue(), \
     			'WatermarkTextColor': self.btnWatermarkTextColor.GetBackgroundColour().Get(), \
     			'WatermarkTextPosition': self.cmbWatermarkTextPosition.GetSelection(), \
     			'WatermarkTextPadding': self.txtWatermarkTextPadding.GetValue(), \
     			'WatermarkImage': self.txtWatermarkImage.GetValue(), \
-    			'WatermarkImageTransparency': self.sldWatermarkImageTransparency.GetValue(), \
+    			'WatermarkImageOpacity': self.sldWatermarkImageOpacity.GetValue(), \
     			'WatermarkImagePosition': self.cmbWatermarkImagePosition.GetSelection(), \
     			'WatermarkImagePadding': self.txtWatermarkImagePadding.GetValue(), \
     			})
@@ -528,11 +528,16 @@ class MyImageDialog(wx.Dialog):
 	self.Destroy()
 	
     def add_watermark(self):
-    	ww = watermark('pic/sample.jpg','icon/logo.png', opacity=0.3)
-    	image = wx.EmptyImage(ww.size[0], ww.size[1])
-    	image.SetData(ww.convert('RGB').tostring())
-	self.imgEffect.SetBitmap(image.ConvertToBitmap())
-	#watermark(new_image_s_filename,MARKIMAGE,POSITION[4],opacity=1).save(new_image_s_filename,quality=90)
+    	if self.rdWatermarkType.GetSelection() == 0: # text type
+    		pass
+    	else: # image type
+	    	ww = watermark(SAMPLE_IMAGE, 
+	    		self.txtWatermarkImage.GetValue(), 
+	    		opacity = self.sldWatermarkImageOpacity.GetValue() / 100.0
+	    		)
+	    	image = wx.EmptyImage(ww.size[0], ww.size[1])
+	    	image.SetData(ww.convert('RGB').tostring())
+		self.imgEffect.SetBitmap(image.ConvertToBitmap())
 
 # end of class MyImageDialog
 

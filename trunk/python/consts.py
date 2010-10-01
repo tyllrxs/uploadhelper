@@ -19,6 +19,7 @@ BBS_HOSTS = ['bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.
 SEPARATOR = '\n--------------------------------------------\n--------------------------------------------\n'
 DATA_DIR = '/usr/share/uploadhelper/'
 FILE_BOARDS = 'data/boards.xml' 
+SAMPLE_IMAGE = 'pic/sample.jpg'
 
 # Set directories to save data
 
