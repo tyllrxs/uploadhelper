@@ -322,6 +322,7 @@ class MyImageDialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
         
+        self.Bind(wx.EVT_CHECKBOX, self.OnchkWatermarkClick, self.chkWatermark)
         self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkTextFontClick, self.btnWatermarkTextFont)
         self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkTextColorClick, self.btnWatermarkTextColor)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
@@ -435,7 +436,7 @@ class MyImageDialog(wx.Dialog):
         self.notebook.AddPage(self.notebook_pane_2, _("EXIF"))
         self.notebook.AddPage(self.notebook_pane_3, _("Watermark"))
 	il = wx.ImageList(32, 32)
-	imgs = ['upload.png', 'post.png', 'reship.png']
+	imgs = ['resize.png', 'exif.png', 'watermark.png']
 	self.notebook.AssignImageList(il)
 	for page in xrange(self.notebook.GetPageCount()):
 		img = il.Add(wx.Bitmap('icon/32/%s' % imgs[page]))
@@ -451,6 +452,10 @@ class MyImageDialog(wx.Dialog):
         self.Layout()
         self.Centre()
         
+    def OnchkWatermarkClick(self, evt):
+    	# TODO
+    	pass
+    
     def OnbtnWatermarkTextFontClick(self, evt):
 	dialog = wx.FontDialog(self, wx.FontData())
 	if wx.ID_OK == dialog.ShowModal():

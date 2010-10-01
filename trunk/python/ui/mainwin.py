@@ -73,10 +73,12 @@ class MyFrame(wx.Frame):
 	self.Bind(wx.EVT_BUTTON, self.OnbtnUploadClick, self.btnUpload)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnPostClick, self.btnPost)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnReshipClick, self.btnReship)
-	self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, self.lstUpFile)
+	# for win32 compatibility issues
+	#self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, self.lstUpFile)
+	self.lstUpFile.Bind(wx.EVT_CONTEXT_MENU, self.OnlstUpFileRClick)
 	self.Bind(wx.EVT_CLOSE, self.OnClose)
 	self.Bind(wx.EVT_ICONIZE, self.on_iconify)
-	self.lstUpFile.Bind(wx.EVT_CONTEXT_MENU, self.OnlstUpFileRClick)
+	
         
     def __set_menubar(self):
         menuBar = wx.MenuBar()
@@ -205,6 +207,15 @@ class MyFrame(wx.Frame):
 	for col in xrange(self.lstUpFile.GetColumnCount()):
 		self.lstUpFile.SetColumnWidth(col, int(col_widths[col]))
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
+	
+	# create popup menu
+	self.ppmenu = wx.Menu()
+	for text in LIST_CONTEXT_MENU:
+		if len(text) <= 0:
+			self.ppmenu.AppendSeparator()
+		else:
+			item = self.ppmenu.Append(-1, text)
+			self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, item)
 	
 	# check the versions of python and wxpython
 	if not sys.platform.startswith('win32'):
@@ -593,28 +604,9 @@ class MyFrame(wx.Frame):
     		self.notebook.SetSelection(1)
 
     def OnlstUpFileRClick(self, evt):
-	if not hasattr(self, "popupID1"):
-		self.popupID1 = wx.NewId()
-		self.popupID2 = wx.NewId()
-		self.popupID3 = wx.NewId()
-		self.popupID4 = wx.NewId()
-		self.popupID5 = wx.NewId()
-		self.popupID6 = wx.NewId()
-		self.popupID7 = wx.NewId()
-		self.popupID8 = wx.NewId()
-		self.popupID9 = wx.NewId()
-	ppmenu = wx.Menu()
-	for text in LIST_CONTEXT_MENU:
-		if len(text) <= 0:
-			ppmenu.AppendSeparator()
-		else:
-			item = ppmenu.Append(-1, text)
-			#self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, id = self.popupID9)
-	self.PopupMenu(ppmenu)
-	ppmenu.Destroy()
+	self.PopupMenu(self.ppmenu)
 
     def OnPopupItemSelected(self, evt):
-    	return
 	menutext = self.ppmenu.FindItemById(evt.GetId()).GetText().replace('_', '&')
 	for k, v in enumerate(LIST_CONTEXT_MENU):
 		if v == menutext:
