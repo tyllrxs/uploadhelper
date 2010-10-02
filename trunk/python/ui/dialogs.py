@@ -383,6 +383,7 @@ class MyImageDialog(wx.Dialog):
 	except:
 		r, g, b = [0, 0, 0]
 	self.btnWatermarkTextColor.SetBackgroundColour(wx.Colour(r, g, b))
+	self.btnWatermarkTextColor.SetLabel(wx.Colour(r, g, b).GetAsString(wx.C2S_HTML_SYNTAX))
 	self.cmbWatermarkTextPosition.SetSelection(read_config_int('Watermark', 'WatermarkTextPosition', 0))
 	self.txtWatermarkTextPadding.SetValue(read_config_int('Watermark', 'WatermarkTextPadding', 10))
 	self.txtWatermarkImage.SetValue(read_config('Watermark', 'WatermarkImage', '').decode('unicode_escape'))
@@ -551,6 +552,7 @@ class MyImageDialog(wx.Dialog):
 	if wx.ID_OK == dialog.ShowModal():
 		data = dialog.GetColourData()
 		self.btnWatermarkTextColor.SetBackgroundColour(data.GetColour())
+		self.btnWatermarkTextColor.SetLabel(data.GetColour().GetAsString(wx.C2S_HTML_SYNTAX))
 	dialog.Destroy()
 	self.add_watermark()
 	
