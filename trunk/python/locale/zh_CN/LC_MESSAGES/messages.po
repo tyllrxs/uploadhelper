@@ -370,11 +370,17 @@ msgstr "搜索文件"
 msgid "Template to Post Article"
 msgstr "发文模板"
 
+msgid "Display and Layout"
+msgstr "显示和布局"
+
 msgid "Threads to Upload"
 msgstr "上传线程数"
 
 msgid "Minimize to Tray"
 msgstr "最小化到系统栏"
+
+msgid "Empty Lines between URLs"
+msgstr "URL 之间空行数"
 
 msgid "Range of Size"
 msgstr "文件大小范围"

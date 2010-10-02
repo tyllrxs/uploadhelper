@@ -552,9 +552,10 @@ class MyFrame(wx.Frame):
     def start_upload_threads(self):
 	self.upcount = 0
 	self.finishcount = 0
+	emptylines = read_config_int('General', 'EmptyLines', 1)
 	if not self.ReshipMode:
 		for i in xrange(self.lstUpFile.GetItemCount()):
-			self.txtBody.SetValue(self.txtBody.GetValue() + '\n%s\n' % MSG_FILE_UPLOADING % (i + 1))
+			self.txtBody.SetValue(self.txtBody.GetValue() + '\n%s' % MSG_FILE_UPLOADING % (i + 1) + '\n' * emptylines)
 	threads = read_config_int('General', 'Threads', 3)
 	for i in range(0, threads):
 		if i < self.lstUpFile.GetItemCount():

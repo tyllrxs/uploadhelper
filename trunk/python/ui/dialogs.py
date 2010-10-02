@@ -112,8 +112,14 @@ class MySettingDialog(wx.Dialog):
         self.notebook = wx.Notebook(self, -1, style=0)
         
         self.notebook_pane1 = wx.Panel(self.notebook, -1)
+        self.staticbox3 = wx.StaticBox(self.notebook_pane1, -1, _("Upload"))
         self.label_1 = wx.StaticText(self.notebook_pane1, -1, _("Threads to Upload"))
         self.txtThreads = wx.SpinCtrl(self.notebook_pane1, -1, "", min=1, max=10)
+        self.staticbox4 = wx.StaticBox(self.notebook_pane1, -1, _("Display and Layout"))
+        self.label_6 = wx.StaticText(self.notebook_pane1, -1, _("Post-upload URL"))
+        self.cmbFileURL = wx.Choice(self.notebook_pane1, -1, choices = BBS_HOSTS)
+        self.label_7 = wx.StaticText(self.notebook_pane1, -1, _("Empty Lines between URLs"))
+        self.txtEmptyLines = wx.SpinCtrl(self.notebook_pane1, -1, "", min=0, max=20)
         self.chkTray = wx.CheckBox(self.notebook_pane1, -1, _("Minimize to Tray"))
         
         self.notebook_pane2 = wx.Panel(self.notebook, -1)
@@ -133,8 +139,6 @@ class MySettingDialog(wx.Dialog):
         self.label_5 = wx.StaticText(self.notebook_pane3, -1, _("Content"))
         self.txtTemplate = wx.TextCtrl(self.notebook_pane3, -1, "")
         self.lblNote = wx.StaticText(self.notebook_pane3, -1, '%s:\n$TITLE (%s); $BODY (%s); \\n (%s)' % (_("Notes"), _('Title'), _('Content of article'), _('New line')))
-        self.label_6 = wx.StaticText(self.notebook_pane3, -1, _("Post-upload URL"))
-        self.cmbFileURL = wx.Choice(self.notebook_pane3, -1, choices = BBS_HOSTS)
         self.chkAutoUpdate = wx.CheckBox(self.notebook_pane3, -1, _("Automatic Update"))
         
         self.btnOK = wx.Button(self, wx.ID_OK, _("OK"))
@@ -161,6 +165,7 @@ class MySettingDialog(wx.Dialog):
     	self.txtTitleTemplate.SetValue(read_config('General', 'TitleTemplate', '').decode('unicode_escape'))
     	self.txtTemplate.SetValue(read_config('General', 'Template', '').decode('unicode_escape'))
     	self.cmbFileURL.SetSelection(read_config_int('General', 'FileURL', 0))
+    	self.txtEmptyLines.SetValue(read_config_int('General', 'EmptyLines', 1))
     	self.chkAutoUpdate.SetValue(read_config_bool('General', 'AutoUpdate', True))
     			
     def __do_layout(self):
@@ -168,7 +173,10 @@ class MySettingDialog(wx.Dialog):
         sizer_2 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_8 = wx.BoxSizer(wx.VERTICAL)
         sizer_9 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_16 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_11 = wx.StaticBoxSizer(self.staticbox2, wx.VERTICAL)
+        sizer_14 = wx.StaticBoxSizer(self.staticbox3, wx.VERTICAL)
+        sizer_15 = wx.StaticBoxSizer(self.staticbox4, wx.VERTICAL)
         sizer_6 = wx.BoxSizer(wx.VERTICAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_12 = wx.StaticBoxSizer(self.staticbox1, wx.VERTICAL)
@@ -176,9 +184,17 @@ class MySettingDialog(wx.Dialog):
         sizer_3 = wx.BoxSizer(wx.VERTICAL)
         sizer_4 = wx.BoxSizer(wx.VERTICAL)
         sizer_5 = wx.BoxSizer(wx.HORIZONTAL)
-        sizer_5.Add(self.label_1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 3)
-        sizer_5.Add(self.txtThreads, 0, wx.ALL, 5)
-        sizer_4.Add(sizer_5, 1, wx.EXPAND|wx.ALL, 5)
+        sizer_5.Add(self.label_1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_5.Add(self.txtThreads, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_14.Add(sizer_5, 0, wx.ALL, 0)
+        sizer_4.Add(sizer_14, 0, wx.EXPAND|wx.ALL, 5)
+        sizer_9.Add(self.label_6, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_9.Add(self.cmbFileURL, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_15.Add(sizer_9, 0, wx.EXPAND, 0)
+        sizer_16.Add(self.label_7, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_16.Add(self.txtEmptyLines, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_15.Add(sizer_16, 0, wx.EXPAND, 0)
+        sizer_4.Add(sizer_15, 0, wx.EXPAND|wx.ALL, 5)
         sizer_4.Add(self.chkTray, 0, wx.ALL, 5)
         sizer_3.Add(sizer_4, 0, wx.EXPAND, 0)
         self.notebook_pane1.SetSizer(sizer_3)
@@ -203,9 +219,6 @@ class MySettingDialog(wx.Dialog):
         sizer_11.Add(mysizer2, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 0)
         sizer_11.Add(self.lblNote, 0, wx.ALL, 5)
         sizer_8.Add(sizer_11, 0, wx.EXPAND|wx.ALL, 5)
-        sizer_9.Add(self.label_6, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 6)
-        sizer_9.Add(self.cmbFileURL, 0, wx.ALL, 5)
-        sizer_8.Add(sizer_9, 0, wx.EXPAND, 0)
         sizer_8.Add(self.chkAutoUpdate, 0, wx.ALL, 5)
         self.notebook_pane3.SetSizer(sizer_8)
         self.notebook.AddPage(self.notebook_pane1, _("General"))
@@ -240,6 +253,7 @@ class MySettingDialog(wx.Dialog):
     			'TitleTemplate': self.txtTitleTemplate.GetValue().encode('unicode_escape'), \
     			'Template': self.txtTemplate.GetValue().encode('unicode_escape'), \
     			'FileURL': self.cmbFileURL.GetSelection(), \
+    			'EmptyLines': self.txtEmptyLines.GetValue(), \
     			'AutoUpdate': self.chkAutoUpdate.IsChecked(), \
     			})
     	except:
