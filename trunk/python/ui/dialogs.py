@@ -284,7 +284,6 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         self.chkResizeLarger = wx.CheckBox(self.notebook_pane_1, -1, '%s (KB) >' % _("Resize only for Image Size"))
         self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
-        self.chkReserveEXIF = wx.CheckBox(self.notebook_pane_1, -1, '%s EXIF' % _("Reserve"))
         self.chkEXIF = wx.CheckBox(self.notebook_pane_2, -1, _("Enable EXIF Editing for JPEG"))
         self.label_10 = wx.StaticText(self.notebook_pane_2, -1, _("label_10"), style=wx.ALIGN_CENTRE)
         self.text_ctrl_3 = wx.TextCtrl(self.notebook_pane_2, -1, "")
@@ -358,6 +357,9 @@ class MyImageDialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkImageClick, self.btnWatermarkImage)
         self.Bind(wx.EVT_BUTTON, self.OnbtnOKClick, id = wx.ID_OK)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
+        
+        # This page still in development, hide it
+	self.notebook.RemovePage(1)
 
     def __set_properties(self):
         self.SetTitle(_("Image Manipulation"))
@@ -368,7 +370,6 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeLarger.SetValue(read_config_int('Resize', 'ResizeLargerThan', 1024))
         evt = wx.CommandEvent()
         self.OnchkResizeLargerClick(evt)
-        self.chkReserveEXIF.SetValue(read_config_bool('Resize', 'ReserveEXIF', True))
         self.chkEXIF.SetValue(read_config_bool('EXIF', 'EXIF', False))
 	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
 	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
@@ -423,7 +424,6 @@ class MyImageDialog(wx.Dialog):
         sizer_19.Add(self.chkResizeLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_19.Add(self.txtResizeLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_17.Add(sizer_19, 0, wx.EXPAND, 0)
-        sizer_17.Add(self.chkReserveEXIF, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_7.Add(sizer_17, 1, wx.EXPAND, 0)
         self.notebook_pane_1.SetSizer(sizer_7)
         sizer_EXIF.Add(self.chkEXIF, 0, wx.ALL, 5)
@@ -572,10 +572,6 @@ class MyImageDialog(wx.Dialog):
     			'ResizeHeight': self.txtResizeHeight.GetValue(), \
     			'ResizeLarger': self.chkResizeLarger.IsChecked(), \
     			'ResizeLargerThan': self.txtResizeLarger.GetValue(), \
-    			'ReserveEXIF': self.chkReserveEXIF.GetValue(), \
-    			})
-    		write_config('EXIF', 
-    			{'EXIF': self.chkEXIF.IsChecked(), \
     			})
     		write_config('Watermark', 
     			{'Watermark': self.chkWatermark.IsChecked(), \
