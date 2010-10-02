@@ -439,7 +439,7 @@ class MyFrame(wx.Frame):
 			fp = open(configfile, 'a')
 			new_line = r'99; ; %s; true; py:import os\\nos.startfile(r\"%s\");' % (APPNAME.encode('gb18030'), sys.argv[0].replace('\\', '\\\\').encode('gb18030'))
 			try:
-				fp.writelines([new_line])
+				fp.write('\n' + new_line)
 			except:
 				wx.MessageBox('%s: %s' % (_('Write Error'), configfile), '%s %s' % (_('Integrate to'), term), wx.ICON_ERROR)
 				return
