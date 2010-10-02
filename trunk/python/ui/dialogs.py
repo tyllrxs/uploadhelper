@@ -520,9 +520,7 @@ class MyImageDialog(wx.Dialog):
 		wildcard = '%s (*.jpg)|*.[Jj][Pp][Gg]' % 'JPEG %s' % _('Images')
 	dialog = wx.FileDialog(None, _('Select an image'), '', '', wildcard, wx.OPEN)
 	if dialog.ShowModal() == wx.ID_OK:
-		from pexif import JpegFile
-		ef = JpegFile.fromFile(dialog.GetPath())
-		print ef.exif.tiff.exif.FocalLength
+		pass
 	dialog.Destroy()
     	
     def OnchkWatermarkClick(self, evt):
