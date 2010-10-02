@@ -513,3 +513,18 @@ msgstr "选择水印字体"
 
 msgid "Fonts"
 msgstr "字体"
+
+msgid "Be sure"
+msgstr "确保"
+
+msgid "has been closed"
+msgstr "已关闭"
+
+msgid "Read Error"
+msgstr "读取错误"
+
+msgid "Write Error"
+msgstr "写入错误"
+
+msgid "successfully"
+msgstr "成功"

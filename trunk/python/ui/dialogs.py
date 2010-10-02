@@ -118,12 +118,12 @@ class MySettingDialog(wx.Dialog):
         self.notebook_pane2 = wx.Panel(self.notebook, -1)
         self.staticbox1 = wx.StaticBox(self.notebook_pane2, -1, _("Search Files"))
         self.label_2 = wx.StaticText(self.notebook_pane2, -1, '%s (KB)' % _("Range of Size"))
-        self.txtMinFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size = wx.Size(100, wx.DefaultSize.y), min=0, max=9999)
+        self.txtMinFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         self.label_3 = wx.StaticText(self.notebook_pane2, -1, "-")
-        self.txtMaxFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size = wx.Size(100, wx.DefaultSize.y), min=0, max=9999)
+        self.txtMaxFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         self.chkSubFolder = wx.CheckBox(self.notebook_pane2, -1, _("Search for Subfolders"))
         self.chkHighlight = wx.CheckBox(self.notebook_pane2, -1, '%s (KB)' % _("Highlight when file size is larger than"))
-        self.txtFileNoLarger = wx.SpinCtrl(self.notebook_pane2, -1, "", size = wx.Size(100, wx.DefaultSize.y), min=0, max=9999)
+        self.txtFileNoLarger = wx.SpinCtrl(self.notebook_pane2, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         
         self.notebook_pane3 = wx.Panel(self.notebook, -1)
         self.staticbox2 = wx.StaticBox(self.notebook_pane3, -1, _("Template to Post Article"))
@@ -157,8 +157,8 @@ class MySettingDialog(wx.Dialog):
     	self.txtFileNoLarger.SetValue(read_config_int('General', 'FileNoLarger', 1024))
     	evt = wx.CommandEvent()
     	self.OnchkHighlightClick(evt)
-    	self.txtTitleTemplate.SetValue(read_config('General', 'TitleTemplate', ''))
-    	self.txtTemplate.SetValue(read_config('General', 'Template', ''))
+    	self.txtTitleTemplate.SetValue(read_config('General', 'TitleTemplate', '').decode('unicode_escape'))
+    	self.txtTemplate.SetValue(read_config('General', 'Template', '').decode('unicode_escape'))
     	self.cmbFileURL.SetSelection(read_config_int('General', 'FileURL', 0))
     	self.chkAutoUpdate.SetValue(read_config_bool('General', 'AutoUpdate', True))
     			
@@ -236,8 +236,8 @@ class MySettingDialog(wx.Dialog):
     			'SubFolder': self.chkSubFolder.IsChecked(), \
     			'Highlight': self.chkHighlight.IsChecked(), \
     			'FileNoLarger': self.txtFileNoLarger.GetValue(), \
-    			'TitleTemplate': self.txtTitleTemplate.GetValue(), \
-    			'Template': self.txtTemplate.GetValue(), \
+    			'TitleTemplate': self.txtTitleTemplate.GetValue().encode('unicode_escape'), \
+    			'Template': self.txtTemplate.GetValue().encode('unicode_escape'), \
     			'FileURL': self.cmbFileURL.GetSelection(), \
     			'AutoUpdate': self.chkAutoUpdate.IsChecked(), \
     			})
@@ -265,11 +265,11 @@ class MyImageDialog(wx.Dialog):
         self.sizer_17_staticbox = wx.StaticBox(self.notebook_pane_1, -1, _("Resize Settings"))
         self.chkResize = wx.CheckBox(self.notebook_pane_1, -1, _("Enable Resize for Large Images"))
         self.label_18 = wx.StaticText(self.notebook_pane_1, -1, _("Resize To"))
-        self.txtResizeWidth = wx.SpinCtrl(self.notebook_pane_1, -1, "", min=0, max=100)
+        self.txtResizeWidth = wx.SpinCtrl(self.notebook_pane_1, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         self.label_19 = wx.StaticText(self.notebook_pane_1, -1, "X")
-        self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", min=0, max=100)
+        self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         self.chkResizeLarger = wx.CheckBox(self.notebook_pane_1, -1, '%s (KB) >' % _("Resize only for Image Size"))
-        self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", min=0, max=100)
+        self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         self.chkEXIF = wx.CheckBox(self.notebook_pane_2, -1, _("Enable EXIF Editing for JPEG"))
         self.label_10 = wx.StaticText(self.notebook_pane_2, -1, _("label_10"), style=wx.ALIGN_CENTRE)
         self.text_ctrl_3 = wx.TextCtrl(self.notebook_pane_2, -1, "")
@@ -345,10 +345,14 @@ class MyImageDialog(wx.Dialog):
     def __set_properties(self):
         self.SetTitle(_("Image Manipulation"))
         self.chkResize.SetValue(read_config_bool('Resize', 'Resize', True))
+        self.txtResizeWidth.SetValue(read_config_int('Resize', 'ResizeWidth', 800))
+        self.txtResizeHeight.SetValue(read_config_int('Resize', 'ResizeHeight', 600))
+        self.chkResizeLarger.SetValue(read_config_bool('Resize', 'ResizeLarger', True))
+        self.txtResizeLarger.SetValue(read_config_int('Resize', 'ResizeLargerThan', 1024))
 	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
 	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
-	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark'))
-	self.txtWatermarkTextFont.SetValue(read_config('Watermark', 'WatermarkTextFont', ''))
+	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark').decode('unicode_escape'))
+	self.txtWatermarkTextFont.SetValue(read_config('Watermark', 'WatermarkTextFont', '').decode('unicode_escape'))
 	self.txtWatermarkTextSize.SetValue(read_config_int('Watermark', 'WatermarkTextSize', 18))
 	self.sldWatermarkTextOpacity.SetValue(read_config_int('Watermark', 'WatermarkTextOpacity', 60))
 	try:
@@ -359,7 +363,7 @@ class MyImageDialog(wx.Dialog):
 	self.btnWatermarkTextColor.SetBackgroundColour(wx.Colour(r, g, b))
 	self.cmbWatermarkTextPosition.SetSelection(read_config_int('Watermark', 'WatermarkTextPosition', 0))
 	self.txtWatermarkTextPadding.SetValue(read_config_int('Watermark', 'WatermarkTextPadding', 10))
-	self.txtWatermarkImage.SetValue(read_config('Watermark', 'WatermarkImage', ''))
+	self.txtWatermarkImage.SetValue(read_config('Watermark', 'WatermarkImage', '').decode('unicode_escape'))
 	self.sldWatermarkImageOpacity.SetValue(read_config_int('Watermark', 'WatermarkImageOpacity', 60))
 	self.cmbWatermarkImagePosition.SetSelection(read_config_int('Watermark', 'WatermarkImagePosition', 0))
 	self.txtWatermarkImagePadding.SetValue(read_config_int('Watermark', 'WatermarkImagePadding', 10))
@@ -528,17 +532,24 @@ class MyImageDialog(wx.Dialog):
 	
     def OnbtnOKClick(self, evt):
     	try:
+    		write_config('Resize', 
+    			{'Resize': self.chkResize.IsChecked(), \
+    			'ResizeWidth': self.txtResizeWidth.GetValue(), \
+    			'ResizeHeight': self.txtResizeHeight.GetValue(), \
+    			'ResizeLarger': self.chkResizeLarger.IsChecked(), \
+    			'ResizeLargerThan': self.txtResizeLarger.GetValue(), \
+    			})
     		write_config('Watermark', 
     			{'Watermark': self.chkWatermark.IsChecked(), \
     			'WatermarkType': self.rdWatermarkType.GetSelection(), \
-    			'WatermarkText': self.txtWatermarkText.GetValue(), \
-    			'WatermarkTextFont': self.txtWatermarkTextFont.GetValue(), \
+    			'WatermarkText': self.txtWatermarkText.GetValue().encode('unicode_escape'), \
+    			'WatermarkTextFont': self.txtWatermarkTextFont.GetValue().encode('unicode_escape'), \
     			'WatermarkTextSize': self.txtWatermarkTextSize.GetValue(), \
     			'WatermarkTextOpacity': self.sldWatermarkTextOpacity.GetValue(), \
     			'WatermarkTextColor': self.btnWatermarkTextColor.GetBackgroundColour().Get(), \
     			'WatermarkTextPosition': self.cmbWatermarkTextPosition.GetSelection(), \
     			'WatermarkTextPadding': self.txtWatermarkTextPadding.GetValue(), \
-    			'WatermarkImage': self.txtWatermarkImage.GetValue(), \
+    			'WatermarkImage': self.txtWatermarkImage.GetValue().encode('unicode_escape'), \
     			'WatermarkImageOpacity': self.sldWatermarkImageOpacity.GetValue(), \
     			'WatermarkImagePosition': self.cmbWatermarkImagePosition.GetSelection(), \
     			'WatermarkImagePadding': self.txtWatermarkImagePadding.GetValue(), \
@@ -546,7 +557,7 @@ class MyImageDialog(wx.Dialog):
     	except:
     		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
     	self.Close()
-   
+
     def OnClose(self, evt):
 	self.Destroy()
 	

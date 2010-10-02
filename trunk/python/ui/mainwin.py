@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, sys
+import os, sys, shutil
 import urllib, urllib2, cookielib
 import wx
 from xml.dom import minidom
@@ -78,7 +78,6 @@ class MyFrame(wx.Frame):
 	self.lstUpFile.Bind(wx.EVT_CONTEXT_MENU, self.OnlstUpFileRClick)
 	self.Bind(wx.EVT_CLOSE, self.OnClose)
 	self.Bind(wx.EVT_ICONIZE, self.on_iconify)
-	
         
     def __set_menubar(self):
         menuBar = wx.MenuBar()
@@ -124,6 +123,8 @@ class MyFrame(wx.Frame):
         	mnuCterm = wx.MenuItem(mnuTerm, wx.NewId(), 'Cterm', '', wx.ITEM_NORMAL)
         	mnuTerm.AppendItem(mnuCterm)
         	mnuSetting.AppendMenu(-1, '%s *T&erm' % _("Integrate to"), mnuTerm)
+        	self.Bind(wx.EVT_MENU, self.OnmnuFtermClick, mnuFterm)
+		self.Bind(wx.EVT_MENU, self.OnmnuCtermClick, mnuCterm)
         mnuAlwaysOnTop = wx.MenuItem(mnuSetting, wx.NewId(), _("Always on &Top"), "", wx.ITEM_CHECK)
         mnuSetting.AppendItem(mnuAlwaysOnTop)
         menuBar.Append(mnuSetting, _("&Setting"))
@@ -401,6 +402,51 @@ class MyFrame(wx.Frame):
     		else:
     			self.GetToolBar().SetWindowStyleFlag(self.GetToolBar().GetWindowStyleFlag() & ~wx.TB_TEXT)
     
+    def OnmnuFtermClick(self, evt):
+    	self.add_to_term('Fterm')
+
+    def OnmnuCtermClick(self, evt):
+    	self.add_to_term('Cterm')
+    
+    def add_to_term(self, term):
+    	wx.MessageBox('%s %s %s' % (_('Be sure'), term, _('has been closed')))
+    	dialog = wx.FileDialog(None, '%s %s' % (_('Select Location of'), term), '', '', '%s (%s.exe)|%s.exe' % (term, term, term), wx.OPEN)
+	if dialog.ShowModal() == wx.ID_OK:
+		path = os.path.abspath(os.path.dirname(dialog.GetPath()))
+		if term == 'Fterm':
+			configfile = os.path.join(path, 'fterm.ini')
+			cf = ConfigParser.ConfigParser()
+			try:
+				cf.read(configfile)
+				value = cf.getint('Script', 'TotalNumber')
+			except:
+				wx.MessageBox('%s: %s' % (_('Read Error'), configfile), '%s %s' % (_('Integrate to'), term), wx.ICON_ERROR)
+				return
+			cf.set('Script', 'TotalNumber', value + 1)
+			cf.set('SCRIPT%d' % value, 'DESC', '%s v%s' % (APPNAME.decode('utf8').encode('gb18030'), VERSION))
+			cf.set('SCRIPT%d' % value, 'CMDTYPE', 1)
+			cf.set('SCRIPT%d' % value, 'CATEGORY', APPNAME.decode('utf8').encode('gb18030'))
+			cf.set('SCRIPT%d' % value, 'COMMAND', sys.argv[0].decode('utf8').encode('gb18030'))
+			cf.write(open(configfile, 'w'))
+		else:
+			configfile = os.path.join(path, 'user', 'mycmds.txt')
+			if not os.path.isfile():
+				try:
+					shutil.copy(os.path.join(path, 'user', 'mycmds.txt.example'), configfile)
+				except:
+					wx.MessageBox('%s: %s' % (_('Read Error'), configfile), '%s %s' % (_('Integrate to'), term), wx.ICON_ERROR)
+					return
+			fp = open(configfile, 'w+')
+			new_line = r'99; ; %s; true; py:import os\\nos.startfile(r\"%s\");' % (APPNAME.decode('utf8').encode('gb18030'), sys.argv[0].replace(r'\', r'\\').decode('utf8').encode('gb18030'))
+			try:
+				fp.writelines([new_line])
+			except:
+				wx.MessageBox('%s: %s' % (_('Write Error'), configfile), '%s %s' % (_('Integrate to'), term), wx.ICON_ERROR)
+				return
+			fp.close()
+		wx.MessageBox('%s %s %s' % (_('Integrate to'), term, _('successfully')), '%s %s' % (_('Integrate to'), term), wx.ICON_INFORMATION)
+	dialog.Destroy()
+        
     def OnmnuAlwaysOnTopClick(self, evt):
 	if self.GetMenuBar().FindItemById(evt.GetId()).IsChecked():
         	self.SetWindowStyleFlag(self.GetWindowStyleFlag() | wx.STAY_ON_TOP)
@@ -604,7 +650,7 @@ class MyFrame(wx.Frame):
     		self.notebook.SetSelection(1)
 
     def OnlstUpFileRClick(self, evt):
-	self.PopupMenu(self.ppmenu)
+	self.notebook.PopupMenu(self.ppmenu)#	print self.GetToolBar().GetSize()
 
     def OnPopupItemSelected(self, evt):
 	menutext = self.ppmenu.FindItemById(evt.GetId()).GetText().replace('_', '&')
