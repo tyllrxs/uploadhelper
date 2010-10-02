@@ -7,7 +7,6 @@ from consts import *
 from utilfunc import *
 from httpredirect import *
 from imagemanipulation import *
-from exif import *
 
 class MyLoginDialog(wx.Dialog):
     def __init__(self, *args, **kwds):
@@ -285,6 +284,7 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
         self.chkResizeLarger = wx.CheckBox(self.notebook_pane_1, -1, '%s (KB) >' % _("Resize only for Image Size"))
         self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", size = wx.Size(80, wx.DefaultSize.y), min=0, max=9999)
+        self.chkReserveEXIF = wx.CheckBox(self.notebook_pane_1, -1, '%s EXIF' % _("Reserve"))
         self.chkEXIF = wx.CheckBox(self.notebook_pane_2, -1, _("Enable EXIF Editing for JPEG"))
         self.label_10 = wx.StaticText(self.notebook_pane_2, -1, _("label_10"), style=wx.ALIGN_CENTRE)
         self.text_ctrl_3 = wx.TextCtrl(self.notebook_pane_2, -1, "")
@@ -368,6 +368,8 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeLarger.SetValue(read_config_int('Resize', 'ResizeLargerThan', 1024))
         evt = wx.CommandEvent()
         self.OnchkResizeLargerClick(evt)
+        self.chkReserveEXIF.SetValue(read_config_bool('Resize', 'ReserveEXIF', True))
+        self.chkEXIF.SetValue(read_config_bool('EXIF', 'EXIF', False))
 	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
 	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
 	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark').decode('unicode_escape'))
@@ -414,13 +416,14 @@ class MyImageDialog(wx.Dialog):
         sizer_18 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_7.Add(self.chkResize, 0, wx.ALL, 5)
         sizer_18.Add(self.label_18, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
-        sizer_18.Add(self.txtResizeWidth, 0, wx.ALL, 5)
+        sizer_18.Add(self.txtResizeWidth, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_18.Add(self.label_19, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
-        sizer_18.Add(self.txtResizeHeight, 0, wx.ALL, 5)
+        sizer_18.Add(self.txtResizeHeight, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_17.Add(sizer_18, 0, wx.EXPAND, 0)
         sizer_19.Add(self.chkResizeLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
-        sizer_19.Add(self.txtResizeLarger, 0, wx.ALL, 5)
+        sizer_19.Add(self.txtResizeLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_17.Add(sizer_19, 0, wx.EXPAND, 0)
+        sizer_17.Add(self.chkReserveEXIF, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_7.Add(sizer_17, 1, wx.EXPAND, 0)
         self.notebook_pane_1.SetSizer(sizer_7)
         sizer_EXIF.Add(self.chkEXIF, 0, wx.ALL, 5)
@@ -517,7 +520,9 @@ class MyImageDialog(wx.Dialog):
 		wildcard = '%s (*.jpg)|*.[Jj][Pp][Gg]' % 'JPEG %s' % _('Images')
 	dialog = wx.FileDialog(None, _('Select an image'), '', '', wildcard, wx.OPEN)
 	if dialog.ShowModal() == wx.ID_OK:
-		read_exif(dialog.GetPath())
+		import TBP
+		j = TBP.Jpeg('test.jpg')
+		print j.getExifTag(306)
 	dialog.Destroy()
     	
     def OnchkWatermarkClick(self, evt):
@@ -569,6 +574,10 @@ class MyImageDialog(wx.Dialog):
     			'ResizeHeight': self.txtResizeHeight.GetValue(), \
     			'ResizeLarger': self.chkResizeLarger.IsChecked(), \
     			'ResizeLargerThan': self.txtResizeLarger.GetValue(), \
+    			'ReserveEXIF': self.chkReserveEXIF.GetValue(), \
+    			})
+    		write_config('EXIF', 
+    			{'EXIF': self.chkEXIF.IsChecked(), \
     			})
     		write_config('Watermark', 
     			{'Watermark': self.chkWatermark.IsChecked(), \

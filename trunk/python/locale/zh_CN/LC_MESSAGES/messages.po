@@ -543,3 +543,6 @@ msgstr "成功"
 
 msgid "Select an image"
 msgstr "选择一张图片"
+
+msgid "Reserve"
+msgstr "保留"
