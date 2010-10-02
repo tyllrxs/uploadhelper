@@ -514,6 +514,9 @@ msgstr "选择水印字体"
 msgid "Fonts"
 msgstr "字体"
 
+msgid "Images"
+msgstr "图片"
+
 msgid "Be sure"
 msgstr "确保"
 
@@ -531,3 +534,6 @@ msgstr "写入错误"
 
 msgid "successfully"
 msgstr "成功"
+
+msgid "Select an image"
+msgstr "选择一张图片"
