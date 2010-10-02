@@ -409,8 +409,8 @@ class MyFrame(wx.Frame):
     	self.add_to_term('Cterm')
     
     def add_to_term(self, term):
-    	wx.MessageBox('%s %s %s' % (_('Be sure'), term, _('has been closed')))
-    	dialog = wx.FileDialog(None, '%s %s' % (_('Select Location of'), term), '', '', '%s (%s.exe)|%s.exe' % (term, term, term), wx.OPEN)
+    	wx.MessageBox('%s %s %s' % (_('Be sure'), term, _('has been closed')), _('Confirm'), wx.ICON_EXCLAMATION)
+    	dialog = wx.FileDialog(None, '%s: %s' % (_('Select Location'), term), '', '', '%s (%s.exe)|%s.exe' % (term, term, term), wx.OPEN)
 	if dialog.ShowModal() == wx.ID_OK:
 		path = os.path.abspath(os.path.dirname(dialog.GetPath()))
 		if term == 'Fterm':
@@ -423,21 +423,21 @@ class MyFrame(wx.Frame):
 				wx.MessageBox('%s: %s' % (_('Read Error'), configfile), '%s %s' % (_('Integrate to'), term), wx.ICON_ERROR)
 				return
 			cf.set('Script', 'TotalNumber', value + 1)
-			cf.set('SCRIPT%d' % value, 'DESC', '%s v%s' % (APPNAME.decode('utf8').encode('gb18030'), VERSION))
+			cf.set('SCRIPT%d' % value, 'DESC', '%s v%s' % (APPNAME.encode('gb18030'), VERSION))
 			cf.set('SCRIPT%d' % value, 'CMDTYPE', 1)
-			cf.set('SCRIPT%d' % value, 'CATEGORY', APPNAME.decode('utf8').encode('gb18030'))
-			cf.set('SCRIPT%d' % value, 'COMMAND', sys.argv[0].decode('utf8').encode('gb18030'))
+			cf.set('SCRIPT%d' % value, 'CATEGORY', APPNAME.encode('gb18030'))
+			cf.set('SCRIPT%d' % value, 'COMMAND', sys.argv[0].encode('gb18030'))
 			cf.write(open(configfile, 'w'))
 		else:
 			configfile = os.path.join(path, 'user', 'mycmds.txt')
-			if not os.path.isfile():
+			if not os.path.isfile(configfile):
 				try:
 					shutil.copy(os.path.join(path, 'user', 'mycmds.txt.example'), configfile)
 				except:
 					wx.MessageBox('%s: %s' % (_('Read Error'), configfile), '%s %s' % (_('Integrate to'), term), wx.ICON_ERROR)
 					return
-			fp = open(configfile, 'w+')
-			new_line = r'99; ; %s; true; py:import os\\nos.startfile(r\"%s\");' % (APPNAME.decode('utf8').encode('gb18030'), sys.argv[0].replace(r'\', r'\\').decode('utf8').encode('gb18030'))
+			fp = open(configfile, 'a')
+			new_line = r'99; ; %s; true; py:import os\\nos.startfile(r\"%s\");' % (APPNAME.encode('gb18030'), sys.argv[0].replace('\\', '\\\\').encode('gb18030'))
 			try:
 				fp.writelines([new_line])
 			except:
