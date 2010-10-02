@@ -7,6 +7,7 @@ from consts import *
 from utilfunc import *
 from httpredirect import *
 from imagemanipulation import *
+from exif import *
 
 class MyLoginDialog(wx.Dialog):
     def __init__(self, *args, **kwds):
@@ -500,17 +501,9 @@ class MyImageDialog(wx.Dialog):
     	wildcard = '%s (*.jpg)|*.jpg' % 'JPEG %s' % _('Images')
 	if sys.platform[:5] == 'linux':
 		wildcard = '%s (*.jpg)|*.[Jj][Pp][Gg]' % 'JPEG %s' % _('Images')
-	default_path = os.path.abspath(os.path.dirname(self.txtWatermarkTextFont.GetValue()))
-	if default_path == os.path.abspath('.'):
-		if sys.platform.startswith('win32'):
-			default_path = os.path.join(os.environ['WINDIR'], 'Fonts')
-		elif sys.platform.find('linux') >= 0:	
-			default_path = '/usr/share/fonts'
-		else:
-			default_path = '/Library/Fonts'
-	dialog = wx.FileDialog(None, _('Select a font for watermark'), default_path, '', wildcard, wx.OPEN)
+	dialog = wx.FileDialog(None, _('Select an image'), '', '', wildcard, wx.OPEN)
 	if dialog.ShowModal() == wx.ID_OK:
-		self.txtWatermarkTextFont.SetValue(dialog.GetPath())
+		read_exif(dialog.GetPath())
 	dialog.Destroy()
     	
     def OnchkWatermarkClick(self, evt):
