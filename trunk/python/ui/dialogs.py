@@ -324,6 +324,7 @@ class MyImageDialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
         
+        self.Bind(wx.EVT_CHECKBOX, self.OnchkResizeLargerClick, self.chkResizeLarger)
         self.Bind(wx.EVT_CHECKBOX, self.OnchkWatermarkClick, self.chkWatermark)
         self.Bind(wx.EVT_RADIOBOX, self.add_watermark, self.rdWatermarkType)
         self.Bind(wx.EVT_TEXT, self.add_watermark, self.txtWatermarkText)
@@ -349,6 +350,8 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeHeight.SetValue(read_config_int('Resize', 'ResizeHeight', 600))
         self.chkResizeLarger.SetValue(read_config_bool('Resize', 'ResizeLarger', True))
         self.txtResizeLarger.SetValue(read_config_int('Resize', 'ResizeLargerThan', 1024))
+        evt = wx.CommandEvent()
+        self.OnchkResizeLargerClick(evt)
 	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
 	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
 	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark').decode('unicode_escape'))
@@ -489,6 +492,10 @@ class MyImageDialog(wx.Dialog):
         self.Layout()
         self.Centre()
         
+        
+    def OnchkResizeLargerClick(self, evt):
+    	self.txtResizeLarger.Enable(self.chkResizeLarger.IsChecked())
+    	
     def OnchkWatermarkClick(self, evt):
     	self.add_watermark()
     

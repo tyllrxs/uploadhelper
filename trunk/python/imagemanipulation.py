@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import Image, ImageDraw, ImageChops, ImageEnhance, ImageFont
+from PIL import Image, ImageDraw, ImageChops, ImageEnhance, ImageFont
 from consts import *
 
 def get_mark_position(im_size, mark_size, position=0, padding=0):
