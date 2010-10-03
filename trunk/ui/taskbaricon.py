@@ -19,9 +19,9 @@ class ddTaskBarIcon(wx.TaskBarIcon):
         	self.frame.Iconize(False)
         	self.frame.Raise()
         else:
-        	self.frame.Iconize(True)
         	evt = wx.CommandEvent()
         	self.frame.on_iconify(evt)
+        	self.frame.Iconize(True)
 
     # override
     def CreatePopupMenu(self):

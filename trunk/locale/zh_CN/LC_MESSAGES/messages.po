@@ -582,3 +582,12 @@ msgstr "更改"
 
 msgid "Remove"
 msgstr "删除"
+
+msgid "Resize manually"
+msgstr "手动缩放"
+
+msgid "Write EXIF manually"
+msgstr "手动写入 EXIF"
+
+msgid "Add Watermark manually"
+msgstr "手动添加水印"

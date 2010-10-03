@@ -271,20 +271,18 @@ class MyImageDialog(wx.Dialog):
         self.notebook_pane_3 = wx.Panel(self.notebook, -1)
         self.notebook_pane_2 = wx.Panel(self.notebook, -1)
         self.notebook_pane_1 = wx.Panel(self.notebook, -1)
-        self.sizer_16_staticbox = wx.StaticBox(self.notebook_pane_2, -1, _("EXIF Settings"))
-        self.sizer_WatermarkText_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Watermark Text"))
-        self.sizer_WatermarkImage_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Watermark Image"))
-        self.sizer_Watermark_Setting_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Watermark Settings"))
-        self.sizer_Watermark_Preview_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Preview"))
-        self.sizer_17_staticbox = wx.StaticBox(self.notebook_pane_1, -1, _("Resize Settings"))
+        
         self.chkResize = wx.CheckBox(self.notebook_pane_1, -1, _("Enable Resize for Large Images"))
+        self.sizer_17_staticbox = wx.StaticBox(self.notebook_pane_1, -1, _("Resize Settings"))
         self.label_18 = wx.StaticText(self.notebook_pane_1, -1, _("Resize To"))
         self.txtResizeWidth = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
         self.label_19 = wx.StaticText(self.notebook_pane_1, -1, "X")
         self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
         self.chkResizeLarger = wx.CheckBox(self.notebook_pane_1, -1, '%s (KB) >' % _("Resize only for Image Size"))
         self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
+        
         self.chkEXIF = wx.CheckBox(self.notebook_pane_2, -1, _("Enable EXIF Editing for JPEG"))
+        self.sizer_16_staticbox = wx.StaticBox(self.notebook_pane_2, -1, _("EXIF Settings"))
         self.txtEXIFInfo = []
         for item, desc in EXIF_TAGS:
         	lbl = wx.StaticText(self.notebook_pane_2, -1, desc)
@@ -295,7 +293,13 @@ class MyImageDialog(wx.Dialog):
         self.btnChangeThumbnail = wx.Button(self.notebook_pane_2, -1, _("Change"))
         self.btnRemoveThumbnail = wx.Button(self.notebook_pane_2, -1, _("Remove"))
         self.btnImportEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Import EXIF from Image"))
+        self.btnManualWriteEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Write EXIF manually"))
+        
         self.chkWatermark = wx.CheckBox(self.notebook_pane_3, -1, _("Enable Watermark"))
+        self.sizer_WatermarkText_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Watermark Text"))
+        self.sizer_WatermarkImage_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Watermark Image"))
+        self.sizer_Watermark_Setting_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Watermark Settings"))
+        self.sizer_Watermark_Preview_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Preview"))
         self.rdWatermarkType = wx.RadioBox(self.notebook_pane_3, -1, _("Watermark Type"), choices=[_("Text"), _("Image")], majorDimension=1, style=wx.RA_SPECIFY_ROWS)
         self.label_3 = wx.StaticText(self.notebook_pane_3, -1, _("Text"))
         self.txtWatermarkText = wx.TextCtrl(self.notebook_pane_3, -1, "")
@@ -403,6 +407,7 @@ class MyImageDialog(wx.Dialog):
         sizer_13_copy = wx.BoxSizer(wx.HORIZONTAL)
         sizer_10_copy = wx.BoxSizer(wx.HORIZONTAL)
         sizer_20 = wx.BoxSizer(wx.VERTICAL)
+        sizer_21 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_15 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_WatermarkText = wx.StaticBoxSizer(self.sizer_WatermarkText_staticbox, wx.VERTICAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
@@ -416,6 +421,7 @@ class MyImageDialog(wx.Dialog):
         sizer_17 = wx.StaticBoxSizer(self.sizer_17_staticbox, wx.VERTICAL)
         sizer_19 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_18 = wx.BoxSizer(wx.HORIZONTAL)
+        
         sizer_7.Add(self.chkResize, 0, wx.ALL, 5)
         sizer_18.Add(self.label_18, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_18.Add(self.txtResizeWidth, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -427,6 +433,7 @@ class MyImageDialog(wx.Dialog):
         sizer_17.Add(sizer_19, 0, wx.EXPAND, 0)
         sizer_7.Add(sizer_17, 1, wx.EXPAND, 0)
         self.notebook_pane_1.SetSizer(sizer_7)
+        
         sizer_EXIF.Add(self.chkEXIF, 0, wx.ALL, 5)
         for label, text in self.txtEXIFInfo:
         	grid_sizer_1.Add(label, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -438,8 +445,12 @@ class MyImageDialog(wx.Dialog):
         grid_sizer_1.Add(sizer_20, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
         sizer_16.Add(grid_sizer_1, 1, wx.EXPAND, 0)
         sizer_EXIF.Add(sizer_16, 1, wx.EXPAND, 0)
-        sizer_EXIF.Add(self.btnImportEXIF, 0, wx.ALL, 5)
+        sizer_21.Add(self.btnImportEXIF, 0, wx.ALL, 5)
+        sizer_21.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
+        sizer_21.Add(self.btnManualWriteEXIF, 0, wx.ALL, 5)
+        sizer_EXIF.Add(sizer_21, 0, wx.EXPAND, 5)
         self.notebook_pane_2.SetSizer(sizer_EXIF)
+        
         sizer_Watermark.Add(self.chkWatermark, 0, wx.ALL, 5)
         sizer_Watermark_Setting.Add(self.rdWatermarkType, 0, wx.EXPAND, 0)
         sizer_11.Add(self.label_3, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -484,6 +495,7 @@ class MyImageDialog(wx.Dialog):
         sizer_Watermark_Main.Add(sizer_Watermark_Preview, 0, wx.EXPAND, 0)
         sizer_Watermark.Add(sizer_Watermark_Main, 1, wx.EXPAND, 0)
         self.notebook_pane_3.SetSizer(sizer_Watermark)
+        
         self.notebook.AddPage(self.notebook_pane_1, _("Resize"))
         self.notebook.AddPage(self.notebook_pane_2, _("EXIF"))
         self.notebook.AddPage(self.notebook_pane_3, _("Watermark"))
@@ -500,6 +512,7 @@ class MyImageDialog(wx.Dialog):
         sizer_button.Add(self.btnCancel, 0, wx.ALL, 5)
         sizer_dialog.Add(sizer_button, 0, wx.EXPAND, 0)
         self.SetSizer(sizer_dialog)
+        
         sizer_dialog.Fit(self)
         self.Layout()
         self.Centre()
