@@ -370,6 +370,7 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeLarger.SetValue(read_config_int('Resize', 'ResizeLargerThan', 1024))
         evt = wx.CommandEvent()
         self.OnchkResizeLargerClick(evt)
+        
         self.chkEXIF.SetValue(read_config_bool('EXIF', 'EXIF', False))
         idx = 0
         for label, text in self.txtEXIFInfo:
@@ -377,6 +378,9 @@ class MyImageDialog(wx.Dialog):
 		idx += 1
 	thumb = read_config('EXIF', 'EXIFThumbnail', '').decode('unicode_escape')
 	self.set_thumbnail(thumb)
+	self.chkWriteEXIFBackup.SetValue(read_config_bool('EXIF', 'WriteEXIFBackup', True))
+	self.chkWriteEXIFUnicode.SetValue(read_config_bool('EXIF', 'WriteEXIFUnicode', False))
+	
 	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
 	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
 	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark').decode('unicode_escape'))
@@ -448,9 +452,11 @@ class MyImageDialog(wx.Dialog):
         grid_sizer_1.Add(sizer_20, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
         sizer_16.Add(grid_sizer_1, 1, wx.EXPAND, 0)
         sizer_EXIF.Add(sizer_16, 1, wx.EXPAND, 0)
-        sizer_21.Add(self.btnImportEXIF, 0, wx.ALL, 5)
+        sizer_21.Add(self.btnImportEXIF, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_21.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
-        sizer_21.Add(self.btnWriteEXIF, 0, wx.ALL, 5)
+        sizer_21.Add(self.btnWriteEXIF, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_21.Add(self.chkWriteEXIFBackup, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_21.Add(self.chkWriteEXIFUnicode, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_EXIF.Add(sizer_21, 0, wx.EXPAND, 5)
         self.notebook_pane_2.SetSizer(sizer_EXIF)
         
@@ -560,7 +566,10 @@ class MyImageDialog(wx.Dialog):
 			try:
 				self.txtEXIFInfo[idx][1].SetValue(val.decode('gb18030'))
 			except:
-				pass
+				try:
+					self.txtEXIFInfo[idx][1].SetValue(val)
+				except:
+					pass
 			idx += 1
 		thumb = get_exif_thumbnail(jpeg)
 		self.set_thumbnail(thumb)
@@ -569,13 +578,23 @@ class MyImageDialog(wx.Dialog):
     	jpg = self.open_jpeg_dialog()
     	if jpg:
     		dict = {}
+    		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
     		for i in xrange(len(self.txtEXIFInfo)):
-    			dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
+    			if use_unicode:
+    				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
+    			else:
+    				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue().encode('gb18030')
     		mydir = os.path.join(self.default_path, 'exif')
     		mydir += os.path.sep
+    		if not self.chkWriteEXIFBackup.IsChecked():
+    			mydir = ''
     		exif_jpg = process_exif(jpg, dict, mydir)
     		if exif_jpg:
-    			wx.MessageBox('%s. %s: %s' % (_('Write successfully'), _('Saved to'), mydir), _('Write EXIF manually'), wx.ICON_INFORMATION)
+    			if mydir:
+    				msg = '%s:\n%s' % (_('Saved to'), mydir)
+    			else:
+    				msg = ''
+    			wx.MessageBox('%s. %s' % (_('Write successfully'), msg), _('Write EXIF manually'), wx.ICON_INFORMATION)
     		else:
     			wx.MessageBox(_('Failed to write'), _('Write EXIF manually'), wx.ICON_ERROR)
     	
@@ -632,6 +651,8 @@ class MyImageDialog(wx.Dialog):
     			})
     		dict = {'EXIF': self.chkEXIF.IsChecked(), \
     			'EXIFThumbnail': self.thumbnail.encode('unicode_escape'), \
+    			'WriteEXIFBackup': self.chkWriteEXIFBackup.IsChecked(), \
+    			'WriteEXIFUnicode': self.chkWriteEXIFUnicode.IsChecked(), \
     			}
     		idx = 0
         	for label, text in self.txtEXIFInfo:
