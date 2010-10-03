@@ -591,3 +591,9 @@ msgstr "手动写入 EXIF"
 
 msgid "Add Watermark manually"
 msgstr "手动添加水印"
+
+msgid "Write successfully ! Saved to directory"
+msgstr "写入成功！保存到目录"
+
+msgid "Failed to write"
+msgstr "写入失败"
