@@ -63,10 +63,10 @@ def get_exif_thumbnail(filename):
 		thumb = ''
 	return thumb
 
-def process_exif(jpg, dict, dir = ''):
+def process_exif(jpg, dict, backup = True):
 	params = ' '.join(['-%s="%s"' % (k, dict[k]) for k in dict.keys()])
-	if dir:
-		params += ' -o "%s"' % dir
+	if not backup:
+		params += ' -o -overwrite_original'
 	(status, info) = commands.getstatusoutput('exiftool %s "%s"' % (params, jpg))
 	if status != 0:
 		return ''

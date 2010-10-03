@@ -584,17 +584,10 @@ class MyImageDialog(wx.Dialog):
     				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
     			else:
     				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue().encode('gb18030')
-    		mydir = os.path.join(self.default_path, 'exif')
-    		mydir += os.path.sep
-    		if not self.chkWriteEXIFBackup.IsChecked():
-    			mydir = ''
-    		exif_jpg = process_exif(jpg, dict, mydir)
+    		backup = self.chkWriteEXIFBackup.IsChecked()
+    		exif_jpg = process_exif(jpg, dict, backup)
     		if exif_jpg:
-    			if mydir:
-    				msg = '%s:\n%s' % (_('Saved to'), mydir)
-    			else:
-    				msg = ''
-    			wx.MessageBox('%s. %s' % (_('Write successfully'), msg), _('Write EXIF manually'), wx.ICON_INFORMATION)
+    			wx.MessageBox('%s.' % _('Write successfully'), _('Write EXIF manually'), wx.ICON_INFORMATION)
     		else:
     			wx.MessageBox(_('Failed to write'), _('Write EXIF manually'), wx.ICON_ERROR)
     	
