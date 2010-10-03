@@ -595,6 +595,23 @@ class MyImageDialog(wx.Dialog):
     	
     def OnbtnRemoveThumbnailClick(self, evt):
     	self.set_thumbnail()
+    	
+    def OnchkAllReadableClick(self, evt):
+    	checked = self.chkAllReadable.IsChecked()
+    	for i in xrange(len(self.txtEXIFInfo)):
+    		self.txtEXIFInfo[i][2].SetValue(checked)
+    	self.chkThumbR.SetValue(checked)
+    	
+    def OnchkAllWritableClick(self, evt):
+    	checked = self.chkAllWritable.IsChecked()
+    	for i in xrange(len(self.txtEXIFInfo)):
+    		self.txtEXIFInfo[i][3].SetValue(checked)
+    	self.chkThumbW.SetValue(checked)
+    	
+    def OnbtnClearAllClick(self, evt):
+    	for i in xrange(len(self.txtEXIFInfo)):
+    		self.txtEXIFInfo[i][1].SetValue('')
+    	self.set_thumbnail()
 			
     def OnbtnImportEXIFClick(self, evt):
     	jpeg = self.open_jpeg_dialog()
