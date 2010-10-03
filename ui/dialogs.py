@@ -292,8 +292,13 @@ class MyImageDialog(wx.Dialog):
         	self.txtEXIFInfo.append((lbl, txt, chk1, chk2))
         self.lblEXIFThumbnail = wx.StaticText(self.notebook_pane_2, -1, _("Thumbnail"))
         self.imgEXIFThumbnail = wx.StaticBitmap(self.notebook_pane_2, -1, wx.NullBitmap, size=(160, 120))
+        self.chkThumbR = wx.CheckBox(self.notebook_pane_2, -1, 'r')
+        self.chkThumbW = wx.CheckBox(self.notebook_pane_2, -1, 'w')
         self.btnChangeThumbnail = wx.Button(self.notebook_pane_2, -1, _("Change"))
         self.btnRemoveThumbnail = wx.Button(self.notebook_pane_2, -1, _("Remove"))
+        self.chkAllReadable = wx.CheckBox(self.notebook_pane_2, -1, _("All Readable"))
+        self.chkAllWritable = wx.CheckBox(self.notebook_pane_2, -1, _("All Writable"))
+        self.btnClearAll = wx.Button(self.notebook_pane_2, -1, _("Clear All"))
         self.btnImportEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Import EXIF from Image"))
         self.btnWriteEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Write EXIF manually"))
         self.chkWriteEXIFBackup = wx.CheckBox(self.notebook_pane_2, -1, _("Backup"))
@@ -340,10 +345,15 @@ class MyImageDialog(wx.Dialog):
         self.__do_layout()
         
         self.Bind(wx.EVT_CHECKBOX, self.OnchkResizeLargerClick, self.chkResizeLarger)
+        
         self.Bind(wx.EVT_BUTTON, self.OnbtnChangeThumbnailClick, self.btnChangeThumbnail)
         self.Bind(wx.EVT_BUTTON, self.OnbtnRemoveThumbnailClick, self.btnRemoveThumbnail)
+        self.Bind(wx.EVT_CHECKBOX, self.OnchkAllReadableClick, self.chkAllReadable)
+        self.Bind(wx.EVT_CHECKBOX, self.OnchkAllWritableClick, self.chkAllWritable)
+        self.Bind(wx.EVT_BUTTON, self.OnbtnClearAllClick, self.btnClearAll)
         self.Bind(wx.EVT_BUTTON, self.OnbtnImportEXIFClick, self.btnImportEXIF)
         self.Bind(wx.EVT_BUTTON, self.OnbtnWriteEXIFClick, self.btnWriteEXIF)
+        
         self.Bind(wx.EVT_CHECKBOX, self.OnchkWatermarkClick, self.chkWatermark)
         self.Bind(wx.EVT_RADIOBOX, self.add_watermark, self.rdWatermarkType)
         self.Bind(wx.EVT_TEXT, self.add_watermark, self.txtWatermarkText)
@@ -359,6 +369,7 @@ class MyImageDialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkTextFontClick, self.btnWatermarkTextFont)
         self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkTextColorClick, self.btnWatermarkTextColor)
         self.Bind(wx.EVT_BUTTON, self.OnbtnWatermarkImageClick, self.btnWatermarkImage)
+        
         self.Bind(wx.EVT_BUTTON, self.OnbtnOKClick, id = wx.ID_OK)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
@@ -388,6 +399,8 @@ class MyImageDialog(wx.Dialog):
 			self.txtEXIFInfo[i][3].SetValue(True)
 	thumb = read_config('EXIF', 'EXIFThumbnail', '').decode('unicode_escape')
 	self.set_thumbnail(thumb)
+	self.chkThumbR.SetValue(read_config_bool('EXIF', 'ThumbR', True))
+	self.chkThumbW.SetValue(read_config_bool('EXIF', 'ThumbW', True))
 	self.chkWriteEXIFBackup.SetValue(read_config_bool('EXIF', 'WriteEXIFBackup', True))
 	self.chkWriteEXIFUnicode.SetValue(read_config_bool('EXIF', 'WriteEXIFUnicode', False))
 	
@@ -425,6 +438,8 @@ class MyImageDialog(wx.Dialog):
         sizer_10_copy = wx.BoxSizer(wx.HORIZONTAL)
         sizer_20 = wx.BoxSizer(wx.VERTICAL)
         sizer_21 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_22 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_23 = wx.BoxSizer(wx.VERTICAL)
         sizer_15 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_WatermarkText = wx.StaticBoxSizer(self.sizer_WatermarkText_staticbox, wx.VERTICAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
@@ -432,7 +447,7 @@ class MyImageDialog(wx.Dialog):
         sizer_10_my = wx.BoxSizer(wx.HORIZONTAL)
         sizer_11 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_EXIF = wx.BoxSizer(wx.VERTICAL)
-        sizer_16 = wx.StaticBoxSizer(self.sizer_16_staticbox, wx.VERTICAL)
+        sizer_16 = wx.StaticBoxSizer(self.sizer_16_staticbox, wx.HORIZONTAL)
         grid_sizer_1 = wx.FlexGridSizer(5, 6, 0, 0)
         sizer_7 = wx.BoxSizer(wx.VERTICAL)
         sizer_17 = wx.StaticBoxSizer(self.sizer_17_staticbox, wx.VERTICAL)
@@ -461,10 +476,20 @@ class MyImageDialog(wx.Dialog):
         	grid_sizer_1.Add(sizer_rw, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         grid_sizer_1.Add(self.lblEXIFThumbnail, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         grid_sizer_1.Add(self.imgEXIFThumbnail, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_22.Add(self.chkThumbR, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_22.Add(self.chkThumbW, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_20.Add(sizer_22, 0, wx.TOP|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_20.Add(self.btnChangeThumbnail, 0, wx.TOP|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_20.Add(self.btnRemoveThumbnail, 0, wx.TOP|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL, 5)
         grid_sizer_1.Add(sizer_20, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
         sizer_16.Add(grid_sizer_1, 1, wx.EXPAND, 0)
+        sizer_23.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
+        sizer_23.Add(self.chkAllReadable, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_23.Add(self.chkAllWritable, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_23.Add(wx.StaticLine(self.notebook_pane_2), 0, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 10)
+        sizer_23.Add(self.btnClearAll, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_23.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
+        sizer_16.Add(sizer_23, 0, wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 0)
         sizer_EXIF.Add(sizer_16, 1, wx.EXPAND, 0)
         sizer_21.Add(self.btnImportEXIF, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_21.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
@@ -575,27 +600,33 @@ class MyImageDialog(wx.Dialog):
     	jpeg = self.open_jpeg_dialog()
     	if jpeg:
 		vals = get_exif_info(jpeg, [k for k, v in EXIF_TAGS])
-		idx = 0
+		i = 0
 		for val in vals:
-			try:
-				self.txtEXIFInfo[idx][1].SetValue(val.decode('gb18030'))
-			except:
+			if self.txtEXIFInfo[i][2].IsChecked():
 				try:
-					self.txtEXIFInfo[idx][1].SetValue(val)
+					self.txtEXIFInfo[i][1].SetValue(val.decode('gb18030'))
 				except:
-					pass
-			idx += 1
-		thumb = get_exif_thumbnail(jpeg)
-		self.set_thumbnail(thumb)
+					try:
+						self.txtEXIFInfo[i][1].SetValue(val)
+					except:
+						pass
+			i += 1
+		if self.chkThumbR.IsChecked():
+			thumb = get_exif_thumbnail(jpeg)
+			self.set_thumbnail(thumb)
 	
     def OnbtnWriteEXIFClick(self, evt):
     	jpg = self.open_jpeg_dialog()
     	if jpg:
     		dict = {}
     		for i in xrange(len(self.txtEXIFInfo)):
-    			dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
+    			if self.txtEXIFInfo[i][3].IsChecked():
+    				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
     		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
-    		thumb = self.thumbnail
+    		if self.chkThumbW.IsChecked():
+    			thumb = self.thumbnail
+    		else:
+    			thumb = ''
     		backup = self.chkWriteEXIFBackup.IsChecked()
     		if not use_unicode:  			
     			reload(sys)
@@ -663,6 +694,8 @@ class MyImageDialog(wx.Dialog):
     			})
     		dict = {'EXIF': self.chkEXIF.IsChecked(), \
     			'EXIFThumbnail': self.thumbnail.encode('unicode_escape'), \
+    			'ThumbR': self.chkThumbR.IsChecked(), \
+    			'ThumbW': self.chkThumbW.IsChecked(), \
     			'WriteEXIFBackup': self.chkWriteEXIFBackup.IsChecked(), \
     			'WriteEXIFUnicode': self.chkWriteEXIFUnicode.IsChecked(), \
     			}
