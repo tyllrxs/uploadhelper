@@ -578,14 +578,17 @@ class MyImageDialog(wx.Dialog):
     	jpg = self.open_jpeg_dialog()
     	if jpg:
     		dict = {}
-    		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
     		for i in xrange(len(self.txtEXIFInfo)):
-    			if use_unicode:
-    				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
-    			else:
-    				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue().encode('gb18030')
+    			dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
+    		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
+    		if not use_unicode:  			
+    			reload(sys)
+    			sys.setdefaultencoding('gb18030')
+    			jpg = jpg.encode('utf8')
     		backup = self.chkWriteEXIFBackup.IsChecked()
     		exif_jpg = process_exif(jpg, dict, backup)
+    		reload(sys)
+    		sys.setdefaultencoding('utf8')
     		if exif_jpg:
     			wx.MessageBox('%s.' % _('Write successfully'), _('Write EXIF manually'), wx.ICON_INFORMATION)
     		else:
