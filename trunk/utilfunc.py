@@ -56,6 +56,13 @@ def get_exif_info(filename, keys):
 			vals.append(val)
 	return vals
 
+def get_exif_thumbnail(filename):
+	thumb = os.path.join(CONFIG_ROOT, 'thumbnail.jpg')
+	(status, info) = commands.getstatusoutput('exiftool -b -ThumbnailImage "%s" > "%s"' % (filename, thumb))
+	if status != 0:
+		thumb = ''
+	return thumb
+
 def apply_template(text):
 	substs = [('\\n', '\n')]
 	txt = text

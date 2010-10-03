@@ -291,7 +291,9 @@ class MyImageDialog(wx.Dialog):
         	txt = wx.TextCtrl(self.notebook_pane_2, -1, "", size=(160, -1))
         	self.txtEXIFInfo.append((lbl, txt))
         self.lblEXIFThumbnail = wx.StaticText(self.notebook_pane_2, -1, _("Thumbnail"))
-        self.imgEXIFThumbnail = wx.StaticBitmap(self.notebook_pane_3, -1, wx.NullBitmap, size=(200, 160))
+        self.imgEXIFThumbnail = wx.StaticBitmap(self.notebook_pane_2, -1, wx.NullBitmap, size=(160, 120))
+        self.btnChangeThumbnail = wx.Button(self.notebook_pane_2, -1, _("Change"))
+        self.btnRemoveThumbnail = wx.Button(self.notebook_pane_2, -1, _("Remove"))
         self.btnImportEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Import EXIF from Image"))
         self.chkWatermark = wx.CheckBox(self.notebook_pane_3, -1, _("Enable Watermark"))
         self.rdWatermarkType = wx.RadioBox(self.notebook_pane_3, -1, _("Watermark Type"), choices=[_("Text"), _("Image")], majorDimension=1, style=wx.RA_SPECIFY_ROWS)
@@ -330,6 +332,8 @@ class MyImageDialog(wx.Dialog):
         self.__do_layout()
         
         self.Bind(wx.EVT_CHECKBOX, self.OnchkResizeLargerClick, self.chkResizeLarger)
+        self.Bind(wx.EVT_BUTTON, self.OnbtnChangeThumbnailClick, self.btnChangeThumbnail)
+        self.Bind(wx.EVT_BUTTON, self.OnbtnRemoveThumbnailClick, self.btnRemoveThumbnail)
         self.Bind(wx.EVT_BUTTON, self.OnbtnImportEXIFClick, self.btnImportEXIF)
         self.Bind(wx.EVT_CHECKBOX, self.OnchkWatermarkClick, self.chkWatermark)
         self.Bind(wx.EVT_RADIOBOX, self.add_watermark, self.rdWatermarkType)
@@ -351,6 +355,7 @@ class MyImageDialog(wx.Dialog):
 
     def __set_properties(self):
         self.SetTitle(_("Image Manipulation"))
+        self.default_path = ''
         self.chkResize.SetValue(read_config_bool('Resize', 'Resize', True))
         self.txtResizeWidth.SetValue(read_config_int('Resize', 'ResizeWidth', 800))
         self.txtResizeHeight.SetValue(read_config_int('Resize', 'ResizeHeight', 600))
@@ -363,6 +368,8 @@ class MyImageDialog(wx.Dialog):
         for label, text in self.txtEXIFInfo:
 		text.SetValue(read_config('EXIF', 'EXIFInfo%02d' % idx).decode('unicode_escape'))
 		idx += 1
+	thumb = read_config('EXIF', 'EXIFThumbnail', '').decode('unicode_escape')
+	self.set_thumbnail(thumb)
 	self.chkWatermark.SetValue(read_config_bool('Watermark', 'Watermark', False))
 	self.rdWatermarkType.SetSelection(read_config_int('Watermark', 'WatermarkType', 0))
 	self.txtWatermarkText.SetValue(read_config('Watermark', 'WatermarkText', 'This is a watermark').decode('unicode_escape'))
@@ -395,6 +402,7 @@ class MyImageDialog(wx.Dialog):
         sizer_WatermarkImage = wx.StaticBoxSizer(self.sizer_WatermarkImage_staticbox, wx.VERTICAL)
         sizer_13_copy = wx.BoxSizer(wx.HORIZONTAL)
         sizer_10_copy = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_20 = wx.BoxSizer(wx.VERTICAL)
         sizer_15 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_WatermarkText = wx.StaticBoxSizer(self.sizer_WatermarkText_staticbox, wx.VERTICAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
@@ -425,6 +433,9 @@ class MyImageDialog(wx.Dialog):
         	grid_sizer_1.Add(text, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         grid_sizer_1.Add(self.lblEXIFThumbnail, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         grid_sizer_1.Add(self.imgEXIFThumbnail, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_20.Add(self.btnChangeThumbnail, 0, wx.TOP|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_20.Add(self.btnRemoveThumbnail, 0, wx.TOP|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL, 5)
+        grid_sizer_1.Add(sizer_20, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 0)
         sizer_16.Add(grid_sizer_1, 1, wx.EXPAND, 0)
         sizer_EXIF.Add(sizer_16, 1, wx.EXPAND, 0)
         sizer_EXIF.Add(self.btnImportEXIF, 0, wx.ALL, 5)
@@ -496,17 +507,41 @@ class MyImageDialog(wx.Dialog):
     def OnchkResizeLargerClick(self, evt):
     	self.txtResizeLarger.Enable(self.chkResizeLarger.IsChecked())
     	
+    def set_thumbnail(self, thumb = ''):
+    	self.thumbnail = thumb
+	if thumb:
+		self.imgEXIFThumbnail.SetBitmap(wx.Bitmap(thumb))
+		self.imgEXIFThumbnail.Parent.Layout()
+	else:
+		self.imgEXIFThumbnail.SetBitmap(wx.EmptyBitmap(1, 1))
+		
+    def OnbtnChangeThumbnailClick(self, evt):
+    	wildcard = '%s (*.jpg)|*.jpg' % 'JPEG %s' % _('Images')
+	if sys.platform[:5] == 'linux':
+		wildcard = '%s (*.jpg)|*.[Jj][Pp][Gg]' % 'JPEG %s' % _('Images')
+	dialog = wx.FileDialog(None, _('Select an image'), self.default_path, '', wildcard, wx.OPEN)
+	if dialog.ShowModal() == wx.ID_OK:
+		self.default_path = os.path.abspath(os.path.dirname(dialog.GetPath()))
+		self.set_thumbnail(dialog.GetPath())	
+	dialog.Destroy()
+    	
+    def OnbtnRemoveThumbnailClick(self, evt):
+    	self.set_thumbnail()
+			
     def OnbtnImportEXIFClick(self, evt):
     	wildcard = '%s (*.jpg)|*.jpg' % 'JPEG %s' % _('Images')
 	if sys.platform[:5] == 'linux':
 		wildcard = '%s (*.jpg)|*.[Jj][Pp][Gg]' % 'JPEG %s' % _('Images')
-	dialog = wx.FileDialog(None, _('Select an image'), '', '', wildcard, wx.OPEN)
+	dialog = wx.FileDialog(None, _('Select an image'), self.default_path, '', wildcard, wx.OPEN)
 	if dialog.ShowModal() == wx.ID_OK:
+		self.default_path = os.path.abspath(os.path.dirname(dialog.GetPath()))
 		vals = get_exif_info(dialog.GetPath(), [k for k, v in EXIF_TAGS])
 		idx = 0
 		for val in vals:
 			self.txtEXIFInfo[idx][1].SetValue(val.decode('gb18030'))
 			idx += 1
+		thumb = get_exif_thumbnail(dialog.GetPath())
+		self.set_thumbnail(thumb)
 	dialog.Destroy()
     	
     def OnchkWatermarkClick(self, evt):
@@ -560,7 +595,9 @@ class MyImageDialog(wx.Dialog):
     			'ResizeLarger': self.chkResizeLarger.IsChecked(), \
     			'ResizeLargerThan': self.txtResizeLarger.GetValue(), \
     			})
-    		dict = {'EXIF': self.chkEXIF.IsChecked()}
+    		dict = {'EXIF': self.chkEXIF.IsChecked(), \
+    			'EXIFThumbnail': self.thumbnail.encode('unicode_escape'), \
+    			}
     		idx = 0
         	for label, text in self.txtEXIFInfo:
 			dict['EXIFInfo%02d' % idx] = text.GetValue().encode('unicode_escape')
