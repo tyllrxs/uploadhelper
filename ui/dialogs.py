@@ -287,7 +287,9 @@ class MyImageDialog(wx.Dialog):
         for item, desc in EXIF_TAGS:
         	lbl = wx.StaticText(self.notebook_pane_2, -1, desc)
         	txt = wx.TextCtrl(self.notebook_pane_2, -1, "", size=(160, -1))
-        	self.txtEXIFInfo.append((lbl, txt))
+        	chk1 = wx.CheckBox(self.notebook_pane_2, -1, 'r')
+        	chk2 = wx.CheckBox(self.notebook_pane_2, -1, 'w')
+        	self.txtEXIFInfo.append((lbl, txt, chk1, chk2))
         self.lblEXIFThumbnail = wx.StaticText(self.notebook_pane_2, -1, _("Thumbnail"))
         self.imgEXIFThumbnail = wx.StaticBitmap(self.notebook_pane_2, -1, wx.NullBitmap, size=(160, 120))
         self.btnChangeThumbnail = wx.Button(self.notebook_pane_2, -1, _("Change"))
@@ -372,10 +374,18 @@ class MyImageDialog(wx.Dialog):
         self.OnchkResizeLargerClick(evt)
         
         self.chkEXIF.SetValue(read_config_bool('EXIF', 'EXIF', False))
-        idx = 0
-        for label, text in self.txtEXIFInfo:
-		text.SetValue(read_config('EXIF', 'EXIFInfo%02d' % idx).decode('unicode_escape'))
-		idx += 1
+        tmp = read_config('EXIF', 'EXIFInfoCheck', '')
+        tmp_list = tmp.split(',')
+        for i in xrange(len(self.txtEXIFInfo)):
+		self.txtEXIFInfo[i][1].SetValue(read_config('EXIF', 'EXIFInfo%02d' % i).decode('unicode_escape'))
+		try:
+			num = int(tmp_list[i])
+		except:
+			num = 7
+		if 4 & num:
+			self.txtEXIFInfo[i][2].SetValue(True)
+		if 2 & num:
+			self.txtEXIFInfo[i][3].SetValue(True)
 	thumb = read_config('EXIF', 'EXIFThumbnail', '').decode('unicode_escape')
 	self.set_thumbnail(thumb)
 	self.chkWriteEXIFBackup.SetValue(read_config_bool('EXIF', 'WriteEXIFBackup', True))
@@ -423,7 +433,7 @@ class MyImageDialog(wx.Dialog):
         sizer_11 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_EXIF = wx.BoxSizer(wx.VERTICAL)
         sizer_16 = wx.StaticBoxSizer(self.sizer_16_staticbox, wx.VERTICAL)
-        grid_sizer_1 = wx.FlexGridSizer(5, 4, 0, 0)
+        grid_sizer_1 = wx.FlexGridSizer(5, 6, 0, 0)
         sizer_7 = wx.BoxSizer(wx.VERTICAL)
         sizer_17 = wx.StaticBoxSizer(self.sizer_17_staticbox, wx.VERTICAL)
         sizer_19 = wx.BoxSizer(wx.HORIZONTAL)
@@ -442,9 +452,13 @@ class MyImageDialog(wx.Dialog):
         self.notebook_pane_1.SetSizer(sizer_7)
         
         sizer_EXIF.Add(self.chkEXIF, 0, wx.ALL, 5)
-        for label, text in self.txtEXIFInfo:
+        for label, text, check1, check2 in self.txtEXIFInfo:
         	grid_sizer_1.Add(label, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         	grid_sizer_1.Add(text, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        	sizer_rw = wx.BoxSizer(wx.HORIZONTAL)
+        	sizer_rw.Add(check1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        	sizer_rw.Add(check2, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        	grid_sizer_1.Add(sizer_rw, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         grid_sizer_1.Add(self.lblEXIFThumbnail, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         grid_sizer_1.Add(self.imgEXIFThumbnail, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_20.Add(self.btnChangeThumbnail, 0, wx.TOP|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -581,12 +595,14 @@ class MyImageDialog(wx.Dialog):
     		for i in xrange(len(self.txtEXIFInfo)):
     			dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
     		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
+    		thumb = self.thumbnail
+    		backup = self.chkWriteEXIFBackup.IsChecked()
     		if not use_unicode:  			
     			reload(sys)
     			sys.setdefaultencoding('gb18030')
     			jpg = jpg.encode('utf8')
-    		backup = self.chkWriteEXIFBackup.IsChecked()
-    		exif_jpg = process_exif(jpg, dict, backup)
+    			thumb = thumb.encode('utf8')
+    		exif_jpg = process_exif(jpg, dict, thumb, backup)
     		reload(sys)
     		sys.setdefaultencoding('utf8')
     		if exif_jpg:
@@ -650,10 +666,16 @@ class MyImageDialog(wx.Dialog):
     			'WriteEXIFBackup': self.chkWriteEXIFBackup.IsChecked(), \
     			'WriteEXIFUnicode': self.chkWriteEXIFUnicode.IsChecked(), \
     			}
-    		idx = 0
-        	for label, text in self.txtEXIFInfo:
-			dict['EXIFInfo%02d' % idx] = text.GetValue().encode('unicode_escape')
-			idx += 1
+    		tmp_list = []
+        	for i in xrange(len(self.txtEXIFInfo)):
+			dict['EXIFInfo%02d' % i] = self.txtEXIFInfo[i][1].GetValue().encode('unicode_escape')
+			num = 0
+			if self.txtEXIFInfo[i][2].IsChecked():
+				num += 4
+			if self.txtEXIFInfo[i][3].IsChecked():
+				num += 2
+			tmp_list.append(str(num))
+		dict['EXIFInfoCheck'] = ','.join(tmp_list)
     		write_config('EXIF', dict)
     		write_config('Watermark', 
     			{'Watermark': self.chkWatermark.IsChecked(), \
