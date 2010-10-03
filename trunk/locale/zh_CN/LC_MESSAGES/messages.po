@@ -612,3 +612,12 @@ msgstr "备份"
 
 msgid "Use unicode"
 msgstr "使用 Unicode"
+
+msgid "All Readable"
+msgstr "全部可读"
+
+msgid "All Writable"
+msgstr "全部可写"
+
+msgid "Clear All"
+msgstr "全部清空"
