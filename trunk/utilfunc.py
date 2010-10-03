@@ -44,9 +44,21 @@ def get_update_info(html, key):
 	val = re.search(r'%s=([^\r\n]*)' % key, html).group(1).strip()
 	return val
 
+def get_tool_path(tool):
+	(status, info) = commands.getstatusoutput(tool)
+	if status == 0:
+		return tool
+	else:
+		executable = '%s%s%s' % ('tool', os.path.sep, tool)
+		(status, info) = commands.getstatusoutput(executable)
+		if status == 0:
+			return executable
+		else:
+			return ''
+
 def get_exif_info(filename, keys):
 	vals = []
-	(status, exif) = commands.getstatusoutput('exiftool -S "%s"' % filename)
+	(status, exif) = commands.getstatusoutput('%s -S "%s"' % (get_tool_path('exiftool'), filename))
 	if status == 0:
 		for key in keys:
 			try:
@@ -58,7 +70,7 @@ def get_exif_info(filename, keys):
 
 def get_exif_thumbnail(filename):
 	thumb = os.path.join(CONFIG_ROOT, 'thumbnail.jpg')
-	(status, info) = commands.getstatusoutput('exiftool -b -ThumbnailImage "%s" > "%s"' % (filename, thumb))
+	(status, info) = commands.getstatusoutput('%s -b -ThumbnailImage "%s" > "%s"' % (get_tool_path('exiftool'), filename, thumb))
 	if status != 0:
 		thumb = ''
 	return thumb
@@ -69,7 +81,7 @@ def process_exif(jpg, dict, thumb = '', backup = True):
 		params += ' \'-ThumbnailImage<=%s\'' % thumb
 	if not backup:
 		params += ' -overwrite_original'
-	(status, info) = commands.getstatusoutput('exiftool %s "%s"' % (params, jpg))
+	(status, info) = commands.getstatusoutput('%s %s "%s"' % (get_tool_path('exiftool'), params, jpg))
 	if status != 0:
 		return ''
 	else:
