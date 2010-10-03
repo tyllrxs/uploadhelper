@@ -50,10 +50,10 @@ class DownloadThread(Thread):
     def DownloadInfo(self, num, url, filename):
     	if filename:
 		self.window.txtReship.AppendText('\n%s ( %d / %d ):\n%s\n%s: %s\n%s\n' 
-			% ('Downloading', num, len(self.urls), url, 'Saved To', filename, 'Finished'))
+			% (_('Downloading'), num, len(self.urls), url, _('Saved to'), filename, _('Finished')))
 	else:
 		self.window.txtReship.AppendText('\n%s ( %d / %d ):\n%s\n%s\n' 
-			% ('Downloading', num, len(self.urls), url, 'Failed'))
+			% (_('Downloading'), num, len(self.urls), url, _('Failed')))
  
     def PostDownloadInfo(self):
     	self.window.txtReship.AppendText(SEPARATOR)

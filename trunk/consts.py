@@ -12,9 +12,8 @@ EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
 HOME_PYTHON = 'http://www.python.org/'
 HOME_WXPYTHON = 'http://www.wxpython.org/'
-APPLANGUAGES = [('de','Deutsch'), ('en','English'), ('es','Español'), ('fr','Française'), 
-		('ja','日本語'), ('ko','한국어'), ('pt','Português'), ('ru','Россию'), 
-		('zh_CN','简体中文'), ('zh_TW','繁體中文')]
+APPLANGUAGES = [('de','Deutsch'), ('en','English'), ('fr','Française'), ('ja','日本語'), 
+		('ko','한국어'), ('ru','Россию'), ('zh_CN','简体中文'), ('zh_TW','繁體中文')]
 BBS_HOSTS = ['bbs.fudan.edu.cn', 'bbs.fudan.sh.cn', '202.120.225.9', '61.129.42.9']
 SEPARATOR = '\n--------------------------------------------\n--------------------------------------------\n'
 DATA_DIR = '/usr/share/uploadhelper/'
@@ -86,7 +85,7 @@ EXIF_TAGS = [('Make', _('Camera Maker')),
 		('ExposureTime', _('Exposure Time')), 
 		('FocalLength', _('Focal Length')), 
 		('ISO', 'ISO'), 
-		('CreateDate', _('Create Date')), 
+		('DateTimeOriginal', _('Date Original')), 
 		('ColorSpace', _('Color Space')), 
 		('Flash', _('Flash')), 
 		('UserComment', _('User Comment'))
