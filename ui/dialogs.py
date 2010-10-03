@@ -293,7 +293,9 @@ class MyImageDialog(wx.Dialog):
         self.btnChangeThumbnail = wx.Button(self.notebook_pane_2, -1, _("Change"))
         self.btnRemoveThumbnail = wx.Button(self.notebook_pane_2, -1, _("Remove"))
         self.btnImportEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Import EXIF from Image"))
-        self.btnManualWriteEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Write EXIF manually"))
+        self.btnWriteEXIF = wx.Button(self.notebook_pane_2, -1, '%s...' % _("Write EXIF manually"))
+        self.chkWriteEXIFBackup = wx.CheckBox(self.notebook_pane_2, -1, _("Backup"))
+        self.chkWriteEXIFUnicode = wx.CheckBox(self.notebook_pane_2, -1, _("Use unicode"))
         
         self.chkWatermark = wx.CheckBox(self.notebook_pane_3, -1, _("Enable Watermark"))
         self.sizer_WatermarkText_staticbox = wx.StaticBox(self.notebook_pane_3, -1, _("Watermark Text"))
@@ -339,6 +341,7 @@ class MyImageDialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.OnbtnChangeThumbnailClick, self.btnChangeThumbnail)
         self.Bind(wx.EVT_BUTTON, self.OnbtnRemoveThumbnailClick, self.btnRemoveThumbnail)
         self.Bind(wx.EVT_BUTTON, self.OnbtnImportEXIFClick, self.btnImportEXIF)
+        self.Bind(wx.EVT_BUTTON, self.OnbtnWriteEXIFClick, self.btnWriteEXIF)
         self.Bind(wx.EVT_CHECKBOX, self.OnchkWatermarkClick, self.chkWatermark)
         self.Bind(wx.EVT_RADIOBOX, self.add_watermark, self.rdWatermarkType)
         self.Bind(wx.EVT_TEXT, self.add_watermark, self.txtWatermarkText)
@@ -447,7 +450,7 @@ class MyImageDialog(wx.Dialog):
         sizer_EXIF.Add(sizer_16, 1, wx.EXPAND, 0)
         sizer_21.Add(self.btnImportEXIF, 0, wx.ALL, 5)
         sizer_21.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
-        sizer_21.Add(self.btnManualWriteEXIF, 0, wx.ALL, 5)
+        sizer_21.Add(self.btnWriteEXIF, 0, wx.ALL, 5)
         sizer_EXIF.Add(sizer_21, 0, wx.EXPAND, 5)
         self.notebook_pane_2.SetSizer(sizer_EXIF)
         
@@ -527,35 +530,54 @@ class MyImageDialog(wx.Dialog):
 		self.imgEXIFThumbnail.Parent.Layout()
 	else:
 		self.imgEXIFThumbnail.SetBitmap(wx.EmptyBitmap(1, 1))
-		
-    def OnbtnChangeThumbnailClick(self, evt):
+
+    def open_jpeg_dialog(self):
     	wildcard = '%s (*.jpg)|*.jpg' % 'JPEG %s' % _('Images')
 	if sys.platform[:5] == 'linux':
 		wildcard = '%s (*.jpg)|*.[Jj][Pp][Gg]' % 'JPEG %s' % _('Images')
+	jpegfile = ''
 	dialog = wx.FileDialog(None, _('Select an image'), self.default_path, '', wildcard, wx.OPEN)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.default_path = os.path.abspath(os.path.dirname(dialog.GetPath()))
-		self.set_thumbnail(dialog.GetPath())	
+		jpegfile = dialog.GetPath()
 	dialog.Destroy()
+	return jpegfile
+		
+    def OnbtnChangeThumbnailClick(self, evt):
+    	jpeg = self.open_jpeg_dialog()
+    	if jpeg:
+		self.set_thumbnail(jpeg)	
     	
     def OnbtnRemoveThumbnailClick(self, evt):
     	self.set_thumbnail()
 			
     def OnbtnImportEXIFClick(self, evt):
-    	wildcard = '%s (*.jpg)|*.jpg' % 'JPEG %s' % _('Images')
-	if sys.platform[:5] == 'linux':
-		wildcard = '%s (*.jpg)|*.[Jj][Pp][Gg]' % 'JPEG %s' % _('Images')
-	dialog = wx.FileDialog(None, _('Select an image'), self.default_path, '', wildcard, wx.OPEN)
-	if dialog.ShowModal() == wx.ID_OK:
-		self.default_path = os.path.abspath(os.path.dirname(dialog.GetPath()))
-		vals = get_exif_info(dialog.GetPath(), [k for k, v in EXIF_TAGS])
+    	jpeg = self.open_jpeg_dialog()
+    	if jpeg:
+		vals = get_exif_info(jpeg, [k for k, v in EXIF_TAGS])
 		idx = 0
 		for val in vals:
-			self.txtEXIFInfo[idx][1].SetValue(val.decode('gb18030'))
+			try:
+				self.txtEXIFInfo[idx][1].SetValue(val.decode('gb18030'))
+			except:
+				pass
 			idx += 1
-		thumb = get_exif_thumbnail(dialog.GetPath())
+		thumb = get_exif_thumbnail(jpeg)
 		self.set_thumbnail(thumb)
-	dialog.Destroy()
+	
+    def OnbtnWriteEXIFClick(self, evt):
+    	jpg = self.open_jpeg_dialog()
+    	if jpg:
+    		dict = {}
+    		for i in xrange(len(self.txtEXIFInfo)):
+    			dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
+    		mydir = os.path.join(self.default_path, 'exif')
+    		mydir += os.path.sep
+    		exif_jpg = process_exif(jpg, dict, mydir)
+    		if exif_jpg:
+    			wx.MessageBox('%s. %s: %s' % (_('Write successfully'), _('Saved to'), mydir), _('Write EXIF manually'), wx.ICON_INFORMATION)
+    		else:
+    			wx.MessageBox(_('Failed to write'), _('Write EXIF manually'), wx.ICON_ERROR)
     	
     def OnchkWatermarkClick(self, evt):
     	self.add_watermark()

@@ -55,6 +55,9 @@ msgstr "错误"
 msgid "Fail"
 msgstr "失败"
 
+msgid "Failed"
+msgstr "失败"
+
 #: consts.py:25
 msgid "Error code"
 msgstr "错误代码"
@@ -562,8 +565,8 @@ msgstr "曝光时间"
 msgid "Focal Length"
 msgstr "焦距"
 
-msgid "Create Date"
-msgstr "创建时间"
+msgid "Date Original"
+msgstr "拍照日期"
 
 msgid "Color Space"
 msgstr "色彩空间"
@@ -592,8 +595,20 @@ msgstr "手动写入 EXIF"
 msgid "Add Watermark manually"
 msgstr "手动添加水印"
 
-msgid "Write successfully ! Saved to directory"
-msgstr "写入成功！保存到目录"
+msgid "Write successfully"
+msgstr "写入成功"
+
+msgid "Saved to"
+msgstr "保存到"
 
 msgid "Failed to write"
 msgstr "写入失败"
+
+msgid "Downloading"
+msgstr "正在下载"
+
+msgid "Backup"
+msgstr "备份"
+
+msgid "Use unicode"
+msgstr "使用 Unicode"

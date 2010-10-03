@@ -47,6 +47,7 @@ def get_update_info(html, key):
 def get_exif_info(filename, keys):
 	vals = []
 	(status, exif) = commands.getstatusoutput('exiftool -S "%s"' % filename)
+	print exif
 	if status == 0:
 		for key in keys:
 			try:
@@ -62,6 +63,14 @@ def get_exif_thumbnail(filename):
 	if status != 0:
 		thumb = ''
 	return thumb
+
+def process_exif(jpg, dict, dir):
+	params = ' '.join(['-%s="%s"' % (k, dict[k]) for k in dict.keys()])
+	(status, info) = commands.getstatusoutput('exiftool %s -o "%s" "%s"' % (params, dir, jpg))
+	if status != 0:
+		return ''
+	else:
+		return jpg
 
 def apply_template(text):
 	substs = [('\\n', '\n')]
