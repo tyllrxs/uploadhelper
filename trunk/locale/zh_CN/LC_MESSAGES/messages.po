@@ -18,84 +18,84 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "日月光华上传助手"
+msgstr "上傳助手"
 
 msgid "Select Files to Upload"
-msgstr "选择要上传的文件"
+msgstr "選擇要上傳的檔案"
 
 #: consts.py:15
 msgid "&Add Files"
-msgstr "添加文件(&A)"
+msgstr "添加檔案"
 
 #: consts.py:15
 msgid "A&dd Directory"
-msgstr "添加目录(&D)"
+msgstr "添加目錄"
 
 #: consts.py:16
 msgid "&Remove Selected"
-msgstr "移除所选(&R)"
+msgstr "移除所選"
 
 #: consts.py:16
 msgid "Remove &Copies"
-msgstr "移除重复的(&C)"
+msgstr "移除重複的"
 
 #: consts.py:16
 msgid "Remove &Invalid"
-msgstr "移除无效的(&I)"
+msgstr "移除無效的"
 
 #: consts.py:17
 msgid "Remove A&ll"
-msgstr "移除所有(&L)"
+msgstr "移除所有"
 
 #: consts.py:23
 msgid "Error"
-msgstr "错误"
+msgstr "錯誤"
 
 #: consts.py:24
 msgid "Fail"
-msgstr "失败"
+msgstr "失敗"
 
 msgid "Failed"
-msgstr "失败"
+msgstr "失敗"
 
 #: consts.py:25
 msgid "Error code"
-msgstr "错误代码"
+msgstr "錯誤代碼"
 
 #: consts.py:26
 msgid "Network Error"
-msgstr "网络连接错误"
+msgstr "網路連接錯誤"
 
 msgid "Error occurred when saving settings"
-msgstr "保存设置时发生错误"
+msgstr "保存設置時發生錯誤"
 
 #: consts.py:27
 msgid "Fill the blanks first."
-msgstr "请先填写完整"
+msgstr "請先填寫完整"
 
 #: consts.py:28
 msgid "%d Files Selected"
-msgstr "选择了 %d 个文件"
+msgstr "選擇了 %d 個檔案"
 
 #: consts.py:29
 msgid "Unknown Error"
-msgstr "未知错误"
+msgstr "未知錯誤"
 
 #: consts.py:30
 msgid "Invalid File"
-msgstr "无效的文件"
+msgstr "無效的檔案"
 
 #: consts.py:31
 msgid "Check for Updates"
-msgstr "检查更新"
+msgstr "檢查更新"
 
 #: consts.py:33
 msgid "Logout"
-msgstr "注销"
+msgstr "註銷"
 
 #: consts.py:34
 msgid "Uploading"
-msgstr "正在上传"
+msgstr "正在上傳"
 
 #: consts.py:35
 msgid "Finished"
@@ -103,7 +103,7 @@ msgstr "完成"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "如有意见、建议，请与日月光华tyllr联系"
+msgstr "如有意見、建議，請與日月光華tyllr聯繫"
 
 #: DlgAbout.py:14
 msgid "Version"
@@ -115,15 +115,15 @@ msgstr "作者"
 
 #: DlgAbout.py:14
 msgid "Homepage"
-msgstr "主页"
+msgstr "主頁"
 
 #: DlgAbout.py:14
 msgid "License"
-msgstr "授权协议"
+msgstr "授權協議"
 
 #: MyFrame.py:59
 msgid "Filename"
-msgstr "文件名"
+msgstr "檔案名"
 
 #: MyFrame.py:59
 msgid "Size"
@@ -131,59 +131,59 @@ msgstr "大小"
 
 #: MyFrame.py:59
 msgid "Status"
-msgstr "状态"
+msgstr "狀態"
 
 #: MyFrame.py:179
 msgid "User"
-msgstr "用户"
+msgstr "用戶"
 
 #: MyFrame.py:234
 msgid "All Supported Files"
-msgstr "所有支持的文件"
+msgstr "所有支持的檔案"
 
 #: MyFrame.py:234
 msgid "Image Files"
-msgstr "图片文件"
+msgstr "圖片檔案"
 
 #: MyFrame.py:234
 msgid "PDF Documents"
-msgstr "PDF 文档"
+msgstr "PDF 文檔"
 
 #: MyFrame.py:234
 msgid "All Files"
-msgstr "所有文件"
+msgstr "所有檔案"
 
 #: MyFrame.py:257
 msgid "Unsupported File Format"
-msgstr "不支持的文件格式"
+msgstr "不支持的檔案格式"
 
 #: MyFrame.py:260
 msgid "Too Large File"
-msgstr "文件太大"
+msgstr "檔案太大"
 
 #: MyFrame.py:268
 msgid "Select at least one file for uploading."
-msgstr "请至少选择一个文件上传。"
+msgstr "請至少選擇一個檔案上傳。"
 
 #: MyFrame.py:304
 msgid "Post Successfully to Board"
-msgstr "成功发表到版面"
+msgstr "成功發表到版面"
 
 #: MyFrame.py:330
 msgid "No webpage content is ready to reship, check if it has been copied correctly."
-msgstr "没有找到要转贴的网页内容，请检查是否已经复制好。"
+msgstr "沒有找到要轉貼的網頁內容，請檢查是否已經復制好。"
 
 #: MyFrame.py:361
 msgid "Choose a directory"
-msgstr "选择一个目录"
+msgstr "選擇一個目錄"
 
 #: MyFrame.py:437
 msgid "Failed to check for updates, try again later."
-msgstr "检查更新失败，请稍后重试。"
+msgstr "檢查更新失敗，請稍後重試。"
 
 #: MyFrame.py:440
 msgid "A new version %s is available! Would you like to update now?"
-msgstr "发现新版本 %s ! 是否立即更新？"
+msgstr "發現新版本 %s ! 是否立即更新？"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
@@ -191,232 +191,232 @@ msgstr "你正在使用最新版本。"
 
 #: MyFrame.py:446
 msgid "has logged out."
-msgstr "已注销。"
+msgstr "已註銷。"
 
 msgid "About"
-msgstr "关于"
+msgstr "關於"
 
 msgid "OK"
-msgstr "确定"
+msgstr "確定"
 
 msgid "Cancel"
 msgstr "取消"
 
 msgid "Login"
-msgstr "登录"
+msgstr "登錄"
 
 msgid "BBS host"
-msgstr "BBS 主机"
+msgstr "BBS 主機"
 
 msgid "Password"
-msgstr "密码"
+msgstr "密碼"
 
 msgid "How to Use"
-msgstr "还不会使用?"
+msgstr "還不會使用?"
 
 msgid "Auto Login"
-msgstr "自动登录"
+msgstr "自動登錄"
 
 msgid "&Login"
-msgstr "登录(&L)"
+msgstr "登錄"
 
 msgid "&Switch User"
-msgstr "更改用户(&S)"
+msgstr "更改用戶"
 
 msgid "Logo&ut"
-msgstr "注销(&U)"
+msgstr "註銷"
 
 msgid "&Setting"
-msgstr "设置(&S)"
+msgstr "設置"
 
 msgid "&Preferences"
-msgstr "首选项(&P)"
+msgstr "首選項"
 
 msgid "Preferences"
-msgstr "首选项"
+msgstr "首選項"
 
 msgid "Preference..."
-msgstr "偏好设置..."
+msgstr "偏好設置..."
 
 msgid "Preferences..."
-msgstr "偏好设置..."
+msgstr "偏好設置..."
 
 msgid "&Preferences..."
-msgstr "偏好设置(&P)..."
+msgstr "偏好設置..."
 
 msgid "Preference"
-msgstr "偏好设置"
+msgstr "偏好設置"
 
 msgid "Image &Manipulation"
-msgstr "图片处理(&M)"
+msgstr "圖片處理"
 
 msgid "Image Manipulation"
-msgstr "图片处理"
+msgstr "圖片處理"
 
 msgid "&Language"
-msgstr "语言(&L)"
+msgstr "語言"
 
 msgid "Select interface language"
-msgstr "选择界面语言"
+msgstr "選擇界面語言"
 
 msgid "Always on &Top"
-msgstr "总在最前(&T)"
+msgstr "總在最前"
 
 msgid "&Help"
-msgstr "帮助(&H)"
+msgstr "幫助"
 
 msgid "Help"
-msgstr "帮助"
+msgstr "幫助"
 
 msgid "&FAQ"
-msgstr "常见问题(&F)"
+msgstr "常見問題"
 
 msgid "&Homepage"
-msgstr "主页(&H)"
+msgstr "主頁"
 
 msgid "Check for &Updates"
-msgstr "检查更新(&U)"
+msgstr "檢查更新"
 
 msgid "&About"
-msgstr "关于(&A)"
+msgstr "關於"
 
 msgid "Switch user"
-msgstr "更改用户"
+msgstr "更改用戶"
 
 msgid "FAQ"
-msgstr "常见问题"
+msgstr "常見問題"
 
 msgid "Visit Homepage of UploadHelper"
-msgstr "访问日月光华上传助手主页"
+msgstr "訪問日月光華上傳助手主頁"
 
 msgid "Upload Files"
-msgstr "上传文件"
+msgstr "上傳檔案"
 
 msgid "Destination"
-msgstr "目标版面"
+msgstr "目標版面"
 
 msgid "Locked"
-msgstr "锁定"
+msgstr "鎖定"
 
 msgid "Browse"
-msgstr "浏览"
+msgstr "瀏覽"
 
 msgid "Upload"
-msgstr "上传"
+msgstr "上傳"
 
 msgid "Post Article"
-msgstr "发表文章"
+msgstr "發表文章"
 
 msgid "Title"
-msgstr "标题"
+msgstr "標題"
 
 msgid "Signature"
-msgstr "签名档"
+msgstr "簽名檔"
 
 msgid "Post"
-msgstr "发表"
+msgstr "發表"
 
 msgid "Reship Webpage"
-msgstr "转贴网页"
+msgstr "轉貼網頁"
 
 msgid "Copy the Webpage Fraction to Clipboard, then Click"
-msgstr "将网页片段复制到剪贴板，然后点击"
+msgstr "將網頁片段複製到剪貼板，然後點擊"
 
 msgid "Start Reshipping"
-msgstr "开始转贴"
+msgstr "開始轉貼"
 
 msgid "Progress"
-msgstr "目前进度"
+msgstr "目前進度"
 
 msgid "Login OK. Prepare to upload files."
-msgstr "登录成功，请准备上传文件。"
+msgstr "登錄成功，請準備上傳檔案。"
 
 msgid "Visit Homepage"
-msgstr "访问主页"
+msgstr "訪問主頁"
 
 msgid "Show about dialog"
-msgstr "显示关于对话框"
+msgstr "顯示關於對話框"
 
 msgid "Python is too old. Get a newer 2.X (NO 3.0 OR ABOVE) version at"
-msgstr "Python 版本太低，请到这里下载新的2.X版本（不支持3.0及以上）"
+msgstr "Python 版本太低，請到這裡下載新的2.X版本（不支持3.0及以上）"
 
 msgid "Python 3 is not supported. Get a 2.X version at"
-msgstr "不支持 Python 3，请到这里下载2.X版本"
+msgstr "不支持 Python 3，請到這裡下載2.X版本"
 
 msgid "wxPython is too old. Get a newer version at"
-msgstr "wxPython 版本太低，请到这里下载新版本"
+msgstr "wxPython 版本太低，請到這裡下載新版本"
 
 msgid "Language has changed. Restart to take effects."
-msgstr "语言已经更改。重启本程序生效。"
+msgstr "語言已經更改。重啟本程序生效。"
 
 msgid "T&oolbar"
-msgstr "工具栏(&O)"
+msgstr "工具欄"
 
 msgid "Show &Icons"
-msgstr "显示图标(&I)"
+msgstr "顯示圖標"
 
 msgid "Show &Texts"
-msgstr "显示文本(&T)"
+msgstr "顯示文本"
 
 msgid "General"
-msgstr "基本设置"
+msgstr "基本設置"
 
 msgid "File Management"
-msgstr "文件管理"
+msgstr "檔案管理"
 
 msgid "Miscellaneous"
-msgstr "其它设置"
+msgstr "其它設置"
 
 msgid "Search Files"
-msgstr "搜索文件"
+msgstr "搜索檔案"
 
 msgid "Template to Post Article"
-msgstr "发文模板"
+msgstr "發文模板"
 
 msgid "Display and Layout"
-msgstr "显示和布局"
+msgstr "顯示和佈局"
 
 msgid "Threads to Upload"
-msgstr "上传线程数"
+msgstr "上傳線程數"
 
 msgid "Minimize to Tray"
-msgstr "最小化到系统栏"
+msgstr "最小化到系統欄"
 
 msgid "Empty Lines between URLs"
-msgstr "URL 之间空行数"
+msgstr "URL 之間空行數"
 
 msgid "Range of Size"
-msgstr "文件大小范围"
+msgstr "檔案大小範圍"
 
 msgid "Search for Subfolders"
-msgstr "搜索子文件夹"
+msgstr "搜索子資料夾"
 
 msgid "Highlight when file size is larger than"
-msgstr "当文件大小超过该值时高亮显示"
+msgstr "當檔案大小超過該值時高亮顯示"
 
 msgid "Notes"
-msgstr "说明"
+msgstr "說明"
 
 msgid "Content of article"
-msgstr "正文内容"
+msgstr "正文內容"
 
 msgid "New line"
-msgstr "换行"
+msgstr "換行"
 
 msgid "Post-upload URL"
-msgstr "上传后 URL 显示"
+msgstr "上傳後 URL 顯示"
 
 msgid "Automatic Update"
-msgstr "自动更新"
+msgstr "自動更新"
 
 msgid "Confirm"
-msgstr "确认"
+msgstr "確認"
 
 msgid "Are you sure to logout?"
-msgstr "你真的要注销吗？"
+msgstr "你真的要註銷嗎？"
 
 msgid "Restore/hide Window"
-msgstr "还原/隐藏窗口"
+msgstr "還原/隱藏窗口"
 
 msgid "Exit"
 msgstr "退出"
@@ -428,64 +428,64 @@ msgid "Integrate to"
 msgstr "集成到"
 
 msgid "Resize"
-msgstr "缩放"
+msgstr "縮放"
 
 msgid "Watermark"
 msgstr "水印"
 
 msgid "EXIF Settings"
-msgstr "EXIF 设置"
+msgstr "EXIF 設置"
 
 msgid "Watermark Text"
 msgstr "水印文本"
 
 msgid "Watermark Image"
-msgstr "水印图片"
+msgstr "水印圖片"
 
 msgid "Watermark Settings"
-msgstr "水印设置"
+msgstr "水印設置"
 
 msgid "Preview"
-msgstr "预览"
+msgstr "預覽"
 
 msgid "Resize Settings"
-msgstr "缩放设置"
+msgstr "縮放設置"
 
 msgid "Enable Resize for Large Images"
-msgstr "启用大图片缩放"
+msgstr "啟用大圖片縮放"
 
 msgid "Resize To"
-msgstr "缩放到"
+msgstr "縮放到"
 
 msgid "Resize only for Image Size"
-msgstr "仅缩放图片大小"
+msgstr "僅縮放圖片大小"
 
 msgid "Enable EXIF Editing for JPEG"
-msgstr "对 JPEG 启用 EXIF 编辑"
+msgstr "對 JPEG 啟用 EXIF 編輯"
 
 msgid "Import EXIF from Image"
-msgstr "从图片导入 EXIF"
+msgstr "從圖片導入 EXIF"
 
 msgid "Enable Watermark"
-msgstr "启用水印"
+msgstr "啟用水印"
 
 msgid "Watermark Type"
-msgstr "水印类型"
+msgstr "水印類型"
 
 msgid "Text"
 msgstr "文本"
 
 msgid "Image"
-msgstr "图片"
+msgstr "圖片"
 
 msgid "Font"
-msgstr "字体"
+msgstr "字體"
 
 msgid "Opacity"
 msgstr "不透明度"
 
 msgid "Color"
-msgstr "颜色"
+msgstr "顏色"
 
 msgid "Position"
 msgstr "位置"
@@ -506,61 +506,61 @@ msgid "Bottom Right"
 msgstr "右下角"
 
 msgid "Padding"
-msgstr "边距"
+msgstr "邊距"
 
 msgid "Original"
-msgstr "原图"
+msgstr "原圖"
 
 msgid "Effect"
 msgstr "效果"
 
 msgid "Select a picture as watermark"
-msgstr "选择一张图片作为水印"
+msgstr "選擇一張圖片作為水印"
 
 msgid "Select a font for watermark"
-msgstr "选择水印字体"
+msgstr "選擇水印字體"
 
 msgid "Fonts"
-msgstr "字体"
+msgstr "字體"
 
 msgid "Images"
-msgstr "图片"
+msgstr "圖片"
 
 msgid "Be sure"
-msgstr "确保"
+msgstr "確保"
 
 msgid "has been closed"
-msgstr "已关闭"
+msgstr "已關閉"
 
 msgid "Select Location"
-msgstr "选择位置"
+msgstr "選擇位置"
 
 msgid "Read Error"
-msgstr "读取错误"
+msgstr "讀取錯誤"
 
 msgid "Write Error"
-msgstr "写入错误"
+msgstr "寫入錯誤"
 
 msgid "successfully"
 msgstr "成功"
 
 msgid "Select an image"
-msgstr "选择一张图片"
+msgstr "選擇一張圖片"
 
 msgid "Conserve"
 msgstr "保留"
 
 msgid "Camera Maker"
-msgstr "相机厂商"
+msgstr "相機廠商"
 
 msgid "Camera Model"
-msgstr "相机型号"
+msgstr "相機型號"
 
 msgid "Aperture"
 msgstr "光圈"
 
 msgid "Exposure Time"
-msgstr "曝光时间"
+msgstr "曝光時間"
 
 msgid "Focal Length"
 msgstr "焦距"
@@ -569,79 +569,79 @@ msgid "Date Original"
 msgstr "拍照日期"
 
 msgid "Color Space"
-msgstr "色彩空间"
+msgstr "色彩空間"
 
 msgid "Flash"
-msgstr "闪光灯"
+msgstr "閃光燈"
 
 msgid "User Comment"
-msgstr "用户注释"
+msgstr "用戶註釋"
 
 msgid "Thumbnail"
-msgstr "缩略图"
+msgstr "縮略圖"
 
 msgid "Change"
 msgstr "更改"
 
 msgid "Remove"
-msgstr "删除"
+msgstr "刪除"
 
 msgid "Resize manually"
-msgstr "手动缩放"
+msgstr "手動縮放"
 
 msgid "Write EXIF manually"
-msgstr "手动写入 EXIF"
+msgstr "手動寫入 EXIF"
 
 msgid "Add Watermark manually"
-msgstr "手动添加水印"
+msgstr "手動添加水印"
 
 msgid "Write successfully"
-msgstr "写入成功"
+msgstr "寫入成功"
 
 msgid "Saved to"
 msgstr "保存到"
 
 msgid "Failed to write"
-msgstr "写入失败"
+msgstr "寫入失敗"
 
 msgid "Downloading"
-msgstr "正在下载"
+msgstr "正在下載"
 
 msgid "Backup"
-msgstr "备份"
+msgstr "備份"
 
 msgid "Use unicode"
 msgstr "使用 Unicode"
 
 msgid "All Readable"
-msgstr "全部可读"
+msgstr "全部可讀"
 
 msgid "All Writable"
-msgstr "全部可写"
+msgstr "全部可寫"
 
 msgid "Clear All"
 msgstr "全部清空"
 
 msgid "Resizing"
-msgstr "正在缩放"
+msgstr "正在縮放"
 
 msgid "Writing"
-msgstr "正在写入"
+msgstr "正在寫入"
 
 msgid "Adding watermark"
 msgstr "正在添加水印"
 
 msgid "&Open File"
-msgstr "打开文件(&O)"
+msgstr "打開檔案"
 
 msgid "Open &Folder"
-msgstr "打开文件夹(&F)"
+msgstr "打開資料夾"
 
 msgid "Image manipulation only, no uploading"
-msgstr "仅处理图片，不上传"
+msgstr "僅處理圖片，不上傳"
 
 msgid "Preparation done"
-msgstr "准备工作完成"
+msgstr "準備工作完成"
 
 msgid "No Upload"
-msgstr "不上传"
+msgstr "不上傳"

@@ -55,6 +55,9 @@ msgstr "Ошибка"
 msgid "Fail"
 msgstr "Неудача"
 
+msgid "Failed"
+msgstr "Не удалось"
+
 #: consts.py:25
 msgid "Error code"
 msgstr "Код ошибки"
@@ -62,6 +65,9 @@ msgstr "Код ошибки"
 #: consts.py:26
 msgid "Network Error"
 msgstr "Ошибка сети"
+
+msgid "Error occurred when saving settings"
+msgstr "Ошибка при сохранении настроек"
 
 #: consts.py:27
 msgid "Fill the blanks first."
@@ -193,6 +199,9 @@ msgstr "О"
 msgid "OK"
 msgstr "ОК"
 
+msgid "Cancel"
+msgstr "Отменить"
+
 msgid "Login"
 msgstr "Войти"
 
@@ -226,11 +235,23 @@ msgstr "Настройки"
 msgid "Preferences"
 msgstr "Настройки"
 
+msgid "Preference..."
+msgstr "Предпочтение ..."
+
 msgid "Preferences..."
+msgstr "Настройки ..."
+
+msgid "&Preferences..."
 msgstr "Настройки ..."
 
 msgid "Preference"
 msgstr "Предпочтение"
+
+msgid "Image &Manipulation"
+msgstr "Изображений GIMP"
+
+msgid "Image Manipulation"
+msgstr "Изображений GIMP"
 
 msgid "&Language"
 msgstr "Язык"
@@ -327,3 +348,300 @@ msgstr "WxPython слишком стар. Получить новую верси
 
 msgid "Language has changed. Restart to take effects."
 msgstr "Язык был изменен. Перезагрузка, чтобы принять последствия."
+
+msgid "T&oolbar"
+msgstr "Панель инструментов"
+
+msgid "Show &Icons"
+msgstr "Показать значки"
+
+msgid "Show &Texts"
+msgstr "Показать Тексты"
+
+msgid "General"
+msgstr "Генеральная"
+
+msgid "File Management"
+msgstr "Управление файлами"
+
+msgid "Miscellaneous"
+msgstr "Разное"
+
+msgid "Search Files"
+msgstr "Поиск файлов"
+
+msgid "Template to Post Article"
+msgstr "Шаблон Послать статью"
+
+msgid "Display and Layout"
+msgstr "Дисплей и макета"
+
+msgid "Threads to Upload"
+msgstr "Темы для загрузки"
+
+msgid "Minimize to Tray"
+msgstr "Свернуть в трей"
+
+msgid "Empty Lines between URLs"
+msgstr "Пустые строки между URL-адресов"
+
+msgid "Range of Size"
+msgstr "Диапазон Размер"
+
+msgid "Search for Subfolders"
+msgstr "Поиск подпапок"
+
+msgid "Highlight when file size is larger than"
+msgstr "Выделите когда размер файла больше, чем"
+
+msgid "Notes"
+msgstr "Примечания"
+
+msgid "Content of article"
+msgstr "Содержание статьи"
+
+msgid "New line"
+msgstr "Новая линия"
+
+msgid "Post-upload URL"
+msgstr "После загрузки URL"
+
+msgid "Automatic Update"
+msgstr "Автоматическое обновление"
+
+msgid "Confirm"
+msgstr "Подтвердить"
+
+msgid "Are you sure to logout?"
+msgstr "Вы уверены, что выход?"
+
+msgid "Restore/hide Window"
+msgstr "Восстановление / скрыть окно"
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "Content"
+msgstr "Содержание"
+
+msgid "Integrate to"
+msgstr "Объединили свои усилия для"
+
+msgid "Resize"
+msgstr "Изменение размера"
+
+msgid "Watermark"
+msgstr "Водяной знак"
+
+msgid "EXIF Settings"
+msgstr "EXIF Настройки"
+
+msgid "Watermark Text"
+msgstr "Текст водяного знака"
+
+msgid "Watermark Image"
+msgstr "Изображение водяного знака"
+
+msgid "Watermark Settings"
+msgstr "Водяной знак Настройки"
+
+msgid "Preview"
+msgstr "Предварительный"
+
+msgid "Resize Settings"
+msgstr "Изменение размера Настройки"
+
+msgid "Enable Resize for Large Images"
+msgstr "Включить размера для больших изображений"
+
+msgid "Resize To"
+msgstr "Изменение размера до"
+
+msgid "Resize only for Image Size"
+msgstr "Изменение размера только для размера изображения"
+
+msgid "Enable EXIF Editing for JPEG"
+msgstr "Включить EXIF редактирования для JPEG"
+
+msgid "Import EXIF from Image"
+msgstr "Импорт EXIF из изображений"
+
+msgid "Enable Watermark"
+msgstr "Включить Watermark"
+
+msgid "Watermark Type"
+msgstr "Watermark Тип"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Image"
+msgstr "Изображение"
+
+msgid "Font"
+msgstr "Шрифта"
+
+msgid "Opacity"
+msgstr "Непрозрачность"
+
+msgid "Color"
+msgstr "Цвет"
+
+msgid "Position"
+msgstr "Позиция"
+
+msgid "Top Left"
+msgstr "Верхний левый"
+
+msgid "Top Right"
+msgstr "Верхний правый"
+
+msgid "Bottom Left"
+msgstr "Нижняя левая"
+
+msgid "Center"
+msgstr "Центр"
+
+msgid "Bottom Right"
+msgstr "Нижний правый"
+
+msgid "Padding"
+msgstr "Заполнение"
+
+msgid "Original"
+msgstr "Подлинный"
+
+msgid "Effect"
+msgstr "Влияние"
+
+msgid "Select a picture as watermark"
+msgstr "Выберите изображение в качестве водяного знака"
+
+msgid "Select a font for watermark"
+msgstr "Выберите шрифт для водяных знаков"
+
+msgid "Fonts"
+msgstr "Шрифты"
+
+msgid "Images"
+msgstr "Изображения"
+
+msgid "Be sure"
+msgstr "Будьте уверены,"
+
+msgid "has been closed"
+msgstr "была закрыта"
+
+msgid "Select Location"
+msgstr "Выберите место расположения"
+
+msgid "Read Error"
+msgstr "Read Error"
+
+msgid "Write Error"
+msgstr "Ошибка записи"
+
+msgid "successfully"
+msgstr "успешно"
+
+msgid "Select an image"
+msgstr "Выберите изображения"
+
+msgid "Conserve"
+msgstr "Сохранять"
+
+msgid "Camera Maker"
+msgstr "Камера Чайник"
+
+msgid "Camera Model"
+msgstr "Модель"
+
+msgid "Aperture"
+msgstr "Апертура"
+
+msgid "Exposure Time"
+msgstr "Время экспозиции"
+
+msgid "Focal Length"
+msgstr "Фокусное расстояние"
+
+msgid "Date Original"
+msgstr "Дата Original"
+
+msgid "Color Space"
+msgstr "Цветовое пространство"
+
+msgid "Flash"
+msgstr "Flash"
+
+msgid "User Comment"
+msgstr "Пользователь Комментарий"
+
+msgid "Thumbnail"
+msgstr "Миниатюра"
+
+msgid "Change"
+msgstr "Изменение"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Resize manually"
+msgstr "Изменение размера вручную"
+
+msgid "Write EXIF manually"
+msgstr "Создать EXIF вручную"
+
+msgid "Add Watermark manually"
+msgstr "Добавить водяной знак вручную"
+
+msgid "Write successfully"
+msgstr "Создать успешно"
+
+msgid "Saved to"
+msgstr "Сохранено в"
+
+msgid "Failed to write"
+msgstr "Не удалось записать"
+
+msgid "Downloading"
+msgstr "Загрузка"
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "Use unicode"
+msgstr "Использование Unicode"
+
+msgid "All Readable"
+msgstr "Все Читаемые"
+
+msgid "All Writable"
+msgstr "Все Записываемые"
+
+msgid "Clear All"
+msgstr "Очистить все"
+
+msgid "Resizing"
+msgstr "Изменение размера"
+
+msgid "Writing"
+msgstr "Дать"
+
+msgid "Adding watermark"
+msgstr "Добавление водяных знаков"
+
+msgid "&Open File"
+msgstr "Открыть файл"
+
+msgid "Open &Folder"
+msgstr "Открыть папку"
+
+msgid "Image manipulation only, no uploading"
+msgstr "Обработки изображений только, нет загрузки"
+
+msgid "Preparation done"
+msgstr "Подготовка сделано"
+
+msgid "No Upload"
+msgstr "Нет Загрузить"
