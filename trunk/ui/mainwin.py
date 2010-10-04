@@ -711,30 +711,38 @@ class MyFrame(wx.Frame):
 		if v == menutext:
 			break
 	if k == 0:
-		self.OnbtnBrowseClick(wx.CommandEvent())
+		if self.lstUpFile.GetSelectedItemCount() <= 0:
+			return
+		os.system()
 	elif k == 1:
+		if self.lstUpFile.GetSelectedItemCount() <= 0:
+			return
+		os.system()
+	elif k == 3:
+		self.OnbtnBrowseClick(wx.CommandEvent())
+	elif k == 4:
 		dialog = wx.DirDialog(None, _('Choose a directory'), self.get_dialog_path(), style=wx.DD_DEFAULT_STYLE)
 	    	if dialog.ShowModal() == wx.ID_OK:
 			self.append_files([dialog.GetPath()])
 			write_config('Upload', {'DefaultPath': dialog.GetPath()})
 	    	dialog.Destroy()
-	elif k == 3:
+	elif k == 6:
 		while self.lstUpFile.GetSelectedItemCount() > 0:
 			self.lstUpFile.DeleteItem(self.lstUpFile.GetNextItem(-1, wx.LIST_NEXT_ALL, wx.LIST_STATE_SELECTED))
-	elif k == 4:
+	elif k == 7:
 		total = self.lstUpFile.GetItemCount()
 		for i in xrange(total - 1, 0, -1):
 			for j in xrange(i):
 				if self.lstUpFile.GetItem(i, 1).GetText() == self.lstUpFile.GetItem(j, 1).GetText():
 					self.lstUpFile.DeleteItem(i)
 					break
-	elif k == 5:
+	elif k == 8:
 		total = self.lstUpFile.GetItemCount()
 		for i in xrange(total - 1, -1, -1):
 			fname = self.lstUpFile.GetItem(i, 1).GetText()
 			if invalid_file_name(fname) or not supported_file_type(fname):
 				self.lstUpFile.DeleteItem(i)
-	elif k == 7:
+	elif k == 10:
 		self.lstUpFile.DeleteAllItems()
 	self.list_re_number()
 	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())

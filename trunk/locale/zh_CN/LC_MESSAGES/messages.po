@@ -639,3 +639,6 @@ msgstr "打开文件夹(&F)"
 
 msgid "Image manipulation only, no uploading"
 msgstr "仅处理图片，不上传"
+
+msgid "Preparation done"
+msgstr "准备工作完成"

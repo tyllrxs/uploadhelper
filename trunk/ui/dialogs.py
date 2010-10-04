@@ -138,6 +138,7 @@ class MySettingDialog(wx.Dialog):
         self.label_5 = wx.StaticText(self.notebook_pane3, -1, _("Content"))
         self.txtTemplate = wx.TextCtrl(self.notebook_pane3, -1, "")
         self.lblNote = wx.StaticText(self.notebook_pane3, -1, '%s:\n$TITLE (%s); $BODY (%s); \\n (%s)' % (_("Notes"), _('Title'), _('Content of article'), _('New line')))
+        self.chkNoUpload = wx.CheckBox(self.notebook_pane3, -1, _("Image manipulation only, no uploading"))
         self.chkAutoUpdate = wx.CheckBox(self.notebook_pane3, -1, _("Automatic Update"))
         
         self.btnOK = wx.Button(self, wx.ID_OK, _("OK"))
@@ -165,6 +166,7 @@ class MySettingDialog(wx.Dialog):
     	self.txtTemplate.SetValue(read_config('General', 'Template', '').decode('unicode_escape'))
     	self.cmbFileURL.SetSelection(read_config_int('General', 'FileURL', 0))
     	self.txtEmptyLines.SetValue(read_config_int('General', 'EmptyLines', 1))
+    	self.chkNoUpload.SetValue(read_config_bool('General', 'NoUpload', False))
     	self.chkAutoUpdate.SetValue(read_config_bool('General', 'AutoUpdate', True))
     			
     def __do_layout(self):
@@ -218,6 +220,7 @@ class MySettingDialog(wx.Dialog):
         sizer_11.Add(mysizer2, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 0)
         sizer_11.Add(self.lblNote, 0, wx.ALL, 5)
         sizer_8.Add(sizer_11, 0, wx.EXPAND|wx.ALL, 5)
+        sizer_8.Add(self.chkNoUpload, 0, wx.ALL, 5)
         sizer_8.Add(self.chkAutoUpdate, 0, wx.ALL, 5)
         self.notebook_pane3.SetSizer(sizer_8)
         self.notebook.AddPage(self.notebook_pane1, _("General"))
@@ -253,6 +256,7 @@ class MySettingDialog(wx.Dialog):
     			'Template': self.txtTemplate.GetValue().encode('unicode_escape'), \
     			'FileURL': self.cmbFileURL.GetSelection(), \
     			'EmptyLines': self.txtEmptyLines.GetValue(), \
+    			'NoUpload': self.chkNoUpload.IsChecked(), \
     			'AutoUpdate': self.chkAutoUpdate.IsChecked(), \
     			})
     	except:
