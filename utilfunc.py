@@ -4,7 +4,7 @@ import os, sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-import re, commands
+import re, commands, shutil
 import wx
 import urllib, urllib2
 import ConfigParser
@@ -118,8 +118,11 @@ def process_exif(filename, dict, thumb = '', backup = True, use_unicode = True):
 		params += ' "-ThumbnailImage<="'
 	elif thumb:
 		params += ' "-ThumbnailImage<=%s"' % thumb
-	if not backup:
-		params += ' -overwrite_original'
+	if backup:
+		newfile = os.path.join(TEMP_DIR, '%s_exif.jpg' % os.path.basename(filename))
+		shutil.copy(filename, newfile)
+		filename = newfile
+	params += ' -overwrite_original'
 	if use_unicode:
 		if 'utf-8' != sys.getdefaultencoding():
 			reload(sys)
@@ -156,6 +159,18 @@ def invalid_file_name(fname):
 
 def supported_file_type(fname):
 	if re.match(r'.*\.(jpe?g|gif|png|pdf)$', fname, re.I):
+		return True
+	else:
+		return False
+		
+def is_image_file(fname):
+	if re.match(r'.*\.(jpe?g|gif|png)$', fname, re.I):
+		return True
+	else:
+		return False
+		
+def is_jpeg_file(fname):
+	if re.match(r'.*\.(jpe?g)$', fname, re.I):
 		return True
 	else:
 		return False

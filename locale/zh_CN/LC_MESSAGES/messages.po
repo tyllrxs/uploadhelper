@@ -621,3 +621,13 @@ msgstr "全部可写"
 
 msgid "Clear All"
 msgstr "全部清空"
+
+msgid "Resizing"
+msgstr "正在缩放"
+
+msgid "Writing"
+msgstr "正在写入"
+
+msgid "Adding watermark"
+msgstr "正在添加水印"
+
