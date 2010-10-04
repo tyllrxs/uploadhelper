@@ -631,3 +631,11 @@ msgstr "正在写入"
 msgid "Adding watermark"
 msgstr "正在添加水印"
 
+msgid "&Open File"
+msgstr "打开文件(&O)"
+
+msgid "Open &Folder"
+msgstr "打开文件夹(&F)"
+
+msgid "Image manipulation only, no uploading"
+msgstr "仅处理图片，不上传"
