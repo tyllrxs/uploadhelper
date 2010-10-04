@@ -554,6 +554,56 @@ class MyFrame(wx.Frame):
     def start_upload_threads(self):
 	self.upcount = 0
 	self.finishcount = 0
+	
+	self.host = self.get_host()
+	self.board = self.get_board_name()
+	self.cookie = self.get_cookie()
+	self.newhost = self.get_new_host()
+	
+	self.enable_resize = read_config_bool('Resize', 'Resize', True)
+	if self.enable_resize:
+		self.resize_width = read_config_int('Resize', 'ResizeWidth', 800)
+		self.resize_height = read_config_int('Resize', 'ResizeHeight', 600)
+		self.resize_larger = read_config_bool('Resize', 'ResizeLarger', True)
+		self.resize_larger_than = read_config_int('Resize', 'ResizeLargerThan', 1024)
+	
+	self.enable_exif = read_config_bool('EXIF', 'EXIF', False)
+	if self.enable_exif:
+		tmp = read_config('EXIF', 'EXIFInfoCheck', '')
+		tmp_list = tmp.split(',')
+		dict = {}
+		for i in xrange(len(EXIF_TAGS)):
+			if 2 & int(tmp_list[i]):
+				dict[EXIF_TAGS[i][0]] = read_config('EXIF', 'EXIFInfo%02d' % i).decode('unicode_escape')
+		self.exif_dict = dict
+		self.thumbnail = read_config('EXIF', 'EXIFThumbnail', '').decode('unicode_escape')
+		if self.thumbnail == '':
+			self.thumbnail = '-'
+		if not read_config_bool('EXIF', 'ThumbW', True):
+			self.thumbnail = ''
+	
+	self.enable_watermark = read_config_bool('Watermark', 'Watermark', False)
+	if self.enable_watermark:
+		self.watermark_type = read_config_int('Watermark', 'WatermarkType', 0)
+		if self.watermark_type == 0:
+			self.watermark_text = read_config('Watermark', 'WatermarkText').decode('unicode_escape')
+			self.watermark_text_font = read_config('Watermark', 'WatermarkTextFont', '').decode('unicode_escape')
+			self.watermark_text_size = read_config_int('Watermark', 'WatermarkTextSize', 18)
+			self.watermark_text_opacity = read_config_int('Watermark', 'WatermarkTextOpacity', 60)
+			try:
+				mycolor = read_config('Watermark', 'WatermarkTextColor', '')
+				r, g, b = [int(item) for item in mycolor[1: -1].split(',')]
+			except:
+				r, g, b = [0, 0, 0]
+			self.watermark_text_color = (r, g, b)
+			self.watermark_text_position = read_config_int('Watermark', 'WatermarkTextPosition', 0)
+			self.watermark_text_padding = read_config_int('Watermark', 'WatermarkTextPadding', 10)
+		else:	
+			self.watermark_image = read_config('Watermark', 'WatermarkImage', '').decode('unicode_escape')
+			self.watermark_image_opacity = read_config_int('Watermark', 'WatermarkImageOpacity', 60)
+			self.watermark_image_position = read_config_int('Watermark', 'WatermarkImagePosition', 0)
+			self.watermark_image_padding = read_config_int('Watermark', 'WatermarkImagePadding', 10)
+		
 	emptylines = read_config_int('General', 'EmptyLines', 1)
 	if not self.ReshipMode:
 		for i in xrange(self.lstUpFile.GetItemCount()):
@@ -562,7 +612,7 @@ class MyFrame(wx.Frame):
 	for i in range(0, threads):
 		if i < self.lstUpFile.GetItemCount():
 			self.upcount += 1
-			UploadThread(self, self.get_host(), self.get_board_name(), i, self.get_cookie(), self.get_new_host())
+			UploadThread(self, i)
 
     def list_re_number(self):
 	for i in xrange(self.lstUpFile.GetItemCount()):
@@ -754,7 +804,7 @@ class MyFrame(wx.Frame):
 			return
 		if self.upcount < self.lstUpFile.ItemCount:
 			self.upcount += 1
-			UploadThread(self, self.get_host(), self.get_board_name(), self.upcount - 1, self.get_cookie(), self.get_new_host())
+			UploadThread(self, self.upcount - 1)
 	elif t.startswith('Download|'):
 		filenames=t.split('|')[1:]
 		self.lstUpFile.DeleteAllItems()

@@ -4,8 +4,22 @@ try:
 	from PIL import Image, ImageDraw, ImageChops, ImageEnhance, ImageFont
 except ImportError:
 	print 'No PIL library found. Program may not be fully featured.'	
-	
+
+import os	
 from consts import *
+
+def do_resize(imagefile, width, height):
+    """Resize image."""  
+    im = Image.open(imagefile)
+    w, h = im.size
+    if w > width:
+    	im = im.resize((width, width * h / w))
+    w, h = im.size
+    if h > height:
+    	im = im.resize((height * w / h, height))
+    newfile = os.path.join(TEMP_DIR, '%s_resize.jpg' % os.path.basename(imagefile))
+    im.save(newfile)
+    return newfile
 
 def get_mark_position(im_size, mark_size, position=0, padding=0):
     if position == 0:
@@ -25,7 +39,7 @@ def get_mark_position(im_size, mark_size, position=0, padding=0):
         position = (im_size[0] - mark_size[0] - padding, im_size[1] - mark_size[1] - padding)
     return position
 
-def signature(imagefile, text, position=0, padding=0, font=None, size=24, color=(0, 0, 0), opacity=1):
+def signature(imagefile, text, position=0, padding=0, font=None, size=24, color=(0, 0, 0), opacity=1, savetofile=False):
     """Adds text to an image as watermark."""  
     im = Image.open(imagefile)
     if im.mode != "RGBA":
@@ -41,7 +55,13 @@ def signature(imagefile, text, position=0, padding=0, font=None, size=24, color=
     del textdraw
     if opacity < 1:
         layer = reduce_opacity(layer, opacity)
-    return Image.composite(layer, im, layer)
+    newim = Image.composite(layer, im, layer)
+    if savetofile:
+    	newfile = os.path.join(TEMP_DIR, '%s_watertext.jpg' % os.path.basename(imagefile))
+    	newim.save(newfile)
+    	return newfile
+    else:
+    	return newim
     
 def reduce_opacity(im, opacity):
     """Returns an image with reduced opacity."""
@@ -55,7 +75,7 @@ def reduce_opacity(im, opacity):
     im.putalpha(alpha)
     return im
 
-def watermark(imagefile, markfile, position=0, padding=0, opacity=1):
+def watermark(imagefile, markfile, position=0, padding=0, opacity=1, savetofile=False):
     """Adds a watermark to an image."""   
     im = Image.open(imagefile)
     mark = Image.open(markfile)   
@@ -69,6 +89,12 @@ def watermark(imagefile, markfile, position=0, padding=0, opacity=1):
     position = get_mark_position(im.size, mark.size, position, padding)
     layer.paste(mark, position)
     # composite the watermark with the layer
-    return Image.composite(layer, im, layer)
+    newim = Image.composite(layer, im, layer)
+    if savetofile:
+    	newfile = os.path.join(TEMP_DIR, '%s_waterimage.jpg' % os.path.basename(imagefile))
+    	newim.save(newfile)
+    	return newfile
+    else:
+    	return newim
     
     
