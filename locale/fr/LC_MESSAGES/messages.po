@@ -55,6 +55,9 @@ msgstr "Erreur"
 msgid "Fail"
 msgstr "Échec"
 
+msgid "Failed"
+msgstr "Échoué"
+
 #: consts.py:25
 msgid "Error code"
 msgstr "Le code d'erreur"
@@ -62,6 +65,9 @@ msgstr "Le code d'erreur"
 #: consts.py:26
 msgid "Network Error"
 msgstr "Erreur réseau"
+
+msgid "Error occurred when saving settings"
+msgstr "Une erreur s'est produite lors de l'enregistrement des paramètres"
 
 #: consts.py:27
 msgid "Fill the blanks first."
@@ -193,6 +199,9 @@ msgstr "A propos"
 msgid "OK"
 msgstr "OK"
 
+msgid "Cancel"
+msgstr "Annuler"
+
 msgid "Login"
 msgstr "Connectez-vous"
 
@@ -226,11 +235,23 @@ msgstr "Préférences"
 msgid "Preferences"
 msgstr "Préférences"
 
+msgid "Preference..."
+msgstr "Préférence ..."
+
 msgid "Preferences..."
+msgstr "Préférences ..."
+
+msgid "&Preferences..."
 msgstr "Préférences ..."
 
 msgid "Preference"
 msgstr "Préférence"
+
+msgid "Image &Manipulation"
+msgstr "Image Manipulation"
+
+msgid "Image Manipulation"
+msgstr "Image Manipulation"
 
 msgid "&Language"
 msgstr "Langue"
@@ -327,3 +348,300 @@ msgstr "wxPython est trop vieux. Obtenez une version plus récente au"
 
 msgid "Language has changed. Restart to take effects."
 msgstr "Le langage a changé. Redémarrer pour prendre des effets."
+
+msgid "T&oolbar"
+msgstr "Barre d'outils"
+
+msgid "Show &Icons"
+msgstr "Afficher les icônes"
+
+msgid "Show &Texts"
+msgstr "Textes Show"
+
+msgid "General"
+msgstr "Général"
+
+msgid "File Management"
+msgstr "Gestion des fichiers"
+
+msgid "Miscellaneous"
+msgstr "Divers"
+
+msgid "Search Files"
+msgstr "Recherche de fichiers"
+
+msgid "Template to Post Article"
+msgstr "Modèle à Publier un article"
+
+msgid "Display and Layout"
+msgstr "Affichage et mise en page"
+
+msgid "Threads to Upload"
+msgstr "Sujets pour télécharger"
+
+msgid "Minimize to Tray"
+msgstr "Réduire dans la barre"
+
+msgid "Empty Lines between URLs"
+msgstr "Les lignes vides entre les URL"
+
+msgid "Range of Size"
+msgstr "Gamme de taille"
+
+msgid "Search for Subfolders"
+msgstr "Recherche de sous-dossiers"
+
+msgid "Highlight when file size is larger than"
+msgstr "Mettez en surbrillance lorsque la taille du fichier est supérieure à"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Content of article"
+msgstr "Contenu de l'article"
+
+msgid "New line"
+msgstr "Nouvelle ligne"
+
+msgid "Post-upload URL"
+msgstr "Post-upload URL"
+
+msgid "Automatic Update"
+msgstr "Mise à jour automatique"
+
+msgid "Confirm"
+msgstr "Confirmer"
+
+msgid "Are you sure to logout?"
+msgstr "Etes-vous sûr de se déconnecter?"
+
+msgid "Restore/hide Window"
+msgstr "Restauration / masquer la fenêtre"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "Content"
+msgstr "Contenu"
+
+msgid "Integrate to"
+msgstr "Intégrer à"
+
+msgid "Resize"
+msgstr "Redimensionner"
+
+msgid "Watermark"
+msgstr "Filigrane"
+
+msgid "EXIF Settings"
+msgstr "EXIF Paramètres"
+
+msgid "Watermark Text"
+msgstr "Texte en filigrane"
+
+msgid "Watermark Image"
+msgstr "Filigrane Image"
+
+msgid "Watermark Settings"
+msgstr "Filigrane Paramètres"
+
+msgid "Preview"
+msgstr "Extrait"
+
+msgid "Resize Settings"
+msgstr "Redimensionner Paramètres"
+
+msgid "Enable Resize for Large Images"
+msgstr "Activer Resize Images pour Grand"
+
+msgid "Resize To"
+msgstr "Redimensionner Pour"
+
+msgid "Resize only for Image Size"
+msgstr "Redimensionner seulement pour Taille de l'image"
+
+msgid "Enable EXIF Editing for JPEG"
+msgstr "Modification EXIF pour JPEG Activer"
+
+msgid "Import EXIF from Image"
+msgstr "Importer EXIF de l'image"
+
+msgid "Enable Watermark"
+msgstr "Activer Watermark"
+
+msgid "Watermark Type"
+msgstr "Filigrane Type"
+
+msgid "Text"
+msgstr "Texte"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Font"
+msgstr "Font"
+
+msgid "Opacity"
+msgstr "Opacité"
+
+msgid "Color"
+msgstr "Couleur"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Top Left"
+msgstr "En haut à gauche"
+
+msgid "Top Right"
+msgstr "En haut à droite"
+
+msgid "Bottom Left"
+msgstr "En bas à gauche"
+
+msgid "Center"
+msgstr "Centre"
+
+msgid "Bottom Right"
+msgstr "En bas à droite"
+
+msgid "Padding"
+msgstr "Rembourrage"
+
+msgid "Original"
+msgstr "Original"
+
+msgid "Effect"
+msgstr "Effet"
+
+msgid "Select a picture as watermark"
+msgstr "Sélectionnez une image en filigrane"
+
+msgid "Select a font for watermark"
+msgstr "Sélectionnez une police pour le filigrane"
+
+msgid "Fonts"
+msgstr "Polices"
+
+msgid "Images"
+msgstr "Images"
+
+msgid "Be sure"
+msgstr "Assurez-vous"
+
+msgid "has been closed"
+msgstr "a été fermé"
+
+msgid "Select Location"
+msgstr "Sélectionnez un lieu"
+
+msgid "Read Error"
+msgstr "Erreur de lecture"
+
+msgid "Write Error"
+msgstr "Erreur d'écriture"
+
+msgid "successfully"
+msgstr "avec succès"
+
+msgid "Select an image"
+msgstr "Sélectionnez une image"
+
+msgid "Conserve"
+msgstr "Conserver"
+
+msgid "Camera Maker"
+msgstr "Appareil photo Maker"
+
+msgid "Camera Model"
+msgstr "Modèle d'appareil photo"
+
+msgid "Aperture"
+msgstr "Aperture"
+
+msgid "Exposure Time"
+msgstr "Temps d'exposition"
+
+msgid "Focal Length"
+msgstr "Focale"
+
+msgid "Date Original"
+msgstr "Date Original"
+
+msgid "Color Space"
+msgstr "Espace colorimétrique"
+
+msgid "Flash"
+msgstr "Flash"
+
+msgid "User Comment"
+msgstr "Commentaire de l'utilisateur"
+
+msgid "Thumbnail"
+msgstr "Vignette"
+
+msgid "Change"
+msgstr "Changement"
+
+msgid "Remove"
+msgstr "Supprimer"
+
+msgid "Resize manually"
+msgstr "Redimensionner manuellement"
+
+msgid "Write EXIF manually"
+msgstr "Donnez votre EXIF manuellement"
+
+msgid "Add Watermark manually"
+msgstr "Ajouter un filigrane manuellement"
+
+msgid "Write successfully"
+msgstr "Donnez votre succès"
+
+msgid "Saved to"
+msgstr "Enregistré dans"
+
+msgid "Failed to write"
+msgstr "Échec de l'écriture"
+
+msgid "Downloading"
+msgstr "Téléchargement"
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "Use unicode"
+msgstr "Utilisez unicode"
+
+msgid "All Readable"
+msgstr "Tous lisibles"
+
+msgid "All Writable"
+msgstr "Tous inscriptibles"
+
+msgid "Clear All"
+msgstr "Effacer tout"
+
+msgid "Resizing"
+msgstr "Redimensionnement"
+
+msgid "Writing"
+msgstr "Rédaction"
+
+msgid "Adding watermark"
+msgstr "Ajout d'un filigrane"
+
+msgid "&Open File"
+msgstr "Ouvrir un fichier"
+
+msgid "Open &Folder"
+msgstr "Ouvrir le dossier"
+
+msgid "Image manipulation only, no uploading"
+msgstr "de manipulation d'image, pas de téléchargement"
+
+msgid "Preparation done"
+msgstr "Préparation fait"
+
+msgid "No Upload"
+msgstr "Aucune Envoyer"

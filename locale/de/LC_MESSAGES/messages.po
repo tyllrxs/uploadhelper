@@ -55,6 +55,9 @@ msgstr "Fehler"
 msgid "Fail"
 msgstr "Scheitern"
 
+msgid "Failed"
+msgstr "Failed"
+
 #: consts.py:25
 msgid "Error code"
 msgstr "Fehlercode"
@@ -62,6 +65,9 @@ msgstr "Fehlercode"
 #: consts.py:26
 msgid "Network Error"
 msgstr "Netzwerk-Fehler"
+
+msgid "Error occurred when saving settings"
+msgstr "Fehler beim Speichern der Einstellungen"
 
 #: consts.py:27
 msgid "Fill the blanks first."
@@ -193,6 +199,9 @@ msgstr "Über"
 msgid "OK"
 msgstr "OK"
 
+msgid "Cancel"
+msgstr "Abbrechen"
+
 msgid "Login"
 msgstr "Login"
 
@@ -226,11 +235,23 @@ msgstr "Voreinstellungen"
 msgid "Preferences"
 msgstr "Voreinstellungen"
 
+msgid "Preference..."
+msgstr "Bevorzugt ..."
+
 msgid "Preferences..."
+msgstr "Einstellungen ..."
+
+msgid "&Preferences..."
 msgstr "Einstellungen ..."
 
 msgid "Preference"
 msgstr "Bevorzugt"
+
+msgid "Image &Manipulation"
+msgstr "Image Manipulation"
+
+msgid "Image Manipulation"
+msgstr "Image Manipulation"
 
 msgid "&Language"
 msgstr "Sprache"
@@ -327,3 +348,300 @@ msgstr "wxPython ist zu alt. Holen Sie sich eine neuere Version auf"
 
 msgid "Language has changed. Restart to take effects."
 msgstr "Sprache hat sich verändert. Neu starten, um Effekte zu nehmen."
+
+msgid "T&oolbar"
+msgstr "Toolbar"
+
+msgid "Show &Icons"
+msgstr "Symbole anzeigen"
+
+msgid "Show &Texts"
+msgstr "Zeige Texte"
+
+msgid "General"
+msgstr "Allgemeine"
+
+msgid "File Management"
+msgstr "Dateiverwaltung"
+
+msgid "Miscellaneous"
+msgstr "Verschiedenes"
+
+msgid "Search Files"
+msgstr "Dateien suchen"
+
+msgid "Template to Post Article"
+msgstr "Vorlage zum Post Artikel"
+
+msgid "Display and Layout"
+msgstr "Anzeige und Layout"
+
+msgid "Threads to Upload"
+msgstr "Themen zum hochladen"
+
+msgid "Minimize to Tray"
+msgstr "Minimize to Tray"
+
+msgid "Empty Lines between URLs"
+msgstr "Leerzeilen zwischen URLs"
+
+msgid "Range of Size"
+msgstr "Auswahl der Größe"
+
+msgid "Search for Subfolders"
+msgstr "Suche nach Unterordnern"
+
+msgid "Highlight when file size is larger than"
+msgstr "Markieren Sie, wenn die Datei größer ist als"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Content of article"
+msgstr "Inhalt des Artikels"
+
+msgid "New line"
+msgstr "Neue Zeile"
+
+msgid "Post-upload URL"
+msgstr "Post-Upload-URL"
+
+msgid "Automatic Update"
+msgstr "Automatisches Update"
+
+msgid "Confirm"
+msgstr "Bestätigen"
+
+msgid "Are you sure to logout?"
+msgstr "Sind Sie sicher, bis zur Abmeldung?"
+
+msgid "Restore/hide Window"
+msgstr "Restore / Hide Window"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "Content"
+msgstr "Inhalt"
+
+msgid "Integrate to"
+msgstr "Integrieren Sie auf"
+
+msgid "Resize"
+msgstr "Resize"
+
+msgid "Watermark"
+msgstr "Wasserzeichen"
+
+msgid "EXIF Settings"
+msgstr "EXIF-Einstellungen"
+
+msgid "Watermark Text"
+msgstr "Wasserzeichen-Text"
+
+msgid "Watermark Image"
+msgstr "Watermark Image"
+
+msgid "Watermark Settings"
+msgstr "Watermark Settings"
+
+msgid "Preview"
+msgstr "Vorschau"
+
+msgid "Resize Settings"
+msgstr "Vergrssern Einstellungen"
+
+msgid "Enable Resize for Large Images"
+msgstr "Enable Resize für große Bilder"
+
+msgid "Resize To"
+msgstr "Größe ändern, um"
+
+msgid "Resize only for Image Size"
+msgstr "Vergrssern nur für Bildgröße"
+
+msgid "Enable EXIF Editing for JPEG"
+msgstr "Aktivieren EXIF Bearbeiten von JPEG"
+
+msgid "Import EXIF from Image"
+msgstr "Import von EXIF Image"
+
+msgid "Enable Watermark"
+msgstr "Aktivieren Sie Wasserzeichen"
+
+msgid "Watermark Type"
+msgstr "Watermark Typ"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Font"
+msgstr "Font"
+
+msgid "Opacity"
+msgstr "Opazität"
+
+msgid "Color"
+msgstr "Farbe"
+
+msgid "Position"
+msgstr "Standpunkt"
+
+msgid "Top Left"
+msgstr "Oben links"
+
+msgid "Top Right"
+msgstr "Oben Rechts"
+
+msgid "Bottom Left"
+msgstr "Unten links"
+
+msgid "Center"
+msgstr "Center"
+
+msgid "Bottom Right"
+msgstr "Unten Rechts"
+
+msgid "Padding"
+msgstr "Polsterung"
+
+msgid "Original"
+msgstr "Original"
+
+msgid "Effect"
+msgstr "Effect"
+
+msgid "Select a picture as watermark"
+msgstr "Wählen Sie ein Bild als Wasserzeichen"
+
+msgid "Select a font for watermark"
+msgstr "Wählen Sie eine Schriftart für Wasserzeichen"
+
+msgid "Fonts"
+msgstr "Schriftarten"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Be sure"
+msgstr "Achten Sie darauf,"
+
+msgid "has been closed"
+msgstr "wurde geschlossen"
+
+msgid "Select Location"
+msgstr "Standort auswählen"
+
+msgid "Read Error"
+msgstr "Read Error"
+
+msgid "Write Error"
+msgstr "Write Error"
+
+msgid "successfully"
+msgstr "erfolgreich"
+
+msgid "Select an image"
+msgstr "Wählen Sie ein Bild"
+
+msgid "Conserve"
+msgstr "Konservieren"
+
+msgid "Camera Maker"
+msgstr "Kamera-Hersteller"
+
+msgid "Camera Model"
+msgstr "Kameramodell"
+
+msgid "Aperture"
+msgstr "Aperture"
+
+msgid "Exposure Time"
+msgstr "Belichtungszeit"
+
+msgid "Focal Length"
+msgstr "Brennweite"
+
+msgid "Date Original"
+msgstr "Datum Originalteile"
+
+msgid "Color Space"
+msgstr "Farbraum"
+
+msgid "Flash"
+msgstr "Flash"
+
+msgid "User Comment"
+msgstr "User Comment"
+
+msgid "Thumbnail"
+msgstr "Vorschaubild"
+
+msgid "Change"
+msgstr "Ändern"
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Resize manually"
+msgstr "Vergrssern manuell"
+
+msgid "Write EXIF manually"
+msgstr "Schreiben Sie EXIF manuell"
+
+msgid "Add Watermark manually"
+msgstr "Wasserzeichen hinzufügen manuell"
+
+msgid "Write successfully"
+msgstr "Schreiben Sie erfolgreich"
+
+msgid "Saved to"
+msgstr "Gespeichert in"
+
+msgid "Failed to write"
+msgstr "Fehler beim Schreiben"
+
+msgid "Downloading"
+msgstr "Herunterladen"
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "Use unicode"
+msgstr "Verwenden von Unicode-"
+
+msgid "All Readable"
+msgstr "Alle lesbaren"
+
+msgid "All Writable"
+msgstr "Alle beschreibbaren"
+
+msgid "Clear All"
+msgstr "Clear All"
+
+msgid "Resizing"
+msgstr "Größenänderung"
+
+msgid "Writing"
+msgstr "Schreiben"
+
+msgid "Adding watermark"
+msgstr "Hinzufügen Wasserzeichen"
+
+msgid "&Open File"
+msgstr "Open File"
+
+msgid "Open &Folder"
+msgstr "Ordner öffnen"
+
+msgid "Image manipulation only, no uploading"
+msgstr "Bild-Manipulation, kein Upload"
+
+msgid "Preparation done"
+msgstr "Vorbereitung getan"
+
+msgid "No Upload"
+msgstr "Kein Upload"

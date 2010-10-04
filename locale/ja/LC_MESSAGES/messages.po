@@ -18,7 +18,7 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "ASEのアシスタント中国アップロード"
+msgstr "アップロードアシスタント"
 
 msgid "Select Files to Upload"
 msgstr "アップロードするファイルを選択してください"
@@ -55,6 +55,9 @@ msgstr "エラー"
 msgid "Fail"
 msgstr "障害"
 
+msgid "Failed"
+msgstr "障害"
+
 #: consts.py:25
 msgid "Error code"
 msgstr "エラーコード"
@@ -62,6 +65,9 @@ msgstr "エラーコード"
 #: consts.py:26
 msgid "Network Error"
 msgstr "ネットワーク接続エラー"
+
+msgid "Error occurred when saving settings"
+msgstr "設定を保存エラー"
 
 #: consts.py:27
 msgid "Fill the blanks first."
@@ -193,6 +199,9 @@ msgstr "について"
 msgid "OK"
 msgstr "[OK]を"
 
+msgid "Cancel"
+msgstr "キャンセル"
+
 msgid "Login"
 msgstr "ログイン"
 
@@ -226,11 +235,23 @@ msgstr "設定"
 msgid "Preferences"
 msgstr "設定"
 
+msgid "Preference..."
+msgstr "設定..."
+
 msgid "Preferences..."
+msgstr "設定..."
+
+msgid "&Preferences..."
 msgstr "設定..."
 
 msgid "Preference"
 msgstr "設定"
+
+msgid "Image &Manipulation"
+msgstr "画像処理"
+
+msgid "Image Manipulation"
+msgstr "画像処理"
 
 msgid "&Language"
 msgstr "言語"
@@ -327,3 +348,300 @@ msgstr "wxPythonのバージョンが低すぎると、ここに新しいバー�
 
 msgid "Language has changed. Restart to take effects."
 msgstr "言語が変更されています。有効にプログラムを再起動します。"
+
+msgid "T&oolbar"
+msgstr "ツールバー"
+
+msgid "Show &Icons"
+msgstr "アイコン"
+
+msgid "Show &Texts"
+msgstr "テキスト"
+
+msgid "General"
+msgstr "基本設定"
+
+msgid "File Management"
+msgstr "ドキュメント管理"
+
+msgid "Miscellaneous"
+msgstr "その他の設定"
+
+msgid "Search Files"
+msgstr "文書を検索"
+
+msgid "Template to Post Article"
+msgstr "ドキュメントテンプレートを発行"
+
+msgid "Display and Layout"
+msgstr "表示とレイアウト"
+
+msgid "Threads to Upload"
+msgstr "アップロードスレッド"
+
+msgid "Minimize to Tray"
+msgstr "最小システムトレイに"
+
+msgid "Empty Lines between URLs"
+msgstr "URLが空白行の間に"
+
+msgid "Range of Size"
+msgstr "ファイルサイズの範囲"
+
+msgid "Search for Subfolders"
+msgstr "[サブフォルダも検索"
+
+msgid "Highlight when file size is larger than"
+msgstr "ファイルのサイズが値を超えると、強調表示"
+
+msgid "Notes"
+msgstr "ヘルプ"
+
+msgid "Content of article"
+msgstr "テキストの内容"
+
+msgid "New line"
+msgstr "ライン"
+
+msgid "Post-upload URL"
+msgstr "URLはアップロードされた表示"
+
+msgid "Automatic Update"
+msgstr "自動更新"
+
+msgid "Confirm"
+msgstr "確認"
+
+msgid "Are you sure to logout?"
+msgstr "あなたは今、ログオフしてもよろしいですか？"
+
+msgid "Restore/hide Window"
+msgstr "復元/ウィンドウを非表示"
+
+msgid "Exit"
+msgstr "終了"
+
+msgid "Content"
+msgstr "テキスト"
+
+msgid "Integrate to"
+msgstr "に"
+
+msgid "Resize"
+msgstr "ズーム"
+
+msgid "Watermark"
+msgstr "透かし"
+
+msgid "EXIF Settings"
+msgstr "EXIFデータの設定"
+
+msgid "Watermark Text"
+msgstr "透かしテキスト"
+
+msgid "Watermark Image"
+msgstr "透かし画像"
+
+msgid "Watermark Settings"
+msgstr "透かし"
+
+msgid "Preview"
+msgstr "プレビュー"
+
+msgid "Resize Settings"
+msgstr "ズームの設定"
+
+msgid "Enable Resize for Large Images"
+msgstr "大きな画像をズームを有効にする"
+
+msgid "Resize To"
+msgstr "ズーム"
+
+msgid "Resize only for Image Size"
+msgstr "スケール画像サイズのみ"
+
+msgid "Enable EXIF Editing for JPEG"
+msgstr "JPEGのEXIFデータエディタが有効になって"
+
+msgid "Import EXIF from Image"
+msgstr "EXIFデータに画像から"
+
+msgid "Enable Watermark"
+msgstr "透かしを有効にする"
+
+msgid "Watermark Type"
+msgstr "透かしタイプ"
+
+msgid "Text"
+msgstr "テキスト"
+
+msgid "Image"
+msgstr "写真"
+
+msgid "Font"
+msgstr "フォント"
+
+msgid "Opacity"
+msgstr "不透明度"
+
+msgid "Color"
+msgstr "カラー"
+
+msgid "Position"
+msgstr "ロケーション"
+
+msgid "Top Left"
+msgstr "左上隅"
+
+msgid "Top Right"
+msgstr "右上隅"
+
+msgid "Bottom Left"
+msgstr "左下隅"
+
+msgid "Center"
+msgstr "センター"
+
+msgid "Bottom Right"
+msgstr "右下隅"
+
+msgid "Padding"
+msgstr "余白"
+
+msgid "Original"
+msgstr "アートワーク"
+
+msgid "Effect"
+msgstr "効果"
+
+msgid "Select a picture as watermark"
+msgstr "透かしとして画像を選択してください"
+
+msgid "Select a font for watermark"
+msgstr "選択してウォーターマークのフォント"
+
+msgid "Fonts"
+msgstr "フォント"
+
+msgid "Images"
+msgstr "写真"
+
+msgid "Be sure"
+msgstr "確保するために"
+
+msgid "has been closed"
+msgstr "クローズド"
+
+msgid "Select Location"
+msgstr "場所を選択"
+
+msgid "Read Error"
+msgstr "読み取りエラー"
+
+msgid "Write Error"
+msgstr "エラーをお書きください。"
+
+msgid "successfully"
+msgstr "成功"
+
+msgid "Select an image"
+msgstr "画像を選択してください"
+
+msgid "Conserve"
+msgstr "予約"
+
+msgid "Camera Maker"
+msgstr "カメラメーカー"
+
+msgid "Camera Model"
+msgstr "カメラモデル"
+
+msgid "Aperture"
+msgstr "開口部"
+
+msgid "Exposure Time"
+msgstr "露光時間"
+
+msgid "Focal Length"
+msgstr "焦点距離"
+
+msgid "Date Original"
+msgstr "写真は日付"
+
+msgid "Color Space"
+msgstr "カラースペース"
+
+msgid "Flash"
+msgstr "フラッシュ"
+
+msgid "User Comment"
+msgstr "ユーザのコメント"
+
+msgid "Thumbnail"
+msgstr "サムネイル"
+
+msgid "Change"
+msgstr "変更"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Resize manually"
+msgstr "マニュアルズーム"
+
+msgid "Write EXIF manually"
+msgstr "手動でEXIFデータの書き込み"
+
+msgid "Add Watermark manually"
+msgstr "手動で透かしを追加する"
+
+msgid "Write successfully"
+msgstr "成功お書きください。"
+
+msgid "Saved to"
+msgstr "に保存する"
+
+msgid "Failed to write"
+msgstr "障害をお書きください。"
+
+msgid "Downloading"
+msgstr "ダウンロード"
+
+msgid "Backup"
+msgstr "バックアップ"
+
+msgid "Use unicode"
+msgstr "Unicodeを使用"
+
+msgid "All Readable"
+msgstr "読み取り可能なすべての"
+
+msgid "All Writable"
+msgstr "すべての書き込み可能な"
+
+msgid "Clear All"
+msgstr "オールクリア"
+
+msgid "Resizing"
+msgstr "スケーリングされる"
+
+msgid "Writing"
+msgstr "書き込み"
+
+msgid "Adding watermark"
+msgstr "ウォーターマークを追加する"
+
+msgid "&Open File"
+msgstr "ファイルを開きます。"
+
+msgid "Open &Folder"
+msgstr "フォルダを開き、"
+
+msgid "Image manipulation only, no uploading"
+msgstr "画像のみ対応してではなく、アップロード"
+
+msgid "Preparation done"
+msgstr "準備作業は完了しています。"
+
+msgid "No Upload"
+msgstr "アップロードしないでください"

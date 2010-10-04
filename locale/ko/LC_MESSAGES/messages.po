@@ -18,7 +18,7 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "ASE 어시스턴트 중국 올리기"
+msgstr "업로드 길잡이"
 
 msgid "Select Files to Upload"
 msgstr "업로드할 파일 선택"
@@ -55,6 +55,9 @@ msgstr "오류"
 msgid "Fail"
 msgstr "실패"
 
+msgid "Failed"
+msgstr "실패"
+
 #: consts.py:25
 msgid "Error code"
 msgstr "오류 코드"
@@ -62,6 +65,9 @@ msgstr "오류 코드"
 #: consts.py:26
 msgid "Network Error"
 msgstr "네트워크 연결 오류"
+
+msgid "Error occurred when saving settings"
+msgstr "설정 저장 오류"
 
 #: consts.py:27
 msgid "Fill the blanks first."
@@ -193,6 +199,9 @@ msgstr "소개"
 msgid "OK"
 msgstr "확인"
 
+msgid "Cancel"
+msgstr "취소"
+
 msgid "Login"
 msgstr "로그인"
 
@@ -226,11 +235,23 @@ msgstr "환경 설정"
 msgid "Preferences"
 msgstr "환경 설정"
 
+msgid "Preference..."
+msgstr "환경 설정 ..."
+
 msgid "Preferences..."
+msgstr "환경 설정 ..."
+
+msgid "&Preferences..."
 msgstr "환경 설정 ..."
 
 msgid "Preference"
 msgstr "환경 설정"
+
+msgid "Image &Manipulation"
+msgstr "이미지 프로세싱"
+
+msgid "Image Manipulation"
+msgstr "이미지 프로세싱"
 
 msgid "&Language"
 msgstr "언어"
@@ -327,3 +348,300 @@ msgstr "wxPython 버전이 너무 낮습니다, 여기에 새 버전을 다운�
 
 msgid "Language has changed. Restart to take effects."
 msgstr "언어 변경되었습니다. 효과로 프로그램을 다시 시작합니다."
+
+msgid "T&oolbar"
+msgstr "툴바"
+
+msgid "Show &Icons"
+msgstr "아이콘"
+
+msgid "Show &Texts"
+msgstr "텍스트"
+
+msgid "General"
+msgstr "기본 설정"
+
+msgid "File Management"
+msgstr "문서 관리"
+
+msgid "Miscellaneous"
+msgstr "기타 설정"
+
+msgid "Search Files"
+msgstr "문서 검색"
+
+msgid "Template to Post Article"
+msgstr "문서 서식 파일을 내리고"
+
+msgid "Display and Layout"
+msgstr "디스플레이 및 레이아웃"
+
+msgid "Threads to Upload"
+msgstr "업로드 스레드"
+
+msgid "Minimize to Tray"
+msgstr "최소화 시스템 트레이에"
+
+msgid "Empty Lines between URLs"
+msgstr "URL에 빈 줄을 사이에"
+
+msgid "Range of Size"
+msgstr "파일 크기 범위"
+
+msgid "Search for Subfolders"
+msgstr "하위 폴더 검색"
+
+msgid "Highlight when file size is larger than"
+msgstr "파일 크기가이 값을 초과하면, 하이라이트"
+
+msgid "Notes"
+msgstr "도움말"
+
+msgid "Content of article"
+msgstr "텍스트 내용"
+
+msgid "New line"
+msgstr "라인"
+
+msgid "Post-upload URL"
+msgstr "URL은 업로드 디스플레이"
+
+msgid "Automatic Update"
+msgstr "자동 업데이트"
+
+msgid "Confirm"
+msgstr "확인"
+
+msgid "Are you sure to logout?"
+msgstr "지금 로그오프 하시겠습니까?"
+
+msgid "Restore/hide Window"
+msgstr "복원 / 창문을 숨기기"
+
+msgid "Exit"
+msgstr "출구"
+
+msgid "Content"
+msgstr "텍스트"
+
+msgid "Integrate to"
+msgstr "에"
+
+msgid "Resize"
+msgstr "줌"
+
+msgid "Watermark"
+msgstr "양수표"
+
+msgid "EXIF Settings"
+msgstr "의 EXIF 설정"
+
+msgid "Watermark Text"
+msgstr "워터마크 텍스트"
+
+msgid "Watermark Image"
+msgstr "워터마크 이미지"
+
+msgid "Watermark Settings"
+msgstr "양수표"
+
+msgid "Preview"
+msgstr "미리보기"
+
+msgid "Resize Settings"
+msgstr "줌 설정"
+
+msgid "Enable Resize for Large Images"
+msgstr "큰 이미지 축소 사용"
+
+msgid "Resize To"
+msgstr "확대"
+
+msgid "Resize only for Image Size"
+msgstr "스케일 이미지 크기에서만"
+
+msgid "Enable EXIF Editing for JPEG"
+msgstr "제이펙 용의 EXIF 에디터가 활성화"
+
+msgid "Import EXIF from Image"
+msgstr "의 EXIF에 이미지에서"
+
+msgid "Enable Watermark"
+msgstr "워터마크 사용"
+
+msgid "Watermark Type"
+msgstr "워터마크 유형"
+
+msgid "Text"
+msgstr "텍스트"
+
+msgid "Image"
+msgstr "사진"
+
+msgid "Font"
+msgstr "글꼴"
+
+msgid "Opacity"
+msgstr "불투명"
+
+msgid "Color"
+msgstr "색"
+
+msgid "Position"
+msgstr "위치"
+
+msgid "Top Left"
+msgstr "왼쪽 상단"
+
+msgid "Top Right"
+msgstr "오른쪽 상단"
+
+msgid "Bottom Left"
+msgstr "왼쪽 하단 모서리"
+
+msgid "Center"
+msgstr "센터"
+
+msgid "Bottom Right"
+msgstr "오른쪽 하단"
+
+msgid "Padding"
+msgstr "여백"
+
+msgid "Original"
+msgstr "예술 작품"
+
+msgid "Effect"
+msgstr "효과"
+
+msgid "Select a picture as watermark"
+msgstr "워터마크로 사진 선택"
+
+msgid "Select a font for watermark"
+msgstr "선택 워터마크 글꼴"
+
+msgid "Fonts"
+msgstr "글꼴"
+
+msgid "Images"
+msgstr "사진"
+
+msgid "Be sure"
+msgstr "보장하기 위해"
+
+msgid "has been closed"
+msgstr "휴무"
+
+msgid "Select Location"
+msgstr "위치를 선택"
+
+msgid "Read Error"
+msgstr "읽기 오류가 발생했습니다"
+
+msgid "Write Error"
+msgstr "쓰기 오류"
+
+msgid "successfully"
+msgstr "성공"
+
+msgid "Select an image"
+msgstr "사진 선택"
+
+msgid "Conserve"
+msgstr "예약"
+
+msgid "Camera Maker"
+msgstr "카메라 제조 업체"
+
+msgid "Camera Model"
+msgstr "카메라 모델"
+
+msgid "Aperture"
+msgstr "구멍"
+
+msgid "Exposure Time"
+msgstr "노출 시간"
+
+msgid "Focal Length"
+msgstr "초점 거리"
+
+msgid "Date Original"
+msgstr "사진 날짜"
+
+msgid "Color Space"
+msgstr "색 공간"
+
+msgid "Flash"
+msgstr "플래시"
+
+msgid "User Comment"
+msgstr "사용자 댓글"
+
+msgid "Thumbnail"
+msgstr "미리보기 이미지"
+
+msgid "Change"
+msgstr "변경"
+
+msgid "Remove"
+msgstr "삭제"
+
+msgid "Resize manually"
+msgstr "수동 줌"
+
+msgid "Write EXIF manually"
+msgstr "수동의 EXIF 쓰기"
+
+msgid "Add Watermark manually"
+msgstr "수동으로 워터마크를 추가"
+
+msgid "Write successfully"
+msgstr "성공 쓰기"
+
+msgid "Saved to"
+msgstr "에 저장"
+
+msgid "Failed to write"
+msgstr "실패 쓰기"
+
+msgid "Downloading"
+msgstr "다운로드"
+
+msgid "Backup"
+msgstr "지원"
+
+msgid "Use unicode"
+msgstr "를 사용하여 유니 코드"
+
+msgid "All Readable"
+msgstr "모든 판독"
+
+msgid "All Writable"
+msgstr "모든 쓰기"
+
+msgid "Clear All"
+msgstr "모두 지우기"
+
+msgid "Resizing"
+msgstr "스케일링세요"
+
+msgid "Writing"
+msgstr "쓰기"
+
+msgid "Adding watermark"
+msgstr "워터마크 추가"
+
+msgid "&Open File"
+msgstr "파일을 열고"
+
+msgid "Open &Folder"
+msgstr "폴더를 엽니다"
+
+msgid "Image manipulation only, no uploading"
+msgstr "이미지만이 거래가 아닌 업로드"
+
+msgid "Preparation done"
+msgstr "준비 작업 완료"
+
+msgid "No Upload"
+msgstr "업로드하지 마십시오"
