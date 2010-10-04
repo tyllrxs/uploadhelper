@@ -32,24 +32,36 @@ class UploadThread(Thread):
 		sz = long(self.window.lstUpFile.GetItem(self.upindex, 2).GetText())
 		if (not self.window.resize_larger) or (sz > self.window.resize_larger_than):
 			wx.CallAfter(self.PreUploadInfo, STATUS_RESIZING)
-			filename = do_resize(filename, self.window.resize_width, self.window.resize_height)
+			newfile = do_resize(filename, self.window.resize_width, self.window.resize_height)
+			if newfile:
+				filename = newfile
 		
 	if is_image_file(filename) and self.window.enable_watermark:
 		wx.CallAfter(self.PreUploadInfo, STATUS_ADDING_WATERMARK)
 		if self.window.watermark_type == 0:
-			filename = signature(filename, self.window.watermark_text, self.window.watermark_text_position,
+			newfile = signature(filename, self.window.watermark_text, self.window.watermark_text_position,
 					self.window.watermark_text_padding, self.window.watermark_text_font,
 					self.window.watermark_text_size, self.window.watermark_text_color, 
 					self.window.watermark_text_opacity, True)
 		else:
-			filename = watermark(filename, self.window.watermark_image, self.window.watermark_image_position,
+			newfile = watermark(filename, self.window.watermark_image, self.window.watermark_image_position,
 					self.window.watermark_image_padding, self.window.watermark_image_opacity, True)
+		if newfile:
+			filename = newfile
 	
 	# EXIF must be the last step to avoid overwritten	
 	if is_jpeg_file(filename) and self.window.enable_exif:
 		wx.CallAfter(self.PreUploadInfo, STATUS_WRITING_EXIF)
-		filename = process_exif(filename, self.window.exif_dict, self.window.thumbnail)
-		
+		newfile = process_exif(filename, self.window.exif_dict, self.window.thumbnail)
+		if newfile:
+			filename = newfile
+	
+	# if no uploading is set, stop here
+	if self.window.no_uploading:
+		wx.CallAfter(self.PreUploadInfo, STATUS_PREPARE_DONE)
+		return
+	
+	# uploading start now!	
 	wx.CallAfter(self.PreUploadInfo, STATUS_UPLOADING)			
 	req = urllib2.Request('http://%s/bbs/upload?b=%s' % (self.window.host, self.window.board))
 	req.add_header('Cookie', self.window.cookie)

@@ -79,6 +79,7 @@ MSG_LOGOUT = _('Logout')
 STATUS_RESIZING = _('Resizing')
 STATUS_WRITING_EXIF = '%s EXIF' % _('Writing')
 STATUS_ADDING_WATERMARK = _('Adding watermark')
+STATUS_PREPARE_DONE = _('Preparation done')
 STATUS_UPLOADING = _('Uploading')
 STATUS_UPLOADED = _('Finished')
 STATUSBAR_INFO = ['', _('Contact tyllr (at) RYGH BBS for help or advice')]
