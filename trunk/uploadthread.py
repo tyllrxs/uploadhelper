@@ -23,6 +23,7 @@ class UploadThread(Thread):
 	self.window = window
 	self.upindex = upindex
 	self.fileurl = ''
+	self.upOK = False
 	self.start()
  
     def run(self):
@@ -56,44 +57,41 @@ class UploadThread(Thread):
 		if newfile:
 			filename = newfile
 	
-	# if no uploading is set, stop here
-	if self.window.no_uploading:
-		wx.CallAfter(self.PreUploadInfo, STATUS_PREPARE_DONE)
-		return
-	
-	# uploading start now!	
-	wx.CallAfter(self.PreUploadInfo, STATUS_UPLOADING)			
-	req = urllib2.Request('http://%s/bbs/upload?b=%s' % (self.window.host, self.window.board))
-	req.add_header('Cookie', self.window.cookie)
-	opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
-	self.upOK = False
-	try:
-		params = { 'up' : open(filename, 'rb') }
-	except IOError:
-		self.info = '%s: %s' % (MSG_FAIL, MSG_INVALID_FILE)
-	except:
-		self.info = '%s: %s' % (MSG_FAIL, MSG_UNKNOWN_ERROR)
-	else:
+	if not self.window.no_upload:
+		# uploading start now!	
+		wx.CallAfter(self.PreUploadInfo, STATUS_UPLOADING)			
+		req = urllib2.Request('http://%s/bbs/upload?b=%s' % (self.window.host, self.window.board))
+		req.add_header('Cookie', self.window.cookie)
+		opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
 		try:
-			the_page = opener.open(req, params).read().decode('gb18030')
-		except urllib2.HTTPError, e:
-			if e.code == 413:
-                        	self.info = '%s: %s' % (MSG_FAIL, MSG_ENTITY_TOO_LARGE)
-                        elif e.code == 400:
-                        	self.info = '%s: %s' % (MSG_FAIL, MSG_UNSUPPORTED_FORMAT)
-                        else:
-                        	self.info = '%s: %s %d' % (MSG_FAIL, MSG_ERROR_CODE, e.code)
-                except Exception, e:
-			self.info = '%s: %s' % (MSG_FAIL, MSG_NETWORK_ERROR)
-			print e
+			params = { 'up' : open(filename, 'rb') }
+		except IOError:
+			self.info = '%s: %s' % (MSG_FAIL, MSG_INVALID_FILE)
+		except:
+			self.info = '%s: %s' % (MSG_FAIL, MSG_UNKNOWN_ERROR)
 		else:
-			if the_page.find(u'发生错误') >= 0:
-				head, body = get_html_info(the_page)
-				self.info = '%s: %s' % (head, body)
+			try:
+				the_page = opener.open(req, params).read().decode('gb18030')
+			except urllib2.HTTPError, e:
+				if e.code == 413:
+		                	self.info = '%s: %s' % (MSG_FAIL, MSG_ENTITY_TOO_LARGE)
+		                elif e.code == 400:
+		                	self.info = '%s: %s' % (MSG_FAIL, MSG_UNSUPPORTED_FORMAT)
+		                else:
+		                	self.info = '%s: %s %d' % (MSG_FAIL, MSG_ERROR_CODE, e.code)
+		        except Exception, e:
+				self.info = '%s: %s' % (MSG_FAIL, MSG_NETWORK_ERROR)
+				print e
 			else:
-				self.upOK = True
-				self.info = STATUS_UPLOADED
-				self.fileurl = get_file_url(the_page, self.window.newhost)
+				if the_page.find(u'发生错误') >= 0:
+					head, body = get_html_info(the_page)
+					self.info = '%s: %s' % (head, body)
+				else:
+					self.upOK = True
+					self.info = STATUS_UPLOADED
+					self.fileurl = get_file_url(the_page, self.window.newhost)
+	else:
+		self.info = _('No Upload')
         wx.CallAfter(self.PostUploadInfo)
  
     def PreUploadInfo(self, msg):
@@ -104,6 +102,7 @@ class UploadThread(Thread):
 		self.window.lstUpFile.SetStringItem(self.upindex, 3, self.info, 2)
 		self.window.lstUpFile.SetItemTextColour(self.upindex, wx.BLACK)
 	else:
+		self.window.upload_fails += 1
 		self.window.lstUpFile.SetStringItem(self.upindex, 3, self.info, 3)
 		self.window.lstUpFile.SetItemTextColour(self.upindex, wx.RED)
 	content = self.window.txtBody.GetValue()
