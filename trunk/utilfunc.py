@@ -96,7 +96,6 @@ def get_exif_thumbnail(filename, use_unicode = True):
 			reload(sys)
 	    		sys.setdefaultencoding('utf-8')
 	    		filename = filename.encode('gb18030')
-	    		thumb = thumb.encode('gb18030')
 	else:
 		reload(sys)
 	    	sys.setdefaultencoding('gb18030')
