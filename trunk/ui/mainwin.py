@@ -549,7 +549,11 @@ class MyFrame(wx.Frame):
 	if self.PostedMode:
 		self.txtBody.SetValue('')
 		self.PostedMode = False
-	CheckCookieThread(self)
+	self.no_upload = read_config_bool('General', 'NoUpload', False)
+	if self.no_upload:
+		self.start_upload_threads()
+	else:
+		CheckCookieThread(self)
 	
     def start_upload_threads(self):
 	self.upcount = 0
