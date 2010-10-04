@@ -43,22 +43,43 @@ def get_file_url(html, index = 0):
 def get_update_info(html, key):
 	val = re.search(r'%s=([^\r\n]*)' % key, html).group(1).strip()
 	return val
-
+	
+def commands_getstatusoutput(cmd):
+	if not sys.platform.startswith('win32'):
+		return commands.getstatusoutput(cmd)
+	from subprocess import Popen, PIPE, STDOUT
+	p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
+	output, unused = p.communicate()
+	status = p.returncode
+	return status, output
+    
 def get_tool_path(tool):
-	(status, info) = commands.getstatusoutput(tool)
-	if status == 0:
+	if sys.platform.startswith('linux'):
 		return tool
 	else:
-		executable = '%s%s%s' % ('tool', os.path.sep, tool)
-		(status, info) = commands.getstatusoutput(executable)
-		if status == 0:
-			return executable
-		else:
-			return ''
+		return '%s%s%s' % ('tool', os.path.sep, tool)
 
-def get_exif_info(filename, keys):
+def restore_default_encoding():
+	reload(sys)
+	if sys.platform.startswith('win32'):
+		sys.setdefaultencoding('gb18030')
+	else:
+		sys.setdefaultencoding('utf-8')
+
+def get_exif_info(filename, keys, use_unicode = True):
 	vals = []
-	(status, exif) = commands.getstatusoutput('%s -S "%s"' % (get_tool_path('exiftool'), filename))
+	if use_unicode:
+		if 'utf-8' != sys.getdefaultencoding():
+			reload(sys)
+	    		sys.setdefaultencoding('utf-8')
+	    		filename = filename.encode('gb18030')
+	else:
+		reload(sys)
+	    	sys.setdefaultencoding('gb18030')
+	    	if not sys.platform.startswith('win32'):
+	    		filename = filename.encode('utf-8')
+	(status, exif) = commands_getstatusoutput('%s -S "%s"' % (get_tool_path('exiftool'), filename))
+	restore_default_encoding()
 	if status == 0:
 		for key in keys:
 			try:
@@ -68,24 +89,54 @@ def get_exif_info(filename, keys):
 			vals.append(val)
 	return vals
 
-def get_exif_thumbnail(filename):
+def get_exif_thumbnail(filename, use_unicode = True):
 	thumb = os.path.join(CONFIG_ROOT, 'thumbnail.jpg')
-	(status, info) = commands.getstatusoutput('%s -b -ThumbnailImage "%s" > "%s"' % (get_tool_path('exiftool'), filename, thumb))
+	if use_unicode:
+		if 'utf-8' != sys.getdefaultencoding():
+			reload(sys)
+	    		sys.setdefaultencoding('utf-8')
+	    		filename = filename.encode('gb18030')
+	    		thumb = thumb.encode('gb18030')
+	else:
+		reload(sys)
+	    	sys.setdefaultencoding('gb18030')
+	    	if not sys.platform.startswith('win32'):
+	    		filename = filename.encode('utf-8')
+	    		thumb = thumb.encode('utf-8')
+	(status, info) = commands_getstatusoutput('%s -b -ThumbnailImage "%s" > "%s"' % (get_tool_path('exiftool'), filename, thumb))
+	print '%s -b -ThumbnailImage "%s" > "%s"' % (get_tool_path('exiftool'), filename, thumb)
+	print info
+	restore_default_encoding()
 	if status != 0:
 		thumb = ''
 	return thumb
 
-def process_exif(jpg, dict, thumb = '', backup = True):
-	params = ' '.join(['-%s="%s"' % (k, dict[k]) for k in dict.keys()])
+def process_exif(filename, dict, thumb = '', backup = True, use_unicode = True):
+	params = ' '.join(['-%s="%s"' % (k, dict[k].strip()) for k in dict.keys()])
 	if thumb:
-		params += ' \'-ThumbnailImage<=%s\'' % thumb
+		params += ' "-ThumbnailImage<=%s"' % thumb
 	if not backup:
 		params += ' -overwrite_original'
-	(status, info) = commands.getstatusoutput('%s %s "%s"' % (get_tool_path('exiftool'), params, jpg))
+	if use_unicode:
+		if 'utf-8' != sys.getdefaultencoding():
+			reload(sys)
+	    		sys.setdefaultencoding('utf-8')
+	    		filename = filename.encode('gb18030')
+	    		params = params.encode('gb18030')
+	else:
+		reload(sys)
+	    	sys.setdefaultencoding('gb18030')
+	    	if not sys.platform.startswith('win32'):
+	    		filename = filename.encode('utf-8')
+	    		params = params.encode('utf-8')
+	(status, info) = commands_getstatusoutput('%s %s "%s"' % (get_tool_path('exiftool'), params, filename))
+	print '%s %s "%s"' % (get_tool_path('exiftool'), params, filename)
+	print info
+	restore_default_encoding()
 	if status != 0:
 		return ''
 	else:
-		return jpg
+		return filename
 
 def apply_template(text):
 	substs = [('\\n', '\n')]
