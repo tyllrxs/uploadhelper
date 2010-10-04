@@ -87,7 +87,11 @@ def get_exif_info(filename, keys, use_unicode = True):
 			except:
 				val = ''
 			vals.append(val)
-	return vals
+	if re.compile(r'^ThumbnailImage:', re.M).search(exif):
+		has_thumb = True
+	else:
+		has_thumb = False
+	return vals, has_thumb
 
 def get_exif_thumbnail(filename, use_unicode = True):
 	thumb = os.path.join(CONFIG_ROOT, 'thumbnail.jpg')
@@ -103,8 +107,6 @@ def get_exif_thumbnail(filename, use_unicode = True):
 	    		filename = filename.encode('utf-8')
 	    		thumb = thumb.encode('utf-8')
 	(status, info) = commands_getstatusoutput('%s -b -ThumbnailImage "%s" > "%s"' % (get_tool_path('exiftool'), filename, thumb))
-	print '%s -b -ThumbnailImage "%s" > "%s"' % (get_tool_path('exiftool'), filename, thumb)
-	print info
 	restore_default_encoding()
 	if status != 0:
 		thumb = ''
@@ -112,7 +114,9 @@ def get_exif_thumbnail(filename, use_unicode = True):
 
 def process_exif(filename, dict, thumb = '', backup = True, use_unicode = True):
 	params = ' '.join(['-%s="%s"' % (k, dict[k].strip()) for k in dict.keys()])
-	if thumb:
+	if thumb == '-':
+		params += ' "-ThumbnailImage<="'
+	elif thumb:
 		params += ' "-ThumbnailImage<=%s"' % thumb
 	if not backup:
 		params += ' -overwrite_original'
@@ -129,8 +133,6 @@ def process_exif(filename, dict, thumb = '', backup = True, use_unicode = True):
 	    		filename = filename.encode('utf-8')
 	    		params = params.encode('utf-8')
 	(status, info) = commands_getstatusoutput('%s %s "%s"' % (get_tool_path('exiftool'), params, filename))
-	print '%s %s "%s"' % (get_tool_path('exiftool'), params, filename)
-	print info
 	restore_default_encoding()
 	if status != 0:
 		return ''
