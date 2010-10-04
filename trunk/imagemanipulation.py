@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from PIL import Image, ImageDraw, ImageChops, ImageEnhance, ImageFont
+try:
+	from PIL import Image, ImageDraw, ImageChops, ImageEnhance, ImageFont
+except ImportError:
+	print 'No PIL library found. Program may not be fully featured.'	
+	
 from consts import *
 
 def get_mark_position(im_size, mark_size, position=0, padding=0):

@@ -291,7 +291,7 @@ class MyImageDialog(wx.Dialog):
         	chk2 = wx.CheckBox(self.notebook_pane_2, -1, 'w')
         	self.txtEXIFInfo.append((lbl, txt, chk1, chk2))
         self.lblEXIFThumbnail = wx.StaticText(self.notebook_pane_2, -1, _("Thumbnail"))
-        self.imgEXIFThumbnail = wx.StaticBitmap(self.notebook_pane_2, -1, wx.NullBitmap, size=(160, 120))
+        self.imgEXIFThumbnail = wx.StaticBitmap(self.notebook_pane_2, -1, size=(160, 120))
         self.chkThumbR = wx.CheckBox(self.notebook_pane_2, -1, 'r')
         self.chkThumbW = wx.CheckBox(self.notebook_pane_2, -1, 'w')
         self.btnChangeThumbnail = wx.Button(self.notebook_pane_2, -1, _("Change"))
@@ -397,8 +397,8 @@ class MyImageDialog(wx.Dialog):
 			self.txtEXIFInfo[i][2].SetValue(True)
 		if 2 & num:
 			self.txtEXIFInfo[i][3].SetValue(True)
-	thumb = read_config('EXIF', 'EXIFThumbnail', '').decode('unicode_escape')
-	self.set_thumbnail(thumb)
+	self.thumbnail = read_config('EXIF', 'EXIFThumbnail', '').decode('unicode_escape')
+	self.set_thumbnail(self.thumbnail)
 	self.chkThumbR.SetValue(read_config_bool('EXIF', 'ThumbR', True))
 	self.chkThumbW.SetValue(read_config_bool('EXIF', 'ThumbW', True))
 	self.chkWriteEXIFBackup.SetValue(read_config_bool('EXIF', 'WriteEXIFBackup', True))
@@ -569,12 +569,14 @@ class MyImageDialog(wx.Dialog):
     	self.txtResizeLarger.Enable(self.chkResizeLarger.IsChecked())
     	
     def set_thumbnail(self, thumb = ''):
+    	if not (self.thumbnail or thumb):
+    		return
     	self.thumbnail = thumb
 	if thumb:
 		self.imgEXIFThumbnail.SetBitmap(wx.Bitmap(thumb))
-		self.imgEXIFThumbnail.Parent.Layout()
 	else:
 		self.imgEXIFThumbnail.SetBitmap(wx.EmptyBitmap(160, 120))
+	self.imgEXIFThumbnail.Parent.Layout()
 
     def open_jpeg_dialog(self):
     	wildcard = '%s (*.jpg)|*.jpg' % 'JPEG %s' % _('Images')
@@ -617,7 +619,7 @@ class MyImageDialog(wx.Dialog):
     	jpeg = self.open_jpeg_dialog()
     	if jpeg:
     		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
-		vals = get_exif_info(jpeg, [k for k, v in EXIF_TAGS], use_unicode)
+		vals, has_thumb = get_exif_info(jpeg, [k for k, v in EXIF_TAGS], use_unicode)
 		i = 0
 		for val in vals:
 			if self.txtEXIFInfo[i][2].IsChecked():
@@ -630,8 +632,11 @@ class MyImageDialog(wx.Dialog):
 						pass
 			i += 1
 		if self.chkThumbR.IsChecked():
-			thumb = get_exif_thumbnail(jpeg, use_unicode)
-			self.set_thumbnail(thumb)
+			if has_thumb:
+				thumb = get_exif_thumbnail(jpeg, use_unicode)
+				self.set_thumbnail(thumb)
+			else:
+				self.set_thumbnail()
 	
     def OnbtnWriteEXIFClick(self, evt):
     	jpg = self.open_jpeg_dialog()
@@ -641,7 +646,10 @@ class MyImageDialog(wx.Dialog):
     			if self.txtEXIFInfo[i][3].IsChecked():
     				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
     		if self.chkThumbW.IsChecked():
-    			thumb = self.thumbnail
+    			if self.thumbnail:
+    				thumb = self.thumbnail
+    			else:
+    				thumb = '-'
     		else:
     			thumb = ''
     		backup = self.chkWriteEXIFBackup.IsChecked()
