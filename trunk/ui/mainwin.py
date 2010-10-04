@@ -369,7 +369,7 @@ class MyFrame(wx.Frame):
 	return read_config('Login', 'AutoLogin')
 	
     def get_dialog_path(self):
-	return read_config('Upload', 'DefaultPath')
+	return read_config('Upload', 'DefaultPath').decode('unicode_escape')
 
     def show_login(self):
 	dialog = MyLoginDialog(self)
@@ -506,7 +506,7 @@ class MyFrame(wx.Frame):
 	dialog = wx.FileDialog(None, _('Select Files to Upload'), self.get_dialog_path(), '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.append_files(dialog.GetPaths())
-		write_config('Upload', {'DefaultPath': os.path.abspath(os.path.dirname(dialog.GetPaths()[0]))})
+		write_config('Upload', {'DefaultPath': os.path.abspath(os.path.dirname(dialog.GetPaths()[0])).encode('unicode_escape')})
 	dialog.Destroy()
 	
     def append_files(self, filenames):

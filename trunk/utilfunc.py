@@ -112,7 +112,7 @@ def get_exif_thumbnail(filename, use_unicode = True):
 		thumb = ''
 	return thumb
 
-def process_exif(filename, dict, thumb = '', backup = True, use_unicode = True):
+def process_exif(filename, dict, thumb = '', backup = True, use_unicode = False):
 	params = ' '.join(['-%s="%s"' % (k, dict[k].strip()) for k in dict.keys()])
 	if thumb == '-':
 		params += ' "-ThumbnailImage<="'
