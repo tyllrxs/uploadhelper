@@ -616,7 +616,8 @@ class MyImageDialog(wx.Dialog):
     def OnbtnImportEXIFClick(self, evt):
     	jpeg = self.open_jpeg_dialog()
     	if jpeg:
-		vals = get_exif_info(jpeg, [k for k, v in EXIF_TAGS])
+    		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
+		vals = get_exif_info(jpeg, [k for k, v in EXIF_TAGS], use_unicode)
 		i = 0
 		for val in vals:
 			if self.txtEXIFInfo[i][2].IsChecked():
@@ -629,7 +630,7 @@ class MyImageDialog(wx.Dialog):
 						pass
 			i += 1
 		if self.chkThumbR.IsChecked():
-			thumb = get_exif_thumbnail(jpeg)
+			thumb = get_exif_thumbnail(jpeg, use_unicode)
 			self.set_thumbnail(thumb)
 	
     def OnbtnWriteEXIFClick(self, evt):
@@ -639,20 +640,13 @@ class MyImageDialog(wx.Dialog):
     		for i in xrange(len(self.txtEXIFInfo)):
     			if self.txtEXIFInfo[i][3].IsChecked():
     				dict[EXIF_TAGS[i][0]] = self.txtEXIFInfo[i][1].GetValue()
-    		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
     		if self.chkThumbW.IsChecked():
     			thumb = self.thumbnail
     		else:
     			thumb = ''
     		backup = self.chkWriteEXIFBackup.IsChecked()
-    		if not use_unicode:  			
-    			reload(sys)
-    			sys.setdefaultencoding('gb18030')
-    			jpg = jpg.encode('utf8')
-    			thumb = thumb.encode('utf8')
-    		exif_jpg = process_exif(jpg, dict, thumb, backup)
-    		reload(sys)
-    		sys.setdefaultencoding('utf8')
+    		use_unicode = self.chkWriteEXIFUnicode.IsChecked()
+    		exif_jpg = process_exif(jpg, dict, thumb, backup, use_unicode)
     		if exif_jpg:
     			wx.MessageBox('%s.' % _('Write successfully'), _('Write EXIF manually'), wx.ICON_INFORMATION)
     		else:
