@@ -42,18 +42,22 @@ LOG_FILE = os.path.join(CONFIG_ROOT, 'log.txt')
 
 gettext.install('messages', 'locale', unicode = True)
 lang = locale.getdefaultlocale()[0]
+cf = ConfigParser.ConfigParser()
 try:
-	cf = ConfigParser.ConfigParser()
 	cf.read(CONFIG_FILE)
 	lang = cf.get('General', 'language', lang)
-	gettext.translation('messages', 'locale', languages = [lang]).install(True)
 except:
 	if not cf.has_section('General'):
 		cf.add_section('General')
 	cf.set('General', 'language', lang)
 finally:
 	cf.write(open(CONFIG_FILE, 'w'))
-
+	
+try:
+	gettext.translation('messages', 'locale', languages = [lang]).install(True)
+except:
+	pass
+	
 # Some common messages
 
 APPNAME = _('UploadHelper')
