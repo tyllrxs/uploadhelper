@@ -18,7 +18,7 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "日月光華上傳助手"
+msgstr "上傳助手"
 
 msgid "Select Files to Upload"
 msgstr "選擇要上傳的檔案"
@@ -55,6 +55,9 @@ msgstr "錯誤"
 msgid "Fail"
 msgstr "失敗"
 
+msgid "Failed"
+msgstr "失敗"
+
 #: consts.py:25
 msgid "Error code"
 msgstr "錯誤代碼"
@@ -62,6 +65,9 @@ msgstr "錯誤代碼"
 #: consts.py:26
 msgid "Network Error"
 msgstr "網路連接錯誤"
+
+msgid "Error occurred when saving settings"
+msgstr "保存設置時發生錯誤"
 
 #: consts.py:27
 msgid "Fill the blanks first."
@@ -97,7 +103,7 @@ msgstr "完成"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "如有意見、建議，請與日月光華tyllr聯絡"
+msgstr "如有意見、建議，請與日月光華tyllr聯繫"
 
 #: DlgAbout.py:14
 msgid "Version"
@@ -129,7 +135,7 @@ msgstr "狀態"
 
 #: MyFrame.py:179
 msgid "User"
-msgstr "使用者"
+msgstr "用戶"
 
 #: MyFrame.py:234
 msgid "All Supported Files"
@@ -193,8 +199,11 @@ msgstr "關於"
 msgid "OK"
 msgstr "確定"
 
+msgid "Cancel"
+msgstr "取消"
+
 msgid "Login"
-msgstr "登入"
+msgstr "登錄"
 
 msgid "BBS host"
 msgstr "BBS 主機"
@@ -206,13 +215,13 @@ msgid "How to Use"
 msgstr "還不會使用?"
 
 msgid "Auto Login"
-msgstr "自動登入"
+msgstr "自動登錄"
 
 msgid "&Login"
-msgstr "登入"
+msgstr "登錄"
 
 msgid "&Switch User"
-msgstr "更改使用者"
+msgstr "更改用戶"
 
 msgid "Logo&ut"
 msgstr "註銷"
@@ -226,11 +235,23 @@ msgstr "首選項"
 msgid "Preferences"
 msgstr "首選項"
 
+msgid "Preference..."
+msgstr "偏好設置..."
+
 msgid "Preferences..."
+msgstr "偏好設置..."
+
+msgid "&Preferences..."
 msgstr "偏好設置..."
 
 msgid "Preference"
 msgstr "偏好設置"
+
+msgid "Image &Manipulation"
+msgstr "圖片處理"
+
+msgid "Image Manipulation"
+msgstr "圖片處理"
 
 msgid "&Language"
 msgstr "語言"
@@ -260,7 +281,7 @@ msgid "&About"
 msgstr "關於"
 
 msgid "Switch user"
-msgstr "更改使用者"
+msgstr "更改用戶"
 
 msgid "FAQ"
 msgstr "常見問題"
@@ -308,7 +329,7 @@ msgid "Progress"
 msgstr "目前進度"
 
 msgid "Login OK. Prepare to upload files."
-msgstr "登入成功，請準備上傳檔案。"
+msgstr "登錄成功，請準備上傳檔案。"
 
 msgid "Visit Homepage"
 msgstr "訪問主頁"
@@ -327,3 +348,300 @@ msgstr "wxPython 版本太低，請到這裡下載新版本"
 
 msgid "Language has changed. Restart to take effects."
 msgstr "語言已經更改。重啟本程序生效。"
+
+msgid "T&oolbar"
+msgstr "工具欄"
+
+msgid "Show &Icons"
+msgstr "顯示圖標"
+
+msgid "Show &Texts"
+msgstr "顯示文本"
+
+msgid "General"
+msgstr "基本設置"
+
+msgid "File Management"
+msgstr "檔案管理"
+
+msgid "Miscellaneous"
+msgstr "其它設置"
+
+msgid "Search Files"
+msgstr "搜索檔案"
+
+msgid "Template to Post Article"
+msgstr "發文模板"
+
+msgid "Display and Layout"
+msgstr "顯示和佈局"
+
+msgid "Threads to Upload"
+msgstr "上傳線程數"
+
+msgid "Minimize to Tray"
+msgstr "最小化到系統欄"
+
+msgid "Empty Lines between URLs"
+msgstr "URL 之間空行數"
+
+msgid "Range of Size"
+msgstr "檔案大小範圍"
+
+msgid "Search for Subfolders"
+msgstr "搜索子資料夾"
+
+msgid "Highlight when file size is larger than"
+msgstr "當檔案大小超過該值時高亮顯示"
+
+msgid "Notes"
+msgstr "說明"
+
+msgid "Content of article"
+msgstr "正文內容"
+
+msgid "New line"
+msgstr "換行"
+
+msgid "Post-upload URL"
+msgstr "上傳後 URL 顯示"
+
+msgid "Automatic Update"
+msgstr "自動更新"
+
+msgid "Confirm"
+msgstr "確認"
+
+msgid "Are you sure to logout?"
+msgstr "你真的要註銷嗎？"
+
+msgid "Restore/hide Window"
+msgstr "還原/隱藏窗口"
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "Content"
+msgstr "正文"
+
+msgid "Integrate to"
+msgstr "集成到"
+
+msgid "Resize"
+msgstr "縮放"
+
+msgid "Watermark"
+msgstr "水印"
+
+msgid "EXIF Settings"
+msgstr "EXIF 設置"
+
+msgid "Watermark Text"
+msgstr "水印文本"
+
+msgid "Watermark Image"
+msgstr "水印圖片"
+
+msgid "Watermark Settings"
+msgstr "水印設置"
+
+msgid "Preview"
+msgstr "預覽"
+
+msgid "Resize Settings"
+msgstr "縮放設置"
+
+msgid "Enable Resize for Large Images"
+msgstr "啟用大圖片縮放"
+
+msgid "Resize To"
+msgstr "縮放到"
+
+msgid "Resize only for Image Size"
+msgstr "僅縮放圖片大小"
+
+msgid "Enable EXIF Editing for JPEG"
+msgstr "對 JPEG 啟用 EXIF 編輯"
+
+msgid "Import EXIF from Image"
+msgstr "從圖片導入 EXIF"
+
+msgid "Enable Watermark"
+msgstr "啟用水印"
+
+msgid "Watermark Type"
+msgstr "水印類型"
+
+msgid "Text"
+msgstr "文本"
+
+msgid "Image"
+msgstr "圖片"
+
+msgid "Font"
+msgstr "字體"
+
+msgid "Opacity"
+msgstr "不透明度"
+
+msgid "Color"
+msgstr "顏色"
+
+msgid "Position"
+msgstr "位置"
+
+msgid "Top Left"
+msgstr "左上角"
+
+msgid "Top Right"
+msgstr "右上角"
+
+msgid "Bottom Left"
+msgstr "左下角"
+
+msgid "Center"
+msgstr "中心"
+
+msgid "Bottom Right"
+msgstr "右下角"
+
+msgid "Padding"
+msgstr "邊距"
+
+msgid "Original"
+msgstr "原圖"
+
+msgid "Effect"
+msgstr "效果"
+
+msgid "Select a picture as watermark"
+msgstr "選擇一張圖片作為水印"
+
+msgid "Select a font for watermark"
+msgstr "選擇水印字體"
+
+msgid "Fonts"
+msgstr "字體"
+
+msgid "Images"
+msgstr "圖片"
+
+msgid "Be sure"
+msgstr "確保"
+
+msgid "has been closed"
+msgstr "已關閉"
+
+msgid "Select Location"
+msgstr "選擇位置"
+
+msgid "Read Error"
+msgstr "讀取錯誤"
+
+msgid "Write Error"
+msgstr "寫入錯誤"
+
+msgid "successfully"
+msgstr "成功"
+
+msgid "Select an image"
+msgstr "選擇一張圖片"
+
+msgid "Conserve"
+msgstr "保留"
+
+msgid "Camera Maker"
+msgstr "相機廠商"
+
+msgid "Camera Model"
+msgstr "相機型號"
+
+msgid "Aperture"
+msgstr "光圈"
+
+msgid "Exposure Time"
+msgstr "曝光時間"
+
+msgid "Focal Length"
+msgstr "焦距"
+
+msgid "Date Original"
+msgstr "拍照日期"
+
+msgid "Color Space"
+msgstr "色彩空間"
+
+msgid "Flash"
+msgstr "閃光燈"
+
+msgid "User Comment"
+msgstr "用戶註釋"
+
+msgid "Thumbnail"
+msgstr "縮略圖"
+
+msgid "Change"
+msgstr "更改"
+
+msgid "Remove"
+msgstr "刪除"
+
+msgid "Resize manually"
+msgstr "手動縮放"
+
+msgid "Write EXIF manually"
+msgstr "手動寫入 EXIF"
+
+msgid "Add Watermark manually"
+msgstr "手動添加水印"
+
+msgid "Write successfully"
+msgstr "寫入成功"
+
+msgid "Saved to"
+msgstr "保存到"
+
+msgid "Failed to write"
+msgstr "寫入失敗"
+
+msgid "Downloading"
+msgstr "正在下載"
+
+msgid "Backup"
+msgstr "備份"
+
+msgid "Use unicode"
+msgstr "使用 Unicode"
+
+msgid "All Readable"
+msgstr "全部可讀"
+
+msgid "All Writable"
+msgstr "全部可寫"
+
+msgid "Clear All"
+msgstr "全部清空"
+
+msgid "Resizing"
+msgstr "正在縮放"
+
+msgid "Writing"
+msgstr "正在寫入"
+
+msgid "Adding watermark"
+msgstr "正在添加水印"
+
+msgid "&Open File"
+msgstr "打開檔案"
+
+msgid "Open &Folder"
+msgstr "打開資料夾"
+
+msgid "Image manipulation only, no uploading"
+msgstr "僅處理圖片，不上傳"
+
+msgid "Preparation done"
+msgstr "準備工作完成"
+
+msgid "No Upload"
+msgstr "不上傳"
