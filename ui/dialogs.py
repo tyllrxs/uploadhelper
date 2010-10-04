@@ -574,7 +574,7 @@ class MyImageDialog(wx.Dialog):
 		self.imgEXIFThumbnail.SetBitmap(wx.Bitmap(thumb))
 		self.imgEXIFThumbnail.Parent.Layout()
 	else:
-		self.imgEXIFThumbnail.SetBitmap(wx.EmptyBitmap(1, 1))
+		self.imgEXIFThumbnail.SetBitmap(wx.EmptyBitmap(160, 120))
 
     def open_jpeg_dialog(self):
     	wildcard = '%s (*.jpg)|*.jpg' % 'JPEG %s' % _('Images')
