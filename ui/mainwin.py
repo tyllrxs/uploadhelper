@@ -714,14 +714,25 @@ class MyFrame(wx.Frame):
 	for k, v in enumerate(LIST_CONTEXT_MENU):
 		if v == menutext:
 			break
-	if k == 0:
-		if self.lstUpFile.GetSelectedItemCount() <= 0:
-			return
-		os.system()
-	elif k == 1:
-		if self.lstUpFile.GetSelectedItemCount() <= 0:
-			return
-		os.system()
+	if k == 0 or k == 1:
+		idx = self.lstUpFile.GetFirstSelected()
+		if idx >= 0:
+			fname = self.lstUpFile.GetItem(idx, 1).GetText()
+			if k == 0:
+				if sys.platform.startswith('win32'):
+					os.system('explorer "%s"' % fname.encode('gb18030'))
+				elif sys.platform.startswith('linux'):
+					os.system('firefox "%s"' % fname)
+				else:
+					os.system('open "%s"' % fname)
+			else:
+				path = os.path.abspath(os.path.dirname(fname))
+				if sys.platform.startswith('win32'):
+					os.system('explorer /select, "%s"' % fname.encode('gb18030'))
+				elif sys.platform.startswith('linux'):
+					os.system('nautilus "%s"' % path)
+				else:
+					os.system('open "%s"' % path)
 	elif k == 3:
 		self.OnbtnBrowseClick(wx.CommandEvent())
 	elif k == 4:
