@@ -540,6 +540,7 @@ class MyFrame(wx.Frame):
 
     def OnbtnUploadClick(self, evt):
     	self.to_upload = False
+    	self.upload_fails = 0
 	self.lblProgress.SetLabel('%s: %d / %d' % (_('Progress'), 0, self.lstUpFile.GetItemCount()))
 	self.gagProgress.SetValue(0)
 	if self.lstUpFile.GetItemCount() <= 0:
@@ -609,7 +610,7 @@ class MyFrame(wx.Frame):
 			self.watermark_image_padding = read_config_int('Watermark', 'WatermarkImagePadding', 10)
 		
 	emptylines = read_config_int('General', 'EmptyLines', 1)
-	if not self.ReshipMode:
+	if not (self.no_upload or self.ReshipMode):
 		for i in xrange(self.lstUpFile.GetItemCount()):
 			self.txtBody.SetValue(self.txtBody.GetValue() + '\n%s' % MSG_FILE_UPLOADING % (i + 1) + '\n' * emptylines)
 	threads = read_config_int('General', 'Threads', 3)
@@ -817,10 +818,12 @@ class MyFrame(wx.Frame):
 			self.btnUpload.Enable()
 	elif t.startswith('Upload|'):
 		self.finishcount += 1
-		self.lblProgress.SetLabel('%s: %d / %d' % (_('Progress'), self.finishcount, self.lstUpFile.GetItemCount()))
+		self.lblProgress.SetLabel('%s: %d / %d (%s: %d)' % (_('Progress'), self.finishcount, self.lstUpFile.GetItemCount(),
+					_('Failed'), self.upload_fails))
 		self.gagProgress.SetValue(self.finishcount * 100 / self.lstUpFile.GetItemCount())
 		if self.finishcount >= self.lstUpFile.ItemCount:
-			self.notebook.SetSelection(1)
+			if self.upload_fails == 0:
+				self.notebook.SetSelection(1)
 			self.UploadedMode = True
 			self.ReshipMode = False
 			self.btnUpload.Enable()

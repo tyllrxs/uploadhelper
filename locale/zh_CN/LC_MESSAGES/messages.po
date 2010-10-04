@@ -642,3 +642,6 @@ msgstr "仅处理图片，不上传"
 
 msgid "Preparation done"
 msgstr "准备工作完成"
+
+msgid "No Upload"
+msgstr "不上传"
