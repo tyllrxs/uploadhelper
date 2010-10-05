@@ -74,8 +74,8 @@ msgid "Fill the blanks first."
 msgstr "完全に記入してください"
 
 #: consts.py:28
-msgid "%d Files Selected"
-msgstr "％d個の選択したファイル"
+msgid "Files Selected"
+msgstr "選択したファイル"
 
 #: consts.py:29
 msgid "Unknown Error"
