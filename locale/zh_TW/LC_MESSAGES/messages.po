@@ -74,8 +74,8 @@ msgid "Fill the blanks first."
 msgstr "請先填寫完整"
 
 #: consts.py:28
-msgid "%d Files Selected"
-msgstr "選擇了 %d 個檔案"
+msgid "Files Selected"
+msgstr "選擇檔案數"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -182,8 +182,11 @@ msgid "Failed to check for updates, try again later."
 msgstr "檢查更新失敗，請稍後重試。"
 
 #: MyFrame.py:440
-msgid "A new version %s is available! Would you like to update now?"
-msgstr "發現新版本 %s ! 是否立即更新？"
+msgid "A new version is available" 
+msgstr "發現新版本"
+
+msgid "Would you like to update now"
+msgstr "是否立即更新"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."

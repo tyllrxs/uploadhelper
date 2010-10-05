@@ -74,8 +74,8 @@ msgid "Fill the blanks first."
 msgstr "전체 내용을 기입하세요"
 
 #: consts.py:28
-msgid "%d Files Selected"
-msgstr "% d 개의 선택한 파일"
+msgid "Selected Files"
+msgstr "개의 선택한 파일"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -182,8 +182,8 @@ msgid "Failed to check for updates, try again later."
 msgstr "나중에 다시 시도해주십시오 실패한 업데이 트를 확인합니다."
 
 #: MyFrame.py:440
-msgid "A new version %s is available! Would you like to update now?"
-msgstr "%의 새 버전을 찾으 바디 즉시 업데이 트됩니까?"
+msgid "A new version is available! Would you like to update now?"
+msgstr "의 새 버전을 찾으 바디 즉시 업데이 트됩니까?"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
