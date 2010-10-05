@@ -628,10 +628,10 @@ class MyImageDialog(wx.Dialog):
 		for val in vals:
 			if self.txtEXIFInfo[i][2].IsChecked():
 				try:
-					self.txtEXIFInfo[i][1].SetValue(val.decode('gb18030'))
+					self.txtEXIFInfo[i][1].SetValue(val)
 				except:
 					try:
-						self.txtEXIFInfo[i][1].SetValue(val)
+						self.txtEXIFInfo[i][1].SetValue(val.decode('gb18030'))
 					except:
 						pass
 			i += 1
