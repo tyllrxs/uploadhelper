@@ -428,7 +428,7 @@ class MyFrame(wx.Frame):
 			cf.set('SCRIPT%d' % value, 'DESC', '%s v%s' % (APPNAME.encode('gb18030'), VERSION))
 			cf.set('SCRIPT%d' % value, 'CMDTYPE', 1)
 			cf.set('SCRIPT%d' % value, 'CATEGORY', APPNAME.encode('gb18030'))
-			cf.set('SCRIPT%d' % value, 'COMMAND', sys.argv[0].encode('gb18030'))
+			cf.set('SCRIPT%d' % value, 'COMMAND', sys.argv[0])
 			cf.write(open(configfile, 'w'))
 		else:
 			configfile = os.path.join(path, 'user', 'mycmds.txt')
@@ -439,7 +439,7 @@ class MyFrame(wx.Frame):
 					wx.MessageBox('%s: %s' % (_('Read Error'), configfile), '%s %s' % (_('Integrate to'), term), wx.ICON_ERROR)
 					return
 			fp = open(configfile, 'a')
-			new_line = r'99; ; %s; true; py:import os\\nos.startfile(r\"%s\");' % (APPNAME.encode('gb18030'), sys.argv[0].replace('\\', '\\\\').encode('gb18030'))
+			new_line = r'99; ; %s; true; py:import os\\nos.startfile(r\"%s\");' % (APPNAME.encode('gb18030'), sys.argv[0].replace('\\', '\\\\'))
 			try:
 				fp.write('\n' + new_line)
 			except:
@@ -593,8 +593,7 @@ class MyFrame(wx.Frame):
 		if self.watermark_type == 0:
 			self.watermark_text = read_config('Watermark', 'WatermarkText').decode('unicode_escape')
 			self.watermark_text_font = read_config('Watermark', 'WatermarkTextFont', '').decode('unicode_escape')
-			self.watermark_text_size = read_config_int('Watermark', 'WatermarkTextSize', 18)
-			self.watermark_text_opacity = read_config_int('Watermark', 'WatermarkTextOpacity', 60)
+			self.watermark_text_size = read_config_int('Watermark', 'WatermarkTextSize', 24)
 			try:
 				mycolor = read_config('Watermark', 'WatermarkTextColor', '')
 				r, g, b = [int(item) for item in mycolor[1: -1].split(',')]
@@ -725,7 +724,7 @@ class MyFrame(wx.Frame):
 			fname = self.lstUpFile.GetItem(idx, 1).GetText()
 			if k == 0:
 				if sys.platform.startswith('win32'):
-					os.system('explorer "%s"' % fname.encode('gb18030'))
+					os.popen('explorer "%s"' % fname.encode('gb18030'))
 				elif sys.platform.startswith('linux'):
 					os.system('firefox "%s"' % fname)
 				else:
@@ -733,7 +732,7 @@ class MyFrame(wx.Frame):
 			else:
 				path = os.path.abspath(os.path.dirname(fname))
 				if sys.platform.startswith('win32'):
-					os.system('explorer /select, "%s"' % fname.encode('gb18030'))
+					os.popen('explorer /select, "%s"' % fname.encode('gb18030'))
 				elif sys.platform.startswith('linux'):
 					os.system('nautilus "%s"' % path)
 				else:
