@@ -1,20 +1,16 @@
 #labels Phase-Requirements,Phase-Implementation,Phase-Deploy
-##################################################################
-
-                       =UploadHelper=
+=UploadHelper=
 
   Written by tyllrxs@gmail.com (RYGH BBS id: tyllr)
   you can freely modify or redistribute it within GPL v2 License
   
-##################################################################
+----
 
 ==Introduction==
 
 A powerful tool for uploading files to RYGH BBS (http://bbs.fudan.edu.cn/). 
 
 This is an open-source, cross-platform program to simplify the uploading work.
-
-----
 
 UploadHelper shares the joy of uploading:)
 
@@ -25,10 +21,9 @@ UploadHelper shares the joy of uploading:)
   * Reship webpage fraction just by one-click. 
 
 ----
-----
 
 ==INSTALLATION GUIDE==
-----
+
 ===Preinstall===
 
 Make sure all these requirements are installed:
@@ -69,7 +64,7 @@ $ sudo apt-get install python python-wxgtk2.8 python-imaging libimage-exiftool-p
 }}}
 OK, everything is done. So easy? Yep:)
 
-----
+
 ===Install===
 {{{
 $ tar -zxvf uploadhelper.tar.gz
