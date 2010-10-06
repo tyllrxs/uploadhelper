@@ -430,7 +430,7 @@ class MyImageDialog(wx.Dialog):
 	self.txtWatermarkTextFont.SetValue(read_config('Watermark', 'WatermarkTextFont', '').decode('unicode_escape'))
 	if not self.txtWatermarkTextFont.GetValue():
 		self.OncmbWatermarkTextFontChange(wx.CommandEvent())
-	self.txtWatermarkTextSize.SetValue(read_config_int('Watermark', 'WatermarkTextSize', 18))
+	self.txtWatermarkTextSize.SetValue(read_config_int('Watermark', 'WatermarkTextSize', 24))
 	try:
 		mycolor = read_config('Watermark', 'WatermarkTextColor', '')
 		r, g, b = [int(item) for item in mycolor[1: -1].split(',')]

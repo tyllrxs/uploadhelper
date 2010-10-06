@@ -19,10 +19,10 @@ SEPARATOR = '\n--------------------------------------------\n-------------------
 DATA_DIR = '/usr/share/uploadhelper/'
 FILE_BOARDS = 'data/boards.xml' 
 SAMPLE_IMAGE = 'pic/sample.jpg'
-PREDEFINE_FONTS = [('宋体', 'simsun.ttc'), ('楷体', 'simkai.ttf'), ('黑体', 'simhei.ttf'), ('隶书', 'simli.ttf'), 
-		   ('仿宋', 'simfang.ttf'), ('幼圆', 'simyou.ttf'), ('方正舒体', 'FZSTK.ttf'), ('方正姚体', 'FZYTK.ttf'), 
-		   ('微软雅黑', 'msyh.ttf'), ('华文行楷', 'STXINGKA.ttf'), ('华文新魏', 'STXINWEI.ttf'), 
-		   ('华文彩云', 'STCAIYUN.ttf'), ('华文琥珀', 'STHUPO.ttf')]
+PREDEFINE_FONTS = [(u'宋体', 'simsun.ttc'), (u'楷体', 'simkai.ttf'), (u'黑体', 'simhei.ttf'), (u'隶书', 'simli.ttf'), 
+		   (u'仿宋', 'simfang.ttf'), (u'幼圆', 'simyou.ttf'), (u'方正舒体', 'FZSTK.ttf'), (u'方正姚体', 'FZYTK.ttf'), 
+		   (u'微软雅黑', 'msyh.ttf'), (u'华文行楷', 'STXINGKA.ttf'), (u'华文新魏', 'STXINWEI.ttf'), 
+		   (u'华文彩云', 'STCAIYUN.ttf'), (u'华文琥珀', 'STHUPO.ttf')]
 
 # Set directories to save data
 
