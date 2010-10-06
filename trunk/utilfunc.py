@@ -112,17 +112,18 @@ def get_exif_thumbnail(filename, use_unicode = True):
 		thumb = ''
 	return thumb
 
-def process_exif(filename, dict, thumb = '', backup = True, use_unicode = False):
-	params = ' '.join(['-%s="%s"' % (k, dict[k].strip()) for k in dict.keys()])
+def process_exif(filename, dict, thumb = '', inplace = True, backup = True, use_unicode = False):
+	params = ' '.join(['-%s="%s"' % (k, dict[k].replace('\n', '').strip()) for k in dict.keys()])
 	if thumb == '-':
 		params += ' "-ThumbnailImage<="'
 	elif thumb:
 		params += ' "-ThumbnailImage<=%s"' % thumb
-	if backup:
+	if not inplace:
 		newfile = os.path.join(TEMP_DIR, '%s_exif.jpg' % os.path.basename(filename))
 		shutil.copy(filename, newfile)
 		filename = newfile
-	params += ' -overwrite_original'
+	if not backup:
+		params += ' -overwrite_original'
 	if use_unicode:
 		if 'utf-8' != sys.getdefaultencoding():
 			reload(sys)

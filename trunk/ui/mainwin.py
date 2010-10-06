@@ -610,7 +610,7 @@ class MyFrame(wx.Frame):
 			self.watermark_image_padding = read_config_int('Watermark', 'WatermarkImagePadding', 10)
 		
 	emptylines = read_config_int('General', 'EmptyLines', 1)
-	if not (self.no_upload or self.ReshipMode):
+	if not self.ReshipMode:
 		for i in xrange(self.lstUpFile.GetItemCount()):
 			self.txtBody.SetValue(self.txtBody.GetValue() + '\n%s' % MSG_FILE_UPLOADING % (i + 1) + '\n' * emptylines)
 	threads = read_config_int('General', 'Threads', 3)

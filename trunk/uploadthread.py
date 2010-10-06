@@ -42,8 +42,7 @@ class UploadThread(Thread):
 		if self.window.watermark_type == 0:
 			newfile = signature(filename, self.window.watermark_text, self.window.watermark_text_position,
 					self.window.watermark_text_padding, self.window.watermark_text_font,
-					self.window.watermark_text_size, self.window.watermark_text_color, 
-					self.window.watermark_text_opacity, True)
+					self.window.watermark_text_size, self.window.watermark_text_color, True)
 		else:
 			newfile = watermark(filename, self.window.watermark_image, self.window.watermark_image_position,
 					self.window.watermark_image_padding, self.window.watermark_image_opacity, True)
@@ -53,7 +52,7 @@ class UploadThread(Thread):
 	# EXIF must be the last step to avoid overwritten	
 	if is_jpeg_file(filename) and self.window.enable_exif:
 		wx.CallAfter(self.PreUploadInfo, STATUS_WRITING_EXIF)
-		newfile = process_exif(filename, self.window.exif_dict, self.window.thumbnail)
+		newfile = process_exif(filename, self.window.exif_dict, self.window.thumbnail, False, False, False)
 		if newfile:
 			filename = newfile
 	
