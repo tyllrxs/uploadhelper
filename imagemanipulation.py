@@ -42,30 +42,24 @@ def get_mark_position(im_size, mark_size, position=0, padding=0):
         position = (im_size[0] - mark_size[0] - padding, im_size[1] - mark_size[1] - padding)
     return position
 
-def signature(imagefile, text, position=0, padding=0, font=None, size=24, color=(0, 0, 0), opacity=1, savetofile=False):
+def signature(imagefile, text, position=0, padding=0, font='', size=24, color=(0, 0, 0), savetofile=False):
     """Adds text to an image as watermark."""  
     try:
 	    im = Image.open(imagefile)
 	    if im.mode != "RGBA":
 		im = im.convert("RGBA")
-	    # create a transparent layer the size of the image and draw the
-	    # watermark in that layer.
-	    layer = Image.new('RGBA', im.size, (0,0,0,0))
-	    textdraw = ImageDraw.Draw(layer)
+	    textdraw = ImageDraw.Draw(im)
 	    font = ImageFont.truetype(font, size)
 	    textsize = textdraw.textsize(text, font = font)
 	    textpos = get_mark_position(im.size, textsize, position, padding)
 	    textdraw.text(textpos, text, font = font, fill = color)
 	    del textdraw
-	    if opacity < 1:
-		layer = reduce_opacity(layer, opacity)
-	    newim = Image.composite(layer, im, layer)
 	    if savetofile:
 	    	newfile = os.path.join(TEMP_DIR, '%s_watertext.jpg' % os.path.basename(imagefile))
-	    	newim.save(newfile)
+	    	im.save(newfile)
 	    	return newfile
 	    else:
-	    	return newim
+	    	return im
     except:
 	    return ''
     
