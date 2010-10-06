@@ -611,6 +611,10 @@ class MyFrame(wx.Frame):
 		
 	emptylines = read_config_int('General', 'EmptyLines', 1)
 	if not self.ReshipMode:
+		if read_config_bool('General', 'PreUploadClearArticle', False):
+			self.txtBody.SetValue('')
+			if read_config_bool('General', 'PreUploadClearArticleTitle', False):
+				self.txtTitle.SetValue('')
 		for i in xrange(self.lstUpFile.GetItemCount()):
 			self.txtBody.SetValue(self.txtBody.GetValue() + '\n%s' % MSG_FILE_UPLOADING % (i + 1) + '\n' * emptylines)
 	threads = read_config_int('General', 'Threads', 3)
