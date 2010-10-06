@@ -7,6 +7,9 @@
   
 ##################################################################
 
+Introduction
+==========================
+
 A powerful tool for uploading files to RYGH BBS (http://bbs.fudan.edu.cn/). 
 
 This is an open-source, cross-platform program to simplify the uploading work.
@@ -20,7 +23,8 @@ UploadHelper shares the joy of uploading:)
 *) Reship webpage fraction just by one-click. 
 
 
------- INSTALLATION GUIDE --------
+INSTALLATION GUIDE
+==========================
 
 [Preinstall]
 
