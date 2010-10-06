@@ -138,6 +138,8 @@ class MySettingDialog(wx.Dialog):
         self.label_5 = wx.StaticText(self.notebook_pane3, -1, _("Content"))
         self.txtTemplate = wx.TextCtrl(self.notebook_pane3, -1, "")
         self.lblNote = wx.StaticText(self.notebook_pane3, -1, '%s:\n$TITLE (%s); $BODY (%s); \\n (%s)' % (_("Notes"), _('Title'), _('Content of article'), _('New line')))
+        self.chkPreUploadClearArticle = wx.CheckBox(self.notebook_pane3, -1, _("Clear article before uploading"))
+        self.chkPreUploadClearArticleTitle = wx.CheckBox(self.notebook_pane3, -1, _("Include title"))
         self.chkNoUpload = wx.CheckBox(self.notebook_pane3, -1, _("Image manipulation only, no uploading"))
         self.chkAutoUpdate = wx.CheckBox(self.notebook_pane3, -1, _("Automatic Update"))
         
@@ -148,6 +150,7 @@ class MySettingDialog(wx.Dialog):
         self.__do_layout()
         
         self.Bind(wx.EVT_CHECKBOX, self.OnchkHighlightClick, self.chkHighlight)
+        self.Bind(wx.EVT_CHECKBOX, self.OnchkPreUploadClearArticleClick, self.chkPreUploadClearArticle)
         self.Bind(wx.EVT_BUTTON, self.OnbtnOKClick, self.btnOK)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
@@ -166,6 +169,9 @@ class MySettingDialog(wx.Dialog):
     	self.txtTemplate.SetValue(read_config('General', 'Template', '').decode('unicode_escape'))
     	self.cmbFileURL.SetSelection(read_config_int('General', 'FileURL', 0))
     	self.txtEmptyLines.SetValue(read_config_int('General', 'EmptyLines', 1))
+    	self.chkPreUploadClearArticle.SetValue(read_config_bool('General', 'PreUploadClearArticle', False))
+    	self.chkPreUploadClearArticleTitle.SetValue(read_config_bool('General', 'PreUploadClearArticleTitle', False))
+    	self.OnchkPreUploadClearArticleClick(evt)
     	self.chkNoUpload.SetValue(read_config_bool('General', 'NoUpload', False))
     	self.chkAutoUpdate.SetValue(read_config_bool('General', 'AutoUpdate', True))
     			
@@ -175,6 +181,7 @@ class MySettingDialog(wx.Dialog):
         sizer_8 = wx.BoxSizer(wx.VERTICAL)
         sizer_9 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_16 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_17 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_11 = wx.StaticBoxSizer(self.staticbox2, wx.VERTICAL)
         sizer_14 = wx.StaticBoxSizer(self.staticbox3, wx.VERTICAL)
         sizer_15 = wx.StaticBoxSizer(self.staticbox4, wx.VERTICAL)
@@ -220,6 +227,9 @@ class MySettingDialog(wx.Dialog):
         sizer_11.Add(mysizer2, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 0)
         sizer_11.Add(self.lblNote, 0, wx.ALL, 5)
         sizer_8.Add(sizer_11, 0, wx.EXPAND|wx.ALL, 5)
+        sizer_17.Add(self.chkPreUploadClearArticle, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_17.Add(self.chkPreUploadClearArticleTitle, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_8.Add(sizer_17, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 0)
         sizer_8.Add(self.chkNoUpload, 0, wx.ALL, 5)
         sizer_8.Add(self.chkAutoUpdate, 0, wx.ALL, 5)
         self.notebook_pane3.SetSizer(sizer_8)
@@ -237,10 +247,10 @@ class MySettingDialog(wx.Dialog):
         self.Centre()
         
     def OnchkHighlightClick(self, evt):
-    	if self.chkHighlight.IsChecked():
-    		self.txtFileNoLarger.Enable()
-    	else:
-    		self.txtFileNoLarger.Enable(False)
+    	self.txtFileNoLarger.Enable(self.chkHighlight.IsChecked())
+    
+    def OnchkPreUploadClearArticleClick(self, evt):
+    	self.chkPreUploadClearArticleTitle.Enable(self.chkPreUploadClearArticle.IsChecked())
     
     def OnbtnOKClick(self, evt):
 	try:
@@ -256,6 +266,8 @@ class MySettingDialog(wx.Dialog):
     			'Template': self.txtTemplate.GetValue().encode('unicode_escape'), \
     			'FileURL': self.cmbFileURL.GetSelection(), \
     			'EmptyLines': self.txtEmptyLines.GetValue(), \
+    			'PreUploadClearArticle': self.chkPreUploadClearArticle.GetValue(), \
+    			'PreUploadClearArticleTitle': self.chkPreUploadClearArticleTitle.GetValue(), \
     			'NoUpload': self.chkNoUpload.IsChecked(), \
     			'AutoUpdate': self.chkAutoUpdate.IsChecked(), \
     			})

@@ -648,3 +648,15 @@ msgstr "准备工作完成"
 
 msgid "No Upload"
 msgstr "不上传"
+
+msgid "Title or content is empty"
+msgstr "标题或内容为空"
+
+msgid "Continue anyway"
+msgstr "还要继续吗"
+
+msgid "Clear article before uploading"
+msgstr "上传之前清空文章内容"
+
+msgid "Include title"
+msgstr "包括标题"

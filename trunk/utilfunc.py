@@ -114,10 +114,6 @@ def get_exif_thumbnail(filename, use_unicode = True):
 
 def process_exif(filename, dict, thumb = '', inplace = True, backup = True, use_unicode = False):
 	params = ' '.join(['-%s="%s"' % (k, dict[k].replace('\n', '').strip()) for k in dict.keys()])
-	if thumb == '-':
-		params += ' "-ThumbnailImage<="'
-	elif thumb:
-		params += ' "-ThumbnailImage<=%s"' % thumb
 	if not inplace:
 		newfile = os.path.join(TEMP_DIR, '%s_exif.jpg' % os.path.basename(filename))
 		shutil.copy(filename, newfile)
@@ -135,7 +131,11 @@ def process_exif(filename, dict, thumb = '', inplace = True, backup = True, use_
 	    	sys.setdefaultencoding('gb18030')
 	    	if not sys.platform.startswith('win32'):
 	    		filename = filename.encode('utf-8')
-	    		params = params.encode('utf-8')
+			thumb = thumb.encode('utf-8')
+	if thumb == '-':
+		params += ' "-ThumbnailImage<="'
+	elif thumb:
+		params += ' "-ThumbnailImage<=%s"' % thumb
 	(status, info) = commands_getstatusoutput('%s %s "%s"' % (get_tool_path('exiftool'), params, filename))
 	restore_default_encoding()
 	if status != 0:

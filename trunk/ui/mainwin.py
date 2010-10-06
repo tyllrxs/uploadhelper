@@ -628,10 +628,6 @@ class MyFrame(wx.Frame):
 	self.lstUpFile.DeleteAllItems()
 	self.lblProgress.SetLabel(MSG_FILE_SELECTED % 0)
 	self.gagProgress.SetValue(0)
-	if self.txtTitle.GetValue().strip() == '' or self.txtBody.GetValue().strip() == '':
-		wx.MessageBox(MSG_FILL_BLANKS)
-		return
-	self.btnPost.Disable()
 	post_title = self.txtTitle.GetValue()
 	post_content = self.txtBody.GetValue()
 	title_template = read_config('General', 'TitleTemplate', '')
@@ -645,6 +641,10 @@ class MyFrame(wx.Frame):
 		template = template.replace('$BODY', post_content)
 		template = template.replace('$TITLE', post_title)
 		post_content = template
+	if post_title.strip() == '' or post_content.strip() == '':
+		if wx.NO == wx.MessageBox('%s. %s?' % (_('Title or content is empty'), _('Continue anyway')), MSG_CHECK_UPDATE, wx.ICON_QUESTION|wx.YES_NO|wx.DEFAULT_NO):
+			return
+	self.btnPost.Disable()
 	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
 		urllib.urlencode({'title': post_title.encode('gb18030'), 
 				'signature': self.txtSignature.GetValue(),
