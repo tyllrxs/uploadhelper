@@ -672,9 +672,10 @@ class MyImageDialog(wx.Dialog):
     	self.add_watermark()
     
     def OncmbWatermarkTextFontChange(self, evt):
+    	if not sys.platform.startswith('win32'):
+    		return
     	font_file = PREDEFINE_FONTS[self.cmbWatermarkTextFont.GetSelection()][1]
-    	if sys.platform.startswith('win32'):
-    		font_file = os.path.join(os.environ['WINDIR'], 'Fonts', font_file)
+    	font_file = os.path.join(os.environ['WINDIR'], 'Fonts', font_file)
     	self.txtWatermarkTextFont.SetValue(font_file)
     
     def OnbtnWatermarkTextFontClick(self, evt):
