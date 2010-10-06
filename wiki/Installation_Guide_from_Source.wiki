@@ -14,18 +14,21 @@ A powerful tool for uploading files to RYGH BBS (http://bbs.fudan.edu.cn/).
 
 This is an open-source, cross-platform program to simplify the uploading work.
 
+----
 
 UploadHelper shares the joy of uploading:)
 
-* Multiple files uploading simutaneously;
+  * Multiple files uploading simutaneously;
 
-* Drag&drop operation style;
+  * Drag&drop operation style;
 
-* Reship webpage fraction just by one-click. 
+  * Reship webpage fraction just by one-click. 
 
+----
+----
 
 ==INSTALLATION GUIDE==
-
+----
 ===Preinstall===
 
 Make sure all these requirements are installed:
@@ -66,7 +69,7 @@ $ sudo apt-get install python python-wxgtk2.8 python-imaging libimage-exiftool-p
 }}}
 OK, everything is done. So easy? Yep:)
 
-
+----
 ===Install===
 {{{
 $ tar -zxvf uploadhelper.tar.gz
