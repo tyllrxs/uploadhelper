@@ -642,7 +642,7 @@ class MyFrame(wx.Frame):
 		template = template.replace('$TITLE', post_title)
 		post_content = template
 	if post_title.strip() == '' or post_content.strip() == '':
-		if wx.NO == wx.MessageBox('%s. %s?' % (_('Title or content is empty'), _('Continue anyway')), MSG_CHECK_UPDATE, wx.ICON_QUESTION|wx.YES_NO|wx.DEFAULT_NO):
+		if wx.NO == wx.MessageBox('%s. %s?' % (_('Title or content is empty'), _('Continue anyway')), _('Post Article'), wx.YES_NO|wx.NO_DEFAULT|wx.ICON_QUESTION):
 			return
 	self.btnPost.Disable()
 	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
