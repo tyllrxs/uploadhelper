@@ -825,7 +825,7 @@ class MyAboutDialog(wx.Dialog):
         self.notebook_pane2 = wx.Panel(self.notebook, -1)
         self.label_1 = wx.StaticText(self.notebook_pane2)
         self.label_1.SetLabel(_('Thanks for advice and feedback from following IDs:'))
-        self.txtCredits = wx.TextCtrl(self.notebook_pane2, -1, size=(400, 100), style=wx.TE_MULTILINE)
+        self.txtCredits = wx.TextCtrl(self.notebook_pane2, -1, size=(400, 100), style=wx.TE_MULTILINE|wx.TE_READONLY)
 
         self.txtLink = wx.HyperlinkCtrl(self, -1, _('Visit Homepage'), HOMEPAGE)
         self.btnOK = wx.Button(self, wx.ID_OK, _("OK"))
