@@ -143,6 +143,20 @@ def process_exif(filename, dict, thumb = '', inplace = True, backup = True, use_
 	else:
 		return filename
 
+def copy_exif(filename, original, inplace = True):
+	if not inplace:
+		newfile = os.path.join(TEMP_DIR, '%s_exif.jpg' % os.path.basename(filename))
+		shutil.copy(filename, newfile)
+		filename = newfile
+	if sys.platform.startswith('win32'):
+		filename = filename.encode('gb18030')
+	    	original = original.encode('gb18030')
+	(status, info) = commands_getstatusoutput('%s -tagsFromFile "%s" "%s"' % (get_tool_path('exiftool'), original, filename))
+	if status != 0:
+		return ''
+	else:
+		return filename
+
 def apply_template(text):
 	substs = [('\\n', '\n')]
 	txt = text

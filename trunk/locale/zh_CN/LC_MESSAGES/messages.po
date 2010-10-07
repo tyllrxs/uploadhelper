@@ -690,3 +690,9 @@ msgstr "超高质量"
 
 msgid "Ignore"
 msgstr "忽略"
+
+msgid "Skip"
+msgstr "跳过"
+
+msgid "Restoring"
+msgstr "正在还原"

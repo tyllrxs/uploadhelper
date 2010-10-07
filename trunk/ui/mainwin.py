@@ -586,8 +586,10 @@ class MyFrame(wx.Frame):
 		self.resize_height = read_config_int('Resize', 'ResizeHeight', 600)
 		self.resize_larger = read_config_bool('Resize', 'ResizeLarger', True)
 		self.resize_larger_than = read_config_int('Resize', 'ResizeLargerThan', 1024)
+		self.resize_quality = read_config_int('Resize', 'ResizeQuality', 0)
 	
 	self.enable_exif = read_config_bool('EXIF', 'EXIF', False)
+	self.preserve_exif = read_config_bool('EXIF', 'PreserveEXIF', False)
 	if self.enable_exif:
 		tmp = read_config('EXIF', 'EXIFInfoCheck', '')
 		tmp_list = tmp.split(',')
@@ -721,6 +723,7 @@ class MyFrame(wx.Frame):
     	self.txtReship.SetValue(html.decode('utf8'))
 	self.txtBody.SetValue(compress_spaces(tmptext).decode('utf8'))
     	if urls:
+    		self.ignore = self.chkReshipIgnore.IsChecked()
     		DownloadThread(self, urls, source_url)
     	else:
     		self.notebook.SetSelection(1)

@@ -25,36 +25,41 @@ class DownloadThread(Thread):
 	self.filenames = []
 	num = 1
     	for url in self.urls:
-    		fname = url
-    		if not supported_file_type(fname):
-    			if supported_file_type(urlparse(fname).path):
-    				fname += get_file_type(urlparse(fname).path)
-    			else:
-    				fname += '.jpg'
-    		fname = re.sub(r'[^\w\d\.\{\}\[\]\(\)\+\=\-\_\&\%\#\@\~]', '_', fname)
-    		fname = os.path.join(TEMP_DIR, fname)
-    		if self.source_url and not url.startswith('http://'):
-    			if url.startswith('/'):
-    				url = self.host + url
-    			else:
-    				url = self.path + url
-    		try:
-    			urllib.urlretrieve(url, fname)
-    		except:
-    			fname = ''
+    		if self.window.ignore and url.lower().endswith('.gif'):
+    			fname = '-'
+    		else:
+	    		fname = url
+	    		if not supported_file_type(fname):
+	    			if supported_file_type(urlparse(fname).path):
+	    				fname += get_file_type(urlparse(fname).path)
+	    			else:
+	    				fname += '.jpg'
+	    		fname = re.sub(r'[^\w\d\.\{\}\[\]\(\)\+\=\-\_\&\%\#\@\~]', '_', fname)
+	    		fname = os.path.join(TEMP_DIR, fname)
+	    		if self.source_url and not url.startswith('http://'):
+	    			if url.startswith('/'):
+	    				url = self.host + url
+	    			else:
+	    				url = self.path + url
+	    		try:
+	    			urllib.urlretrieve(url, fname)
+	    		except:
+	    			fname = ''
     		wx.CallAfter(self.DownloadInfo, num, url, fname)
     		self.filenames.append(fname)
     		num += 1
         wx.CallAfter(self.PostDownloadInfo)
  
     def DownloadInfo(self, num, url, filename):
+    	self.window.txtReship.AppendText('\n%s ( %d / %d ):\n%s\n' % (_('Downloading'), num, len(self.urls), url))
     	if filename:
-		self.window.txtReship.AppendText('\n%s ( %d / %d ):\n%s\n%s: %s\n%s\n' 
-			% (_('Downloading'), num, len(self.urls), url, _('Saved to'), filename, _('Finished')))
+    		if filename != '-':
+			self.window.txtReship.AppendText('%s: %s\n%s\n' % (_('Saved to'), filename, _('Finished')))
+		else:
+			self.window.txtReship.AppendText('%s\n' % _('Skip'))
 	else:
-		self.window.txtReship.AppendText('\n%s ( %d / %d ):\n%s\n%s\n' 
-			% (_('Downloading'), num, len(self.urls), url, _('Failed')))
- 
+		self.window.txtReship.AppendText('%s\n' % _('Failed'))
+
     def PostDownloadInfo(self):
     	self.window.txtReship.AppendText(SEPARATOR)
 	Publisher().sendMessage("update", '%s|%s' % ('Download', '|'.join(self.filenames)))
