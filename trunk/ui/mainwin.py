@@ -602,8 +602,8 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	
 	self.enable_resize = read_config_bool('Resize', 'Resize', True)
 	if self.enable_resize:
-		self.resize_width = read_config_int('Resize', 'ResizeWidth', 800)
-		self.resize_height = read_config_int('Resize', 'ResizeHeight', 600)
+		self.resize_width = read_config_int('Resize', 'ResizeWidth', 1000)
+		self.resize_height = read_config_int('Resize', 'ResizeHeight', 800)
 		self.resize_larger = read_config_bool('Resize', 'ResizeLarger', True)
 		self.resize_larger_than = read_config_int('Resize', 'ResizeLargerThan', 1024)
 		self.resize_quality = read_config_int('Resize', 'ResizeQuality', 0)
