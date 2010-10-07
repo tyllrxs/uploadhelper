@@ -5,6 +5,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 import re, commands, shutil
+import random
 import wx
 import urllib, urllib2
 import ConfigParser
@@ -28,6 +29,9 @@ def get_url_path(url):
 def get_python_version():
 	(status, pyver) = commands.getstatusoutput('python -V')
 	return re.search(r'ython\s+([\d\.]+)', pyver).group(1)
+	
+def get_temp_filename(fname, suffix=''):
+	return os.path.join(TEMP_DIR, '%s%s%04d%s' % (os.path.basename(fname), suffix, random.randint(0, 10000), os.path.splitext(fname)[1]))
 
 def get_html_info(html):
 	head = re.search(r'<title>(.*)</title>', html).group(1)
@@ -115,7 +119,7 @@ def get_exif_thumbnail(filename, use_unicode = True):
 def process_exif(filename, dict, thumb = '', inplace = True, backup = True, use_unicode = False):
 	params = ' '.join(['-%s="%s"' % (k, dict[k].replace('\n', '').strip()) for k in dict.keys()])
 	if not inplace:
-		newfile = os.path.join(TEMP_DIR, '%s_exif.jpg' % os.path.basename(filename))
+		newfile = get_temp_filename(filename, '_exif')
 		shutil.copy(filename, newfile)
 		filename = newfile
 	if not backup:
@@ -145,7 +149,7 @@ def process_exif(filename, dict, thumb = '', inplace = True, backup = True, use_
 
 def copy_exif(filename, original, inplace = True):
 	if not inplace:
-		newfile = os.path.join(TEMP_DIR, '%s_exif.jpg' % os.path.basename(filename))
+		newfile = get_temp_filename(filename, '_rexif')
 		shutil.copy(filename, newfile)
 		filename = newfile
 	if sys.platform.startswith('win32'):

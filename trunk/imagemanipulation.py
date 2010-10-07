@@ -7,6 +7,7 @@ except ImportError:
 
 import os	
 from consts import *
+from utilfunc import *
 
 def do_resize(imagefile, width, height, quality=0):
     """Resize image.""" 
@@ -22,7 +23,7 @@ def do_resize(imagefile, width, height, quality=0):
 		    	w = height * w / h
 		    	h = height
 		    im = im.resize((w, h), qualities[quality])
-		    newfile = os.path.join(TEMP_DIR, '%s_resize.jpg' % os.path.basename(imagefile))
+		    newfile = get_temp_filename(imagefile, '_resize')
 		    im.save(newfile)
 	    else:
 	    	newfile = imagefile
@@ -61,7 +62,7 @@ def signature(imagefile, text, position=0, padding=0, font='', size=24, color=(0
 	    textdraw.text(textpos, text, font = font, fill = color)
 	    del textdraw
 	    if savetofile:
-	    	newfile = os.path.join(TEMP_DIR, '%s_watertext.jpg' % os.path.basename(imagefile))
+	    	newfile = get_temp_filename(imagefile, '_watertext')
 	    	im.save(newfile)
 	    	return newfile
 	    else:
@@ -98,7 +99,7 @@ def watermark(imagefile, markfile, position=0, padding=0, opacity=1, savetofile=
 	    # composite the watermark with the layer
 	    newim = Image.composite(layer, im, layer)
 	    if savetofile:
-	    	newfile = os.path.join(TEMP_DIR, '%s_waterimage.jpg' % os.path.basename(imagefile))
+	    	newfile = get_temp_filename(imagefile, '_waterimage')
 	    	newim.save(newfile)
 	    	return newfile
 	    else:
