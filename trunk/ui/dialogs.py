@@ -296,8 +296,11 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
         self.chkResizeLarger = wx.CheckBox(self.notebook_pane_1, -1, '%s (KB) >' % _("Resize only for Image Size"))
         self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
+        self.label_22 = wx.StaticText(self.notebook_pane_1, -1, _("Resizing quality"))
+        self.cmbResizeQuality = wx.Choice(self.notebook_pane_1, -1, choices=[_("Very fast"), _("Fast"), _("High quality"), _("Very high quality")])
         
         self.chkEXIF = wx.CheckBox(self.notebook_pane_2, -1, _("Enable EXIF Editing for JPEG"))
+        self.chkPreserveEXIF = wx.CheckBox(self.notebook_pane_2, -1, _("Preserve original EXIF"))
         self.sizer_16_staticbox = wx.StaticBox(self.notebook_pane_2, -1, _("EXIF Settings"))
         self.txtEXIFInfo = []
         for item, desc in EXIF_TAGS:
@@ -398,8 +401,10 @@ class MyImageDialog(wx.Dialog):
         self.txtResizeLarger.SetValue(read_config_int('Resize', 'ResizeLargerThan', 1024))
         evt = wx.CommandEvent()
         self.OnchkResizeLargerClick(evt)
+        self.cmbResizeQuality.SetSelection(read_config_int('Resize', 'ResizeQuality', 0))
         
         self.chkEXIF.SetValue(read_config_bool('EXIF', 'EXIF', False))
+        self.chkPreserveEXIF.SetValue(read_config_bool('EXIF', 'PreserveEXIF', False))
         tmp = read_config('EXIF', 'EXIFInfoCheck', '')
         tmp_list = tmp.split(',')
         for i in xrange(len(self.txtEXIFInfo)):
@@ -461,6 +466,8 @@ class MyImageDialog(wx.Dialog):
         sizer_21 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_22 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_23 = wx.BoxSizer(wx.VERTICAL)
+        sizer_24 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_25 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_15 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_WatermarkText = wx.StaticBoxSizer(self.sizer_WatermarkText_staticbox, wx.VERTICAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
@@ -484,10 +491,15 @@ class MyImageDialog(wx.Dialog):
         sizer_19.Add(self.chkResizeLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_19.Add(self.txtResizeLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_17.Add(sizer_19, 0, wx.EXPAND, 0)
+        sizer_25.Add(self.label_22, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_25.Add(self.cmbResizeQuality, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_17.Add(sizer_25, 0, wx.EXPAND, 0)
         sizer_7.Add(sizer_17, 1, wx.EXPAND, 0)
         self.notebook_pane_1.SetSizer(sizer_7)
         
-        sizer_EXIF.Add(self.chkEXIF, 0, wx.ALL, 5)
+        sizer_24.Add(self.chkEXIF, 0, wx.ALL, 5)
+        sizer_24.Add(self.chkPreserveEXIF, 0, wx.ALL, 5)
+        sizer_EXIF.Add(sizer_24, 0, wx.ALL, 0)
         for label, text, check1, check2 in self.txtEXIFInfo:
         	grid_sizer_1.Add(label, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         	grid_sizer_1.Add(text, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -737,8 +749,10 @@ class MyImageDialog(wx.Dialog):
     			'ResizeHeight': self.txtResizeHeight.GetValue(), \
     			'ResizeLarger': self.chkResizeLarger.IsChecked(), \
     			'ResizeLargerThan': self.txtResizeLarger.GetValue(), \
+    			'ResizeQuality': self.cmbResizeQuality.GetSelection(), \
     			})
     		dict = {'EXIF': self.chkEXIF.IsChecked(), \
+    			'PreserveEXIF': self.chkPreserveEXIF.IsChecked(), \
     			'EXIFThumbnail': self.thumbnail.encode('unicode_escape'), \
     			'ThumbR': self.chkThumbR.IsChecked(), \
     			'ThumbW': self.chkThumbW.IsChecked(), \
