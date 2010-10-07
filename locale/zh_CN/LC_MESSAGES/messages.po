@@ -660,3 +660,12 @@ msgstr "上传之前清空文章内容"
 
 msgid "Include title"
 msgstr "包括标题"
+
+msgid "Detailed Information"
+msgstr "详细信息"
+
+msgid "Credits"
+msgstr "致谢"
+
+msgid "Thanks for advice and feedback from following IDs:"
+msgstr "感谢下列 ID 的建议和反馈："

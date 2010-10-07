@@ -211,15 +211,11 @@ class MyFrame(wx.Frame):
 		self.lstUpFile.SetColumnWidth(col, int(col_widths[col]))
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
 	
-	# create popup menu
-	self.ppmenu = wx.Menu()
+	# combine popup menu id and text
+	self.menu_title_by_id = []
 	for text in LIST_CONTEXT_MENU:
-		if len(text) <= 0:
-			self.ppmenu.AppendSeparator()
-		else:
-			item = self.ppmenu.Append(-1, text)
-			self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, item)
-	
+		self.menu_title_by_id.append((wx.NewId(), text))
+			
 	# check the versions of python and wxpython
 	if not sys.platform.startswith('win32'):
 		pyver = get_python_version()
@@ -369,7 +365,17 @@ class MyFrame(wx.Frame):
 	return read_config('Login', 'AutoLogin')
 	
     def get_dialog_path(self):
-	return read_config('Upload', 'DefaultPath').decode('unicode_escape')
+    	try:
+    		path = read_config('Upload', 'DefaultPath').decode('unicode_escape')
+    	except:
+    		path = ''
+	return path
+
+    def set_dialog_path(self, path):
+    	try:
+		write_config('Upload', {'DefaultPath': path.encode('unicode_escape')})
+	except:
+		pass
 
     def show_login(self):
 	dialog = MyLoginDialog(self)
@@ -506,7 +512,7 @@ class MyFrame(wx.Frame):
 	dialog = wx.FileDialog(None, _('Select Files to Upload'), self.get_dialog_path(), '', wildcard, wx.OPEN|wx.MULTIPLE)
 	if dialog.ShowModal() == wx.ID_OK:
 		self.append_files(dialog.GetPaths())
-		write_config('Upload', {'DefaultPath': os.path.abspath(os.path.dirname(dialog.GetPaths()[0])).encode('unicode_escape')})
+		self.set_dialog_path(os.path.abspath(os.path.dirname(dialog.GetPaths()[0])))
 	dialog.Destroy()
 	
     def append_files(self, filenames):
@@ -711,12 +717,33 @@ class MyFrame(wx.Frame):
     		self.notebook.SetSelection(1)
 
     def OnlstUpFileRClick(self, evt):
-	self.notebook.PopupMenu(self.ppmenu)#	print self.GetToolBar().GetSize()
+    	# create popup menu
+	ppmenu = wx.Menu()
+	for k, v in enumerate(self.menu_title_by_id):
+		if k <= 2:
+			if self.lstUpFile.GetFirstSelected() >= 0:
+				ppmenu.Append(v[0], v[1])
+				self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, id = v[0])
+				if k == 2:
+					ppmenu.AppendSeparator()
+		elif k <= 4:
+			ppmenu.Append(v[0], v[1])
+			self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, id = v[0])
+			if k == 4 and self.lstUpFile.GetItemCount() > 0: # avoid the separator becomes the last item
+				ppmenu.AppendSeparator()
+		else:
+			if self.lstUpFile.GetItemCount() > 0:
+				ppmenu.Append(v[0], v[1])
+				self.Bind(wx.EVT_MENU, self.OnPopupItemSelected, id = v[0])
+				if k == 6:
+					ppmenu.AppendSeparator()						
+	self.notebook.PopupMenu(ppmenu)
+	ppmenu.Destroy()
 
     def OnPopupItemSelected(self, evt):
-	menutext = self.ppmenu.FindItemById(evt.GetId()).GetText().replace('_', '&')
-	for k, v in enumerate(LIST_CONTEXT_MENU):
-		if v == menutext:
+	menuid = evt.GetId()
+	for k, v in enumerate(self.menu_title_by_id):
+		if v[0] == menuid:
 			break
 	if k == 0 or k == 1:
 		idx = self.lstUpFile.GetFirstSelected()
@@ -737,31 +764,31 @@ class MyFrame(wx.Frame):
 					os.system('nautilus "%s"' % path)
 				else:
 					os.system('open "%s"' % path)
+	elif k == 2:
+		while self.lstUpFile.GetSelectedItemCount() > 0:
+			self.lstUpFile.DeleteItem(self.lstUpFile.GetNextItem(-1, wx.LIST_NEXT_ALL, wx.LIST_STATE_SELECTED))
 	elif k == 3:
 		self.OnbtnBrowseClick(wx.CommandEvent())
 	elif k == 4:
 		dialog = wx.DirDialog(None, _('Choose a directory'), self.get_dialog_path(), style=wx.DD_DEFAULT_STYLE)
 	    	if dialog.ShowModal() == wx.ID_OK:
 			self.append_files([dialog.GetPath()])
-			write_config('Upload', {'DefaultPath': dialog.GetPath()})
+			self.set_dialog_path(dialog.GetPath())
 	    	dialog.Destroy()
-	elif k == 6:
-		while self.lstUpFile.GetSelectedItemCount() > 0:
-			self.lstUpFile.DeleteItem(self.lstUpFile.GetNextItem(-1, wx.LIST_NEXT_ALL, wx.LIST_STATE_SELECTED))
-	elif k == 7:
+	elif k == 5:
 		total = self.lstUpFile.GetItemCount()
 		for i in xrange(total - 1, 0, -1):
 			for j in xrange(i):
 				if self.lstUpFile.GetItem(i, 1).GetText() == self.lstUpFile.GetItem(j, 1).GetText():
 					self.lstUpFile.DeleteItem(i)
 					break
-	elif k == 8:
+	elif k == 6:
 		total = self.lstUpFile.GetItemCount()
 		for i in xrange(total - 1, -1, -1):
 			fname = self.lstUpFile.GetItem(i, 1).GetText()
 			if invalid_file_name(fname) or not supported_file_type(fname):
 				self.lstUpFile.DeleteItem(i)
-	elif k == 10:
+	elif k == 7:
 		self.lstUpFile.DeleteAllItems()
 	self.list_re_number()
 	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())
