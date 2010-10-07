@@ -23,6 +23,14 @@ PREDEFINE_FONTS = [(u'宋体', 'simsun.ttc'), (u'楷体', 'simkai.ttf'), (u'黑�
 		   (u'仿宋', 'simfang.ttf'), (u'幼圆', 'simyou.ttf'), (u'方正舒体', 'FZSTK.ttf'), (u'方正姚体', 'FZYTK.ttf'), 
 		   (u'微软雅黑', 'msyh.ttf'), (u'华文行楷', 'STXINGKA.ttf'), (u'华文新魏', 'STXINWEI.ttf'), 
 		   (u'华文彩云', 'STCAIYUN.ttf'), (u'华文琥珀', 'STHUPO.ttf')]
+CREDITS = '''
+Macintosh, DreamGhost, gw, Placebo, DETconan, SakurabaAoi, Lucian, 
+FallinSnow, wpbirch, DragonZhao, iloveac, rat, FedoraCore, qrupdhlcn, 
+ssnake, fisio, SuperColin, droople, zhangga, lancyl, andyhqa, CAtom, 
+Odom, GFW, CHGS, gotogoal, feisty, marcus, overboming, sixtongtong, 
+dymm, alexjiang, tearring, dashuai, raxodus, BetterLife, eagleonhill, 
+humor, followsun, RedComet, ky, cosx, ArieShout
+'''
 
 # Set directories to save data
 
@@ -87,10 +95,8 @@ STATUS_PREPARE_DONE = _('Preparation done')
 STATUS_UPLOADING = _('Uploading')
 STATUS_UPLOADED = _('Finished')
 STATUSBAR_INFO = ['', _('Contact tyllr (at) RYGH BBS for help or advice')]
-LIST_CONTEXT_MENU = (_('&Open File'), _('Open &Folder'), '', 
-		'%s...' % _('&Add Files'), '%s...' % _('A&dd Directory'), '', 
-		_('&Remove Selected'), _('Remove &Copies'), _('Remove &Invalid'), '', 
-		_('Remove A&ll'))
+LIST_CONTEXT_MENU = (_('&Open File'), _('Open &Folder'), _('&Remove Selected'), '%s...' % _('&Add Files'), 
+		'%s...' % _('A&dd Directory'), _('Remove &Copies'), _('Remove &Invalid'), _('Remove A&ll'))
 MARK_POSITIONS = [_("Top Left"), _("Top Right"), _("Center"), _("Bottom Left"), _("Bottom Right")]
 EXIF_TAGS = [('Make', _('Camera Maker')), 
 		('Model', _('Camera Model')), 

@@ -815,9 +815,18 @@ class MyAboutDialog(wx.Dialog):
         self.txtAppName = wx.StaticText(self, label = APPNAME)
         font1 = wx.Font(16, wx.FONTFAMILY_DEFAULT, wx.NORMAL, wx.FONTWEIGHT_BOLD)
         self.txtAppName.SetFont(font1)
-        self.txtInfo = wx.StaticText(self)
+        
+	self.notebook = wx.Notebook(self, -1)
+        self.notebook_pane1 = wx.Panel(self.notebook, -1)
+        self.txtInfo = wx.StaticText(self.notebook_pane1)
         self.txtInfo.SetLabel('%s: %s\n%s: %s (%s)\n%s: %s\n%s: GPL v2' 
 		% (_('Version'), VERSION, _('Author'), AUTHOR, EMAIL, _('Homepage'), HOMEPAGE, _('License')))
+		
+        self.notebook_pane2 = wx.Panel(self.notebook, -1)
+        self.label_1 = wx.StaticText(self.notebook_pane2)
+        self.label_1.SetLabel(_('Thanks for advice and feedback from following IDs:'))
+        self.txtCredits = wx.TextCtrl(self.notebook_pane2, -1, size=(400, 100), style=wx.TE_MULTILINE)
+
         self.txtLink = wx.HyperlinkCtrl(self, -1, _('Visit Homepage'), HOMEPAGE)
         self.btnOK = wx.Button(self, wx.ID_OK, _("OK"))
 
@@ -828,13 +837,22 @@ class MyAboutDialog(wx.Dialog):
 	
     def __set_properties(self):
         self.SetTitle(_("About"))
+        self.txtCredits.SetValue(', '.join([item.strip() for item in CREDITS.split(',')]))
 
     def __do_layout(self):
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(self.imgLogo, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 10)
-        sizer.Add(self.txtAppName, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 10)
-        sizer.Add(self.txtInfo, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 10)
-        sizer.Add(wx.StaticLine(self), 0, wx.LEFT|wx.RIGHT|wx.EXPAND, 10)
+        sizer_1 = wx.BoxSizer(wx.VERTICAL)
+        sizer_2 = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(self.imgLogo, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer.Add(self.txtAppName, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_1.Add(self.txtInfo, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        self.notebook_pane1.SetSizer(sizer_1)
+        sizer_2.Add(self.label_1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_2.Add(self.txtCredits, 1, wx.LEFT|wx.RIGHT|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5)
+        self.notebook_pane2.SetSizer(sizer_2)
+        self.notebook.AddPage(self.notebook_pane1, _("Detailed Information"))
+        self.notebook.AddPage(self.notebook_pane2, _("Credits"))
+        sizer.Add(self.notebook, 1, wx.ALL|wx.EXPAND, 5)
         subsizer = wx.BoxSizer(wx.HORIZONTAL)
         subsizer.Add(self.txtLink, 0, wx.ALIGN_CENTRE_VERTICAL)
         subsizer.Add((20, 20), 1, wx.ALIGN_CENTRE_VERTICAL)
