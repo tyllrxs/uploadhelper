@@ -11,8 +11,8 @@ from utilfunc import *
 
 def do_resize(imagefile, width, height, quality=0):
     """Resize image.""" 
-    qualities = ('NEAREST', 'BILINEAR', 'BICUBIC', 'ANTIALIAS')
     try: 
+	    qualities = (Image.NEAREST, Image.BILINEAR, Image.BICUBIC, Image.ANTIALIAS)
 	    im = Image.open(imagefile)
 	    w, h = im.size
 	    if w > width or h > height:

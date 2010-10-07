@@ -399,8 +399,8 @@ class MyImageDialog(wx.Dialog):
         self.SetTitle(_("Image Manipulation"))
         self.default_path = ''
         self.chkResize.SetValue(read_config_bool('Resize', 'Resize', True))
-        self.txtResizeWidth.SetValue(read_config_int('Resize', 'ResizeWidth', 800))
-        self.txtResizeHeight.SetValue(read_config_int('Resize', 'ResizeHeight', 600))
+        self.txtResizeWidth.SetValue(read_config_int('Resize', 'ResizeWidth', 1000))
+        self.txtResizeHeight.SetValue(read_config_int('Resize', 'ResizeHeight', 800))
         self.chkResizeLarger.SetValue(read_config_bool('Resize', 'ResizeLarger', True))
         self.txtResizeLarger.SetValue(read_config_int('Resize', 'ResizeLargerThan', 1024))
         evt = wx.CommandEvent()

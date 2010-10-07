@@ -31,7 +31,8 @@ def get_python_version():
 	return re.search(r'ython\s+([\d\.]+)', pyver).group(1)
 	
 def get_temp_filename(fname, suffix=''):
-	return os.path.join(TEMP_DIR, '%s%s%04d%s' % (os.path.basename(fname), suffix, random.randint(0, 10000), os.path.splitext(fname)[1]))
+	base, ext = os.path.splitext(os.path.basename(fname))
+	return os.path.join(TEMP_DIR, '%s%s%04d%s' % (base, suffix, random.randint(0, 10000), ext))
 
 def get_html_info(html):
 	head = re.search(r'<title>(.*)</title>', html).group(1)
