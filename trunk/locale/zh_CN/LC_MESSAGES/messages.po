@@ -669,3 +669,24 @@ msgstr "致谢"
 
 msgid "Thanks for advice and feedback from following IDs:"
 msgstr "感谢下列 ID 的建议和反馈："
+
+msgid "Preserve original EXIF"
+msgstr "保留原有的 EXIF"
+
+msgid "Resizing quality"
+msgstr "缩放质量"
+
+msgid "Very fast"
+msgstr "非常快"
+
+msgid "Fast"
+msgstr "快"
+
+msgid "High quality"
+msgstr "高质量"
+
+msgid "Very high quality"
+msgstr "超高质量"
+
+msgid "Ignore"
+msgstr "忽略"
