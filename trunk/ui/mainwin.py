@@ -212,7 +212,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_CENTER)
 		else:
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_LEFT)
-	col_widths = read_config('Upload', 'ColumnWidths', '40,320,80,120').split(',')
+	col_widths = read_config('Upload', 'ColumnWidths', '50,300,90,120').split(',')
 	for col in xrange(self.lstUpFile.GetColumnCount()):
 		self.lstUpFile.SetColumnWidth(col, int(col_widths[col]))
 	self.itemDataMap = {}
@@ -547,12 +547,18 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			self.append_files(search_files(f, r'\.(jpe?g|gif|png|pdf)$'))
 			continue
 		index = self.lstUpFile.InsertStringItem(sys.maxint, '%s' % (self.lstUpFile.GetItemCount() + 1))
+		data_id = wx.NewId()
+		self.lstUpFile.SetItemData(index, data_id)
+		data = []
+		data.append(index)
 		self.lstUpFile.SetStringItem(index, 1, f)
+		data.append(f)
 		try:
 			fz = os.path.getsize(f) / 1024
 		except:
 			fz = -1
 		self.lstUpFile.SetStringItem(index, 2, '%ld' % fz)
+		data.append(fz)
 		if invalid_file_name(f):
 			self.lstUpFile.SetStringItem(index, 3, MSG_INVALID_FILE, 0)
 			self.lstUpFile.SetItemTextColour(index, wx.RED)
@@ -563,6 +569,8 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			if highlight:
 				self.lstUpFile.SetStringItem(index, 3, MSG_ENTITY_TOO_LARGE, 0)
 				self.lstUpFile.SetItemTextColour(index, wx.BLUE)
+		data.append(self.lstUpFile.GetItem(index, 3).GetText())
+		self.itemDataMap[data_id] = data
 	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())    	
 
     def OnbtnUploadClick(self, evt):
@@ -654,6 +662,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     def list_re_number(self):
 	for i in xrange(self.lstUpFile.GetItemCount()):
 		self.lstUpFile.SetStringItem(i, 0, str(i+1))
+		self.itemDataMap[self.lstUpFile.GetItemData(i)][0] = i + 1
 
     def OnbtnPostClick(self, evt):
     	self.to_post = False
