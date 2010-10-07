@@ -12,10 +12,11 @@ class LogoutThread(Thread):
     """Logout current BBS ID."""
  
     #----------------------------------------------------------------------
-    def __init__(self, host, cookie):
+    def __init__(self, host, cookie, quiet=False):
         Thread.__init__(self)
 	self.host = host
 	self.cookie = cookie
+	self.quiet = quiet
         self.start()
  
     #----------------------------------------------------------------------
@@ -39,5 +40,6 @@ class LogoutThread(Thread):
  
     #----------------------------------------------------------------------
     def sendInfo(self):
-	Publisher().sendMessage("update", '%s|%s' % ('Logout', self.info))
+	if not self.quiet:
+		Publisher().sendMessage("update", '%s|%s' % ('Logout', self.info))
 	

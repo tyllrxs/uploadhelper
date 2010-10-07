@@ -119,17 +119,18 @@ class MySettingDialog(wx.Dialog):
         self.cmbFileURL = wx.Choice(self.notebook_pane1, -1, choices = BBS_HOSTS)
         self.label_7 = wx.StaticText(self.notebook_pane1, -1, _("Empty Lines between URLs"))
         self.txtEmptyLines = wx.SpinCtrl(self.notebook_pane1, -1, "", min=0, max=20)
+        self.chkLogoutOnExit = wx.CheckBox(self.notebook_pane1, -1, _("Logout on exit"))
         self.chkTray = wx.CheckBox(self.notebook_pane1, -1, _("Minimize to Tray"))
         
         self.notebook_pane2 = wx.Panel(self.notebook, -1)
         self.staticbox1 = wx.StaticBox(self.notebook_pane2, -1, _("Search Files"))
         self.label_2 = wx.StaticText(self.notebook_pane2, -1, '%s (KB)' % _("Range of Size"))
-        self.txtMinFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size=(80, -1), min=0, max=9999)
+        self.txtMinFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size=(100, -1), min=0, max=9999)
         self.label_3 = wx.StaticText(self.notebook_pane2, -1, "-")
-        self.txtMaxFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size=(80, -1), min=0, max=9999)
+        self.txtMaxFileSize = wx.SpinCtrl(self.notebook_pane2, -1, "", size=(100, -1), min=0, max=9999)
         self.chkSubFolder = wx.CheckBox(self.notebook_pane2, -1, _("Search for Subfolders"))
         self.chkHighlight = wx.CheckBox(self.notebook_pane2, -1, '%s (KB)' % _("Highlight when file size is larger than"))
-        self.txtFileNoLarger = wx.SpinCtrl(self.notebook_pane2, -1, "", size=(80, -1), min=0, max=9999)
+        self.txtFileNoLarger = wx.SpinCtrl(self.notebook_pane2, -1, "", size=(100, -1), min=0, max=9999)
         
         self.notebook_pane3 = wx.Panel(self.notebook, -1)
         self.staticbox2 = wx.StaticBox(self.notebook_pane3, -1, _("Template to Post Article"))
@@ -157,6 +158,7 @@ class MySettingDialog(wx.Dialog):
     def __set_properties(self):
         self.SetTitle(_("Preferences"))
         self.txtThreads.SetValue(read_config_int('General', 'Threads', 3))
+        self.chkLogoutOnExit.SetValue(read_config_bool('General', 'LogoutOnExit', False))
         self.chkTray.SetValue(read_config_bool('General', 'MinimizeToTray', False))
     	self.txtMinFileSize.SetValue(read_config_int('General', 'MinFileSize', 0))
     	self.txtMaxFileSize.SetValue(read_config_int('General', 'MaxFileSize', 1024))
@@ -203,7 +205,8 @@ class MySettingDialog(wx.Dialog):
         sizer_16.Add(self.txtEmptyLines, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_15.Add(sizer_16, 0, wx.EXPAND, 0)
         sizer_4.Add(sizer_15, 0, wx.EXPAND|wx.ALL, 5)
-        sizer_4.Add(self.chkTray, 0, wx.ALL, 5)
+        sizer_4.Add(self.chkLogoutOnExit, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_4.Add(self.chkTray, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_3.Add(sizer_4, 0, wx.EXPAND, 0)
         self.notebook_pane1.SetSizer(sizer_3)
         sizer_7.Add(self.label_2, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -256,6 +259,7 @@ class MySettingDialog(wx.Dialog):
 	try:
     		write_config('General', 
     			{'Threads': self.txtThreads.GetValue(), \
+    			'LogoutOnExit': self.chkLogoutOnExit.IsChecked(), \
     			'MinimizeToTray': self.chkTray.IsChecked(), \
     			'MinFileSize': self.txtMinFileSize.GetValue(), \
     			'MaxFileSize': self.txtMaxFileSize.GetValue(), \
@@ -291,11 +295,11 @@ class MyImageDialog(wx.Dialog):
         self.chkResize = wx.CheckBox(self.notebook_pane_1, -1, _("Enable Resize for Large Images"))
         self.sizer_17_staticbox = wx.StaticBox(self.notebook_pane_1, -1, _("Resize Settings"))
         self.label_18 = wx.StaticText(self.notebook_pane_1, -1, _("Resize To"))
-        self.txtResizeWidth = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
+        self.txtResizeWidth = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(100, -1), min=0, max=9999)
         self.label_19 = wx.StaticText(self.notebook_pane_1, -1, "X")
-        self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
+        self.txtResizeHeight = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(100, -1), min=0, max=9999)
         self.chkResizeLarger = wx.CheckBox(self.notebook_pane_1, -1, '%s (KB) >' % _("Resize only for Image Size"))
-        self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(80, -1), min=0, max=9999)
+        self.txtResizeLarger = wx.SpinCtrl(self.notebook_pane_1, -1, "", size=(100, -1), min=0, max=9999)
         self.label_22 = wx.StaticText(self.notebook_pane_1, -1, _("Resizing quality"))
         self.cmbResizeQuality = wx.Choice(self.notebook_pane_1, -1, choices=[_("Very fast"), _("Fast"), _("High quality"), _("Very high quality")])
         

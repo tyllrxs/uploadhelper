@@ -5,6 +5,7 @@ import urllib, urllib2, cookielib
 import wx
 from xml.dom import minidom
 from threading import Thread
+import wx.lib.mixins.listctrl
 from wx.lib.pubsub import Publisher
 
 from consts import *
@@ -19,7 +20,7 @@ from downloadthread import *
 from parsehtml import *
 from taskbaricon import *
 
-class MyFrame(wx.Frame):
+class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     def __init__(self, *args, **kwds):
         wx.Frame.__init__(self, *args, **kwds)
 
@@ -200,9 +201,11 @@ class MyFrame(wx.Frame):
 	self.chkLock.SetValue(read_config_bool('Upload', 'UpBoardLock'))
 	evt = wx.CommandEvent()
 	self.OnchkLockClick(evt)
-	il = wx.ImageList(16,16, True)
+	il = wx.ImageList(16, 16, True)
 	for name in ['alarm', 'process', 'ok', 'error']:
 		il.Add(wx.Bitmap('icon/indicator/%s.png' % name))
+	self.up = il.Add(wx.Bitmap('icon/indicator/up.png'))
+        self.down = il.Add(wx.Bitmap('icon/indicator/down.png'))
 	self.lstUpFile.AssignImageList(il, wx.IMAGE_LIST_SMALL)
 	for col, text in enumerate(['No.', _('Filename'), '%s (KB)' % _('Size'), _('Status')]):
 		if col == 0 or col == 2:
@@ -212,6 +215,9 @@ class MyFrame(wx.Frame):
 	col_widths = read_config('Upload', 'ColumnWidths', '40,320,80,120').split(',')
 	for col in xrange(self.lstUpFile.GetColumnCount()):
 		self.lstUpFile.SetColumnWidth(col, int(col_widths[col]))
+	self.itemDataMap = {}
+	wx.lib.mixins.listctrl.ColumnSorterMixin.__init__(self, self.lstUpFile.GetColumnCount())
+		
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
 	self.chkReshipIgnore.SetValue(read_config_bool('Upload', 'ReshipIgnore', True))
 	
@@ -321,6 +327,12 @@ class MyFrame(wx.Frame):
         self.CentreOnScreen()
         if read_config_bool('General', 'WinMaximized', False):
         	self.Maximize()
+        	
+    def GetListCtrl(self):
+        return self.lstUpFile
+
+    def GetSortImages(self):
+        return (self.down, self.up)
         
     def read_zones(self):
         xmldoc = minidom.parse(FILE_BOARDS)
@@ -840,9 +852,11 @@ class MyFrame(wx.Frame):
 	except:
 		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
 	try:
+		if read_config_bool('General', 'LogoutOnExit', False):
+			LogoutThread(self.get_host(), self.get_cookie(), quiet=True)
 		self.trayicon.Destroy()
 	except:
-		pass
+		pass	
 	self.Destroy()
 
     def updateDisplay(self, msg):
