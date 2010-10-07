@@ -28,12 +28,13 @@ class UploadThread(Thread):
  
     def run(self):
 	filename = self.window.lstUpFile.GetItem(self.upindex, 1).GetText()
+	original = filename
 	
 	if is_image_file(filename) and self.window.enable_resize:
 		sz = long(self.window.lstUpFile.GetItem(self.upindex, 2).GetText())
 		if (not self.window.resize_larger) or (sz > self.window.resize_larger_than):
 			wx.CallAfter(self.PreUploadInfo, STATUS_RESIZING)
-			newfile = do_resize(filename, self.window.resize_width, self.window.resize_height)
+			newfile = do_resize(filename, self.window.resize_width, self.window.resize_height, self.window.resize_quality)
 			if newfile:
 				filename = newfile
 		
@@ -46,6 +47,12 @@ class UploadThread(Thread):
 		else:
 			newfile = watermark(filename, self.window.watermark_image, self.window.watermark_image_position,
 					self.window.watermark_image_padding, self.window.watermark_image_opacity, True)
+		if newfile:
+			filename = newfile
+	
+	if is_jpeg_file(filename) and self.window.preserve_exif:
+		wx.CallAfter(self.PreUploadInfo, STATUS_RESTORING_EXIF)
+		newfile = copy_exif(filename, original, False)
 		if newfile:
 			filename = newfile
 	

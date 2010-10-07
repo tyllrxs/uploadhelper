@@ -90,6 +90,7 @@ MSG_FILE_UPLOADING_2 = r'[File \1 Uploading...]'
 MSG_LOGOUT = _('Logout')
 STATUS_RESIZING = _('Resizing')
 STATUS_WRITING_EXIF = '%s EXIF' % _('Writing')
+STATUS_RESTORING_EXIF = '%s EXIF' % _('Restoring')
 STATUS_ADDING_WATERMARK = _('Adding watermark')
 STATUS_PREPARE_DONE = _('Preparation done')
 STATUS_UPLOADING = _('Uploading')

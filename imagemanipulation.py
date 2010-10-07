@@ -8,18 +8,24 @@ except ImportError:
 import os	
 from consts import *
 
-def do_resize(imagefile, width, height):
+def do_resize(imagefile, width, height, quality=0):
     """Resize image.""" 
+    qualities = ('NEAREST', 'BILINEAR', 'BICUBIC', 'ANTIALIAS')
     try: 
 	    im = Image.open(imagefile)
 	    w, h = im.size
-	    if w > width:
-	    	im = im.resize((width, width * h / w))
-	    w, h = im.size
-	    if h > height:
-	    	im = im.resize((height * w / h, height))
-	    newfile = os.path.join(TEMP_DIR, '%s_resize.jpg' % os.path.basename(imagefile))
-	    im.save(newfile)
+	    if w > width or h > height:
+		    if w > width:
+		    	h = width * h / w
+		    	w = width	
+		    if h > height:
+		    	w = height * w / h
+		    	h = height
+		    im = im.resize((w, h), qualities[quality])
+		    newfile = os.path.join(TEMP_DIR, '%s_resize.jpg' % os.path.basename(imagefile))
+		    im.save(newfile)
+	    else:
+	    	newfile = imagefile
 	    return newfile
     except:
 	    return ''	    
