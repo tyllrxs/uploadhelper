@@ -68,7 +68,10 @@ class UploadThread(Thread):
 		wx.CallAfter(self.PreUploadInfo, STATUS_UPLOADING)			
 		req = urllib2.Request('http://%s/bbs/upload?b=%s' % (self.window.host, self.window.board))
 		req.add_header('Cookie', self.window.cookie)
-		opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
+		if self.window.proxy:
+			opener = urllib2.build_opener(urllib2.ProxyHandler({'http':self.window.proxy}), MultipartPostHandler.MultipartPostHandler)
+		else:
+			opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
 		try:
 			params = { 'up' : open(filename, 'rb') }
 		except IOError:

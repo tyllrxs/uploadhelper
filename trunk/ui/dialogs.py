@@ -29,7 +29,7 @@ class MyLoginDialog(wx.Dialog):
         self.label_6 = wx.StaticText(self, -1, _("Username"))
         self.txtProxyUser = wx.TextCtrl(self, -1, "")
         self.label_7 = wx.StaticText(self, -1, _("Password"))
-        self.txtProxyPwd = wx.TextCtrl(self, -1, "")
+        self.txtProxyPwd = wx.TextCtrl(self, -1, "", style=wx.TE_PASSWORD)
         self.lnkHelp = wx.HyperlinkCtrl(self, -1, _("How to Use"), '%s%s' % (HOMEPAGE, 'faq.htm'))
         self.chkAutoLogin = wx.CheckBox(self, -1, _("Auto Login"))
         self.btnLogin = wx.Button(self, -1, _("Login"))
@@ -37,6 +37,9 @@ class MyLoginDialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
         
+        self.OnchkProxyClick(wx.CommandEvent())
+        
+        self.Bind(wx.EVT_CHECKBOX, self.OnchkProxyClick, self.chkProxy)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnLoginClick, self.btnLogin)
 	self.Bind(wx.EVT_CLOSE, self.OnClose)
 	
@@ -45,6 +48,12 @@ class MyLoginDialog(wx.Dialog):
         self.cmbHost.SetSelection(read_config_int('Login', 'Host', 0))
         self.txtUser.SetValue(read_config('Login', 'UserID'))
 	self.txtPwd.SetValue(read_config('Login', 'Password'))
+	self.chkRememberPwd.SetValue(read_config_bool('Login', 'RememberPassword', True))
+	self.chkProxy.SetValue(read_config_bool('Login', 'Proxy', False))
+	self.txtProxyHost.SetValue(read_config('Login', 'ProxyHost'))
+	self.txtProxyPort.SetValue(read_config('Login', 'ProxyPort'))
+	self.txtProxyUser.SetValue(read_config('Login', 'ProxyUser'))
+	self.txtProxyPwd.SetValue(read_config('Login', 'ProxyPwd'))
 	self.chkAutoLogin.SetValue(read_config_bool('Login', 'AutoLogin', True))
 	self.btnLogin.SetDefault()
 
@@ -98,16 +107,34 @@ class MyLoginDialog(wx.Dialog):
         object_1.Fit(self)
         self.Layout()
         self.Centre()
+        
+    def OnchkProxyClick(self, evt):
+    	if self.chkProxy.IsChecked():
+    		self.GetSizer().Show(3)
+    	else:
+    		self.GetSizer().Hide(3)
+    	self.Fit()
+    	self.Layout()
 
     def OnbtnLoginClick(self, evt):
 	host = self.cmbHost.GetSelection()
 	userid = self.txtUser.GetValue().strip()
 	pwd = self.txtPwd.GetValue().strip()
 	autologin = self.chkAutoLogin.IsChecked()
+	rememberpwd = self.chkRememberPwd.IsChecked()
+	useproxy = self.chkProxy.IsChecked()
+	p_host = self.txtProxyHost.GetValue()
+	p_port = self.txtProxyPort.GetValue()
+	p_user = self.txtProxyUser.GetValue()
+	p_pwd = self.txtProxyPwd.GetValue()
 	if userid == '' or pwd == '':
 		wx.MessageBox(MSG_FILL_BLANKS, _('Login'), wx.ICON_EXCLAMATION)
 		return
-	opener = urllib2.build_opener(SmartRedirectHandler())  
+	if self.chkProxy.IsChecked():
+		proxy = 'http://%s:%s@%s:%s' % (p_user, p_pwd, p_host, p_port)
+		opener = urllib2.build_opener(urllib2.ProxyHandler({'http':proxy}), SmartRedirectHandler())
+	else:
+		opener = urllib2.build_opener(SmartRedirectHandler())  
 	urllib2.install_opener(opener)  
 	req = urllib2.Request('http://%s/bbs/login' % BBS_HOSTS[host], urllib.urlencode({'id': userid, 'pw': pwd}))  
 	try:
@@ -126,7 +153,19 @@ class MyLoginDialog(wx.Dialog):
 			return
 		else:
 			cookie = ';'.join(resp.headers['set-cookie'].split(','))
-			write_config('Login', {'UserID': userid, 'Password': pwd, 'Cookie': cookie, 'Host': host, 'AutoLogin': autologin})
+			write_config('Login', \
+				{'UserID': userid, \
+				'Password': pwd, \
+				'Cookie': cookie, \
+				'Host': host, \
+				'AutoLogin': autologin, \
+				'RememberPassword': rememberpwd, \
+    		      		'Proxy': useproxy, \
+    		      		'ProxyHost': p_host, \
+    		      		'ProxyPort': p_port, \
+    		      		'ProxyUser': p_user, \
+    		      		'ProxyPwd': p_pwd, \
+				})
 			wx.MessageBox(_('Login OK. Prepare to upload files.'), _('Login'), wx.ICON_INFORMATION)
 			update_title()
 			if self.Parent.to_upload:

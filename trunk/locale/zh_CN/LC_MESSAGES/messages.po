@@ -713,12 +713,12 @@ msgid "Proxy Settings"
 msgstr "代理设置"
 
 msgid "Host"
-msgstr "代理设置"
+msgstr "主机"
 
 msgid "Port"
-msgstr "代理设置"
+msgstr "端口"
 
 msgid "Username"
-msgstr "代理设置"
+msgstr "用户名"
 
 
