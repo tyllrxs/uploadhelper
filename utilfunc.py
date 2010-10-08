@@ -293,9 +293,12 @@ def remove_config(section, option = ''):
 	except:
 		pass
 
-def perfect_connect(url, post = '', retry = False):
+def perfect_connect(url, post = '', retry = False, proxy = ''):
 	req = urllib2.Request(url, post)
 	req.add_header('Cookie', read_config('Login', 'Cookie'))
+	if proxy:
+		opener = urllib2.build_opener(urllib2.ProxyHandler({'http':proxy}))
+		urllib2.install_opener(opener)
 	try:		    
 		resp = urllib2.urlopen(req)
 	except urllib2.HTTPError, e:  

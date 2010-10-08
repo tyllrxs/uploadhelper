@@ -601,6 +601,12 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.cookie = self.get_cookie()
 	self.newhost = self.get_new_host()
 	
+	if read_config_bool('Login', 'Proxy', False):
+		self.proxy = 'http://%s:%s@%s:%s' % (read_config('Login', 'ProxyUser'), read_config('Login', 'ProxyPwd'), \
+						read_config('Login', 'ProxyHost'), read_config('Login', 'ProxyPort'))
+	else:
+		self.proxy = ''
+		
 	self.enable_resize = read_config_bool('Resize', 'Resize', True)
 	if self.enable_resize:
 		self.resize_width = read_config_int('Resize', 'ResizeWidth', 1000)
