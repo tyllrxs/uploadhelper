@@ -705,3 +705,20 @@ msgstr "注册"
 
 msgid "Remember"
 msgstr "记住"
+
+msgid "Use proxy"
+msgstr "使用代理"
+
+msgid "Proxy Settings"
+msgstr "代理设置"
+
+msgid "Host"
+msgstr "代理设置"
+
+msgid "Port"
+msgstr "代理设置"
+
+msgid "Username"
+msgstr "代理设置"
+
+
