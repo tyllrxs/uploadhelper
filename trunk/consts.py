@@ -29,7 +29,9 @@ FallinSnow, wpbirch, DragonZhao, iloveac, rat, FedoraCore, qrupdhlcn,
 ssnake, fisio, SuperColin, droople, zhangga, lancyl, andyhqa, CAtom, 
 Odom, GFW, CHGS, gotogoal, feisty, marcus, overboming, sixtongtong, 
 dymm, alexjiang, tearring, dashuai, raxodus, BetterLife, eagleonhill, 
-humor, followsun, RedComet, ky, cosx, ArieShout
+humor, followsun, RedComet, ky, cosx, ArieShout, webbie, limilaw, 
+RVP, phosphor, Marvin, elflying, Zack, wil, zzlydm, tinypig, boliwa, 
+easygone
 '''
 
 # Set directories to save data

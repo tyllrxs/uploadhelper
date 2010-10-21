@@ -130,7 +130,7 @@ class MyLoginDialog(wx.Dialog):
 	if userid == '' or pwd == '':
 		wx.MessageBox(MSG_FILL_BLANKS, _('Login'), wx.ICON_EXCLAMATION)
 		return
-	if self.chkProxy.IsChecked():
+	if useproxy:
 		proxy = 'http://%s:%s@%s:%s' % (p_user, p_pwd, p_host, p_port)
 		opener = urllib2.build_opener(urllib2.ProxyHandler({'http':proxy}), SmartRedirectHandler())
 	else:
@@ -155,7 +155,6 @@ class MyLoginDialog(wx.Dialog):
 			cookie = ';'.join(resp.headers['set-cookie'].split(','))
 			write_config('Login', \
 				{'UserID': userid, \
-				'Password': pwd, \
 				'Cookie': cookie, \
 				'Host': host, \
 				'AutoLogin': autologin, \
@@ -166,6 +165,8 @@ class MyLoginDialog(wx.Dialog):
     		      		'ProxyUser': p_user, \
     		      		'ProxyPwd': p_pwd, \
 				})
+			if rememberpwd:
+				write_config('Login', {'Password': pwd})
 			wx.MessageBox(_('Login OK. Prepare to upload files.'), _('Login'), wx.ICON_INFORMATION)
 			update_title()
 			if self.Parent.to_upload:
@@ -918,7 +919,7 @@ class MyAboutDialog(wx.Dialog):
 		
         self.notebook_pane2 = wx.Panel(self.notebook, -1)
         self.label_1 = wx.StaticText(self.notebook_pane2)
-        self.label_1.SetLabel(_('Thanks for advice and feedback from following IDs:'))
+        self.label_1.SetLabel('%s: (%s)' % (_('Thanks for advice and feedback from following IDs'), _('in alphabetical order')))
         self.txtCredits = wx.TextCtrl(self.notebook_pane2, -1, size=(400, 100), style=wx.TE_MULTILINE|wx.TE_READONLY)
 
         self.txtLink = wx.HyperlinkCtrl(self, -1, _('Visit Homepage'), HOMEPAGE)
@@ -931,7 +932,9 @@ class MyAboutDialog(wx.Dialog):
 	
     def __set_properties(self):
         self.SetTitle(_("About"))
-        self.txtCredits.SetValue(', '.join([item.strip() for item in CREDITS.split(',')]))
+        credit_list = [item.strip() for item in CREDITS.split(',')]
+        credit_list.sort()
+        self.txtCredits.SetValue(', '.join(credit_list))
 
     def __do_layout(self):
         sizer = wx.BoxSizer(wx.VERTICAL)

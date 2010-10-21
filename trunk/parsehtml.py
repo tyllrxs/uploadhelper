@@ -11,14 +11,15 @@ def prettify_html(html):
 def parse_html_images(html):
 	soup = BeautifulSoup(html)
 	urls = []
+	image_tags = ('real_src', 'src')
 	num = 1
 	for image in soup.findAll('img'):
-		try:
-			urls.append(image['src'])
-			image.replaceWith('[[Image %d: %s]]' % (num, image['src']))
-			num += 1
-		except:
-			pass
+		for tag in image_tags:
+			if image.has_key(tag):
+				urls.append(image[tag])
+				image.replaceWith('[[Image %d: %s]]' % (num, image[tag]))
+				num += 1
+				break
 	return urls, str(soup)
 
 def parse_html_texts(html):
