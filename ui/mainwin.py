@@ -387,7 +387,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	return read_config('Login', 'AutoLogin')
 
     def get_proxy(self):
-	if not read_config_bool('Login', 'Proxy', 'False')
+	if not read_config_bool('Login', 'Proxy', 'False'):
 		return ''
 	p_host = read_config('Login', 'ProxyHost')
 	p_port = read_config('Login', 'ProxyPort')
