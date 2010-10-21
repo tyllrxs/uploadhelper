@@ -385,7 +385,17 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	
     def get_auto_login(self):
 	return read_config('Login', 'AutoLogin')
-	
+
+    def get_proxy(self):
+	if not read_config_bool('Login', 'Proxy', 'False')
+		return ''
+	p_host = read_config('Login', 'ProxyHost')
+	p_port = read_config('Login', 'ProxyPort')
+	p_user = read_config('Login', 'ProxyUser')
+	p_pwd = read_config('Login', 'ProxyPwd')
+	proxy = 'http://%s:%s@%s:%s' % (p_user, p_pwd, p_host, p_port)
+	return proxy
+		
     def get_dialog_path(self):
     	try:
     		path = read_config('Upload', 'DefaultPath').decode('unicode_escape')
@@ -409,7 +419,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     def OnmnuLogoutClick(self, evt):
     	if wx.NO == wx.MessageBox(_('Are you sure to logout?'), _('Confirm'), wx.YES_NO|wx.NO_DEFAULT|wx.ICON_EXCLAMATION):
     		return
-	LogoutThread(self.get_host(), self.get_cookie())
+	LogoutThread(self)
 	
     def OnmnuPreferenceClick(self, evt):
     	dialog = MySettingDialog(self)
@@ -600,12 +610,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.board = self.get_board_name()
 	self.cookie = self.get_cookie()
 	self.newhost = self.get_new_host()
-	
-	if read_config_bool('Login', 'Proxy', False):
-		self.proxy = 'http://%s:%s@%s:%s' % (read_config('Login', 'ProxyUser'), read_config('Login', 'ProxyPwd'), \
-						read_config('Login', 'ProxyHost'), read_config('Login', 'ProxyPort'))
-	else:
-		self.proxy = ''
+	self.proxy = self.get_proxy()
 		
 	self.enable_resize = read_config_bool('Resize', 'Resize', True)
 	if self.enable_resize:
@@ -694,9 +699,11 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			return
 	self.btnPost.Disable()
 	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
-		urllib.urlencode({'title': post_title.encode('gb18030'), 
-				'signature': self.txtSignature.GetValue(),
-				'text': post_content.encode('gb18030')}))
+				urllib.urlencode({'title': post_title.encode('gb18030'), 
+						'signature': self.txtSignature.GetValue(),
+						'text': post_content.encode('gb18030')}), 
+				proxy = self.get_proxy()
+				)
 	self.btnPost.Enable()
 	if info == '':
 		wx.MessageBox('%s %s.' % (_('Post Successfully to Board'), self.get_board_name(True)), _('Post Article'), wx.ICON_INFORMATION)
@@ -869,7 +876,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
 	try:
 		if read_config_bool('General', 'LogoutOnExit', False):
-			LogoutThread(self.get_host(), self.get_cookie(), quiet=True)
+			LogoutThread(self, quiet=True)
 		self.trayicon.Destroy()
 	except:
 		pass	

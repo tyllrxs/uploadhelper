@@ -667,8 +667,11 @@ msgstr "详细信息"
 msgid "Credits"
 msgstr "致谢"
 
-msgid "Thanks for advice and feedback from following IDs:"
-msgstr "感谢下列 ID 的建议和反馈："
+msgid "Thanks for advice and feedback from following IDs"
+msgstr "感谢下列 ID 的建议和反馈"
+
+msgid "in alphabetical order"
+msgstr "以字母为序"
 
 msgid "Preserve original EXIF"
 msgstr "保留原有的 EXIF"
