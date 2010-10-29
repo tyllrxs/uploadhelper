@@ -45,6 +45,5 @@ class LogoutThread(Thread):
  
     #----------------------------------------------------------------------
     def sendInfo(self):
-	if not self.quiet:
-		Publisher().sendMessage("update", '%s|%s' % ('Logout', self.info))
+	Publisher().sendMessage("update", '%s|%s|%d' % ('Logout', self.info, self.quiet))
 	
