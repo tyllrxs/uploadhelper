@@ -233,7 +233,7 @@ class MySettingDialog(wx.Dialog):
         self.label_10 = wx.StaticText(self.notebook_pane4, -1, _("Username"))
         self.txtProxyUser = wx.TextCtrl(self.notebook_pane4, -1, "")
         self.label_11 = wx.StaticText(self.notebook_pane4, -1, _("Password"))
-        self.txtProxyPwd = wx.TextCtrl(self.notebook_pane4, -1, "")
+        self.txtProxyPwd = wx.TextCtrl(self.notebook_pane4, -1, "", style=wx.TE_PASSWORD)
         
         self.btnOK = wx.Button(self, wx.ID_OK, _("OK"))
         self.btnCancel = wx.Button(self, wx.ID_CANCEL, _("Cancel"))
@@ -267,6 +267,11 @@ class MySettingDialog(wx.Dialog):
     	self.OnchkPreUploadClearArticleClick(evt)
     	self.chkNoUpload.SetValue(read_config_bool('General', 'NoUpload', False))
     	self.chkAutoUpdate.SetValue(read_config_bool('General', 'AutoUpdate', True))
+    	self.chkProxy.SetValue(read_config_bool('Login', 'Proxy', False))
+	self.txtProxyHost.SetValue(read_config('Login', 'ProxyHost'))
+	self.txtProxyPort.SetValue(read_config('Login', 'ProxyPort'))
+	self.txtProxyUser.SetValue(read_config('Login', 'ProxyUser'))
+	self.txtProxyPwd.SetValue(read_config('Login', 'ProxyPwd'))
     			
     def __do_layout(self):
         sizer_1 = wx.BoxSizer(wx.VERTICAL)
@@ -279,7 +284,7 @@ class MySettingDialog(wx.Dialog):
         sizer_11 = wx.StaticBoxSizer(self.staticbox2, wx.VERTICAL)
         sizer_14 = wx.StaticBoxSizer(self.staticbox3, wx.VERTICAL)
         sizer_15 = wx.StaticBoxSizer(self.staticbox4, wx.VERTICAL)
-        sizer_19 = wx.StaticBoxSizer(self.staticbox4, wx.VERTICAL)
+        sizer_19 = wx.StaticBoxSizer(self.staticbox5, wx.VERTICAL)
         sizer_6 = wx.BoxSizer(wx.VERTICAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_12 = wx.StaticBoxSizer(self.staticbox1, wx.VERTICAL)
@@ -334,14 +339,14 @@ class MySettingDialog(wx.Dialog):
         sizer_8.Add(self.chkAutoUpdate, 0, wx.ALL, 5)
         self.notebook_pane3.SetSizer(sizer_8)
         
-        sizer_18.Add(self.chkAutoUpdate, 0, wx.ALL, 5)
-        grid_sizer_1.Add(self.label_4, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_18.Add(self.chkProxy, 0, wx.ALL, 5)
+        grid_sizer_1.Add(self.label_8, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
 	grid_sizer_1.Add(self.txtProxyHost, 0, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 5)
-	grid_sizer_1.Add(self.label_5, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+	grid_sizer_1.Add(self.label_9, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
 	grid_sizer_1.Add(self.txtProxyPort, 0, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 5)
-	grid_sizer_1.Add(self.label_6, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+	grid_sizer_1.Add(self.label_10, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
 	grid_sizer_1.Add(self.txtProxyUser, 0, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 5)
-	grid_sizer_1.Add(self.label_7, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+	grid_sizer_1.Add(self.label_11, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
 	grid_sizer_1.Add(self.txtProxyPwd, 0, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_VERTICAL, 5)
 	grid_sizer_1.AddGrowableCol(1)
 	grid_sizer_1.AddGrowableCol(3)
@@ -389,6 +394,13 @@ class MySettingDialog(wx.Dialog):
     			'NoUpload': self.chkNoUpload.IsChecked(), \
     			'AutoUpdate': self.chkAutoUpdate.IsChecked(), \
     			})
+    		write_config('Login', 
+			{'Proxy': self.chkProxy.IsChecked(), \
+	      		'ProxyHost': self.txtProxyHost.GetValue(), \
+	      		'ProxyPort': self.txtProxyPort.GetValue(), \
+	      		'ProxyUser': self.txtProxyUser.GetValue(), \
+	      		'ProxyPwd': self.txtProxyPwd.GetValue(), \
+			})
     	except:
     		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
     	self.Close()
