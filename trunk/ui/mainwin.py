@@ -881,6 +881,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	if read_config_bool('General', 'LogoutOnExit', False) and self.get_user_id():
 		wx.ProgressDialog(_('Logout'), '%s...' % _('Logging out'), style=wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
 		LogoutThread(self, quiet=True)
+		return
 	self.Destroy()
 
     def updateDisplay(self, msg):
