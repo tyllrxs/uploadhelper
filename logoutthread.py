@@ -42,7 +42,7 @@ class LogoutThread(Thread):
 		else:
 			self.info = 'OK'
         wx.CallAfter(self.sendInfo)
- 
+	          
     #----------------------------------------------------------------------
     def sendInfo(self):
 	Publisher().sendMessage("update", '%s|%s|%d' % ('Logout', self.info, self.quiet))
