@@ -709,6 +709,9 @@ msgstr "注册"
 msgid "Remember"
 msgstr "记住"
 
+msgid "Network Proxy"
+msgstr "网络代理"
+
 msgid "Use proxy"
 msgstr "使用代理"
 
