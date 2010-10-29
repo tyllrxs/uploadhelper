@@ -876,11 +876,11 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
 	try:
 		self.trayicon.Destroy()
-		if read_config_bool('General', 'LogoutOnExit', False) and self.get_user_id():
-			wx.ProgressDialog(_('Logout'), '%s...' % _('Logging out'), style=wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
-			LogoutThread(self, quiet=True)
 	except:
-		pass	
+		pass
+	if read_config_bool('General', 'LogoutOnExit', False) and self.get_user_id():
+		wx.ProgressDialog(_('Logout'), '%s...' % _('Logging out'), style=wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
+		LogoutThread(self, quiet=True)
 	self.Destroy()
 
     def updateDisplay(self, msg):
