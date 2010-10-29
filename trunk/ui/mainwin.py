@@ -879,10 +879,20 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	except:
 		pass
 	if read_config_bool('General', 'LogoutOnExit', False) and self.get_user_id():
-		wx.ProgressDialog(_('Logout'), '%s...' % _('Logging out'), style=wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
-		LogoutThread(self, quiet=True)
+		self.dlgWait = wx.ProgressDialog(_('Logout'), '%s...' % _('Logging out'), style=wx.PD_APP_MODAL|wx.PD_AUTO_HIDE|wx.PD_CAN_ABORT)
+		self.mythread = LogoutThread(self, quiet=True)
+		self.timer = wx.Timer(self)
+		self.Bind(wx.EVT_TIMER, self.OnTimer, self.timer)
+		self.timer.Start(300)
 		return
 	self.Destroy()
+
+    def OnTimer(self, evt):
+    	resp = self.dlgWait.Update(0)
+	if not resp[0]:
+		self.timer.Stop()
+		self.dlgWait.Destroy()
+		self.Destroy()
 
     def updateDisplay(self, msg):
         """
