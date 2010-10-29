@@ -875,9 +875,10 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	except:
 		wx.MessageBox(MSG_SAVE_SETTINGS_ERROR, MSG_ERROR, wx.ICON_ERROR)
 	try:
-		if read_config_bool('General', 'LogoutOnExit', False):
-			LogoutThread(self, quiet=True)
 		self.trayicon.Destroy()
+		if read_config_bool('General', 'LogoutOnExit', False) and self.get_user_id():
+			wx.ProgressDialog(_('Logout'), '%s...' % _('Logging out'), style=wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
+			LogoutThread(self, quiet=True)
 	except:
 		pass	
 	self.Destroy()
@@ -935,12 +936,19 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 					wx.MessageBox(_('You are using the latest version.'), MSG_CHECK_UPDATE, wx.ICON_INFORMATION)
 	elif t.startswith('Logout|'):
 		if t.split('|')[1] == 'OK':
-			wx.MessageBox('%s %s' % (self.get_user_id(), _('has logged out.')), _('Logout'), wx.ICON_INFORMATION)
-			remove_config('Login')
-			update_title()
+			if t.endswith('|0'):
+				wx.MessageBox('%s %s' % (self.get_user_id(), _('has logged out.')), _('Logout'), wx.ICON_INFORMATION)
+			write_config('Login', {'UserID': '', 'Password': '', 'Cookie': ''})
+			if t.endswith('|0'):
+				update_title()
+			else:
+				sys.exit(0)
 		else:
-			tips = t.split('|')
-			wx.MessageBox(tips[2], tips[1])
+			if t.endswith('|0'):
+				tips = t.split('|')
+				wx.MessageBox(tips[2], tips[1])
+			else:
+				sys.exit(0)
 
 
 # end of class MyFrame

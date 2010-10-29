@@ -167,6 +167,8 @@ class MyLoginDialog(wx.Dialog):
 				})
 			if rememberpwd:
 				write_config('Login', {'Password': pwd})
+			else:
+				remove_config('Login', 'Password')
 			wx.MessageBox(_('Login OK. Prepare to upload files.'), _('Login'), wx.ICON_INFORMATION)
 			update_title()
 			if self.Parent.to_upload:

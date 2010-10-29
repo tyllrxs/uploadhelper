@@ -724,4 +724,5 @@ msgstr "端口"
 msgid "Username"
 msgstr "用户名"
 
-
+msgid "Logging out"
+msgstr "正在注销"
