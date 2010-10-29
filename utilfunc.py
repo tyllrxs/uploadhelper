@@ -323,7 +323,10 @@ def perfect_connect(url, post = '', retry = False, proxy = ''):
 				userid = read_config('Login', 'UserID')
 				pwd = read_config('Login', 'Password')
 				if userid and pwd:
-					opener = urllib2.build_opener(SmartRedirectHandler())  
+					if proxy:
+						opener = urllib2.build_opener(urllib2.ProxyHandler({'http':proxy}), SmartRedirectHandler())
+					else:
+						opener = urllib2.build_opener(SmartRedirectHandler())  
 					urllib2.install_opener(opener)  
 					req2 = urllib2.Request('http://%s/bbs/login' % BBS_HOSTS[host], urllib.urlencode({'id': userid, 'pw': pwd}))  
 					try:
