@@ -729,3 +729,9 @@ msgstr "用户名"
 
 msgid "Logging out"
 msgstr "正在注销"
+
+msgid "Anonymous"
+msgstr "匿名"
+
+msgid "For anonymous boards"
+msgstr "仅对匿名版有效"
