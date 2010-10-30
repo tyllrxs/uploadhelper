@@ -58,6 +58,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         self.cmbPostZone = wx.ComboBox(self.notebook_pane2, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
         self.cmbPostBoard = wx.ComboBox(self.notebook_pane2, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
         self.btnPost = wx.Button(self.notebook_pane2, -1, _("Post"))
+        self.chkAnonymous = wx.CheckBox(self.notebook_pane2, -1, '%s(%s)' % (_("Anonymous"), _("For anonymous boards")))
         self.label_5 = wx.StaticText(self.notebook_pane3, -1, _("Copy the Webpage Fraction to Clipboard, then Click"))
         self.btnReship = wx.Button(self.notebook_pane3, -1, _("Start Reshipping"))
         self.txtReship = wx.TextCtrl(self.notebook_pane3, -1, "", style=wx.TE_MULTILINE|wx.TE_READONLY)
@@ -220,6 +221,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	wx.lib.mixins.listctrl.ColumnSorterMixin.__init__(self, self.lstUpFile.GetColumnCount())
 		
 	self.txtSignature.SetValue(read_config_int('Upload', 'PostSignature', 1))
+	self.chkAnonymous.SetValue(read_config_bool('Upload', 'PostAnonymous', True))
 	self.chkReshipIgnore.SetValue(read_config_bool('Upload', 'ReshipIgnore', True))
 	
 	# combine popup menu id and text
@@ -266,6 +268,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         sizer_4 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_3 = wx.StaticBoxSizer(self.sizer_3_staticbox, wx.HORIZONTAL)
         sizer_11 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_12 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_3.Add(self.cmbZone, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_3.Add(self.cmbBoard, 2, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_3.Add(self.chkLock, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -289,7 +292,10 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         sizer_8.Add(self.cmbPostZone, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_8.Add(self.cmbPostBoard, 2, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_6.Add(sizer_8, 0, wx.ALL|wx.EXPAND, 5)
-        sizer_6.Add(self.btnPost, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL|wx.SHAPED, 5)
+        sizer_12.Add((20, 20), 1, 0, 0)
+        sizer_12.Add(self.btnPost, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_12.Add(self.chkAnonymous, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_6.Add(sizer_12, 0, wx.ALL|wx.EXPAND, 5)
         self.notebook_pane2.SetSizer(sizer_6)
         sizer_10.Add(self.label_5, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_10.Add(self.btnReship, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -700,8 +706,10 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.btnPost.Disable()
 	info = perfect_connect('http://%s/bbs/snd?bid=%s' % (self.get_host(), self.get_board_id(True)),
 				urllib.urlencode({'title': post_title.encode('gb18030'), 
-						'signature': self.txtSignature.GetValue(),
-						'text': post_content.encode('gb18030')}), 
+						'sig': self.txtSignature.GetValue(),
+						'text': post_content.encode('gb18030'),
+						'anony': int(self.chkAnonymous.IsChecked()),
+						}), 
 				proxy = self.get_proxy()
 				)
 	self.btnPost.Enable()
@@ -862,6 +870,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			'PostSignature': self.txtSignature.GetValue(), \
 			'PostZone': self.cmbPostZone.GetSelection(), \
 			'PostBoard': self.cmbPostBoard.GetSelection(), \
+			'PostAnonymous': self.chkAnonymous.IsChecked(), \
 			'ReshipIgnore': self.chkReshipIgnore.IsChecked(), \
 			'ActivePage': self.notebook.GetSelection(), \
 			'ColumnWidths': ','.join([str(self.lstUpFile.GetColumnWidth(col)) for col in xrange(self.lstUpFile.GetColumnCount())]), \
