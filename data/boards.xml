@@ -16,6 +16,7 @@
 		<Complaint name="举报版" bid="306"/>
 		<GoneWithTheWind name="随风飘逝" bid="305"/>
 		<GuangHuaBei name="光华杯" bid="457"/>
+		<Heart name="心灵空间（匿名版）" bid="508"/>
 		<New_Board name="新版申请" bid="5"/>
 		<Notepad name="酸甜苦辣" bid="46"/>
 		<Notice name="警示牌" bid="3"/>
@@ -129,6 +130,7 @@
 	</Zone>
 	<Zone name="电脑技术">
 		<Algorithm name="算法与数据结构" bid="204"/>
+		<Android name="安卓操作系统" bid="506"/>
 		<Arch_Compiler name="体系结构与编译技术" bid="258"/>
 		<Basic name="Basic/Visual Basic" bid="162"/>
 		<C name="C/C++" bid="61"/>
@@ -171,6 +173,7 @@
 		<IQ name="智力乐园" bid="235"/>
 		<Joke name="嘻嘻哈哈" bid="67"/>
 		<MyShow name="王道" bid="419"/>
+		<PhotoGear name="摄影器材" bid="507"/>
 		<Photography name="摄影" bid="78"/>
 		<PIC name="贴图乐园" bid="11"/>
 		<Riddle name="灯谜" bid="79"/>
