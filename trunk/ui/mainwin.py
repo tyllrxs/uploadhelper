@@ -39,7 +39,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         self.notebook_pane3 = wx.Panel(self.notebook, -1)
         self.notebook_pane2 = wx.Panel(self.notebook, -1)
         self.notebook_pane1 = wx.Panel(self.notebook, -1)
-        self.sizer_8_staticbox = wx.StaticBox(self.notebook_pane2, -1, _("Destination"))
+        
         self.sizer_3_staticbox = wx.StaticBox(self.notebook_pane1, -1, _("Destination"))
         self.cmbZone = wx.ComboBox(self.notebook_pane1, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
         self.cmbBoard = wx.ComboBox(self.notebook_pane1, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
@@ -47,18 +47,27 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         self.label_1 = wx.StaticText(self.notebook_pane1, -1, _("Select Files to Upload"))
         self.btnBrowse = wx.Button(self.notebook_pane1, -1, '%s...' % _("Browse"))
         self.lstUpFile = DragList(self.notebook_pane1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
+        self.lblPreviewFilename = wx.StaticText(self.notebook_pane1, -1, "", style=wx.ALIGN_CENTRE)
+        self.imgPreview = wx.StaticBitmap(self.notebook_pane1, -1, size=(180, 180))
+        self.btnPreviewPrev = wx.Button(self.notebook_pane1, -1, "<-", size=(32, -1))
+        self.btnPreviewNext = wx.Button(self.notebook_pane1, -1, "->", size=(32, -1))
+        self.btnPreviewRotate = wx.Button(self.notebook_pane1, -1, _("Rotate"))
+        self.btnPreviewRemove = wx.Button(self.notebook_pane1, -1, _("Remove"))
         self.lblProgress = wx.StaticText(self.notebook_pane1, -1, "")
         self.btnUpload = wx.Button(self.notebook_pane1, -1, _("Upload"))
         self.gagProgress = wx.Gauge(self.notebook_pane1, -1, 100)
+        
         self.label_3 = wx.StaticText(self.notebook_pane2, -1, _("Title"))
         self.txtTitle = wx.TextCtrl(self.notebook_pane2, -1, "")
         self.label_4 = wx.StaticText(self.notebook_pane2, -1, _("Signature"))
         self.txtSignature = wx.SpinCtrl(self.notebook_pane2, -1, "", min=0, max=10)
         self.txtBody = wx.TextCtrl(self.notebook_pane2, -1, "", style=wx.TE_MULTILINE)
+        self.sizer_8_staticbox = wx.StaticBox(self.notebook_pane2, -1, _("Destination"))
         self.cmbPostZone = wx.ComboBox(self.notebook_pane2, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
         self.cmbPostBoard = wx.ComboBox(self.notebook_pane2, -1, choices=[], style=wx.CB_DROPDOWN|wx.CB_READONLY)
         self.btnPost = wx.Button(self.notebook_pane2, -1, _("Post"))
         self.chkAnonymous = wx.CheckBox(self.notebook_pane2, -1, '%s(%s)' % (_("Anonymous"), _("For anonymous boards")))
+        
         self.label_5 = wx.StaticText(self.notebook_pane3, -1, _("Copy the Webpage Fraction to Clipboard, then Click"))
         self.btnReship = wx.Button(self.notebook_pane3, -1, _("Start Reshipping"))
         self.txtReship = wx.TextCtrl(self.notebook_pane3, -1, "", style=wx.TE_MULTILINE|wx.TE_READONLY)
@@ -74,10 +83,15 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.Bind(wx.EVT_COMBOBOX, self.OnPostZoneChange, self.cmbPostZone)
 	self.Bind(wx.EVT_CHECKBOX, self.OnchkLockClick, self.chkLock)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnBrowseClick, self.btnBrowse)
+	self.Bind(wx.EVT_BUTTON, self.OnbtnBrowseClick, self.btnPreviewPrev)
+	self.Bind(wx.EVT_BUTTON, self.OnbtnBrowseClick, self.btnPreviewNext)
+	self.Bind(wx.EVT_BUTTON, self.OnbtnPreviewRotateClick, self.btnPreviewRotate)
+	self.Bind(wx.EVT_BUTTON, self.OnbtnPreviewRotateClick, self.btnPreviewRemove)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnUploadClick, self.btnUpload)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnPostClick, self.btnPost)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnReshipClick, self.btnReship)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnReshipClearAllClick, self.btnReshipClearAll)
+	self.Bind(wx.EVT_LIST_ITEM_FOCUSED, self.OnlstUpFileFocus, self.lstUpFile)
 	# for win32 compatibility issues
 	#self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.OnlstUpFileRClick, self.lstUpFile)
 	self.lstUpFile.Bind(wx.EVT_CONTEXT_MENU, self.OnlstUpFileRClick)
@@ -269,6 +283,11 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         sizer_3 = wx.StaticBoxSizer(self.sizer_3_staticbox, wx.HORIZONTAL)
         sizer_11 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_12 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_14 = wx.BoxSizer(wx.VERTICAL)
+        sizer_15 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_16 = wx.BoxSizer(wx.HORIZONTAL)
+        
         sizer_3.Add(self.cmbZone, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_3.Add(self.cmbBoard, 2, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_3.Add(self.chkLock, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -276,13 +295,25 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         sizer_4.Add(self.label_1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_4.Add(self.btnBrowse, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_4.Add((20, 20), 1, 0, 0)
-        sizer_2.Add(sizer_4, 0, wx.ALL|wx.EXPAND, 5)
-        sizer_2.Add(self.lstUpFile, 1, wx.ALL|wx.EXPAND, 5)
+        sizer_2.Add(sizer_4, 0, wx.LEFT|wx.RIGHT|wx.EXPAND, 5)
+        sizer_13.Add(self.lstUpFile, 1, wx.ALL|wx.EXPAND, 5)
+        sizer_14.Add(self.lblPreviewFilename, 0, wx.ALL, 5)
+        sizer_14.Add(self.imgPreview, 0, wx.ALL|wx.EXPAND, 5)
+        sizer_15.Add(self.btnPreviewPrev, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_15.Add((20, 20), 1, 0, 0)
+        sizer_15.Add(self.btnPreviewNext, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_14.Add(sizer_15, 0, wx.ALL|wx.EXPAND, 0)
+        sizer_16.Add(self.btnPreviewRotate, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_16.Add(self.btnPreviewRemove, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_14.Add(sizer_16, 0, wx.ALL|wx.EXPAND, 0)
+        sizer_13.Add(sizer_14, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
+        sizer_2.Add(sizer_13, 1, wx.LEFT|wx.RIGHT|wx.EXPAND, 5)
         sizer_5.Add(self.lblProgress, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_5.Add(self.btnUpload, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_5.Add(self.gagProgress, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_2.Add(sizer_5, 0, wx.ALL|wx.EXPAND, 5)
         self.notebook_pane1.SetSizer(sizer_2)
+        
         sizer_7.Add(self.label_3, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_7.Add(self.txtTitle, 3, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_7.Add(self.label_4, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -297,6 +328,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         sizer_12.Add(self.chkAnonymous, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_6.Add(sizer_12, 0, wx.ALL|wx.EXPAND, 5)
         self.notebook_pane2.SetSizer(sizer_6)
+        
         sizer_10.Add(self.label_5, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_10.Add(self.btnReship, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_9.Add(sizer_10, 0, wx.ALL|wx.EXPAND, 5)
@@ -306,6 +338,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         sizer_11.Add(self.btnReshipClearAll, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_9.Add(sizer_11, 0, wx.ALL|wx.EXPAND, 5)
         self.notebook_pane3.SetSizer(sizer_9)
+        
         self.notebook.AddPage(self.notebook_pane1, _("Upload Files"))
         self.notebook.AddPage(self.notebook_pane2, _("Post Article"))
         self.notebook.AddPage(self.notebook_pane3, _("Reship Webpage"))
@@ -327,8 +360,8 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 		CheckUpdateThread(False)
 
     def set_window_size(self):
-	w = read_config_int('General', 'WinWidth', 600)
-	h = read_config_int('General', 'WinHeight', 600)
+	w = read_config_int('General', 'WinWidth', 800)
+	h = read_config_int('General', 'WinHeight', 640)
 	self.SetSize(wx.Size(w, h))
         self.Layout()
         self.CentreOnScreen()
@@ -773,6 +806,26 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 
     def OnbtnReshipClearAllClick(self, evt):
 	self.txtReship.SetValue('')
+	
+    def OnlstUpFileFocus(self, evt):
+    	idx = self.lstUpFile.GetFocusedItem()
+    	if idx < 0:
+    		return
+    	fname = self.lstUpFile.GetItem(idx, 1).GetText()
+    	self.lblPreviewFilename.SetLabel(os.path.basename(fname))
+    	if not is_image_file(fname):
+    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
+    		return
+    	img = wx.Image(fname)
+    	w, h = img.GetSize()
+    	if w > 180:
+    		h = h * 180 / w
+    		w = 180
+    	if h > 180:
+    		w = w * 180 / h
+    		h = 180
+    	img = img.Rescale(w, h)
+    	self.imgPreview.SetBitmap(img.ConvertToBitmap())
 
     def OnlstUpFileRClick(self, evt):
     	# create popup menu

@@ -6,7 +6,7 @@ import locale, gettext
 
 APPCODENAME = 'uploadhelper'
 PACKAGE = 'uploadhelper'
-VERSION = '3.983'
+VERSION = '3.99'
 AUTHOR = 'tyllr'
 EMAIL = 'tyllrxs@gmail.com'
 HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
