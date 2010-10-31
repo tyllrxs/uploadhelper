@@ -43,6 +43,11 @@ A blending of the wxWidgets C++ class library with the Python programming langua
 
 http://www.wxpython.org/
 
+-------------------
+Optional Install
+-------------------
+
+The following packages are optional, you may install them only if you want a full-featured version.
 
 3) PIL (Python Imaging Library)
  
