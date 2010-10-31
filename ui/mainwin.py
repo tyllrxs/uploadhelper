@@ -47,7 +47,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         self.label_1 = wx.StaticText(self.notebook_pane1, -1, _("Select Files to Upload"))
         self.btnBrowse = wx.Button(self.notebook_pane1, -1, '%s...' % _("Browse"))
         self.lstUpFile = DragList(self.notebook_pane1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
-        self.lblPreviewFilename = wx.StaticText(self.notebook_pane1, -1, "", style=wx.ALIGN_CENTRE)
+        self.lblPreviewFilename = wx.StaticText(self.notebook_pane1, -1, "")
         self.imgPreview = wx.StaticBitmap(self.notebook_pane1, -1, size=(180, 180))
         self.id_prev = wx.NewId()
         self.id_next = wx.NewId()
@@ -657,6 +657,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     		if w <= 1 and h <= 1:
     			return
     		img = img.Rotate90()
+    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		self.imgPreview.SetBitmap(img.ConvertToBitmap())
     		idx = self.lstUpFile.GetFocusedItem()
     		fname = self.lstUpFile.GetItem(idx, 1).GetText()
@@ -862,15 +863,14 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.txtReship.SetValue('')
 	
     def OnlstUpFileFocus(self, evt):
+    	self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     	idx = self.lstUpFile.GetFocusedItem()
     	if idx < 0:
     		self.lblPreviewFilename.SetLabel('')
-    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
     	fname = self.lstUpFile.GetItem(idx, 1).GetText()
     	self.lblPreviewFilename.SetLabel('%d) %s' % (idx + 1, os.path.basename(fname)))
     	if not is_image_file(fname):
-    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
     	try:
 	    	img = wx.Image(fname)
@@ -885,7 +885,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	    		img = img.Rescale(w, h)
 	    	self.imgPreview.SetBitmap(img.ConvertToBitmap())
 	except:
-		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
+		pass
 
     def OnlstUpFileRClick(self, evt):
     	# create popup menu
