@@ -190,7 +190,7 @@ def is_image_file(fname):
 		return False
 		
 def is_jpeg_file(fname):
-	if re.match(r'.*\.(jpe?g)$', fname, re.I):
+	if re.match(r'.*\.jpe?g$', fname, re.I):
 		return True
 	else:
 		return False
@@ -202,6 +202,14 @@ def get_file_type(fname):
 		return ''
 	else:
 		return ext
+
+def get_bitmap_type(fname):
+	if re.match(r'.*\.png$', fname, re.I):
+		return wx.BITMAP_TYPE_PNG
+	elif re.match(r'.*\.gif$', fname, re.I):
+		return wx.BITMAP_TYPE_GIF
+	else:
+		return wx.BITMAP_TYPE_JPEG
 
 def search_files(path, expr = '.*'):
 	min_size = read_config_int('General', 'MinFileSize', 0)

@@ -659,20 +659,20 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     		idx = self.lstUpFile.GetFocusedItem()
     		fname = self.lstUpFile.GetItem(idx, 1).GetText()
     		newfile = get_temp_filename(fname, '_rotate')
-    		img.SaveFile(newfile, 0)
+    		img.SaveFile(newfile, get_bitmap_type(newfile))
     		self.lstUpFile.SetStringItem(idx, 1, newfile)
+    		self.lblPreviewFilename.SetLabel(os.path.basename(newfile))
 	except:
 		pass
 
     def OnbtnPreviewRemoveClick(self, evt):
     	idx = self.lstUpFile.GetFocusedItem()
     	self.lstUpFile.DeleteItem(idx)
-    	self.list_re_number()
     	total = self.lstUpFile.GetItemCount()
     	if idx >= total:
     		idx = total - 1
     	self.focus_item(idx)
-	self.OnlstUpFileFocus('')
+	self.list_re_number()
 		
     def OnbtnUploadClick(self, evt):
     	self.to_upload = False
@@ -765,7 +765,8 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	for i in xrange(self.lstUpFile.GetItemCount()):
 		self.lstUpFile.SetStringItem(i, 0, str(i+1))
 		self.itemDataMap[self.lstUpFile.GetItemData(i)][0] = i + 1
-
+	self.OnlstUpFileFocus('')
+	
     def OnbtnPostClick(self, evt):
     	self.to_post = False
 	self.lstUpFile.DeleteAllItems()
