@@ -2,7 +2,9 @@
 
 try:
 	from PIL import Image, ImageDraw, ImageChops, ImageEnhance, ImageFont
+	has_pil = True
 except ImportError:
+	has_pil = False
 	print 'No PIL library found. Program may not be fully featured.'	
 
 import os	
@@ -11,25 +13,50 @@ from utilfunc import *
 
 def do_resize(imagefile, width, height, quality=0):
     """Resize image.""" 
-    try: 
-	    qualities = (Image.NEAREST, Image.BILINEAR, Image.BICUBIC, Image.ANTIALIAS)
-	    im = Image.open(imagefile)
-	    w, h = im.size
-	    if w > width or h > height:
-		    if w > width:
-		    	h = width * h / w
-		    	w = width	
-		    if h > height:
-		    	w = height * w / h
-		    	h = height
-		    im = im.resize((w, h), qualities[quality])
-		    newfile = get_temp_filename(imagefile, '_resize')
-		    im.save(newfile)
-	    else:
-	    	newfile = imagefile
-	    return newfile
-    except:
-	    return ''	    
+    global has_pil
+    if has_pil:
+    	qualities = (Image.NEAREST, Image.BILINEAR, Image.BICUBIC, Image.ANTIALIAS)
+    	try: 
+	    	im = Image.open(imagefile)
+	    	w, h = im.size
+	    	if w > width or h > height:
+		    	if w > width:
+		    		h = width * h / w
+		    		w = width	
+		    	if h > height:
+		    		w = height * w / h
+		    		h = height
+		    	im = im.resize((w, h), qualities[quality])
+		    	newfile = get_temp_filename(imagefile, '_resize')
+		    	im.save(newfile)
+	    	else:
+	    		newfile = imagefile
+	    	return newfile
+    	except:
+	    	return ''
+    else:
+    	qualities = (wx.IMAGE_QUALITY_NORMAL, wx.IMAGE_QUALITY_HIGH)
+    	try:
+    		im = wx.Image(imagefile)
+    		w, h = im.GetSize()
+    		if w > width or h > height:
+		    	if w > width:
+		    		h = width * h / w
+		    		w = width	
+		    	if h > height:
+		    		w = height * w / h
+		    		h = height
+		    	if quality > 1:
+		    		im = im.Rescale(w, h, qualities[1])
+		    	else:
+		    		im = im.Rescale(w, h)
+		    	newfile = get_temp_filename(imagefile, '_resize')
+		    	im.SaveFile(newfile, get_bitmap_type(newfile))
+		else:
+			newfile = imagefile
+		return newfile
+    	except:
+	    	return ''	    
 
 def get_mark_position(im_size, mark_size, position=0, padding=0):
     if position == 0:
