@@ -884,6 +884,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	    			w = w * 180 / h
 	    			h = 180
 	    		img = img.Rescale(w, h)
+	    	self.imgPreview.SetSize((180, 180))
 	    	self.imgPreview.SetBitmap(img.ConvertToBitmap())
 	except:
 		pass
