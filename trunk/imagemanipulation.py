@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+has_pil = True
 try:
 	from PIL import Image, ImageDraw, ImageChops, ImageEnhance, ImageFont
-	has_pil = True
 except ImportError:
 	has_pil = False
 	print 'No PIL library found. Program may not be fully featured.'	
