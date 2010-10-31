@@ -651,20 +651,21 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.OnlstUpFileFocus('')
 	
     def OnbtnPreviewRotateClick(self, evt):
+    	idx = self.lstUpFile.GetFocusedItem()
+    	if idx < 0:
+    		return
+    	fname = self.lstUpFile.GetItem(idx, 1).GetText()
+    	if not is_image_file(fname):
+    		return
     	try:
-    		img = wx.ImageFromBitmap(self.imgPreview.GetBitmap())
-    		w, h = img.GetSize()
-    		if w <= 1 and h <= 1:
-    			return
-    		img = img.Rotate90()
-    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
-    		self.imgPreview.SetBitmap(img.ConvertToBitmap())
-    		idx = self.lstUpFile.GetFocusedItem()
-    		fname = self.lstUpFile.GetItem(idx, 1).GetText()
+	    	img = wx.Image(fname)
+	    	img = img.Rotate90()
+	    	if fname.lower().endswith('.gif'):
+    			fname = fname[:-4] + '.png'
     		newfile = get_temp_filename(fname, '_rotate')
     		img.SaveFile(newfile, get_bitmap_type(newfile))
-    		self.lstUpFile.SetStringItem(idx, 1, newfile)
-    		self.lblPreviewFilename.SetLabel('%d) %s' % (idx + 1, os.path.basename(newfile)))
+	    	self.lstUpFile.SetStringItem(idx, 1, newfile)
+	    	self.OnlstUpFileFocus('')
 	except:
 		pass
 
