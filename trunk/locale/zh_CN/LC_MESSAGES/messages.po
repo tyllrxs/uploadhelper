@@ -738,3 +738,9 @@ msgstr "仅对匿名版有效"
 
 msgid "Rotate"
 msgstr "旋转"
+
+msgid "Preview images"
+msgstr "预览图片"
+
+msgid "Require restarting"
+msgstr "需要重启"
