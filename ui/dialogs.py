@@ -210,6 +210,7 @@ class MySettingDialog(wx.Dialog):
         self.chkSubFolder = wx.CheckBox(self.notebook_pane2, -1, _("Search for Subfolders"))
         self.chkHighlight = wx.CheckBox(self.notebook_pane2, -1, '%s (KB)' % _("Highlight when file size is larger than"))
         self.txtFileNoLarger = wx.SpinCtrl(self.notebook_pane2, -1, "", size=(100, -1), min=0, max=9999)
+        self.chkPreviewImage = wx.CheckBox(self.notebook_pane2, -1, "%s (%s)" % (_("Preview images"), _("Require restarting")))
         
         self.notebook_pane3 = wx.Panel(self.notebook, -1)
         self.staticbox2 = wx.StaticBox(self.notebook_pane3, -1, _("Template to Post Article"))
@@ -258,6 +259,7 @@ class MySettingDialog(wx.Dialog):
     	self.txtFileNoLarger.SetValue(read_config_int('General', 'FileNoLarger', 1024))
     	evt = wx.CommandEvent()
     	self.OnchkHighlightClick(evt)
+    	self.chkPreviewImage.SetValue(read_config_bool('General', 'PreviewImage', True))
     	self.txtTitleTemplate.SetValue(read_config('General', 'TitleTemplate', '').decode('unicode_escape'))
     	self.txtTemplate.SetValue(read_config('General', 'Template', '').decode('unicode_escape'))
     	self.cmbFileURL.SetSelection(read_config_int('General', 'FileURL', 0))
@@ -320,6 +322,7 @@ class MySettingDialog(wx.Dialog):
         sizer_13.Add(self.chkHighlight, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_13.Add(self.txtFileNoLarger, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_6.Add(sizer_13, 0, wx.EXPAND, 0)
+        sizer_6.Add(self.chkPreviewImage, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         self.notebook_pane2.SetSizer(sizer_6)
         
         mysizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -385,6 +388,7 @@ class MySettingDialog(wx.Dialog):
     			'SubFolder': self.chkSubFolder.IsChecked(), \
     			'Highlight': self.chkHighlight.IsChecked(), \
     			'FileNoLarger': self.txtFileNoLarger.GetValue(), \
+    			'PreviewImage': self.chkPreviewImage.IsChecked(), \
     			'TitleTemplate': self.txtTitleTemplate.GetValue().encode('unicode_escape'), \
     			'Template': self.txtTemplate.GetValue().encode('unicode_escape'), \
     			'FileURL': self.cmbFileURL.GetSelection(), \

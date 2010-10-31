@@ -309,6 +309,8 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         sizer_16.Add(self.btnPreviewRemove, 1, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_14.Add(sizer_16, 0, wx.ALL|wx.EXPAND, 0)
         sizer_13.Add(sizer_14, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
+        if not read_config_bool('General', 'PreviewImage', True):
+        	sizer_13.Hide(1)
         sizer_2.Add(sizer_13, 1, wx.LEFT|wx.RIGHT|wx.EXPAND, 5)
         sizer_5.Add(self.lblProgress, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
         sizer_5.Add(self.btnUpload, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
@@ -428,7 +430,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	return read_config('Login', 'AutoLogin')
 
     def get_proxy(self):
-	if not read_config_bool('Login', 'Proxy', 'False'):
+	if not read_config_bool('Login', 'Proxy', False):
 		return ''
 	p_host = read_config('Login', 'ProxyHost')
 	p_port = read_config('Login', 'ProxyPort')
@@ -661,7 +663,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     		newfile = get_temp_filename(fname, '_rotate')
     		img.SaveFile(newfile, get_bitmap_type(newfile))
     		self.lstUpFile.SetStringItem(idx, 1, newfile)
-    		self.lblPreviewFilename.SetLabel(os.path.basename(newfile))
+    		self.lblPreviewFilename.SetLabel('%d) %s' % (idx + 1, os.path.basename(newfile)))
 	except:
 		pass
 
@@ -866,7 +868,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
     	fname = self.lstUpFile.GetItem(idx, 1).GetText()
-    	self.lblPreviewFilename.SetLabel(os.path.basename(fname))
+    	self.lblPreviewFilename.SetLabel('%d) %s' % (idx + 1, os.path.basename(fname)))
     	if not is_image_file(fname):
     		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
