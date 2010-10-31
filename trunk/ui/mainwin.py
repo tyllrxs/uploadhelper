@@ -49,8 +49,10 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         self.lstUpFile = DragList(self.notebook_pane1, style=wx.LC_REPORT|wx.SUNKEN_BORDER)
         self.lblPreviewFilename = wx.StaticText(self.notebook_pane1, -1, "", style=wx.ALIGN_CENTRE)
         self.imgPreview = wx.StaticBitmap(self.notebook_pane1, -1, size=(180, 180))
-        self.btnPreviewPrev = wx.Button(self.notebook_pane1, -1, "<-", size=(32, -1))
-        self.btnPreviewNext = wx.Button(self.notebook_pane1, -1, "->", size=(32, -1))
+        self.id_prev = wx.NewId()
+        self.id_next = wx.NewId()
+        self.btnPreviewPrev = wx.Button(self.notebook_pane1, self.id_prev, "<-", size=(32, -1))
+        self.btnPreviewNext = wx.Button(self.notebook_pane1, self.id_next, "->", size=(32, -1))
         self.btnPreviewRotate = wx.Button(self.notebook_pane1, -1, _("Rotate"))
         self.btnPreviewRemove = wx.Button(self.notebook_pane1, -1, _("Remove"))
         self.lblProgress = wx.StaticText(self.notebook_pane1, -1, "")
@@ -83,10 +85,10 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.Bind(wx.EVT_COMBOBOX, self.OnPostZoneChange, self.cmbPostZone)
 	self.Bind(wx.EVT_CHECKBOX, self.OnchkLockClick, self.chkLock)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnBrowseClick, self.btnBrowse)
-	self.Bind(wx.EVT_BUTTON, self.OnbtnBrowseClick, self.btnPreviewPrev)
-	self.Bind(wx.EVT_BUTTON, self.OnbtnBrowseClick, self.btnPreviewNext)
+	self.Bind(wx.EVT_BUTTON, self.OnbtnPreviewNextClick, self.btnPreviewPrev)
+	self.Bind(wx.EVT_BUTTON, self.OnbtnPreviewNextClick, self.btnPreviewNext)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnPreviewRotateClick, self.btnPreviewRotate)
-	self.Bind(wx.EVT_BUTTON, self.OnbtnPreviewRotateClick, self.btnPreviewRemove)
+	self.Bind(wx.EVT_BUTTON, self.OnbtnPreviewRemoveClick, self.btnPreviewRemove)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnUploadClick, self.btnUpload)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnPostClick, self.btnPost)
 	self.Bind(wx.EVT_BUTTON, self.OnbtnReshipClick, self.btnReship)
@@ -621,8 +623,57 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 				self.lstUpFile.SetItemTextColour(index, wx.BLUE)
 		data.append(self.lstUpFile.GetItem(index, 3).GetText())
 		self.itemDataMap[data_id] = data
-	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())    	
+	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())    
+	
+    def focus_item(self, item):
+	self.lstUpFile.Focus(item)
+	
+    def OnbtnPreviewNextClick(self, evt):
+    	total = self.lstUpFile.GetItemCount()
+    	if total <= 0:
+    		return
+    	idx = self.lstUpFile.GetFocusedItem()
+    	if evt.GetId() == self.id_prev:
+    		prev = 1
+    	else:
+    		prev = 0
+    	if prev:
+    		idx -= 1
+    		if idx < 0:
+    			idx = total - 1
+    	else:
+    		idx += 1
+    		if idx >= total:
+    			idx = 0
+    	self.focus_item(idx)
+	self.OnlstUpFileFocus('')
+	
+    def OnbtnPreviewRotateClick(self, evt):
+    	try:
+    		img = wx.ImageFromBitmap(self.imgPreview.GetBitmap())
+    		w, h = img.GetSize()
+    		if w <= 1 and h <= 1:
+    			return
+    		img = img.Rotate90()
+    		self.imgPreview.SetBitmap(img.ConvertToBitmap())
+    		idx = self.lstUpFile.GetFocusedItem()
+    		fname = self.lstUpFile.GetItem(idx, 1).GetText()
+    		newfile = get_temp_filename(fname, '_rotate')
+    		img.SaveFile(newfile, 0)
+    		self.lstUpFile.SetStringItem(idx, 1, newfile)
+	except:
+		pass
 
+    def OnbtnPreviewRemoveClick(self, evt):
+    	idx = self.lstUpFile.GetFocusedItem()
+    	self.lstUpFile.DeleteItem(idx)
+    	self.list_re_number()
+    	total = self.lstUpFile.GetItemCount()
+    	if idx >= total:
+    		idx = total - 1
+    	self.focus_item(idx)
+	self.OnlstUpFileFocus('')
+		
     def OnbtnUploadClick(self, evt):
     	self.to_upload = False
     	self.upload_fails = 0
@@ -810,6 +861,8 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     def OnlstUpFileFocus(self, evt):
     	idx = self.lstUpFile.GetFocusedItem()
     	if idx < 0:
+    		self.lblPreviewFilename.SetLabel('')
+    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
     	fname = self.lstUpFile.GetItem(idx, 1).GetText()
     	self.lblPreviewFilename.SetLabel(os.path.basename(fname))
