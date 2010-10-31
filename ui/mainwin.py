@@ -872,16 +872,20 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     	if not is_image_file(fname):
     		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
-    	img = wx.Image(fname)
-    	w, h = img.GetSize()
-    	if w > 180:
-    		h = h * 180 / w
-    		w = 180
-    	if h > 180:
-    		w = w * 180 / h
-    		h = 180
-    	img = img.Rescale(w, h)
-    	self.imgPreview.SetBitmap(img.ConvertToBitmap())
+    	try:
+	    	img = wx.Image(fname)
+	    	w, h = img.GetSize()
+	    	if w > 180 or h > 180:
+	    		if w > 180:
+	    			h = h * 180 / w
+	    			w = 180
+	    		if h > 180:
+	    			w = w * 180 / h
+	    			h = 180
+	    		img = img.Rescale(w, h)
+	    	self.imgPreview.SetBitmap(img.ConvertToBitmap())
+	except:
+		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
 
     def OnlstUpFileRClick(self, evt):
     	# create popup menu
