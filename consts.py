@@ -38,7 +38,7 @@ easygone
 
 if sys.platform.startswith('win32'):
 	CONFIG_ROOT = os.path.join(os.environ['APPDATA'], APPCODENAME)
-	TEMP_DIR = os.path.join(os.environ['TEMP'], APPCODENAME).decode('gb18030')
+	TEMP_DIR = os.path.join(os.environ['TEMP'], APPCODENAME)
 else:
 	CONFIG_ROOT = os.path.join(os.getenv('HOME'), '.config', APPCODENAME)
 	TEMP_DIR = os.path.join('/tmp', APPCODENAME)

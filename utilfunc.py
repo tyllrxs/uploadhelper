@@ -32,7 +32,11 @@ def get_python_version():
 	
 def get_temp_filename(fname, suffix=''):
 	base, ext = os.path.splitext(os.path.basename(fname))
-	return os.path.join(TEMP_DIR, '%s%s%04d%s' % (base, suffix, random.randint(0, 10000), ext))
+	if sys.platform.startswith('win32'):
+		tmpdir = TEMP_DIR.decode('gb18030')
+	else:
+		tmpdir = TEMP_DIR
+	return os.path.join(tmpdir, '%s%s%04d%s' % (base, suffix, random.randint(0, 10000), ext))
 
 def get_html_info(html):
 	head = re.search(r'<title>(.*)</title>', html).group(1)
