@@ -120,7 +120,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         mnuSetting.AppendItem(mnuImageManipulation)
         mnuSetting.AppendSeparator()
         mnuLang = wx.Menu()
-        target_lang = read_config('General', 'language', 'en') 
+        target_lang = read_config('General', 'language', 'en_US') 
         for cod, lng in APPLANGUAGES:
         	mnulng = wx.MenuItem(mnuLang, wx.NewId(), lng.decode('utf8'), cod, wx.ITEM_RADIO)
         	mnuLang.AppendItem(mnulng)
@@ -864,14 +864,15 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	self.txtReship.SetValue('')
 	
     def OnlstUpFileFocus(self, evt):
-    	self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     	idx = self.lstUpFile.GetFocusedItem()
     	if idx < 0:
     		self.lblPreviewFilename.SetLabel('')
+    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
     	fname = self.lstUpFile.GetItem(idx, 1).GetText()
     	self.lblPreviewFilename.SetLabel('%d) %s' % (idx + 1, os.path.basename(fname)))
     	if not is_image_file(fname):
+    		self.imgPreview.SetBitmap(wx.EmptyBitmap(1, 1))
     		return
     	try:
 	    	img = wx.Image(fname)
@@ -884,7 +885,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	    			w = w * 180 / h
 	    			h = 180
 	    		img = img.Rescale(w, h)
-	    	self.imgPreview.SetSize((180, 180))
+	    	self.imgPreview.SetSize((w, h))
 	    	self.imgPreview.SetBitmap(img.ConvertToBitmap())
 	except:
 		pass
