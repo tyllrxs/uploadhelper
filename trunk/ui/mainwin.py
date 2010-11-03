@@ -230,7 +230,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_CENTER)
 		else:
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_LEFT)
-	col_widths = read_config('Upload', 'ColumnWidths', '41,238,74,94').split(',')
+	col_widths = read_config('Upload', 'ColumnWidths', '43,307,92,101').split(',')
 	for col in xrange(self.lstUpFile.GetColumnCount()):
 		self.lstUpFile.SetColumnWidth(col, int(col_widths[col]))
 	self.itemDataMap = {}
