@@ -596,6 +596,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     		self.UploadedMode = False
     	highlight = read_config_bool('General', 'Highlight', True)
     	file_no_larger = read_config_int('General', 'FileNoLarger', 1024)
+    	allow_resize = read_config_bool('Resize', 'Resize', True)
 	for f in filenames:
 		if os.path.isdir(f):
 			self.append_files(search_files(f, r'\.(jpe?g|gif|png|pdf)$'))
@@ -620,7 +621,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			self.lstUpFile.SetStringItem(index, 3, MSG_UNSUPPORTED_FORMAT, 0)
 			self.lstUpFile.SetItemTextColour(index, wx.RED)
 		elif fz > file_no_larger:
-			if highlight:
+			if highlight and not (is_image_file(f) and allow_resize):
 				self.lstUpFile.SetStringItem(index, 3, MSG_ENTITY_TOO_LARGE, 0)
 				self.lstUpFile.SetItemTextColour(index, wx.BLUE)
 		data.append(self.lstUpFile.GetItem(index, 3).GetText())
