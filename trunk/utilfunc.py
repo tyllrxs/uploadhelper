@@ -36,6 +36,8 @@ def get_temp_filename(fname, suffix=''):
 		tmpdir = TEMP_DIR.decode('gb18030')
 	else:
 		tmpdir = TEMP_DIR
+	if len(base)>10:
+                base = base[:10]
 	return os.path.join(tmpdir, '%s%s%04d%s' % (base, suffix, random.randint(0, 10000), ext))
 
 def get_html_info(html):
