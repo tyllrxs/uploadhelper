@@ -124,7 +124,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
         for cod, lng in APPLANGUAGES:
         	mnulng = wx.MenuItem(mnuLang, wx.NewId(), lng.decode('utf8'), cod, wx.ITEM_RADIO)
         	mnuLang.AppendItem(mnulng)
-        	if cod == target_lang:
+        	if target_lang.startswith(cod):
         		mnulng.Check(True)
         	self.Bind(wx.EVT_MENU, self.OnmnuLangClick, mnulng)
         mnuSetting.AppendMenu(-1, _("&Language"), mnuLang, _("Select interface language"))
@@ -230,7 +230,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_CENTER)
 		else:
 			self.lstUpFile.InsertColumn(col, text, wx.LIST_FORMAT_LEFT)
-	col_widths = read_config('Upload', 'ColumnWidths', '50,300,90,120').split(',')
+	col_widths = read_config('Upload', 'ColumnWidths', '41,238,74,94').split(',')
 	for col in xrange(self.lstUpFile.GetColumnCount()):
 		self.lstUpFile.SetColumnWidth(col, int(col_widths[col]))
 	self.itemDataMap = {}
