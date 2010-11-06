@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- This is an RYGH BBS board list file. -->
-<!-- Last update: 2010-10-30 by tyllr -->
+<!-- Last update: 2010-11-06 by tyllr -->
 <BBS>
 	<Zone name="BBS系统">
 		<Advice name="光华建设与发展" bid="275"/>
@@ -259,7 +259,6 @@
 		<DigitalLife name="数码生活" bid="170"/>
 		<EnglishTest name="英语考试" bid="50"/>
 		<Exam name="考试与培训信息" bid="166"/>
-		<EXPO_2010 name="2010年上海世博会" bid="493"/>
 		<GoAbroad name="出国专题" bid="124"/>
 		<HomeDeco name="家居装潢" bid="385"/>
 		<House name="房产信息" bid="213"/>
