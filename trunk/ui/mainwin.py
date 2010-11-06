@@ -678,6 +678,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
     		idx = total - 1
     	self.focus_item(idx)
 	self.list_re_number()
+	self.lblProgress.SetLabel(MSG_FILE_SELECTED % self.lstUpFile.GetItemCount())
 		
     def OnbtnUploadClick(self, evt):
     	self.to_upload = False
@@ -972,7 +973,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 	lng = self.GetMenuBar().FindItemById(evt.GetId()).GetHelp()
 	lng = lng.replace('__', '_')
 	write_config('General', {'language': lng})
-	wx.MessageBox(_('Language has changed. Restart to take effects.'))
+	wx.MessageBox(_('Language has been changed. Restart to take effects.'))
 	
     def on_iconify(self, evt):
         if read_config_bool('General', 'MinimizeToTray', False):
