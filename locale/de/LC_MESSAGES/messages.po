@@ -74,8 +74,8 @@ msgid "Fill the blanks first."
 msgstr "Füllen Sie die Felder zuerst."
 
 #: consts.py:28
-msgid "%d Files Selected"
-msgstr "% D Dateien ausgewählt"
+msgid "Selected Files"
+msgstr "Ausgewählte Dateien"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -182,8 +182,11 @@ msgid "Failed to check for updates, try again later."
 msgstr "Konnte nach Updates zu suchen, versuchen Sie es später erneut."
 
 #: MyFrame.py:440
-msgid "A new version %s is available! Would you like to update now?"
-msgstr "Eine neue Version% s ist nicht möglich! Möchten Sie jetzt aktualisieren?"
+msgid "A new version is available"
+msgstr "Eine neue Version ist verfügbar"
+
+msgid "Would you like to update now"
+msgstr "Möchten Sie jetzt aktualisieren"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
@@ -346,8 +349,8 @@ msgstr "Python 3 wird nicht unterstützt. Holen Sie sich eine Version 2.X auf"
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython ist zu alt. Holen Sie sich eine neuere Version auf"
 
-msgid "Language has changed. Restart to take effects."
-msgstr "Sprache hat sich verändert. Neu starten, um Effekte zu nehmen."
+msgid "Language has been changed. Restart to take effects."
+msgstr "Die Sprache wurde geändert. Neu starten, um Effekte zu nehmen."
 
 msgid "T&oolbar"
 msgstr "Toolbar"
@@ -645,3 +648,99 @@ msgstr "Vorbereitung getan"
 
 msgid "No Upload"
 msgstr "Kein Upload"
+
+msgid "Title or content is empty"
+msgstr "Titel oder Inhalt ist leer"
+
+msgid "Continue anyway"
+msgstr "Trotzdem fortfahren"
+
+msgid "Clear article before uploading"
+msgstr "Klare Artikel vor dem Hochladen"
+
+msgid "Include title"
+msgstr "Artikelbezeichnung"
+
+msgid "Detailed Information"
+msgstr "Detaillierte Information"
+
+msgid "Credits"
+msgstr "Credits"
+
+msgid "Thanks for advice and feedback from following IDs"
+msgstr "Danke für Ratschläge und Rückmeldungen von folgenden IDs"
+
+msgid "in alphabetical order"
+msgstr "in alphabetischer Reihenfolge"
+
+msgid "Preserve original EXIF"
+msgstr "Behalten Sie die Original EXIF"
+
+msgid "Resizing quality"
+msgstr "Größenänderung Qualität"
+
+msgid "Very fast"
+msgstr "Sehr schnell"
+
+msgid "Fast"
+msgstr "Fast"
+
+msgid "High quality"
+msgstr "Hohe Qualität"
+
+msgid "Very high quality"
+msgstr "Sehr hohe Qualität"
+
+msgid "Ignore"
+msgstr "Ignorieren"
+
+msgid "Skip"
+msgstr "Skip"
+
+msgid "Restoring"
+msgstr "Wiederherstellen"
+
+msgid "Logout on exit"
+msgstr "Abmelden bei der Ausfahrt"
+
+msgid "Register"
+msgstr "Registrieren"
+
+msgid "Remember"
+msgstr "Denken Sie daran,"
+
+msgid "Network Proxy"
+msgstr "Netzwerk-Proxy"
+
+msgid "Use proxy"
+msgstr "Proxy verwenden"
+
+msgid "Proxy Settings"
+msgstr "Proxy-Einstellungen"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "Logging out"
+msgstr "Abmelden"
+
+msgid "Anonymous"
+msgstr "Anonym"
+
+msgid "For anonymous boards"
+msgstr "Für anonyme Bretter"
+
+msgid "Rotate"
+msgstr "Drehen"
+
+msgid "Preview images"
+msgstr "Vorschau-Bilder"
+
+msgid "Require restarting"
+msgstr "Erfordern einen Neustart"

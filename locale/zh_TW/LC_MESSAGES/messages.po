@@ -18,14 +18,14 @@ msgstr ""
 
 #: consts.py:7
 msgid "UploadHelper"
-msgstr "上傳助手"
+msgstr "日月光華上傳助手"
 
 msgid "Select Files to Upload"
-msgstr "選擇要上傳的檔案"
+msgstr "選擇要上傳的檔"
 
 #: consts.py:15
 msgid "&Add Files"
-msgstr "添加檔案"
+msgstr "添加檔"
 
 #: consts.py:15
 msgid "A&dd Directory"
@@ -74,8 +74,8 @@ msgid "Fill the blanks first."
 msgstr "請先填寫完整"
 
 #: consts.py:28
-msgid "Files Selected"
-msgstr "選擇檔案數"
+msgid "Selected Files"
+msgstr "選擇檔數"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -83,7 +83,7 @@ msgstr "未知錯誤"
 
 #: consts.py:30
 msgid "Invalid File"
-msgstr "無效的檔案"
+msgstr "無效的檔"
 
 #: consts.py:31
 msgid "Check for Updates"
@@ -123,7 +123,7 @@ msgstr "授權協議"
 
 #: MyFrame.py:59
 msgid "Filename"
-msgstr "檔案名"
+msgstr "檔名"
 
 #: MyFrame.py:59
 msgid "Size"
@@ -139,11 +139,11 @@ msgstr "用戶"
 
 #: MyFrame.py:234
 msgid "All Supported Files"
-msgstr "所有支持的檔案"
+msgstr "所有支持的檔"
 
 #: MyFrame.py:234
 msgid "Image Files"
-msgstr "圖片檔案"
+msgstr "圖片檔"
 
 #: MyFrame.py:234
 msgid "PDF Documents"
@@ -151,19 +151,19 @@ msgstr "PDF 文檔"
 
 #: MyFrame.py:234
 msgid "All Files"
-msgstr "所有檔案"
+msgstr "所有檔"
 
 #: MyFrame.py:257
 msgid "Unsupported File Format"
-msgstr "不支持的檔案格式"
+msgstr "不支持的檔格式"
 
 #: MyFrame.py:260
 msgid "Too Large File"
-msgstr "檔案太大"
+msgstr "檔太大"
 
 #: MyFrame.py:268
 msgid "Select at least one file for uploading."
-msgstr "請至少選擇一個檔案上傳。"
+msgstr "請至少選擇一個檔上傳。"
 
 #: MyFrame.py:304
 msgid "Post Successfully to Board"
@@ -182,7 +182,7 @@ msgid "Failed to check for updates, try again later."
 msgstr "檢查更新失敗，請稍後重試。"
 
 #: MyFrame.py:440
-msgid "A new version is available" 
+msgid "A new version is available"
 msgstr "發現新版本"
 
 msgid "Would you like to update now"
@@ -293,7 +293,7 @@ msgid "Visit Homepage of UploadHelper"
 msgstr "訪問日月光華上傳助手主頁"
 
 msgid "Upload Files"
-msgstr "上傳檔案"
+msgstr "上傳檔"
 
 msgid "Destination"
 msgstr "目標版面"
@@ -332,7 +332,7 @@ msgid "Progress"
 msgstr "目前進度"
 
 msgid "Login OK. Prepare to upload files."
-msgstr "登錄成功，請準備上傳檔案。"
+msgstr "登錄成功，請準備上傳檔。"
 
 msgid "Visit Homepage"
 msgstr "訪問主頁"
@@ -349,7 +349,7 @@ msgstr "不支持 Python 3，請到這裡下載2.X版本"
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython 版本太低，請到這裡下載新版本"
 
-msgid "Language has changed. Restart to take effects."
+msgid "Language has been changed. Restart to take effects."
 msgstr "語言已經更改。重啟本程序生效。"
 
 msgid "T&oolbar"
@@ -365,13 +365,13 @@ msgid "General"
 msgstr "基本設置"
 
 msgid "File Management"
-msgstr "檔案管理"
+msgstr "檔管理"
 
 msgid "Miscellaneous"
 msgstr "其它設置"
 
 msgid "Search Files"
-msgstr "搜索檔案"
+msgstr "搜索檔"
 
 msgid "Template to Post Article"
 msgstr "發文模板"
@@ -389,13 +389,13 @@ msgid "Empty Lines between URLs"
 msgstr "URL 之間空行數"
 
 msgid "Range of Size"
-msgstr "檔案大小範圍"
+msgstr "檔大小範圍"
 
 msgid "Search for Subfolders"
-msgstr "搜索子資料夾"
+msgstr "搜索子檔夾"
 
 msgid "Highlight when file size is larger than"
-msgstr "當檔案大小超過該值時高亮顯示"
+msgstr "當檔大小超過該值時高亮顯示"
 
 msgid "Notes"
 msgstr "說明"
@@ -635,10 +635,10 @@ msgid "Adding watermark"
 msgstr "正在添加水印"
 
 msgid "&Open File"
-msgstr "打開檔案"
+msgstr "打開檔"
 
 msgid "Open &Folder"
-msgstr "打開資料夾"
+msgstr "打開檔夾"
 
 msgid "Image manipulation only, no uploading"
 msgstr "僅處理圖片，不上傳"
@@ -648,3 +648,99 @@ msgstr "準備工作完成"
 
 msgid "No Upload"
 msgstr "不上傳"
+
+msgid "Title or content is empty"
+msgstr "標題或內容為空"
+
+msgid "Continue anyway"
+msgstr "還要繼續嗎"
+
+msgid "Clear article before uploading"
+msgstr "上傳之前清空文章內容"
+
+msgid "Include title"
+msgstr "包括標題"
+
+msgid "Detailed Information"
+msgstr "詳細信息"
+
+msgid "Credits"
+msgstr "致謝"
+
+msgid "Thanks for advice and feedback from following IDs"
+msgstr "感謝下列 ID 的建議和反饋"
+
+msgid "in alphabetical order"
+msgstr "以字母為序"
+
+msgid "Preserve original EXIF"
+msgstr "保留原有的 EXIF"
+
+msgid "Resizing quality"
+msgstr "縮放質量"
+
+msgid "Very fast"
+msgstr "非常快"
+
+msgid "Fast"
+msgstr "快"
+
+msgid "High quality"
+msgstr "高質量"
+
+msgid "Very high quality"
+msgstr "超高質量"
+
+msgid "Ignore"
+msgstr "忽略"
+
+msgid "Skip"
+msgstr "跳過"
+
+msgid "Restoring"
+msgstr "正在還原"
+
+msgid "Logout on exit"
+msgstr "退出時註銷用戶"
+
+msgid "Register"
+msgstr "註冊"
+
+msgid "Remember"
+msgstr "記住"
+
+msgid "Network Proxy"
+msgstr "網路代理"
+
+msgid "Use proxy"
+msgstr "使用代理"
+
+msgid "Proxy Settings"
+msgstr "代理設置"
+
+msgid "Host"
+msgstr "主機"
+
+msgid "Port"
+msgstr "端口"
+
+msgid "Username"
+msgstr "用戶名"
+
+msgid "Logging out"
+msgstr "正在註銷"
+
+msgid "Anonymous"
+msgstr "匿名"
+
+msgid "For anonymous boards"
+msgstr "僅對匿名版有效"
+
+msgid "Rotate"
+msgstr "旋轉"
+
+msgid "Preview images"
+msgstr "預覽圖片"
+
+msgid "Require restarting"
+msgstr "需要重啟"

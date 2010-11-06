@@ -74,8 +74,8 @@ msgid "Fill the blanks first."
 msgstr "完全に記入してください"
 
 #: consts.py:28
-msgid "Files Selected"
-msgstr "選択したファイル"
+msgid "Selected Files"
+msgstr "ファイルの数を選択します。"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -103,7 +103,7 @@ msgstr "完全な"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "コメントは、提案は、太陽と接触して、月のtyllrしてください"
+msgstr "コメントは、提案は、接触tyllrしてください"
 
 #: DlgAbout.py:14
 msgid "Version"
@@ -182,8 +182,11 @@ msgid "Failed to check for updates, try again later."
 msgstr "後でもう一度試してみてください、失敗した更新を確認してください。"
 
 #: MyFrame.py:440
-msgid "A new version %s is available! Would you like to update now?"
-msgstr "新しいバージョンの％を表示して下さい！代わりにすぐに更新ですか？"
+msgid "A new version is available"
+msgstr "バージョンの新しい発見"
+
+msgid "Would you like to update now"
+msgstr "あなたが更新するか"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
@@ -287,7 +290,7 @@ msgid "FAQ"
 msgstr "よくある質問"
 
 msgid "Visit Homepage of UploadHelper"
-msgstr "ホーム側近は太陽、月をアップロード参照してください。"
+msgstr "アクセスホーム"
 
 msgid "Upload Files"
 msgstr "ファイルをアップロード"
@@ -346,7 +349,7 @@ msgstr "2.Xのバージョンをダウンロードするにはここを参照し
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPythonのバージョンが低すぎると、ここに新しいバージョンをダウンロードしてください"
 
-msgid "Language has changed. Restart to take effects."
+msgid "Language has been changed. Restart to take effects."
 msgstr "言語が変更されています。有効にプログラムを再起動します。"
 
 msgid "T&oolbar"
@@ -645,3 +648,99 @@ msgstr "準備作業は完了しています。"
 
 msgid "No Upload"
 msgstr "アップロードしないでください"
+
+msgid "Title or content is empty"
+msgstr "空のタイトルや内容"
+
+msgid "Continue anyway"
+msgstr "とにかく続けていきたいと"
+
+msgid "Clear article before uploading"
+msgstr "資料をアップロードする前に内容を空"
+
+msgid "Include title"
+msgstr "タイトルを含む"
+
+msgid "Detailed Information"
+msgstr "詳細"
+
+msgid "Credits"
+msgstr "ありがとう"
+
+msgid "Thanks for advice and feedback from following IDs"
+msgstr "次の提案やフィードバックのIDをありがとう"
+
+msgid "in alphabetical order"
+msgstr "アルファベット順"
+
+msgid "Preserve original EXIF"
+msgstr "元のEXIFデータを保持"
+
+msgid "Resizing quality"
+msgstr "ズーム品質"
+
+msgid "Very fast"
+msgstr "非常に高速"
+
+msgid "Fast"
+msgstr "高速"
+
+msgid "High quality"
+msgstr "高品質の"
+
+msgid "Very high quality"
+msgstr "高品質"
+
+msgid "Ignore"
+msgstr "無視"
+
+msgid "Skip"
+msgstr "スキップ"
+
+msgid "Restoring"
+msgstr "復元"
+
+msgid "Logout on exit"
+msgstr "ログインユーザー出口"
+
+msgid "Register"
+msgstr "交流"
+
+msgid "Remember"
+msgstr "注意してください"
+
+msgid "Network Proxy"
+msgstr "ネットワークエージェント"
+
+msgid "Use proxy"
+msgstr "プロキシを使用する"
+
+msgid "Proxy Settings"
+msgstr "プロキシ設定"
+
+msgid "Host"
+msgstr "ホスト"
+
+msgid "Port"
+msgstr "ポート"
+
+msgid "Username"
+msgstr "ユーザー名"
+
+msgid "Logging out"
+msgstr "キャンセルされる"
+
+msgid "Anonymous"
+msgstr "匿名"
+
+msgid "For anonymous boards"
+msgstr "のみ有効匿名版"
+
+msgid "Rotate"
+msgstr "回転"
+
+msgid "Preview images"
+msgstr "プレビュー画像"
+
+msgid "Require restarting"
+msgstr "再起動する必要がある"

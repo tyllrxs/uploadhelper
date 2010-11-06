@@ -75,7 +75,7 @@ msgstr "전체 내용을 기입하세요"
 
 #: consts.py:28
 msgid "Selected Files"
-msgstr "개의 선택한 파일"
+msgstr "파일의 번호를 선택"
 
 #: consts.py:29
 msgid "Unknown Error"
@@ -103,7 +103,7 @@ msgstr "완전한"
 
 #: consts.py:48
 msgid "Contact tyllr (at) RYGH BBS for help or advice"
-msgstr "의견, 제안, 태양와 접촉, 그리고 달 tyllr하시기 바랍니다"
+msgstr "의견, 제안, 문의 tyllr하시기 바랍니다"
 
 #: DlgAbout.py:14
 msgid "Version"
@@ -182,8 +182,11 @@ msgid "Failed to check for updates, try again later."
 msgstr "나중에 다시 시도해주십시오 실패한 업데이 트를 확인합니다."
 
 #: MyFrame.py:440
-msgid "A new version is available! Would you like to update now?"
-msgstr "의 새 버전을 찾으 바디 즉시 업데이 트됩니까?"
+msgid "A new version is available"
+msgstr "버전의 새로운 발견"
+
+msgid "Would you like to update now"
+msgstr "당신이 업데이 트 하시겠습니까"
 
 #: MyFrame.py:443
 msgid "You are using the latest version."
@@ -287,7 +290,7 @@ msgid "FAQ"
 msgstr "자주 묻는 질문"
 
 msgid "Visit Homepage of UploadHelper"
-msgstr "홈 보좌관은 태양, 그리고 달의 업로드 방문"
+msgstr "액세스 홈"
 
 msgid "Upload Files"
 msgstr "파일 올리기"
@@ -346,7 +349,7 @@ msgstr "2.x에서 버전을 다운로드하려면 여기를 방문하시기 바�
 msgid "wxPython is too old. Get a newer version at"
 msgstr "wxPython 버전이 너무 낮습니다, 여기에 새 버전을 다운로드하십시오"
 
-msgid "Language has changed. Restart to take effects."
+msgid "Language has been changed. Restart to take effects."
 msgstr "언어 변경되었습니다. 효과로 프로그램을 다시 시작합니다."
 
 msgid "T&oolbar"
@@ -645,3 +648,99 @@ msgstr "준비 작업 완료"
 
 msgid "No Upload"
 msgstr "업로드하지 마십시오"
+
+msgid "Title or content is empty"
+msgstr "빈 제목이나 내용"
+
+msgid "Continue anyway"
+msgstr "어쨌든 계속해서"
+
+msgid "Clear article before uploading"
+msgstr "문서를 업로드하기 전에 비우기 내용"
+
+msgid "Include title"
+msgstr "제목을 포함"
+
+msgid "Detailed Information"
+msgstr "세부"
+
+msgid "Credits"
+msgstr "고마워"
+
+msgid "Thanks for advice and feedback from following IDs"
+msgstr "다음과 같은 제안 및 의견 ID를 주셔서 감사합니다"
+
+msgid "in alphabetical order"
+msgstr "알파벳 순서로"
+
+msgid "Preserve original EXIF"
+msgstr "원래의 EXIF 유지"
+
+msgid "Resizing quality"
+msgstr "줌 품질"
+
+msgid "Very fast"
+msgstr "아주 빨리"
+
+msgid "Fast"
+msgstr "빨리"
+
+msgid "High quality"
+msgstr "고품질"
+
+msgid "Very high quality"
+msgstr "고품질"
+
+msgid "Ignore"
+msgstr "무시"
+
+msgid "Skip"
+msgstr "건너뛰기"
+
+msgid "Restoring"
+msgstr "복원"
+
+msgid "Logout on exit"
+msgstr "로그인 사용자 출구"
+
+msgid "Register"
+msgstr "위로"
+
+msgid "Remember"
+msgstr "기억"
+
+msgid "Network Proxy"
+msgstr "네트워크 에이전트"
+
+msgid "Use proxy"
+msgstr "프록시를 사용"
+
+msgid "Proxy Settings"
+msgstr "프록시 설정"
+
+msgid "Host"
+msgstr "숙주"
+
+msgid "Port"
+msgstr "포트"
+
+msgid "Username"
+msgstr "사용자 이름"
+
+msgid "Logging out"
+msgstr "취소"
+
+msgid "Anonymous"
+msgstr "익명"
+
+msgid "For anonymous boards"
+msgstr "유효 기간에만 익명 자용"
+
+msgid "Rotate"
+msgstr "회전"
+
+msgid "Preview images"
+msgstr "미리보기 이미지"
+
+msgid "Require restarting"
+msgstr "다시 시작해야합니다"
