@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import sys
-if sys.platform.startswith('win32'):
-	reload(sys)
-	sys.setdefaultencoding('latin1')
+reload(sys)
+sys.setdefaultencoding('latin1')
 
 import urllib2
 import wx

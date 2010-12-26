@@ -507,7 +507,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 				return
 			cf.set('Script', 'TotalNumber', value + 1)
 			cf.set('SCRIPT%d' % value, 'DESC', '%s v%s' % (APPNAME.encode('gb18030'), VERSION))
-			cf.set('SCRIPT%d' % value, 'CMDTYPE', 1)
+			cf.set('SCRIPT%d' % value, 'CMDTYPE', 2)
 			cf.set('SCRIPT%d' % value, 'CATEGORY', APPNAME.encode('gb18030'))
 			cf.set('SCRIPT%d' % value, 'COMMAND', sys.argv[0])
 			cf.write(open(configfile, 'w'))
