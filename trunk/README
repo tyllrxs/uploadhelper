@@ -28,7 +28,7 @@ INSTALLATION GUIDE
 
 [Preinstall]
 
-Make sure all these requirements are installed:
+Make sure all these prerequisites are installed:
 
 1) Python (Of course, but <= 2.7, not >= 3.0)
 
@@ -47,7 +47,7 @@ http://www.wxpython.org/
 Optional Install
 -------------------
 
-The following packages are optional, you may install them only if you want a full-featured version.
+The following packages are optional, you may install them only if you want a fully-featured version.
 
 3) PIL (Python Imaging Library)
  
