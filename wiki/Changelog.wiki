@@ -1,3 +1,4 @@
+#labels Featured,Phase-Design
 v4.0 更新：[2010-11-06]
 
     移植到Windows、Linux 和 Mac 三大平台
