@@ -929,7 +929,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 				if sys.platform.startswith('win32'):
 					os.popen('explorer "%s"' % fname.encode('gb18030'))
 				elif sys.platform.startswith('linux'):
-					os.system('firefox "%s"' % fname)
+					os.system('gnome-open "%s"' % fname.encode('utf8'))
 				else:
 					os.system('open "%s"' % fname)
 			else:
@@ -937,7 +937,7 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 				if sys.platform.startswith('win32'):
 					os.popen('explorer /select, "%s"' % fname.encode('gb18030'))
 				elif sys.platform.startswith('linux'):
-					os.system('nautilus "%s"' % path)
+					os.system('nautilus "%s"' % path.encode('utf8'))
 				else:
 					os.system('open "%s"' % path)
 	elif k == 2:
@@ -1090,4 +1090,3 @@ class MyFrame(wx.Frame, wx.lib.mixins.listctrl.ColumnSorterMixin):
 
 
 # end of class MyFrame
-
