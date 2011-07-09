@@ -6,10 +6,10 @@ import locale, gettext
 
 APPCODENAME = 'uploadhelper'
 PACKAGE = 'uploadhelper'
-VERSION = '4.0'
+VERSION = '4.1'
 AUTHOR = 'tyllr'
 EMAIL = 'tyllrxs@gmail.com'
-HOMEPAGE = 'http://homepage.fudan.edu.cn/~tyllr/uh/'
+HOMEPAGE = 'http://code.google.com/p/uploadhelper/'
 HOME_PYTHON = 'http://www.python.org/'
 HOME_WXPYTHON = 'http://www.wxpython.org/'
 APPLANGUAGES = [('de', 'Deutsch'), ('en', 'English'), ('fr', 'Française'), ('ja', '日本語'), 
