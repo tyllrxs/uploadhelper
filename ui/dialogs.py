@@ -30,7 +30,6 @@ class MyLoginDialog(wx.Dialog):
         self.txtProxyUser = wx.TextCtrl(self, -1, "")
         self.label_7 = wx.StaticText(self, -1, _("Password"))
         self.txtProxyPwd = wx.TextCtrl(self, -1, "", style=wx.TE_PASSWORD)
-        self.lnkHelp = wx.HyperlinkCtrl(self, -1, _("How to Use"), '%s%s' % (HOMEPAGE, 'faq.htm'))
         self.chkAutoLogin = wx.CheckBox(self, -1, _("Auto Login"))
         self.btnLogin = wx.Button(self, -1, _("Login"))
         
@@ -96,11 +95,9 @@ class MyLoginDialog(wx.Dialog):
 	object_2.Add(grid_sizer_2, 0, wx.EXPAND|wx.ALIGN_LEFT|wx.ALIGN_CENTER_VERTICAL, 0)
 	object_1.Add(object_2, 0, wx.ALL|wx.EXPAND|wx.ALIGN_LEFT|wx.ALIGN_CENTER_VERTICAL, 5)
 	
-        object_5.Add(self.lnkHelp, 0, wx.ALL|wx.ALIGN_LEFT|wx.ALIGN_CENTER_VERTICAL, 5)
         object_5.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
-        object_5.Add(self.btnLogin, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
-        object_5.Add((20, 20), 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 0)
-        object_5.Add(self.chkAutoLogin, 0, wx.ALL|wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL, 5)
+        object_5.Add(self.btnLogin, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
+        object_5.Add(self.chkAutoLogin, 1, wx.ALL|wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL, 5)
         object_1.Add(object_5, 0, wx.ALL|wx.EXPAND|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL, 5)
 
         self.SetSizer(object_1)
