@@ -1,0 +1,88 @@
+# UploadHelper #
+
+> Written by tyllrxs@gmail.com (RYGH BBS id: tyllr)
+> you can freely modify or redistribute it within GPL v2 License
+
+
+---
+
+
+## Introduction ##
+
+A powerful tool for uploading files to RYGH BBS (http://bbs.fudan.edu.cn/).
+
+This is an open-source, cross-platform program to simplify the uploading work.
+
+UploadHelper shares the joy of uploading:)
+
+  * Multiple files uploading simutaneously;
+
+  * Drag&drop operation style;
+
+  * Reship webpage fraction just by one-click.
+
+
+---
+
+
+## INSTALLATION GUIDE ##
+
+### Preinstall ###
+
+Make sure all these prerequisites are installed:
+
+1) Python (Of course, but <= 2.7, not >= 3.0)
+
+Python is a programming language that lets you work more quickly and integrate your systems more effectively.
+
+http://www.python.org/
+
+
+2) wxPython (>= 2.8)
+
+A blending of the wxWidgets C++ class library with the Python programming language.
+
+http://www.wxpython.org/
+
+
+---
+
+Optional Install
+
+---
+
+
+The following packages are optional, you may install them only if you want a fully-featured version.
+
+3) PIL (Python Imaging Library)
+
+The Python Imaging Library (PIL) adds image processing capabilities to your Python interpreter. This library supports many file formats, and provides powerful image processing and graphics capabilities.
+
+http://www.pythonware.com/products/pil/
+
+
+4) ExifTool by Phil Harvey
+
+ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files.
+
+http://www.sno.phy.queensu.ca/~phil/exiftool/
+
+
+**FOR Ubuntu users**
+
+You can do all above just by typing in terminal:
+```
+$ sudo apt-get install python python-wxgtk2.8 python-imaging libimage-exiftool-perl
+```
+OK, everything is done. So easy? Yep:)
+
+
+### Install ###
+```
+$ tar -zxvf uploadhelper.tar.gz
+$ cd uploadhelper
+$ chmod +x ./uploadhelper
+$ ./uploadhelper
+```
+
+UploadHelper should be running now! Enjoy this :)
